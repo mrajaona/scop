@@ -1,4 +1,4 @@
-NAME		=	OpenGL
+NAME		=	scop
 
 DIR_INC		=	./inc/
 INC			=	

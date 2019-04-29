@@ -29,12 +29,11 @@ all		:		$(NAME)
 $(OBJS)	:		$(INCS)
 
 $(NAME)	:		$(INCS) $(SRCS) $(OBJS)
-				$(CC) -o $(NAME) $(OBJS) \
-				-lglfw \
-				-framework Cocoa \
-				-framework OpenGL \
-				-framework IOKit \
-				-framework CoreVideo
+
+				$(CC) `pkg-config --cflags glfw3` \
+				-o $(NAME) $(OBJS) \
+				`pkg-config --static --libs glfw3`
+
 				@$(ECHO) "\033[32m> Executable compiled\033[0m\n"
 
 clean	:
@@ -52,9 +51,6 @@ setup	:
 				brew reinstall cmake
 				brew reinstall glfw3
 
-#	export DYLD_LIBRARY_PATH="~/.brew/Cellar/glfw/3.3/lib:$DYLD_LIBRARY_PATH"
-#	export PATH="~/.brew/Cellar/glfw/3.3/include/:$PATH"
-
 submodule	:
 				git submodule update --init --recursive
 
@@ -62,3 +58,6 @@ submodule	:
 				setup submodule
 
 .DEFAULT_GOAL	:=	all
+
+#	export DYLD_LIBRARY_PATH="~/.brew/Cellar/glfw/3.3/lib:$DYLD_LIBRARY_PATH"
+#	export PATH="~/.brew/Cellar/glfw/3.3/include/:$PATH"

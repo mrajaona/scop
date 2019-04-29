@@ -56,10 +56,14 @@ linux-lib	:
 				sudo make -C glfw install
 
 macos-setup	:
-				@$(ECHO) "GLFW : install XCode + CMake"
-				brew install glfw3
+				xcode-select --install
+				brew reinstall cmake
+				brew reinstall glfw3
+
+submodule	:
+				git submodule update --init --recursive
 
 .PHONY	:		all clean fclean re \
-				linux-setup macos-setup install-lib
+				linux-setup macos-setup install-lib submodule
 
 .DEFAULT_GOAL	:=	all

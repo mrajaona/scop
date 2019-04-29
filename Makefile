@@ -1,5 +1,7 @@
 NAME		=	scop
 
+GLWF_INC	=	/Users/mrajaona/.brew/Cellar/glfw/3.3/include/
+
 DIR_INC		=	./inc/
 INC			=	tuto.h
 
@@ -16,7 +18,7 @@ SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
 OBJS		=	$(SRCS:.c=.o)
 
-CFLAGS		=	-Wall -Wextra -Werror -I$(DIR_INC)
+CFLAGS		=	-Wall -Wextra -Werror -I$(DIR_INC) -I$(GLWF_INC)
 
 CC			=	/usr/bin/gcc
 RM			=	/bin/rm -f
@@ -26,8 +28,8 @@ all		:		$(NAME)
 
 $(OBJS)	:		$(INCS)
 
-$(NAME)	:		$(INCS) $(SRCS)
-				$(CC) -o $(NAME) $(SRCS) $(CFLAGS) \
+$(NAME)	:		$(INCS) $(SRCS) $(OBJS)
+				$(CC) -o $(NAME) $(OBJS) \
 				-lglfw \
 				-framework Cocoa \
 				-framework OpenGL \

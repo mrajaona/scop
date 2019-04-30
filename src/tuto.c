@@ -1,7 +1,19 @@
 #include "tuto.h"
 
+static void	glew_init()
+{
+	glewExperimental = GL_TRUE;
+	if (glewInit() != GLEW_OK)
+	{
+		; // err
+	}
+	GLuint vertexBuffer;
+	glGenBuffers(1, &vertexBuffer);
+}
+
 static void	init()
 {
+	glew_init();
 	vbo();
 	shader_program();
 	vao();

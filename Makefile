@@ -19,7 +19,7 @@ SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
 OBJS		=	$(SRCS:.c=.o)
 
-CFLAGS		=	-Wall -Wextra -Werror -I$(DIR_INC) -lGLEW -lGLU -lGL
+CFLAGS		=	-Wall -Wextra -Werror -I$(DIR_INC)
 
 CC			=	/usr/bin/gcc
 RM			=	/bin/rm -f
@@ -30,7 +30,6 @@ all		:		$(NAME)
 $(OBJS)	:		$(INCS)
 
 $(NAME)	:		$(INCS) $(SRCS) $(OBJS)
-				export LD_LIBRARY_PATH="/home/mks/myGL/oglpg/lib"
 				$(CC) `pkg-config --cflags glfw3` \
 				-o $(NAME) $(OBJS) -lGLEW -lGLU -lGL \
 				`pkg-config --static --libs glfw3`

@@ -9,6 +9,9 @@
 # include <GL/glew.h>
 # include <GLFW/glfw3.h>
 
+# include <unistd.h>
+# include <stdio.h>
+
 void 	vbo();
 void	shader_program();
 void	vao();

@@ -8,7 +8,7 @@ static void	shader_status(GLuint shader)
 
 	if (status != GL_TRUE)
 	{
-		; // failure
+		write(2, "shader init error\n", 18); // err
 	}
 	
 	// log
@@ -80,5 +80,3 @@ void	shader_program()
 
 	vertex_attribute_array(shaderProgram);
 }
-
-

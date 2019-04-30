@@ -5,7 +5,7 @@ static void	glew_init()
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
 	{
-		; // err
+		write(2, "glew init error\n", 16); // err
 	}
 	GLuint vertexBuffer;
 	glGenBuffers(1, &vertexBuffer);
@@ -15,8 +15,8 @@ static void	init()
 {
 	glew_init();
 	vbo();
-	shader_program();
 	vao();
+	shader_program();
 }
 
 int			main()
@@ -32,7 +32,6 @@ int			main()
 	
 	GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL", NULL, NULL); // Windowed
 	// GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL", glfwGetPrimaryMonitor(), NULL); // Fullscreen
-
 
 	glfwMakeContextCurrent(window);
 

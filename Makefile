@@ -1,7 +1,7 @@
 NAME		=	scop
 
 DIR_INC		=	./inc/
-INC			=	
+INC			=	tuto.h
 
 DIR_SRC		=	./src/
 
@@ -14,7 +14,7 @@ SRC			=	$(SRCS_MAIN)
 INCS		=	$(addprefix $(DIR_INC), $(INC))
 SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
-OBJS		=	$(SRCS:.cpp=.o)
+OBJS		=	$(SRCS:.c=.o)
 
 CFLAGS		=	-Wall -Wextra -Werror -I$(DIR_INC)
 

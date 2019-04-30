@@ -1,25 +1,24 @@
-/*
-#include <libraryheaders>
-
-int main()
-{
-	createWindow(title, width, height);
-	createOpenGLContext(settings);
-	while (windowOpen)
-	{
-		while (event = newEvent())
-			handleEvent(event);
-		updateScene();
-		drawGraphics();
-		presentGraphics();
-	}
-	return (0);
-}
-*/
-
 #include "tuto.h"
 
-int	main()
+// normalement, on peut faiire sans
+static void	glew_init()
+{
+	GLuint vertexBuffer;
+
+	glewExperimental = GL_TRUE;
+	glewInit();
+	glGenBuffers(1, &vertexBuffer);
+}
+
+static void	init()
+{
+	glew_init();
+	vbo();
+	shader_program();
+	vao();
+}
+
+int			main()
 {
 	glfwInit();
 
@@ -34,6 +33,9 @@ int	main()
 	// GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL", glfwGetPrimaryMonitor(), NULL); // Fullscreen
 
 	glfwMakeContextCurrent(window);
+
+	init();
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	while(!glfwWindowShouldClose(window))
 	{

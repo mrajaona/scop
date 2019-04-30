@@ -6,7 +6,10 @@ INC			=	tuto.h
 DIR_SRC		=	./src/
 
 DIR_MAIN	=	./
-SRC_MAIN	=	tuto.c
+SRC_MAIN	=	tuto.c \
+				vertex_buffer_objects.c \
+				shader_program.c \
+				vertex_array_objects.c
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
 SRC			=	$(SRCS_MAIN)
@@ -26,7 +29,7 @@ all		:		$(NAME)
 
 $(OBJS)	:		$(INCS)
 
-$(NAME)	:		$(INCS) $(SRCS) $(INCLUDE) $(OBJS)
+$(NAME)	:		$(INCS) $(SRCS) $(OBJS)
 				$(CC) `pkg-config --cflags glfw3` \
 				-o $(NAME) $(OBJS) \
 				`pkg-config --static --libs glfw3`
@@ -54,6 +57,10 @@ linux-lib	:
 				cd -
 				make -C glfw
 				sudo make -C glfw install
+				cd glew
+				make
+				sudo make installmake clean
+				cd -
 
 macos-setup	:
 				xcode-select --install

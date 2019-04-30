@@ -1,6 +1,6 @@
 #include "tuto.h"
 
-void vbo()
+void vbo(GLuint *vbo)
 {
 	float	vertices[] = {
 		0.0f, 0.5f, // Vertex 1 (X, Y)
@@ -8,9 +8,8 @@ void vbo()
 		-0.5f, -0.5f // Vertex 3 (X, Y)
 	};
 
-	GLuint vbo;
-	glGenBuffers(1, &vbo); // Generate 1 buffer
-	glBindBuffer(GL_ARRAY_BUFFER, vbo); // make active array buffer
+	glGenBuffers(1, vbo); // Generate 1 buffer
+	glBindBuffer(GL_ARRAY_BUFFER, *vbo); // make active array buffer
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // copy the vertex data
 	/*
 	** • GL_STATIC_DRAW		: The vertex data will be uploaded once and drawn many times (e.g. the world).

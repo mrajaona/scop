@@ -1,22 +1,29 @@
 #include "tuto.h"
 
-static void	glew_init()
+static void	glew_init(GLuint *vertexBuffer)
 {
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
 	{
 		write(2, "glew init error\n", 16); // err
 	}
-	GLuint vertexBuffer;
-	glGenBuffers(1, &vertexBuffer);
+	glGenBuffers(1, vertexBuffer);
 }
 
-static void	init()
+static void	init(t_data *scop)
 {
-	glew_init();
-	vbo();
-	vao();
-	shader_program();
+	glew_init(&(scop->vertexBuffer));
+	vbo(&(scop->vbo));
+	vao(&(scop->vao));
+	shader_program(&(scop->shaderProgram));
+}
+
+static void	color_loop(t_data *scop)
+{
+	static double lol = 1;
+
+	lol -= 0.00001;
+	glUniform3f(scop->uniColor, lol, lol, lol);
 }
 
 int			main()
@@ -35,13 +42,19 @@ int			main()
 
 	glfwMakeContextCurrent(window);
 
-	init();
+	t_data	scop;
+	init(&scop);
+
+	// triangle color
+	scop.uniColor = glGetUniformLocation(scop.shaderProgram, "triangleColor");
+	glUniform3f(scop.uniColor, 1.0f, 0.0f, 0.0f);
 
 	while(!glfwWindowShouldClose(window))
 	{
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 		glDrawArrays(GL_TRIANGLES, 0, 3);
+		color_loop(&scop);
 	}
 
 	glfwTerminate();

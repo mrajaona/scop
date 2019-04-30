@@ -12,8 +12,18 @@
 # include <unistd.h>
 # include <stdio.h>
 
-void 	vbo();
-void	shader_program();
-void	vao();
+typedef struct	s_data
+{
+	GLuint vertexBuffer;
+	GLuint	vbo;
+	GLuint	vao;	
+	GLuint	shaderProgram;
+	GLint	uniColor;
+}				t_data;
+
+
+void 	vbo(GLuint *vbo);
+void	vao(GLuint *vao);
+void	shader_program(GLuint *shaderProgram;);
 
 #endif

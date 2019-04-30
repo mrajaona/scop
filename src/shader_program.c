@@ -1,6 +1,6 @@
 #include "tuto.h"
 
-static void	shader_status(GLuint shader)
+static void	shader_status(const GLuint shader)
 {
 	// check success
 	GLint status;
@@ -16,7 +16,7 @@ static void	shader_status(GLuint shader)
 	glGetShaderInfoLog(shader, 512, NULL, buffer);	
 }
 
-static void	vertex_shader(GLuint shaderProgram)
+static void	vertex_shader(const GLuint shaderProgram)
 {
 	const char *vertexSource = R"glsl(
 		#version 150 core
@@ -37,15 +37,16 @@ static void	vertex_shader(GLuint shaderProgram)
 }
 
 
-static void	fragment_shader(GLuint shaderProgram)
+static void	fragment_shader(const GLuint shaderProgram)
 {
 	const char *fragmentSource = R"glsl(
 		#version 150 core
+		uniform vec3 triangleColor;
 		out vec4 outColor;
 
 		void main()
 		{
-			outColor = vec4(1.0, 1.0, 1.0, 1.0);
+			outColor = vec4(triangleColor, 1.0);
 		}
 	)glsl";
 	GLuint fragmentShader;
@@ -57,26 +58,24 @@ static void	fragment_shader(GLuint shaderProgram)
 	glAttachShader(shaderProgram, fragmentShader);
 }
 
-static void	vertex_attribute_array(GLuint shaderProgram)
+static void	vertex_attribute_array(const GLuint shaderProgram)
 {
 	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
 	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 0, 0);
 	glEnableVertexAttribArray(posAttrib);	
 }
 
-void	shader_program()
+void	shader_program(GLuint *shaderProgram)
 {
-	GLuint	shaderProgram;
+	*shaderProgram = glCreateProgram();
 
-	shaderProgram = glCreateProgram();
+	vertex_shader(*shaderProgram);
+	fragment_shader(*shaderProgram);
 
-	vertex_shader(shaderProgram);
-	fragment_shader(shaderProgram);
+	glBindFragDataLocation(*shaderProgram, 0, "outColor");
 
-	glBindFragDataLocation(shaderProgram, 0, "outColor");
+	glLinkProgram(*shaderProgram);
+	glUseProgram(*shaderProgram);
 
-	glLinkProgram(shaderProgram);
-	glUseProgram(shaderProgram);
-
-	vertex_attribute_array(shaderProgram);
+	vertex_attribute_array(*shaderProgram);
 }

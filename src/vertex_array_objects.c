@@ -1,8 +1,7 @@
 #include "tuto.h"
 
-void	vao()
+void	vao(GLuint *vao)
 {
-	GLuint	vao;
-	glGenVertexArrays(1, &vao); // generate
-	glBindVertexArray(vao); // make active
+	glGenVertexArrays(1, vao); // generate
+	glBindVertexArray(*vao); // make active
 }

@@ -33,15 +33,16 @@ int			main()
 	GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL", NULL, NULL); // Windowed
 	// GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGL", glfwGetPrimaryMonitor(), NULL); // Fullscreen
 
+
 	glfwMakeContextCurrent(window);
 
 	init();
-	// glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	while(!glfwWindowShouldClose(window))
 	{
 		glfwSwapBuffers(window);
 		glfwPollEvents();
+		glDrawArrays(GL_TRIANGLES, 0, 3);
 	}
 
 	glfwTerminate();

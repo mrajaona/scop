@@ -1,18 +1,7 @@
 #include "tuto.h"
 
-// normalement, on peut faiire sans
-static void	glew_init()
-{
-	GLuint vertexBuffer;
-
-	glewExperimental = GL_TRUE;
-	glewInit();
-	glGenBuffers(1, &vertexBuffer);
-}
-
 static void	init()
 {
-	glew_init();
 	vbo();
 	shader_program();
 	vao();
@@ -35,7 +24,7 @@ int			main()
 	glfwMakeContextCurrent(window);
 
 	init();
-	glDrawArrays(GL_TRIANGLES, 0, 3);
+	// glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	while(!glfwWindowShouldClose(window))
 	{

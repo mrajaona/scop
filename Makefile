@@ -19,7 +19,7 @@ SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
 OBJS		=	$(SRCS:.c=.o)
 
-CFLAGS		=	-Wall -Wextra -Werror -I$(DIR_INC)
+CFLAGS		=	-Wall -Wextra -Werror -I$(DIR_INC) -lGLEW
 
 CC			=	/usr/bin/gcc
 RM			=	/bin/rm -f
@@ -31,7 +31,7 @@ $(OBJS)	:		$(INCS)
 
 $(NAME)	:		$(INCS) $(SRCS) $(OBJS)
 				$(CC) `pkg-config --cflags glfw3` \
-				-o $(NAME) $(OBJS) \
+				-o $(NAME) $(OBJS) -lGLEW \
 				`pkg-config --static --libs glfw3`
 				@$(ECHO) "\033[32m> Executable compiled\033[0m\n"
 
@@ -57,10 +57,6 @@ linux-lib	:
 				cd -
 				make -C glfw
 				sudo make -C glfw install
-				cd glew
-				make
-				sudo make installmake clean
-				cd -
 
 macos-setup	:
 				xcode-select --install

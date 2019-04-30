@@ -26,7 +26,7 @@ all		:		$(NAME)
 
 $(OBJS)	:		$(INCS)
 
-$(NAME)	:		$(INCS) $(SRCS) $(INCLUDE) $(OBJ)
+$(NAME)	:		$(INCS) $(SRCS) $(INCLUDE) $(OBJS)
 				$(CC) `pkg-config --cflags glfw3` \
 				-o $(NAME) $(OBJS) \
 				`pkg-config --static --libs glfw3`

@@ -8,8 +8,10 @@ DIR_SRC		=	./src/
 DIR_MAIN	=	./
 SRC_MAIN	=	tuto.c \
 				vertex_buffer_objects.c \
+				vertex_array_objects.c \
+				element_array_buffer.c \
 				shader_program.c \
-				vertex_array_objects.c
+				show.c
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
 SRC			=	$(SRCS_MAIN)

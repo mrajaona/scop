@@ -4,8 +4,8 @@ static void	shader_status(const GLuint shader)
 {
 	// check success
 	GLint status;
+	
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-
 	if (status != GL_TRUE)
 	{
 		write(2, "shader init error\n", 18); // err
@@ -43,14 +43,14 @@ static void	vertex_shader(const GLuint shaderProgram)
 static void	fragment_shader(const GLuint shaderProgram)
 {
 	const char *fragmentSource = R"glsl(
-	#version 150 core
-	in vec3 Color;
-	out vec4 outColor;
-	
-	void main()
-	{
-		outColor = vec4(Color, 1.0);
-	}
+		#version 150 core
+		in vec3 Color;
+		out vec4 outColor;
+		
+		void main()
+		{
+			outColor = vec4(Color, 1.0);
+		}
 	)glsl";
 	GLuint fragmentShader;
 
@@ -63,12 +63,15 @@ static void	fragment_shader(const GLuint shaderProgram)
 
 static void	vertex_attribute_array(const GLuint shaderProgram)
 {
-	GLint posAttrib = glGetAttribLocation(shaderProgram, "position");
+	GLint posAttrib;
+	GLint colAttrib;
+
+	posAttrib = glGetAttribLocation(shaderProgram, "position");
 	glEnableVertexAttribArray(posAttrib);
 	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE,
 		5 * sizeof(float), 0);
 	
-	GLint colAttrib = glGetAttribLocation(shaderProgram, "color");
+	colAttrib = glGetAttribLocation(shaderProgram, "color");
 	glEnableVertexAttribArray(colAttrib);
 	glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE,
 		5 * sizeof(float), (void *)(2 * sizeof(float)));

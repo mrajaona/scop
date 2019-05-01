@@ -2,7 +2,7 @@
 
 void	ebo(GLuint *ebo)
 {
-	GLuint elements[] = {
+	const GLuint	elements[] = {
 		0, 1, 2,
 		2, 3, 0
 	};

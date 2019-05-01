@@ -24,6 +24,7 @@ typedef struct	s_data
 	GLint		uniColor;
 }				t_data;
 
+void	glfw_init(GLFWwindow **window);
 
 void 	vbo(GLuint *vbo);
 void	vao(GLuint *vao);

@@ -7,6 +7,7 @@ DIR_SRC		=	./src/
 
 DIR_MAIN	=	./
 SRC_MAIN	=	tuto.c \
+				glfw_init.c \
 				vertex_buffer_objects.c \
 				vertex_array_objects.c \
 				element_array_buffer.c \

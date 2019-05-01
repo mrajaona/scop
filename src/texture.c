@@ -44,12 +44,13 @@ void	tex(GLuint *tex, t_data *scop)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	// Load texture
+	/*
 	// Black/white checkerboard
 	float pixels[] = {
 		0.0f, 0.0f, 0.0f,	1.0f, 1.0f, 1.0f,
 		1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 0.0f
 	};
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, pixels);
-
+	*/
 	load_img("sample.png", scop);
 }

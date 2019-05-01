@@ -12,6 +12,7 @@ SRC_MAIN	=	tuto.c \
 				vertex_array_objects.c \
 				element_array_buffer.c \
 				shader_program.c \
+				texture.c \
 				show.c
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
@@ -22,7 +23,7 @@ SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
 OBJS		=	$(SRCS:.c=.o)
 
-CFLAGS		=	-Wall -Wextra -Werror -I$(DIR_INC)
+CFLAGS		=	-Wall -Wextra -Werror -I$(DIR_INC) -I./soil
 
 CC			=	/usr/bin/gcc
 RM			=	/bin/rm -f
@@ -34,7 +35,7 @@ $(OBJS)	:		$(INCS)
 
 $(NAME)	:		$(INCS) $(SRCS) $(OBJS)
 				$(CC) `pkg-config --cflags glfw3` \
-				-o $(NAME) $(OBJS) -lGLEW -lGLU -lGL \
+				-o $(NAME) $(OBJS) -lGLEW -lGLU -lGL -lSOIL \
 				`pkg-config --static --libs glfw3`
 				@$(ECHO) "\033[32m> Executable compiled\033[0m\n"
 

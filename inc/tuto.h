@@ -9,9 +9,10 @@
 # include <GL/glew.h>
 # include <GLFW/glfw3.h>
 
-# include <unistd.h>
 # include <stdlib.h>
 # include <stdio.h>
+
+# include "SOIL.h"
 
 typedef struct	s_data
 {
@@ -20,8 +21,11 @@ typedef struct	s_data
 	GLuint		vbo;
 	GLuint		vao;
 	GLuint		ebo;	
+	GLuint		vertexShader;
+	GLuint		fragmentShader;
 	GLuint		shaderProgram;
-	GLint		uniColor;
+	// GLint		uniColor;
+	GLuint		tex;
 }				t_data;
 
 void	glfw_init(GLFWwindow **window);
@@ -29,7 +33,10 @@ void	glfw_init(GLFWwindow **window);
 void 	vbo(GLuint *vbo);
 void	vao(GLuint *vao);
 void	ebo(GLuint *ebo);
-void	shader_program(GLuint *shaderProgram;);
+void	tex(GLuint *tex, t_data *scop);
+void	shader_program(GLuint *shaderProgram, t_data *scop);
 void	show(t_data *scop);
+
+void	ft_exit(t_data *scop, int status);
 
 #endif

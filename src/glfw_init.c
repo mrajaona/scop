@@ -1,6 +1,6 @@
 #include "tuto.h"
 
-static void	glfw_error()
+static void	glfw_error(void)
 {
 	const char *description;
 	int code;
@@ -18,8 +18,9 @@ void	glfw_init(GLFWwindow **window)
 {
 	if (!glfwInit())
 	{
-		write(2, "glfw init error\n", 16); // err
-		exit (1);
+		fprintf(stderr, "glfw init error\n");
+		fflush(stderr);
+		exit(1);
 	}
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);

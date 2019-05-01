@@ -1,6 +1,6 @@
 #include "tuto.h"
 
-static void	shader_status(const GLuint shader)
+static void	shader_status(const GLuint shader, t_data *scop)
 {
 	// check success
 	GLint status;
@@ -8,82 +8,89 @@ static void	shader_status(const GLuint shader)
 	glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
 	if (status != GL_TRUE)
 	{
-		write(2, "shader init error\n", 18); // err
-		exit(1);
+		fprintf(stderr, "shader init error\n");
+		fflush(stderr);
+		ft_exit(scop, 1);
 	}
-	
-	// log
-	char buffer[512];
-	glGetShaderInfoLog(shader, 512, NULL, buffer);	
 }
 
-static void	vertex_shader(const GLuint shaderProgram)
+static void	vertex_shader(const GLuint shaderProgram, t_data *scop)
 {
 	const char *vertexSource = R"glsl(
 		#version 150 core
+		in vec2 texcoord;
 		in vec2 position;
 		in vec3 color;
 		out vec3 Color;
-		
+		out vec2 Texcoord;
+
 		void main()
 		{
+			Texcoord = texcoord;
 			Color = color;
 			gl_Position = vec4(position, 0.0, 1.0);
 		}
 	)glsl";
-	GLuint vertexShader;
 	
-	vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexSource, NULL);
-	glCompileShader(vertexShader);
-	shader_status(vertexShader);
-	glAttachShader(shaderProgram, vertexShader);
+	scop->vertexShader = glCreateShader(GL_VERTEX_SHADER);
+	glShaderSource(scop->vertexShader, 1, &vertexSource, NULL);
+	glCompileShader(scop->vertexShader);
+	shader_status(scop->vertexShader, scop);
+	glAttachShader(shaderProgram, scop->vertexShader);
 }
 
 
-static void	fragment_shader(const GLuint shaderProgram)
+static void	fragment_shader(const GLuint shaderProgram, t_data *scop)
 {
 	const char *fragmentSource = R"glsl(
 		#version 150 core
 		in vec3 Color;
+		in vec2 Texcoord;
 		out vec4 outColor;
-		
+
+		uniform sampler2D tex;
+
 		void main()
 		{
-			outColor = vec4(Color, 1.0);
+			outColor = texture(tex, Texcoord) * vec4(Color, 1.0);
 		}
 	)glsl";
-	GLuint fragmentShader;
 
-	fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
-	glCompileShader(fragmentShader);
-	shader_status(fragmentShader);
-	glAttachShader(shaderProgram, fragmentShader);
+	scop->fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
+	glShaderSource(scop->fragmentShader, 1, &fragmentSource, NULL);
+	glCompileShader(scop->fragmentShader);
+	shader_status(scop->fragmentShader, scop);
+	glAttachShader(shaderProgram, scop->fragmentShader);
 }
 
 static void	vertex_attribute_array(const GLuint shaderProgram)
 {
 	GLint posAttrib;
 	GLint colAttrib;
+	GLint texAttrib;
 
 	posAttrib = glGetAttribLocation(shaderProgram, "position");
 	glEnableVertexAttribArray(posAttrib);
 	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE,
-		5 * sizeof(float), 0);
+		7 * sizeof(float), 0);
 	
 	colAttrib = glGetAttribLocation(shaderProgram, "color");
 	glEnableVertexAttribArray(colAttrib);
 	glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE,
-		5 * sizeof(float), (void *)(2 * sizeof(float)));
+		7 * sizeof(float), (void *)(2 * sizeof(float)));
+
+	texAttrib = glGetAttribLocation(shaderProgram, "texcoord");
+	glEnableVertexAttribArray(texAttrib);
+	glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE,
+		7 * sizeof(float), (void *)(5 * sizeof(float)));
 }
 
-void	shader_program(GLuint *shaderProgram)
+void	shader_program(GLuint *shaderProgram, t_data *scop)
 {
 	*shaderProgram = glCreateProgram();
 
-	vertex_shader(*shaderProgram);
-	fragment_shader(*shaderProgram);
+	vertex_shader(*shaderProgram, scop);
+	fragment_shader(*shaderProgram, scop);
 
 	glBindFragDataLocation(*shaderProgram, 0, "outColor");
 

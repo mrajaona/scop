@@ -24,7 +24,6 @@ typedef struct	s_data
 	GLuint		vertexShader;
 	GLuint		fragmentShader;
 	GLuint		shaderProgram;
-	// GLint		uniColor;
 	GLuint		tex;
 }				t_data;
 

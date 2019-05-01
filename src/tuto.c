@@ -52,7 +52,6 @@ static void	clr_scop(t_data *scop)
 	scop->vertexShader = 0;
 	scop->fragmentShader = 0;
 	scop->shaderProgram = 0;
-	// scop->uniColor = 0;
 	scop->tex = 0;
 }
 

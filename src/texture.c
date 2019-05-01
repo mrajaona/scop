@@ -1,5 +1,17 @@
 #include "tuto.h"
 
+static void	gl_status(t_data *scop)
+{
+	GLenum err;
+
+	if ((err = glGetError()) != GL_NO_ERROR)
+	{
+		fprintf(stderr, "glTexImage2D fail %#x\n", err);
+		fflush(stderr);
+		ft_exit(scop, 1);
+	}
+}
+
 static void	load_img(const char *path, t_data *scop)
 {
 	// SOIL
@@ -15,22 +27,31 @@ static void	load_img(const char *path, t_data *scop)
 		ft_exit(scop, 1);
 	}
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-
-	GLenum err;
-	if ((err = glGetError()) != GL_NO_ERROR)
-	{
-		fprintf(stderr, "glTexImage2D fail %#x\n", err);
-		fflush(stderr);
-		ft_exit(scop, 1);
-	}
-
+	gl_status(scop);
 	SOIL_free_image_data(image);
 }
+
+/*
+static void	bw_checkerboard(t_data *scop)
+{
+	float pixels[] = {
+		0.0f, 0.0f, 0.0f,	1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 0.0f
+	};
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, pixels);
+	gl_status(scop);	
+}
+*/
 
 void	tex(GLuint *tex, t_data *scop)
 {
 	glGenTextures(1, tex);
 	glBindTexture(GL_TEXTURE_2D, *tex);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 	/*
 	glGenerateMipmap(GL_TEXTURE_2D);
@@ -38,19 +59,7 @@ void	tex(GLuint *tex, t_data *scop)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	*/
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
 	// Load texture
-	/*
-	// Black/white checkerboard
-	float pixels[] = {
-		0.0f, 0.0f, 0.0f,	1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 0.0f
-	};
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, pixels);
-	*/
+	// bw_checkerboard(scop);
 	load_img("sample.png", scop);
 }

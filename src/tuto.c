@@ -2,7 +2,7 @@
 
 void	ft_exit(t_data *scop, int status)
 {
-	glDeleteTextures(1, &(scop->tex));
+	glDeleteTextures(N_TEXTURES, scop->textures);
 
     glDeleteProgram(scop->shaderProgram);
     glDeleteShader(scop->fragmentShader);
@@ -38,12 +38,14 @@ static void	init(t_data *scop)
 	vbo(&(scop->vbo));
 	vao(&(scop->vao));
 	ebo(&(scop->ebo));
-	tex(&(scop->tex), scop);
+	tex(scop->textures, scop);
 	shader_program(&(scop->shaderProgram), scop);
 }
 
 static void	clr_scop(t_data *scop)
 {
+	unsigned int i;
+
 	scop->window = NULL;
 	scop->vertexBuffer = 0;
 	scop->vbo = 0;
@@ -52,7 +54,12 @@ static void	clr_scop(t_data *scop)
 	scop->vertexShader = 0;
 	scop->fragmentShader = 0;
 	scop->shaderProgram = 0;
-	scop->tex = 0;
+	i = 0;
+	while (i < N_TEXTURES)
+	{
+		scop->textures[i] = 0;
+		i++;
+	}
 }
 
 int			main()

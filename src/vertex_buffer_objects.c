@@ -3,10 +3,10 @@
 void vbo(GLuint *vbo)
 {
 	const float	vertices[] = {
-		-0.5f, +0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f,	// TL
-		+0.5f, +0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f,	// TR
-		+0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // BL
-		-0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f	// BR
+	-0.5f, +0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // Top-left
+	+0.5f, +0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // Top-right
+	+0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // Bottom-right
+	-0.5f, -0.5f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f  // Bottom-left
 	};
 
 	glGenBuffers(1, vbo); // Generate 1 buffer

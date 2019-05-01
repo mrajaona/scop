@@ -8,8 +8,14 @@ static void	gl_status(t_data *scop)
 	{
 		fprintf(stderr, "glTexImage2D fail %#x\n", err);
 		fflush(stderr);
-		ft_exit(scop, 1);
+		// ft_exit(scop, 1);
 	}
+	else
+	{
+		fprintf(stderr, "glTexImage2D ok %#x\n", err);
+		fflush(stderr);
+	}
+	(void)scop;
 }
 
 static void	load_img(const char *path, t_data *scop)
@@ -43,11 +49,8 @@ static void	bw_checkerboard(t_data *scop)
 }
 */
 
-void	tex(GLuint *tex, t_data *scop)
+void	set_TexParameter()
 {
-	glGenTextures(1, tex);
-	glBindTexture(GL_TEXTURE_2D, *tex);
-
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -58,8 +61,26 @@ void	tex(GLuint *tex, t_data *scop)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	*/
+}
+
+void	tex(GLuint textures[N_TEXTURES], t_data *scop)
+{
+	glGenTextures(N_TEXTURES, textures);
 
 	// Load texture
 	// bw_checkerboard(scop);
+
+	// CAT
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, textures[0]);
 	load_img("sample.png", scop);
+	glUniform1i(glGetUniformLocation(scop->shaderProgram, "texKitten"), 0);
+	set_TexParameter();
+
+	// DOG
+	glActiveTexture(GL_TEXTURE1);
+	glBindTexture(GL_TEXTURE_2D, textures[1]);
+	load_img("sample2.png", scop);
+	glUniform1i(glGetUniformLocation(scop->shaderProgram, "texPuppy"), 1);
+	set_TexParameter();
 }

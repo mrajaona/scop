@@ -14,6 +14,8 @@
 
 # include "SOIL.h"
 
+# define N_TEXTURES 2
+
 typedef struct	s_data
 {
 	GLFWwindow	*window;
@@ -24,7 +26,7 @@ typedef struct	s_data
 	GLuint		vertexShader;
 	GLuint		fragmentShader;
 	GLuint		shaderProgram;
-	GLuint		tex;
+	GLuint		textures[N_TEXTURES];
 }				t_data;
 
 void	glfw_init(GLFWwindow **window);

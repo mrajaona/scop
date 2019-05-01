@@ -10,20 +10,19 @@ static void	color_loop(t_data *scop)
 }
 */
 
-void	show(GLFWwindow *window, t_data *scop)
+void	show(t_data *scop)
 {
-	(void)scop;
 	/*
 	// triangle color
-	scop.uniColor = glGetUniformLocation(scop.shaderProgram, "triangleColor");
-	glUniform3f(scop.uniColor, 1.0f, 0.0f, 0.0f);
+	scop->uniColor = glGetUniformLocation(scop->shaderProgram, "triangleColor");
+	glUniform3f(scop->uniColor, 1.0f, 0.0f, 0.0f);
 	*/
 
-	while(!glfwWindowShouldClose(window))
+	while(!glfwWindowShouldClose(scop->window))
 	{
-		glfwSwapBuffers(window);
+		glfwSwapBuffers(scop->window);
 		glfwPollEvents();
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-		// color_loop(&scop);
+		// color_loop(scop);
 	}
 }

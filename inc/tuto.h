@@ -15,12 +15,13 @@
 
 typedef struct	s_data
 {
-	GLuint	vertexBuffer;
-	GLuint	vbo;
-	GLuint	vao;
-	GLuint	ebo;	
-	GLuint	shaderProgram;
-	GLint	uniColor;
+	GLFWwindow	*window;
+	GLuint		vertexBuffer;
+	GLuint		vbo;
+	GLuint		vao;
+	GLuint		ebo;	
+	GLuint		shaderProgram;
+	GLint		uniColor;
 }				t_data;
 
 
@@ -28,6 +29,6 @@ void 	vbo(GLuint *vbo);
 void	vao(GLuint *vao);
 void	ebo(GLuint *ebo);
 void	shader_program(GLuint *shaderProgram;);
-void	show(GLFWwindow *window, t_data *scop);
+void	show(t_data *scop);
 
 #endif

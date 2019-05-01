@@ -1,23 +1,5 @@
 #include "tuto.h"
 
-static void	gl_status(t_data *scop)
-{
-	GLenum err;
-
-	if ((err = glGetError()) != GL_NO_ERROR)
-	{
-		fprintf(stderr, "glTexImage2D fail %#x\n", err);
-		fflush(stderr);
-		// ft_exit(scop, 1);
-	}
-	else
-	{
-		fprintf(stderr, "glTexImage2D ok %#x\n", err);
-		fflush(stderr);
-	}
-	(void)scop;
-}
-
 static void	load_img(const char *path, t_data *scop)
 {
 	// SOIL
@@ -33,7 +15,6 @@ static void	load_img(const char *path, t_data *scop)
 		ft_exit(scop, 1);
 	}
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-	gl_status(scop);
 	SOIL_free_image_data(image);
 }
 
@@ -70,19 +51,25 @@ void	tex(GLuint textures[N_TEXTURES], t_data *scop)
 	// Load texture
 	// bw_checkerboard(scop);
 
+	GLint location;
+
 	// CAT
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textures[0]);
 	load_img("sample.png", scop);
-	glUniform1i(glGetUniformLocation(scop->shaderProgram, "texKitten"), 0);
-	gl_status(scop);
+	
+	location = glGetUniformLocation(scop->shaderProgram, "texKitten");
+	glUniform1i(location, 0);
+	
 	set_TexParameter();
 
 	// DOG
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, textures[1]);
 	load_img("sample2.png", scop);
-	glUniform1i(glGetUniformLocation(scop->shaderProgram, "texPuppy"), 1);
-	gl_status(scop);
+
+	location = glGetUniformLocation(scop->shaderProgram, "texPuppy");
+	glUniform1i(location, 1);
+
 	set_TexParameter();
 }

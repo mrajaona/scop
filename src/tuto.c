@@ -38,8 +38,8 @@ static void	init(t_data *scop)
 	vbo(&(scop->vbo));
 	vao(&(scop->vao));
 	ebo(&(scop->ebo));
-	tex(scop->textures, scop);
 	shader_program(&(scop->shaderProgram), scop);
+	tex(scop->textures, scop);
 }
 
 static void	clr_scop(t_data *scop)

@@ -53,8 +53,8 @@ void	set_TexParameter()
 {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 	/*
 	glGenerateMipmap(GL_TEXTURE_2D);
@@ -75,6 +75,7 @@ void	tex(GLuint textures[N_TEXTURES], t_data *scop)
 	glBindTexture(GL_TEXTURE_2D, textures[0]);
 	load_img("sample.png", scop);
 	glUniform1i(glGetUniformLocation(scop->shaderProgram, "texKitten"), 0);
+	gl_status(scop);
 	set_TexParameter();
 
 	// DOG
@@ -82,5 +83,6 @@ void	tex(GLuint textures[N_TEXTURES], t_data *scop)
 	glBindTexture(GL_TEXTURE_2D, textures[1]);
 	load_img("sample2.png", scop);
 	glUniform1i(glGetUniformLocation(scop->shaderProgram, "texPuppy"), 1);
+	gl_status(scop);
 	set_TexParameter();
 }

@@ -10,11 +10,12 @@
 # include <GLFW/glfw3.h>
 
 # include <unistd.h>
+# include <stdlib.h>
 # include <stdio.h>
 
 typedef struct	s_data
 {
-	GLuint vertexBuffer;
+	GLuint	vertexBuffer;
 	GLuint	vbo;
 	GLuint	vao;
 	GLuint	ebo;	

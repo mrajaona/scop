@@ -9,6 +9,7 @@ static void	shader_status(const GLuint shader)
 	if (status != GL_TRUE)
 	{
 		write(2, "shader init error\n", 18); // err
+		exit(1);
 	}
 	
 	// log

@@ -8,7 +8,6 @@ void	ebo(GLuint *ebo)
 	};
 
 	glGenBuffers(1, ebo);
-	// ...
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
 }

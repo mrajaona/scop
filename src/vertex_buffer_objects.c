@@ -2,10 +2,10 @@
 
 void vbo(GLuint *vbo)
 {
-	float	vertices[] = {
-		0.0f, 0.5f, // Vertex 1 (X, Y)
-		0.5f, -0.5f, // Vertex 2 (X, Y)
-		-0.5f, -0.5f // Vertex 3 (X, Y)
+	float vertices[] = {
+		0.0f, 0.5f, 1.0f, 0.0f, 0.0f, // Vertex 1: Red
+		0.5f, -0.5f, 0.0f, 1.0f, 0.0f, // Vertex 2: Green
+		-0.5f, -0.5f, 0.0f, 0.0f, 1.0f // Vertex 3: Blue
 	};
 
 	glGenBuffers(1, vbo); // Generate 1 buffer

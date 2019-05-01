@@ -51,25 +51,17 @@ void	tex(GLuint textures[N_TEXTURES], t_data *scop)
 	// Load texture
 	// bw_checkerboard(scop);
 
-	GLint location;
-
 	// CAT
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textures[0]);
 	load_img("sample.png", scop);
-	
-	location = glGetUniformLocation(scop->shaderProgram, "texKitten");
-	glUniform1i(location, 0);
-	
+	glUniform1i(glGetUniformLocation(scop->shaderProgram, "texKitten"), 0);
 	set_TexParameter();
 
 	// DOG
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, textures[1]);
 	load_img("sample2.png", scop);
-
-	location = glGetUniformLocation(scop->shaderProgram, "texPuppy");
-	glUniform1i(location, 1);
-
+	glUniform1i(glGetUniformLocation(scop->shaderProgram, "texPuppy"), 1);
 	set_TexParameter();
 }

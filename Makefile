@@ -1,19 +1,14 @@
 NAME		=	scop
 
+GLWF_INC	=	/Users/mrajaona/.brew/Cellar/glfw/3.3/include/
+
 DIR_INC		=	./inc/
 INC			=	tuto.h
 
 DIR_SRC		=	./src/
 
 DIR_MAIN	=	./
-SRC_MAIN	=	tuto.c \
-				glfw_init.c \
-				vertex_buffer_objects.c \
-				vertex_array_objects.c \
-				element_array_buffer.c \
-				shader_program.c \
-				texture.c \
-				show.c
+SRC_MAIN	=	tuto.c
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
 SRC			=	$(SRCS_MAIN)
@@ -23,7 +18,7 @@ SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
 OBJS		=	$(SRCS:.c=.o)
 
-CFLAGS		=	-Wall -Wextra -Werror -I$(DIR_INC) -I./soil
+CFLAGS		=	-Wall -Wextra -Werror -I$(DIR_INC) -I$(GLWF_INC) -I./soil
 
 CC			=	/usr/bin/gcc
 RM			=	/bin/rm -f
@@ -34,9 +29,11 @@ all		:		$(NAME)
 $(OBJS)	:		$(INCS)
 
 $(NAME)	:		$(INCS) $(SRCS) $(OBJS)
+
 				$(CC) `pkg-config --cflags glfw3` \
-				-o $(NAME) $(OBJS) -lGLEW -lGLU -lGL -lSOIL \
+				-o $(NAME) $(OBJS) ./libSOIL.a \
 				`pkg-config --static --libs glfw3`
+
 				@$(ECHO) "\033[32m> Executable compiled\033[0m\n"
 
 clean	:
@@ -49,10 +46,18 @@ fclean	:		clean
 
 re		:		fclean all
 
+setup	:
+				xcode-select --install
+				brew reinstall cmake
+				brew reinstall glfw3
+
 submodule	:
 				git submodule update --init --recursive
 
 .PHONY	:		all clean fclean re \
-				submodule
+				setup submodule
 
 .DEFAULT_GOAL	:=	all
+
+#	export DYLD_LIBRARY_PATH="~/.brew/Cellar/glfw/3.3/lib:$DYLD_LIBRARY_PATH"
+#	export PATH="~/.brew/Cellar/glfw/3.3/include/:$PATH"

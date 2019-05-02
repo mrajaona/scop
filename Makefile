@@ -15,6 +15,7 @@ SRC_MAIN	=	tuto.c \
 				element_array_buffer.c \
 				shader_program.c \
 				texture.c \
+				matrix.c \
 				show.c
 
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))

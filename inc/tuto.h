@@ -20,6 +20,9 @@
 
 # define N_TEXTURES 2
 
+typedef float t_mat4[16];
+typedef float t_vector[4];
+
 typedef struct	s_data
 {
 	GLFWwindow	*window;

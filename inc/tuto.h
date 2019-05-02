@@ -1,12 +1,16 @@
 #ifndef TUTO_H
 # define TUTO_H
 
+# define GLEW_STATIC
+
 # ifdef __APPLE__
+#  define GL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED
 #  define GLFW_INCLUDE_GLCOREARB
+#  include "glew.h"
+# else
+#  include <GL/glew.h>
 # endif
 
-# define GLEW_STATIC
-# include <GL/glew.h>
 # include <GLFW/glfw3.h>
 
 # include <stdlib.h>

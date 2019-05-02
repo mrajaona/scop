@@ -16,21 +16,23 @@ static void	shader_status(const GLuint shader, t_data *scop)
 
 static void	vertex_shader(const GLuint shaderProgram, t_data *scop)
 {
-	const char *vertexSource = "glsl("
-	"	#version 150 core"
-	"	in vec2 texcoord;"
-	"	in vec2 position;"
-	"	in vec3 color;"
-	"	out vec3 Color;"
-	"	out vec2 Texcoord;"
-	""
-	"	void main()"
-	"	{"
-	"		Texcoord = texcoord;"
-	"		Color = color;"
-	"		gl_Position = vec4(position, 0.0, 1.0);"
-	"	}"
-	")glsl";
+	const char *vertexSource = "\
+		#version 150 core \
+		\
+		in vec2 texcoord; \
+		in vec2 position; \
+		in vec3 color; \
+		\
+		out vec3 Color; \
+		out vec2 Texcoord; \
+		\
+		void main() \
+		{ \
+			Texcoord = texcoord; \
+			Color = color; \
+			gl_Position = vec4(position, 0.0, 1.0); \
+		} \
+	";
 	
 	scop->vertexShader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(scop->vertexShader, 1, &vertexSource, NULL);
@@ -42,22 +44,23 @@ static void	vertex_shader(const GLuint shaderProgram, t_data *scop)
 
 static void	fragment_shader(const GLuint shaderProgram, t_data *scop)
 {
-	const char *fragmentSource = "glsl("
-	"	#version 150 core"
-	"	in vec3 Color;"
-	"	in vec2 Texcoord;"
-	"	out vec4 outColor;"
-	""
-	"	uniform sampler2D texKitten;"
-	"	uniform sampler2D texPuppy;"
-	""
-	"	void main()"
-	"	{"
-	"		vec4 colKitten = texture(texKitten, Texcoord);"
-	"		vec4 colPuppy = texture(texPuppy, Texcoord);"
-	"		outColor = mix(colKitten, colPuppy, 0.5);"
-	"	}"
-	")glsl";
+	const char *fragmentSource = "\
+		#version 150 core \
+		\
+		in vec3 Color; \
+		in vec2 Texcoord; \
+		out vec4 outColor; \
+		\
+		uniform sampler2D texKitten; \
+		uniform sampler2D texPuppy; \
+		\
+		void main() \
+		{ \
+			vec4 colKitten = texture(texKitten, Texcoord); \
+			vec4 colPuppy = texture(texPuppy, Texcoord); \
+			outColor = mix(colKitten, colPuppy, 0.5); \
+		} \
+	";
 
 	scop->fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(scop->fragmentShader, 1, &fragmentSource, NULL);

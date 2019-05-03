@@ -1,6 +1,7 @@
 #ifndef IMG_LOADER_H
 # define IMG_LOADER_H
 
+# include <errno.h>
 # include <stdio.h>
 # include <string.h>
 

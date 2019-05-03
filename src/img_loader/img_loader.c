@@ -1,6 +1,5 @@
 #include "img_loader.h"
 
-
 static unsigned char	*load(const char *path, int *width, int *height)
 {
 	FILE			*fp;
@@ -17,10 +16,21 @@ static unsigned char	*load(const char *path, int *width, int *height)
 
 	size_t	rd;
 	rd = fread(magic, 1, 8, fp);
+	if (!rd)
+	{
+		fprintf(stderr, "Could not read %s\n", path);
+		fflush(stderr);
+		fclose(fp);
+		return (NULL);
+	}
 
-	// clear errno here
+	errno = 0;
 	rewind(fp);
-	// check errno here
+	if (errno)
+	{
+		fclose(fp);
+		return (NULL);
+	}
 
 	// check format
 	if (rd >= 2 && !strncmp(magic, BMP_MAGIC, 2))

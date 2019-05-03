@@ -58,8 +58,10 @@ static unsigned char	*read_data(FILE *ptr,
 {
 	unsigned char	*image;
 
+	if (fseek(ptr, header->offset, SEEK_SET) < 0)
+		return (NULL);
 	image = NULL;
-	(void)ptr; (void)header; (void)info;
+	(void)info;
 	return (image);
 }
 

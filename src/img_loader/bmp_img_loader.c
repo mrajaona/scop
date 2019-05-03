@@ -9,6 +9,17 @@ static void				read_header(t_bmp_header *header, FILE *ptr)
 	fread(&(header->reserved1), 2, 1, ptr);
 	fread(&(header->reserved2), 2, 1, ptr);
 	fread(&(header->offset), 4, 1, ptr);
+
+	// debug
+	fprintf(stdout, "\n--- Header\ntype: %c%c\nsize: %u\nr1: %hu\nr2: %hu\noffset: %u\n",
+		((char *)(&(header->type)))[0],
+		((char *)(&(header->type)))[1],
+		header->size,
+		header->reserved1,
+		header->reserved2,
+		header->offset
+	);
+	fflush(stdout);
 }
 
 static void				read_info(t_bmp_info *info, FILE *ptr)
@@ -24,7 +35,22 @@ static void				read_info(t_bmp_info *info, FILE *ptr)
 	fread(&(info->yresolution), 4, 1, ptr);
 	fread(&(info->ncolours), 4, 1, ptr);
 	fread(&(info->importantcolours), 4, 1, ptr);
-	
+
+	// debug
+	fprintf(stdout, "\n--- Info\nsize: %u\nwidth: %i\nheight: %i\nplanes: %hu\nbits: %hu\ncompression: %u\nimagesize: %u\nxresolution: %i\nyresolution: %i\nncolours: %u\nimportantcolours: %u\n",
+		info->size,
+		info->width,
+		info->height,
+		info->planes,
+		info->bits,
+		info->compression,
+		info->imagesize,
+		info->xresolution,
+		info->yresolution,
+		info->ncolours,
+		info->importantcolours
+	);
+	fflush(stdout);
 }
 
 static unsigned char	*read_data(FILE *ptr,

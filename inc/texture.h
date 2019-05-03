@@ -9,6 +9,6 @@
 ** N_TEXTURES is defined in common.h
 */
 
-void    tex(GLuint *tex, t_data *scop);
+void	tex(GLuint *tex, t_data *scop);
 
 #endif

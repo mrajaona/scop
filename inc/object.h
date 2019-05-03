@@ -3,8 +3,8 @@
 
 # include "common.h"
 
-void    vbo(GLuint *vbo);
-void    vao(GLuint *vao);
-void    ebo(GLuint *ebo);
+void	vbo(GLuint *vbo);
+void	vao(GLuint *vao);
+void	ebo(GLuint *ebo);
 
 #endif

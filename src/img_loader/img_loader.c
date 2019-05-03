@@ -7,6 +7,7 @@ int	load_img(const char *path)
 	int				height;
 	unsigned char	*image;
 
+	// unsigned char *SOIL_load_image(const char *filename, int *width, int *height, int *channels, int force_channels)
 	image = SOIL_load_image(path, &width, &height, 0, SOIL_LOAD_RGB);
 	if (!image)
 	{

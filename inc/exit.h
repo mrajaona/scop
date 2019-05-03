@@ -4,6 +4,6 @@
 # include <stdlib.h>
 # include "common.h"
 
-void    ft_exit(t_data *scop, int status);
+void	ft_exit(t_data *scop, int status);
 
 #endif

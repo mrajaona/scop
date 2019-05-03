@@ -5,6 +5,6 @@
 # include "SOIL.h"
 # include "error.h"
 
-int load_img(const char *path);
+int	load_img(const char *path);
 
 #endif

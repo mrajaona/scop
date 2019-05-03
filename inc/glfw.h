@@ -11,6 +11,6 @@
 # include "common.h"
 # include "error.h"
 
-void    glfw_init(GLFWwindow **window);
+void	glfw_init(GLFWwindow **window);
 
 #endif

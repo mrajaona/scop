@@ -43,8 +43,7 @@ void	tex(GLuint textures[N_TEXTURES], t_data *scop)
 	// DOG
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, textures[1]);
-	// success = load_img("textures/sample2.png");
-	success = load_img("textures/img_cheryl.jpg");
+	success = load_img("textures/sample2.png");
 	glUniform1i(glGetUniformLocation(scop->shaderProgram, "texPuppy"), 1);
 	set_TexParameter(success);
 }

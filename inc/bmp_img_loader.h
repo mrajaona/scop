@@ -1,7 +1,9 @@
 #ifndef BMP_IMG_LOADER_H
 # define BMP_IMG_LOADER_H
 
+# include <stdlib.h>
 # include <stdio.h>
+# include "img_format.h"
 
 /*
 ** total        : 14 bytes

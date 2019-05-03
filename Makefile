@@ -6,6 +6,7 @@ DIR_INC		=	./inc/
 INC			=	common.h \
 				glfw.h \
 				gl_loader.h \
+				img_format.h \
 				img_loader.h \
 				bmp_img_loader.h \
 				scop.h \

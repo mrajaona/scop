@@ -9,6 +9,7 @@
 
 # include "SOIL.h" // tmp
 
+# include "img_format.h"
 # include "bmp_img_loader.h"
 # include "error.h"
 

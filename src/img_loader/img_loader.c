@@ -80,8 +80,8 @@ int						load_img(const char *path)
 		return (0);
 	}
 	fflush(stderr);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height,
-		0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	glTexImage2D(GL_TEXTURE_2D, 0, TEX_FORMAT, width, height,
+		0, TEX_FORMAT, GL_UNSIGNED_BYTE, image);
 	// free image
 	SOIL_free_image_data(image);										// tmp
 	return (1);

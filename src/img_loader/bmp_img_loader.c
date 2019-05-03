@@ -53,15 +53,26 @@ static void				read_info(t_bmp_info *info, FILE *ptr)
 	fflush(stdout);
 }
 
+// bgr to rgb
 static unsigned char	*read_data(FILE *ptr,
 	t_bmp_header *header, t_bmp_info *info)
 {
 	unsigned char	*image;
+	size_t			size;
 
 	if (fseek(ptr, header->offset, SEEK_SET) < 0)
 		return (NULL);
+	size = info->width * info->height * BYTES_PER_PIXEL;
+	
+	if (!(image = (unsigned char *)malloc(size * sizeof(unsigned char))))
+		return (NULL);
+
+	// debug
+	fprintf(stdout, "test ok\n");
+	fflush(stdout);
+	free(image);
 	image = NULL;
-	(void)info;
+	
 	return (image);
 }
 

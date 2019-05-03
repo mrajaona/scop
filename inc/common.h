@@ -4,7 +4,7 @@
 # include "glfw.h"
 
 /*
-** libc
+** libc -lc
 ** <assert.h>
 ** <complex.h>
 ** <ctype.h>
@@ -37,7 +37,7 @@
 */
 
 /*
-** -libm
+** libm -libm
 ** <math.h>
 ** <stdlib.h>
 */

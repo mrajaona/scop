@@ -4,17 +4,18 @@ GLWF_INC	=	/Users/mrajaona/.brew/Cellar/glfw/3.3/include/
 
 DIR_INC		=	./inc/
 INC			=	common.h \
-				error.h \
-				exit.h \
-				gl_loader.h \
 				glfw.h \
+				gl_loader.h \
 				img_loader.h \
-				matrix.h \
-				object.h \
+				bmp_img_loader.h \
 				scop.h \
+				object.h \
 				shader.h \
+				texture.h \
+				matrix.h \
 				show.h \
-				texture.h
+				error.h \
+				exit.h
 
 DIR_SRC		=	./src/
 
@@ -41,7 +42,8 @@ SRC_MATRIX	=	matrix.c
 SRCS_MATRIX	=	$(addprefix	$(DIR_MATRIX), $(SRC_MATRIX))
 
 DIR_IMG_LOADER	=	./img_loader/
-SRC_IMG_LOADER	=	img_loader.c
+SRC_IMG_LOADER	=	img_loader.c \
+					bmp_img_loader.c
 SRCS_IMG_LOADER	=	$(addprefix	$(DIR_IMG_LOADER), $(SRC_IMG_LOADER))
 
 SRC			=	$(SRCS_MAIN) $(SRCS_OBJECT) $(SRCS_SHADER) $(SRCS_MATRIX) \

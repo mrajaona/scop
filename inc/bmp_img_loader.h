@@ -1,15 +1,7 @@
 #ifndef BMP_IMG_LOADER_H
 # define BMP_IMG_LOADER_H
 
-# include "common.h"
-# include "SOIL.h"
-# include "error.h"
-
-int load_img(const char *path);
-
-/*
-** BMP
-*/
+# include <stdio.h>
 
 /*
 ** total        : 14 bytes
@@ -23,7 +15,7 @@ int load_img(const char *path);
 typedef struct  s_bmp_header {
    unsigned short int   type;
    unsigned int         size;
-   unsigned short int   reserved1
+   unsigned short int   reserved1;
    unsigned short int   reserved2;
    unsigned int         offset;
 }               t_bmp_header;
@@ -51,8 +43,8 @@ typedef struct  s_bmp_info {
    unsigned int         size;
    int                  width;
    int                  height;
-   unsigned short int   planes
-   unsigned short int   bits
+   unsigned short int   planes;
+   unsigned short int   bits;
    unsigned int         compression;
    unsigned int         imagesize;
    int                  xresolution;
@@ -75,5 +67,7 @@ typedef struct  s_bmp_palette {
 ** 24-bit   : BGR
 ** indexed  : BGRA (A unused)
 */
+
+unsigned char  *load_bmp_img(FILE *ptr, int *width, int *height);
 
 #endif

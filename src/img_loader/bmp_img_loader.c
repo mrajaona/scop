@@ -1,8 +1,7 @@
 #include "bmp_img_loader.h"
 
-void    load_bmp_img(const char *filename,
-    int *width, int *height,
-    int *channels, int force_channels)
+unsigned char	*load_bmp_img(FILE *ptr, int *width, int *height)
 {
-    ;
+	(void)ptr; (void)width; (void)height;
+	return (NULL);
 }

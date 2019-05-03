@@ -23,21 +23,23 @@ static unsigned char	*load(const char *path, int *width, int *height)
 	// check errno here
 
 	// check format
-	if (rd >= 2 && !strncmp(magic, BMP_MAGIC, rd))
+	if (rd >= 2 && !strncmp(magic, BMP_MAGIC, 2))
 	{
 		fprintf(stdout, "BMP\n");										// tmp
 		fflush(stdout);													// tmp
 		// image = load_bmp_img(fp, width, height);
 		image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);	// tmp
+		fprintf(stdout, "fgdsfsad\n");
+		fflush(stdout);
 	}
-	else if (rd >= 8 && !strncmp(magic, PNG_MAGIC, rd))
+	else if (rd >= 8 && !strncmp(magic, PNG_MAGIC, 8))
 	{
 		fprintf(stdout, "PNG\n");										// tmp
 		fflush(stdout);													// tmp
 		// image = load_png_image();
 		image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);	// tmp
 	}
-	else if (rd >= 3 && !strncmp(magic, JPG_MAGIC, rd))
+	else if (rd >= 3 && !strncmp(magic, JPG_MAGIC, 3))
 	{
 		fprintf(stdout, "JPG\n");										// tmp
 		fflush(stdout);													// tmp
@@ -69,8 +71,10 @@ int						load_img(const char *path)
 		fflush(stderr);
 		return (0);
 	}
+	fflush(stderr);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height,
 		0, GL_RGB, GL_UNSIGNED_BYTE, image);
+	// free image
 	SOIL_free_image_data(image);										// tmp
 	return (1);
 }

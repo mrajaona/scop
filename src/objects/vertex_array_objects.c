@@ -1,4 +1,4 @@
-#include "tuto.h"
+#include "object.h"
 
 void	vao(GLuint *vao)
 {

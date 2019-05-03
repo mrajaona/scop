@@ -3,24 +3,44 @@ NAME		=	scop
 GLWF_INC	=	/Users/mrajaona/.brew/Cellar/glfw/3.3/include/
 
 DIR_INC		=	./inc/
-INC			=	tuto.h
+INC			=	common.h \
+				error.h \
+				exit.h \
+				gl_loader.h \
+				glfw.h \
+				img_loader.h \
+				matrix.h \
+				object.h \
+				scop.h \
+				shader.h \
+				show.h \
+				texture.h
 
 DIR_SRC		=	./src/
 
 DIR_MAIN	=	./
-SRC_MAIN	=	tuto.c \
+SRC_MAIN	=	exit.c \
+				scop.c \
 				glfw_init.c \
-				vertex_buffer_objects.c \
-				vertex_array_objects.c \
-				element_array_buffer.c \
-				shader_program.c \
 				texture.c \
-				matrix.c \
 				show.c
-
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
-SRC			=	$(SRCS_MAIN)
+DIR_OBJECT	=	./objects/
+SRC_OBJECT	=	vertex_buffer_objects.c \
+				vertex_array_objects.c \
+				element_array_buffer.c
+SRCS_OBJECT	=	$(addprefix	$(DIR_OBJECT), $(SRC_OBJECT))
+
+DIR_SHADER	=	./shader/
+SRC_SHADER	=	shader_program.c
+SRCS_SHADER	=	$(addprefix	$(DIR_SHADER), $(SRC_SHADER))
+
+DIR_MATRIX	=	./matrix/
+SRC_MATRIX	=	matrix.c
+SRCS_MATRIX	=	$(addprefix	$(DIR_MATRIX), $(SRC_MATRIX))
+
+SRC			=	$(SRCS_MAIN) $(SRCS_OBJECT) $(SRCS_SHADER) $(SRCS_MATRIX)
 
 INCS		=	$(addprefix $(DIR_INC), $(INC))
 SRCS		=	$(addprefix $(DIR_SRC), $(SRC))

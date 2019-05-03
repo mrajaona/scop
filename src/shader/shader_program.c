@@ -1,4 +1,4 @@
-#include "tuto.h"
+#include "shader.h"
 
 static void	shader_status(const GLuint shader, t_data *scop)
 {

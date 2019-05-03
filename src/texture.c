@@ -1,4 +1,4 @@
-#include "tuto.h"
+#include "texture.h"
 
 static void	bw_checkerboard(void)
 {

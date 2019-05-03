@@ -1,4 +1,4 @@
-#include "tuto.h"
+#include "glfw.h"
 
 static void	glfw_error(void)
 {

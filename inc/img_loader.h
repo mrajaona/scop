@@ -6,7 +6,7 @@
 
 # include "common.h"
 
-# include "SOIL.h"
+# include "SOIL.h" // tmp
 
 # include "bmp_img_loader.h"
 # include "error.h"

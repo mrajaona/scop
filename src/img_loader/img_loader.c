@@ -22,25 +22,27 @@ unsigned char	*load(const char *path, int *width, int *height)
 	rewind(fp);
 	// check errno here
 
-	(void)width; (void)height; image = NULL;
 	// check format
 	if (rd >= 2 && !strncmp(magic, BMP_MAGIC, rd))
 	{
 		fprintf(stdout, "BMP\n");
 		fflush(stdout);
 		// image = load_bmp_img(fp, width, height);
+		image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);
 	}
 	else if (rd >= 8 && !strncmp(magic, PNG_MAGIC, rd))
 	{
-	fprintf(stdout, "PNG\n");
+		fprintf(stdout, "PNG\n");
 		fflush(stdout);
 		// image = load_png_image();
+		image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);
 	}
 	else if (rd >= 3 && !strncmp(magic, JPG_MAGIC, rd))
 	{
 		fprintf(stdout, "JPG\n");
 		fflush(stdout);
 		// image = load_jpg_image();
+		image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);
 	}
 	else
 	{
@@ -60,9 +62,8 @@ int	load_img(const char *path)
 	int				height;
 	unsigned char	*image;
 
-	image = load(path, &width, &height);
 	// unsigned char *SOIL_load_image(const char *filename, int *width, int *height, int *channels, int force_channels)
-	image = SOIL_load_image(path, &width, &height, 0, SOIL_LOAD_RGB);
+	image = load(path, &width, &height);
 	if (!image)
 	{
 		fprintf(stderr, "Failed to load image\n");

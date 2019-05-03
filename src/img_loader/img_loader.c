@@ -27,10 +27,8 @@ static unsigned char	*load(const char *path, int *width, int *height)
 	{
 		fprintf(stdout, "BMP\n");										// tmp
 		fflush(stdout);													// tmp
-		// image = load_bmp_img(fp, width, height);
-		image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);	// tmp
-		fprintf(stdout, "fgdsfsad\n");
-		fflush(stdout);
+		image = load_bmp_img(fp, width, height);
+		// image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);	// tmp // floating point exception
 	}
 	else if (rd >= 8 && !strncmp(magic, PNG_MAGIC, 8))
 	{

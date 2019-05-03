@@ -9,25 +9,6 @@ static void	bw_checkerboard(void)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, pixels);
 }
 
-static int	load_img(const char *path)
-{
-	// SOIL
-	int				width;
-	int				height;
-	unsigned char	*image;
-
-	image = SOIL_load_image(path, &width, &height, 0, SOIL_LOAD_RGB);
-	if (!image)
-	{
-		fprintf(stderr, "failed to load image\n");
-		fflush(stderr);
-		return (0);
-	}
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-	SOIL_free_image_data(image);
-	return (1);
-}
-
 void	set_TexParameter(int loaded)
 {
 	if (!loaded)
@@ -55,14 +36,14 @@ void	tex(GLuint textures[N_TEXTURES], t_data *scop)
 	// CAT
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textures[0]);
-	success = load_img("sample.png");
+	success = load_img("textures/sample.png");
 	glUniform1i(glGetUniformLocation(scop->shaderProgram, "texKitten"), 0);
 	set_TexParameter(success);
 
 	// DOG
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, textures[1]);
-	success = load_img("sample2.png");
+	success = load_img("textures/sample2.png");
 	glUniform1i(glGetUniformLocation(scop->shaderProgram, "texPuppy"), 1);
 	set_TexParameter(success);
 }

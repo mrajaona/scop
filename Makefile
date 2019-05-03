@@ -40,7 +40,12 @@ DIR_MATRIX	=	./matrix/
 SRC_MATRIX	=	matrix.c
 SRCS_MATRIX	=	$(addprefix	$(DIR_MATRIX), $(SRC_MATRIX))
 
-SRC			=	$(SRCS_MAIN) $(SRCS_OBJECT) $(SRCS_SHADER) $(SRCS_MATRIX)
+DIR_IMG_LOADER	=	./img_loader/
+SRC_IMG_LOADER	=	img_loader.c
+SRCS_IMG_LOADER	=	$(addprefix	$(DIR_IMG_LOADER), $(SRC_IMG_LOADER))
+
+SRC			=	$(SRCS_MAIN) $(SRCS_OBJECT) $(SRCS_SHADER) $(SRCS_MATRIX) \
+				$(SRCS_IMG_LOADER)
 
 INCS		=	$(addprefix $(DIR_INC), $(INC))
 SRCS		=	$(addprefix $(DIR_SRC), $(SRC))

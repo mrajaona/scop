@@ -1,5 +1,14 @@
 #include "matrix_op.h"
 
+void			coord_to_vec(float x, float y, float z, t_vector dest)
+{
+	dest[0] = x;
+	dest[1] = y;
+	dest[2] = z;
+	dest[3] = 1;
+}
+
+
 void		mat4_vector_prod(t_mat4 lhs, t_vector rhs, t_vector res)
 {
 	unsigned char	x;
@@ -31,16 +40,16 @@ static void	transform(t_mat4 trans, t_mat4 dest)
 	mat4_mult(trans, tmp_mat, dest);
 }
 
-void			translation(t_3d_coord *mov, t_mat4 dest)
+void			translation(t_vector mov, t_mat4 dest)
 {
 	t_mat4	translate_mat;
 
 	if (!mov || !dest)
 		return ;
 	identity(translate_mat);
-	mat4_set(translate_mat, 3, 0, mov->x);
-	mat4_set(translate_mat, 3, 1, mov->y);
-	mat4_set(translate_mat, 3, 2, mov->z);
+	mat4_set(translate_mat, 3, 0, mov[0]);
+	mat4_set(translate_mat, 3, 1, mov[1]);
+	mat4_set(translate_mat, 3, 2, mov[2]);
 	mat4_set(translate_mat, 3, 3, 1);
 	transform(translate_mat, dest);
 }

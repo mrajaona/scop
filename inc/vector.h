@@ -2,7 +2,6 @@
 # define VECTOR_H
 
 # include <stdlib.h>
-# include "3d.h"
 
 typedef float	t_vector[4];
 typedef float	*t_vector_ptr;

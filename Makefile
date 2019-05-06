@@ -11,7 +11,6 @@ INC			=	common.h \
 				object.h \
 				shader.h \
 				texture.h \
-				3d.h \
 				matrix.h \
 				vector.h \
 				matrix_op.h \

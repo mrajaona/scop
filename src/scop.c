@@ -55,22 +55,46 @@ int			main()
 	init(&scop);
 
 	// debug
-	t_mat4		trans;
-	identity(trans);
-	rotatez(deg_to_rad(180.0), trans);
+
+	t_mat4		model;
+	identity(model);
+	rotatez(deg_to_rad(180), model);
+	GLint uniTrans = glGetUniformLocation(scop.shaderProgram, "model");
+	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, model);
+
+	// camera
+	t_mat4		view;
+	identity(view);
+
+	t_vector mov;
+	// clear_vector(mov);
+	coord_to_vec(0, 1, 0, mov);
+	translation(mov, view);
 	/*
-	t_vector	ori;
-	clear_vector(ori);
-	ori[0] = 1;
-
-	t_vector	res;
-	mat4_vector_prod(trans, ori, res);
-
-	fprintf(stdout, "x:%f y:%f z:%f w:%f\n", res[0], res[1], res[2], res[3]);
-	fflush(stdout);
+	glm::mat4 view = glm::lookAt(
+		glm::vec3(1.2f, 1.2f, 1.2f), 	// camera pos (default : 0, 0, 0)
+		glm::vec3(0.0f, 0.0f, 0.0f), 	// screen center (camera direction) (default : 0, 0, -1)
+		glm::vec3(0.0f, 0.0f, 1.0f)		// up axis (camera orientation) (default : y ?)
+	);
 	*/
-	GLint uniTrans = glGetUniformLocation(scop.shaderProgram, "trans");
-	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, trans);
+	GLint uniView = glGetUniformLocation(scop.shaderProgram, "view");
+	glUniformMatrix4fv(uniView, 1, GL_FALSE, view);
+
+	// fov
+	t_mat4		proj;
+	identity(proj);
+	/*
+	glm::mat4 proj = glm::perspective(
+		glm::radians(45.0f),	// vertical fov
+		800.0f / 600.0f,		// aspect ratio of the screen
+		1.0f,					// near plane
+		10.0f					// far plane
+	);
+	*/
+	GLint uniProj = glGetUniformLocation(scop.shaderProgram, "proj");
+	glUniformMatrix4fv(uniProj, 1, GL_FALSE, proj);
+
+
 	// end
 
 	show(&scop);

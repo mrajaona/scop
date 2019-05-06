@@ -14,8 +14,9 @@ typedef struct	s_scale
 	float	sz;
 }				t_scale;
 
+void			coord_to_vec(float x, float y, float z, t_vector dest);
 void			mat4_vector_prod(t_mat4 lhs, t_vector rhs, t_vector res);
-void			translation(t_3d_coord *mov, t_mat4 dest);
+void			translation(t_vector mov, t_mat4 dest);
 void			scaling(t_scale *scale, t_mat4 dest);
 float			deg_to_rad(float angle);
 float			rad_to_deg(float angle);

@@ -9,12 +9,12 @@
 ** y goes down
 */
 
-typedef double	t_mat4[16];
-typedef double	*t_mat4_ptr;
+typedef float	t_mat4[16];
+typedef float	*t_mat4_ptr;
 
 void			mat4_set(t_mat4 mat, unsigned char x, unsigned char y,
-	double value);
-double			mat4_get(t_mat4 mat, unsigned char x, unsigned char y);
+	float value);
+float			mat4_get(t_mat4 mat, unsigned char x, unsigned char y);
 
 void			clear_matrix(t_mat4 mat);
 void			identity(t_mat4 mat);

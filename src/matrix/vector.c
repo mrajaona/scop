@@ -32,7 +32,7 @@ t_vector_ptr	vector_add(t_vector lhs, t_vector rhs, t_vector res)
 	unsigned char	x;
 	unsigned char	y;
 
-	if (!lhs || (!res && !(res = (t_vector_ptr)malloc(16 * sizeof(double)))))
+	if (!lhs || (!res && !(res = (t_vector_ptr)malloc(16 * sizeof(float)))))
 		return (NULL);
 	if (!rhs)
 	{
@@ -58,7 +58,7 @@ t_vector_ptr	vector_sub(t_vector lhs, t_vector rhs, t_vector res)
 	unsigned char	x;
 	unsigned char	y;
 
-	if (!lhs || (!res && !(res = (t_vector_ptr)malloc(16 * sizeof(double)))))
+	if (!lhs || (!res && !(res = (t_vector_ptr)malloc(16 * sizeof(float)))))
 		return (NULL);
 	if (!rhs)
 	{
@@ -84,7 +84,7 @@ t_vector_ptr	vector_scalar(t_vector vec, int scalar, t_vector res)
 	unsigned char	x;
 	unsigned char	y;
 
-	if (!vec || (!res && !(res = (t_vector_ptr)malloc(16 * sizeof(double)))))
+	if (!vec || (!res && !(res = (t_vector_ptr)malloc(16 * sizeof(float)))))
 		return (NULL);
 	y = 0;
 	while (y < 4)

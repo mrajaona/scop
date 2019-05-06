@@ -4,8 +4,8 @@
 # include <stdlib.h>
 # include "3d.h"
 
-typedef double	t_vector[4];
-typedef double	*t_vector_ptr;
+typedef float	t_vector[4];
+typedef float	*t_vector_ptr;
 
 void			clear_vector(t_vector vec);
 void			vector_eq(t_vector dst, t_vector src);

@@ -45,11 +45,34 @@ static void	clr_scop(t_data *scop)
 	}
 }
 
+#include "matrix_op.h"
+#include "error.h"
+
 int			main()
 {
 	t_data	scop;
 	clr_scop(&scop);
 	init(&scop);
+
+	// debug
+	t_mat4		trans;
+	identity(trans);
+	rotatez(deg_to_rad(180.0), trans);
+	/*
+	t_vector	ori;
+	clear_vector(ori);
+	ori[0] = 1;
+
+	t_vector	res;
+	mat4_vector_prod(trans, ori, res);
+
+	fprintf(stdout, "x:%f y:%f z:%f w:%f\n", res[0], res[1], res[2], res[3]);
+	fflush(stdout);
+	*/
+	GLint uniTrans = glGetUniformLocation(scop.shaderProgram, "trans");
+	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, trans);
+	// end
+
 	show(&scop);
 	ft_exit(&scop, 0);
 	// return (0);

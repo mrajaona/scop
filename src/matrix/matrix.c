@@ -1,13 +1,13 @@
 #include "matrix.h"
 
-void		mat4_set(t_mat4 mat, unsigned char x, unsigned char y, double value)
+void		mat4_set(t_mat4 mat, unsigned char x, unsigned char y, float value)
 {
 	if (x >= 4 || y >= 4)
 		return ;
 	mat[x + (4 * y)] = value;
 }
 
-double		mat4_get(t_mat4 mat, unsigned char x, unsigned char y)
+float		mat4_get(t_mat4 mat, unsigned char x, unsigned char y)
 {
 	if (x >= 4 || y >= 4)
 		return (0);
@@ -91,7 +91,7 @@ t_mat4_ptr		mat4_add(t_mat4 lhs, t_mat4 rhs, t_mat4 res)
 	unsigned char	x;
 	unsigned char	y;
 
-	if (!lhs || (!res && !(res = (t_mat4_ptr)malloc(16 * sizeof(double)))))
+	if (!lhs || (!res && !(res = (t_mat4_ptr)malloc(16 * sizeof(float)))))
 		return (NULL);
 	if (!rhs)
 	{
@@ -118,7 +118,7 @@ t_mat4_ptr		mat4_sub(t_mat4 lhs, t_mat4 rhs, t_mat4 res)
 	unsigned char	x;
 	unsigned char	y;
 
-	if (!lhs || (!res && !(res = (t_mat4_ptr)malloc(16 * sizeof(double)))))
+	if (!lhs || (!res && !(res = (t_mat4_ptr)malloc(16 * sizeof(float)))))
 		return (NULL);
 	if (!rhs)
 	{
@@ -145,7 +145,7 @@ t_mat4_ptr		mat4_scalar(t_mat4 mat, int scalar, t_mat4 res)
 	unsigned char	x;
 	unsigned char	y;
 
-	if (!mat || (!res && !(res = (t_mat4_ptr)malloc(16 * sizeof(double)))))
+	if (!mat || (!res && !(res = (t_mat4_ptr)malloc(16 * sizeof(float)))))
 		return (NULL);
 	y = 0;
 	while (y < 4)
@@ -166,10 +166,10 @@ t_mat4_ptr		mat4_scalar(t_mat4 mat, int scalar, t_mat4 res)
 ** res[x][y] = lhs x row . rhs y col
 */
 
-static double	mult_step(unsigned char x, unsigned char y,
+static float	mult_step(unsigned char x, unsigned char y,
 	t_mat4 lhs, t_mat4 rhs)
 {
-	double	step;
+	float	step;
 	unsigned char	i;
 
 	step = 0;
@@ -188,7 +188,7 @@ t_mat4_ptr		mat4_mult(t_mat4 lhs, t_mat4 rhs, t_mat4 res)
 	unsigned char	y;
 
 	if (!lhs || !rhs
-		|| (!res && !(res = (t_mat4_ptr)malloc(16 * sizeof(double)))))
+		|| (!res && !(res = (t_mat4_ptr)malloc(16 * sizeof(float)))))
 		return (NULL);
 	y = 0;
 	while (y < 4)

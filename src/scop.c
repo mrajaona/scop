@@ -73,7 +73,7 @@ int			main()
 	/*
 	glm::mat4 view = glm::lookAt(
 		glm::vec3(1.2f, 1.2f, 1.2f), 	// camera pos (default : 0, 0, 0)
-		glm::vec3(0.0f, 0.0f, 0.0f), 	// screen center (camera direction) (default : 0, 0, -1)
+		glm::vec3(0.0f, 0.0f, 0.0f), 	// screen center (default : 0, 0, 0) (-z)
 		glm::vec3(0.0f, 0.0f, 1.0f)		// up axis (camera orientation) (default : y ?)
 	);
 	*/

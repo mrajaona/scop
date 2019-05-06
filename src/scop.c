@@ -63,13 +63,19 @@ int			main()
 	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, model);
 
 	// camera
+
 	t_mat4		view;
 	identity(view);
 
-	t_vector mov;
-	// clear_vector(mov);
-	coord_to_vec(0, 1, 0, mov);
-	translation(mov, view);
+	t_vector up;
+	coord_to_vec(0, 1, 0, up);
+
+	t_vector	eye;
+	coord_to_vec(0, -1, 0, eye);
+
+	t_vector	center;
+	coord_to_vec(0, 1, 0, center);
+
 	/*
 	glm::mat4 view = glm::lookAt(
 		glm::vec3(1.2f, 1.2f, 1.2f), 	// camera pos (default : 0, 0, 0)

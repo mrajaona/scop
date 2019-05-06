@@ -1,5 +1,20 @@
 #include "vector.h"
 
+void			normalize(t_vector vector, t_vector dest)
+{
+	float	len;
+
+	len = sqrtf(
+		(vector[0] * vector[0])
+		+ (vector[1] * vector[1])
+		+ (vector[2] * vector[2])
+	);
+	dest[0] = vector[0] / len;
+	dest[1] = vector[1] / len;
+	dest[2] = vector[2] / len;
+	dest[3] = 1;
+}
+
 /*
 ** 0
 ** 0
@@ -29,7 +44,6 @@ void		vector_eq(t_vector dst, t_vector src)
 
 t_vector_ptr	vector_add(t_vector lhs, t_vector rhs, t_vector res)
 {
-	unsigned char	x;
 	unsigned char	y;
 
 	if (!lhs || (!res && !(res = (t_vector_ptr)malloc(16 * sizeof(float)))))
@@ -42,12 +56,7 @@ t_vector_ptr	vector_add(t_vector lhs, t_vector rhs, t_vector res)
 	y = 0;
 	while (y < 4)
 	{
-		x = 0;
-		while (x < 4)
-		{
-			res[x + (4 * y)] = lhs[x + (4 * y)] + rhs[x + (4 * y)];
-			x++;
-		}
+		res[y] = lhs[y] + rhs[y];
 		y++;
 	}
 	return (res);
@@ -55,7 +64,6 @@ t_vector_ptr	vector_add(t_vector lhs, t_vector rhs, t_vector res)
 
 t_vector_ptr	vector_sub(t_vector lhs, t_vector rhs, t_vector res)
 {
-	unsigned char	x;
 	unsigned char	y;
 
 	if (!lhs || (!res && !(res = (t_vector_ptr)malloc(16 * sizeof(float)))))
@@ -68,12 +76,7 @@ t_vector_ptr	vector_sub(t_vector lhs, t_vector rhs, t_vector res)
 	y = 0;
 	while (y < 4)
 	{
-		x = 0;
-		while (x < 4)
-		{
-			res[x + (4 * y)] = lhs[x + (4 * y)] - rhs[x + (4 * y)];
-			x++;
-		}
+		res[y] = lhs[y] - rhs[y];
 		y++;
 	}
 	return (res);
@@ -81,7 +84,6 @@ t_vector_ptr	vector_sub(t_vector lhs, t_vector rhs, t_vector res)
 
 t_vector_ptr	vector_scalar(t_vector vec, int scalar, t_vector res)
 {
-	unsigned char	x;
 	unsigned char	y;
 
 	if (!vec || (!res && !(res = (t_vector_ptr)malloc(16 * sizeof(float)))))
@@ -89,12 +91,7 @@ t_vector_ptr	vector_scalar(t_vector vec, int scalar, t_vector res)
 	y = 0;
 	while (y < 4)
 	{
-		x = 0;
-		while (x < 4)
-		{
-			res[x + (4 * y)] = vec[x + (4 * y)] * scalar;
-			x++;
-		}
+		res[y] = vec[y] * scalar;
 		y++;
 	}
 	return (res);

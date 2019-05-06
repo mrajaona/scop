@@ -102,8 +102,8 @@ void			rotatex(t_angle angle, t_mat4 dest)
 	if (!dest)
 		return ;
 	identity(rotate_mat);
-	c = cos(angle);
-	s = sin(angle);
+	c = cosf(angle);
+	s = sinf(angle);
 	mat4_set(rotate_mat, 1, 1, c);
 	mat4_set(rotate_mat, 2, 1, -1 * s);
 	mat4_set(rotate_mat, 1, 2, s);
@@ -127,8 +127,8 @@ void			rotatey(t_angle angle, t_mat4 dest)
 	if (!dest)
 		return ;
 	identity(rotate_mat);
-	c = cos(angle);
-	s = sin(angle);
+	c = cosf(angle);
+	s = sinf(angle);
 	mat4_set(rotate_mat, 0, 0, c);
 	mat4_set(rotate_mat, 2, 0, s);
 	mat4_set(rotate_mat, 0, 2, -1 * s);
@@ -152,8 +152,8 @@ void			rotatez(t_angle angle, t_mat4 dest)
 	if (!dest)
 		return ;
 	identity(rotate_mat);
-	c = cos(angle);
-	s = sin(angle);
+	c = cosf(angle);
+	s = sinf(angle);
 	mat4_set(rotate_mat, 0, 0, c);
 	mat4_set(rotate_mat, 1, 0, -1 * s);
 	mat4_set(rotate_mat, 0, 1, s);

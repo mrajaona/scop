@@ -67,14 +67,17 @@ int			main()
 	t_mat4		view;
 	identity(view);
 
-	t_vector up;
-	coord_to_vec(0, 1, 0, up);
-
 	t_vector	eye;
-	coord_to_vec(0, -1, 0, eye);
-
 	t_vector	center;
-	coord_to_vec(0, 1, 0, center);
+	t_vector up;
+
+	coord_to_vec(1.2f, 1.2f, 1.2f, eye);
+	coord_to_vec(0, 0, 0, center);
+	coord_to_vec(0, 0, 1, up);
+
+	t_vector	right_final;		// norm(up) x direction_final
+	t_vector	up_final;			// norm(right_final) x direction_final
+	t_vector	direction_final;	// norm(center - eye)
 
 	/*
 	glm::mat4 view = glm::lookAt(

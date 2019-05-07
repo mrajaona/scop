@@ -14,6 +14,8 @@ INC			=	common.h \
 				shader.h \
 				texture.h \
 				matrix.h \
+				vector.h \
+				matrix_op.h \
 				show.h \
 				error.h \
 				exit.h
@@ -39,7 +41,9 @@ SRC_SHADER	=	shader_program.c
 SRCS_SHADER	=	$(addprefix	$(DIR_SHADER), $(SRC_SHADER))
 
 DIR_MATRIX	=	./matrix/
-SRC_MATRIX	=	matrix.c
+SRC_MATRIX	=	matrix.c \
+				vector.c \
+				operations.c
 SRCS_MATRIX	=	$(addprefix	$(DIR_MATRIX), $(SRC_MATRIX))
 
 DIR_IMG_LOADER	=	./img_loader/

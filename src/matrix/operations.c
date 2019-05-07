@@ -162,6 +162,12 @@ void			rotatez(t_angle angle, t_mat4 dest)
 }
 
 // a tester et corriger
+
+
+// It seems you already have a camera pos (p), target (l) and up (u) vectors.
+// To calculate right, find the cross product of (p - l) and (u - p).
+// This will give you a vector orthogonal to both, the "right" vector.
+
 void			lookat(t_vector eye, t_vector center, t_vector up, t_mat4 dest)
 {
 	t_vector	s;					// up x f
@@ -189,12 +195,12 @@ void			lookat(t_vector eye, t_vector center, t_vector up, t_mat4 dest)
 	mat4_set(dest, 3, 1, 0);
 
 	mat4_set(dest, 0, 2, -1 * f[0]);
-	mat4_set(dest, 1, 2, -1 * f[0]);
-	mat4_set(dest, 2, 2, -1 * f[0]);
+	mat4_set(dest, 1, 2, -1 * f[1]);
+	mat4_set(dest, 2, 2, -1 * f[2]);
 	mat4_set(dest, 3, 2, 0);
 
-	mat4_set(dest, 0, 3, s[0]);
-	mat4_set(dest, 1, 3, s[0]);
-	mat4_set(dest, 2, 3, s[0]);
+	mat4_set(dest, 0, 3, 0);
+	mat4_set(dest, 1, 3, 0);
+	mat4_set(dest, 2, 3, 0);
 	mat4_set(dest, 3, 3, 1);
 }

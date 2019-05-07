@@ -67,7 +67,7 @@ int			main()
 
 	t_mat4		view;
 	identity(view);
-	/*
+
 	t_vector	eye;
 	t_vector	center;
 	t_vector up;
@@ -76,10 +76,8 @@ int			main()
 	coord_to_vec(0, 0, 0, center);
 	coord_to_vec(0, 0, 1, up);
 	
-	t_vector	right_final;		// norm(up) x direction_final
-	t_vector	up_final;			// norm(right_final) x direction_final
-	t_vector	direction_final;	// norm(center - eye)
-	*/
+	lookat(eye, center, up, view);
+
 	/*
 	glm::mat4 view = glm::lookAt(
 		glm::vec3(1.2f, 1.2f, 1.2f), 	// camera pos (default : 0, 0, 0)

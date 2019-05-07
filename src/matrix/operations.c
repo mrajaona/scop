@@ -160,3 +160,40 @@ void			rotatez(t_angle angle, t_mat4 dest)
 	mat4_set(rotate_mat, 1, 1, c);
 	transform(rotate_mat, dest);
 }
+
+void			lookat(t_vector eye, t_vector center, t_vector up, t_mat4 dest)
+{
+	t_vector	s;					// up x f
+	t_vector	t;					// norm(s) x direction_final
+	t_vector	final_direction;	// norm(center - eye)
+
+	t_vector	f;
+	t_vector	norm_s;
+
+	vector_sub(center, eye, final_direction);
+	coord_normalize(final_direction, f);
+
+	coord_scalar_prod(f, up, s);
+	coord_normalize(s, norm_s);
+	coord_scalar_prod(norm_s, f, t);
+
+	mat4_set(dest, 0, 0, s[0]);
+	mat4_set(dest, 1, 0, s[1]);
+	mat4_set(dest, 2, 0, s[2]);
+	mat4_set(dest, 3, 0, 0);
+
+	mat4_set(dest, 0, 1, t[0]);
+	mat4_set(dest, 1, 1, t[1]);
+	mat4_set(dest, 2, 1, t[2]);
+	mat4_set(dest, 3, 1, 0);
+
+	mat4_set(dest, 0, 2, -1 * f[0]);
+	mat4_set(dest, 1, 2, -1 * f[0]);
+	mat4_set(dest, 2, 2, -1 * f[0]);
+	mat4_set(dest, 3, 2, 0);
+
+	mat4_set(dest, 0, 3, s[0]);
+	mat4_set(dest, 1, 3, s[0]);
+	mat4_set(dest, 2, 3, s[0]);
+	mat4_set(dest, 3, 3, 1);
+}

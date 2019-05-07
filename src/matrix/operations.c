@@ -161,6 +161,7 @@ void			rotatez(t_angle angle, t_mat4 dest)
 	transform(rotate_mat, dest);
 }
 
+// a tester et corriger
 void			lookat(t_vector eye, t_vector center, t_vector up, t_mat4 dest)
 {
 	t_vector	s;					// up x f

@@ -1,7 +1,7 @@
 #ifndef OBJECT_H
 # define OBJECT_H
 
-# include "gl_loader.h"
+// # include "gl_loader.h"
 # include "common.h"
 
 void	vbo(GLuint *vbo);

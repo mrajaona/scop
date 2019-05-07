@@ -1,6 +1,7 @@
 #include "scop.h"
 
 // GLEW
+/*
 static void	glew_init(GLuint *vertexBuffer)
 {
 	glewExperimental = GL_TRUE;
@@ -13,11 +14,11 @@ static void	glew_init(GLuint *vertexBuffer)
 	}
 	glGenBuffers(1, vertexBuffer);
 }
-
+*/
 static void	init(t_data *scop)
 {
 	glfw_init(&(scop->window));
-	glew_init(&(scop->vertexBuffer));
+//	glew_init(&(scop->vertexBuffer));
 	vbo(&(scop->vbo));
 	vao(&(scop->vao));
 	ebo(&(scop->ebo));

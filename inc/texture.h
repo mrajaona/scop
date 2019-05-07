@@ -1,7 +1,7 @@
 #ifndef TEXTURE_H
 # define TEXTURE_H
 
-# include "gl_loader.h"
+// # include "gl_loader.h"
 # include "common.h"
 # include "img_loader.h"
 # include "error.h"

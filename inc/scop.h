@@ -1,7 +1,7 @@
 #ifndef SCOP_H
 # define SCOP_H
 
-# include "gl_loader.h"
+//# include "gl_loader.h"
 # include "common.h"
 # include "object.h"
 # include "texture.h"

@@ -1,7 +1,7 @@
 #ifndef SHADER_H
 # define SHADER_H
 
-# include "gl_loader.h"
+// # include "gl_loader.h"
 # include "common.h"
 # include "error.h"
 # include "exit.h"

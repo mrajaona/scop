@@ -170,10 +170,11 @@ void			rotatez(t_angle angle, t_mat4 dest)
 
 void			lookat(t_vector eye, t_vector target, t_vector up, t_mat4 dest)
 {
-	t_vector	tmp1;
-	t_vector	tmp2;
+	t_vector	cam_direction;
+	t_vector	tmp;
 
-	t_vector	right;
+	t_vector	cam_right;
+	t_vector	cam_up;
 
 	t_vector	r; // right
 	t_vector	u; // up
@@ -181,13 +182,15 @@ void			lookat(t_vector eye, t_vector target, t_vector up, t_mat4 dest)
 
 	t_mat4	lhs;
 
-	vector_sub(target, eye, tmp1);
-	vector_sub(up, eye, tmp2);
-	coord_cross_prod(tmp1, tmp2, right);
+	vector_sub(target, eye, cam_direction);
+	vector_sub(up, eye, tmp);
+	coord_cross_prod(cam_direction, tmp, cam_right);
 
-	coord_normalize(tmp1, d);
-	coord_normalize(up, u);
-	coord_normalize(right, r);
+	coord_cross_prod(cam_direction, cam_right, cam_up);
+
+	coord_normalize(cam_direction, d);
+	coord_normalize(cam_up, u);
+	coord_normalize(cam_right, r);
 
 	identity(lhs);
 

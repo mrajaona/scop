@@ -77,9 +77,9 @@ int			main()
 	coord_to_vec(0, 0, 0, center);
 	coord_to_vec(0, 0, 1, up);
 	*/
-	coord_to_vec(1, 0, 1, eye);
-	coord_to_vec(0, 0, 0, center);
-	coord_to_vec(1, 0, 0, up);
+	coord_to_vec(1, 1, 1, eye);
+	coord_to_vec(1, 1, 0, center);
+	coord_to_vec(0, 1, 0, up);
 
 	lookat(eye, center, up, view);
 
@@ -87,7 +87,7 @@ int			main()
 	glm::mat4 view = glm::lookAt(
 		glm::vec3(1.2f, 1.2f, 1.2f), 	// camera pos (default : 0, 0, 0)
 		glm::vec3(0.0f, 0.0f, 0.0f), 	// screen center (default : 0, 0, 0) (-z)
-		glm::vec3(0.0f, 0.0f, 1.0f)		// up axis (camera orientation) (default : y ?)
+		glm::vec3(0.0f, 0.0f, 1.0f)		// up axis // (world)
 	);
 	*/
 	GLint uniView = glGetUniformLocation(scop.shaderProgram, "view");

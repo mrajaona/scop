@@ -1,13 +1,10 @@
 #include "show.h"
 
-/*
-// dynamic color
-uniColor = glGetUniformLocation(scop->shaderProgram, "triangleColor");
-glUniform3f(uniColor, 1.0f, 0.0f, 0.0f);
-*/
-
 void	show(t_data *scop)
 {
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f );
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 	while(!glfwWindowShouldClose(scop->window))
 	{
 		glfwSwapBuffers(scop->window);

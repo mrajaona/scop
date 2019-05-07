@@ -1,6 +1,7 @@
 #include "scop.h"
 
 // GLEW
+
 static void	glew_init(GLuint *vertexBuffer)
 {
 	glewExperimental = GL_TRUE;
@@ -69,21 +70,24 @@ int			main()
 
 	t_vector	eye;
 	t_vector	center;
-	t_vector up;
+	t_vector 	up;
 
+	/*
 	coord_to_vec(1.2f, 1.2f, 1.2f, eye);
 	coord_to_vec(0, 0, 0, center);
 	coord_to_vec(0, 0, 1, up);
+	*/
+	coord_to_vec(1, 1, 1, eye);
+	coord_to_vec(1, 1, 0, center);
+	coord_to_vec(0, 1, 0, up);
 
-	t_vector	right_final;		// norm(up) x direction_final
-	t_vector	up_final;			// norm(right_final) x direction_final
-	t_vector	direction_final;	// norm(center - eye)
+	lookat(eye, center, up, view);
 
 	/*
 	glm::mat4 view = glm::lookAt(
 		glm::vec3(1.2f, 1.2f, 1.2f), 	// camera pos (default : 0, 0, 0)
 		glm::vec3(0.0f, 0.0f, 0.0f), 	// screen center (default : 0, 0, 0) (-z)
-		glm::vec3(0.0f, 0.0f, 1.0f)		// up axis (camera orientation) (default : y ?)
+		glm::vec3(0.0f, 0.0f, 1.0f)		// up axis // (world)
 	);
 	*/
 	GLint uniView = glGetUniformLocation(scop.shaderProgram, "view");
@@ -102,7 +106,6 @@ int			main()
 	*/
 	GLint uniProj = glGetUniformLocation(scop.shaderProgram, "proj");
 	glUniformMatrix4fv(uniProj, 1, GL_FALSE, proj);
-
 
 	// end
 

@@ -82,7 +82,7 @@ t_vector_ptr	vector_scalar(t_vector vec, int scalar, t_vector res)
 	return (res);
 }
 
-t_vector_ptr	coord_scalar_prod(t_vector lhs, t_vector rhs, t_vector res)
+t_vector_ptr	coord_cross_prod(t_vector lhs, t_vector rhs, t_vector res)
 {
 	res[0] = (lhs[1] * rhs[2]) - (lhs[2] * rhs[1]);
 	res[1] = (lhs[2] * rhs[0]) - (lhs[0] * rhs[2]);

@@ -23,6 +23,6 @@ float			rad_to_deg(float angle);
 void			rotatex(t_angle angle, t_mat4 dest);
 void			rotatey(t_angle angle, t_mat4 dest);
 void			rotatez(t_angle angle, t_mat4 dest);
-void            lookat(t_vector eye, t_vector center, t_vector up, t_mat4 dest);
+void            lookat(t_vector eye, t_vector target, t_vector up, t_mat4 dest);
 
 #endif

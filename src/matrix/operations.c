@@ -168,39 +168,48 @@ void			rotatez(t_angle angle, t_mat4 dest)
 // To calculate right, find the cross product of (p - l) and (u - p).
 // This will give you a vector orthogonal to both, the "right" vector.
 
-void			lookat(t_vector eye, t_vector center, t_vector up, t_mat4 dest)
+void			lookat(t_vector eye, t_vector target, t_vector up, t_mat4 dest)
 {
-	t_vector	s;					// up x f
-	t_vector	t;					// norm(s) x direction_final
-	t_vector	final_direction;	// norm(center - eye)
+	t_vector	tmp1;
+	t_vector	tmp2;
 
-	t_vector	f;
-	t_vector	norm_s;
+	t_vector	right;
 
-	vector_sub(center, eye, final_direction);
-	coord_normalize(final_direction, f);
+	t_vector	r; // right
+	t_vector	u; // up
+	t_vector	d; // direction
 
-	coord_scalar_prod(f, up, s);
-	coord_normalize(s, norm_s);
-	coord_scalar_prod(norm_s, f, t);
+	t_mat4	lhs;
 
-	mat4_set(dest, 0, 0, s[0]);
-	mat4_set(dest, 1, 0, s[1]);
-	mat4_set(dest, 2, 0, s[2]);
-	mat4_set(dest, 3, 0, 0);
+	vector_sub(target, eye, tmp1);
+	vector_sub(up, eye, tmp2);
+	coord_cross_prod(tmp1, tmp2, right);
 
-	mat4_set(dest, 0, 1, t[0]);
-	mat4_set(dest, 1, 1, t[1]);
-	mat4_set(dest, 2, 1, t[2]);
-	mat4_set(dest, 3, 1, 0);
+	coord_normalize(tmp1, d);
+	coord_normalize(up, u);
+	coord_normalize(right, r);
 
-	mat4_set(dest, 0, 2, -1 * f[0]);
-	mat4_set(dest, 1, 2, -1 * f[1]);
-	mat4_set(dest, 2, 2, -1 * f[2]);
-	mat4_set(dest, 3, 2, 0);
+	identity(lhs);
 
-	mat4_set(dest, 0, 3, 0);
-	mat4_set(dest, 1, 3, 0);
-	mat4_set(dest, 2, 3, 0);
-	mat4_set(dest, 3, 3, 1);
+	mat4_set(lhs, 0, 0, r[0]);
+	mat4_set(lhs, 1, 0, r[1]);
+	mat4_set(lhs, 2, 0, r[2]);
+
+	mat4_set(lhs, 0, 1, u[0]);
+	mat4_set(lhs, 1, 1, u[1]);
+	mat4_set(lhs, 2, 1, u[2]);
+
+	mat4_set(lhs, 0, 2, d[0]);
+	mat4_set(lhs, 1, 2, d[1]);
+	mat4_set(lhs, 2, 2, d[2]);
+
+	t_mat4	rhs;
+
+	identity(rhs);
+
+	mat4_set(rhs, 3, 0, -1 * eye[0]);
+	mat4_set(rhs, 3, 1, -1 * eye[1]);
+	mat4_set(rhs, 3, 2, -1 * eye[2]);
+
+	mat4_mult(lhs, rhs, dest);
 }

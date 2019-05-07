@@ -13,7 +13,7 @@ t_vector_ptr	vector_add(t_vector lhs, t_vector rhs, t_vector res);
 t_vector_ptr	vector_sub(t_vector lhs, t_vector rhs, t_vector res);
 t_vector_ptr	vector_scalar(t_vector vec, int scalar, t_vector res);
 
-t_vector_ptr	coord_scalar_prod(t_vector lhs, t_vector rhs, t_vector res);
+t_vector_ptr	coord_cross_prod(t_vector lhs, t_vector rhs, t_vector res);
 float       	coord_dot_prod(t_vector lhs, t_vector rhs);
 void			coord_normalize(t_vector vector, t_vector dest);
 

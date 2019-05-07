@@ -70,12 +70,12 @@ int			main()
 
 	t_vector	eye;
 	t_vector	center;
-	t_vector up;
+	t_vector 	up;
 
 	coord_to_vec(1.2f, 1.2f, 1.2f, eye);
 	coord_to_vec(0, 0, 0, center);
 	coord_to_vec(0, 0, 1, up);
-	
+
 	lookat(eye, center, up, view);
 
 	/*
@@ -101,7 +101,6 @@ int			main()
 	*/
 	GLint uniProj = glGetUniformLocation(scop.shaderProgram, "proj");
 	glUniformMatrix4fv(uniProj, 1, GL_FALSE, proj);
-
 
 	// end
 

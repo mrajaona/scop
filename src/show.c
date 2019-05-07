@@ -1,4 +1,5 @@
 #include "show.h"
+#include <unistd.h> // debug
 
 void	show(t_data *scop)
 {
@@ -7,5 +8,6 @@ void	show(t_data *scop)
 		glfwSwapBuffers(scop->window);
 		glfwPollEvents();
 		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        sleep(1); // debug
 	}
 }

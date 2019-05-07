@@ -72,7 +72,7 @@ $(OBJS)	:		$(INCS)
 $(NAME)	:		$(INCS) $(SRCS) $(OBJS)
 
 				$(CC) `pkg-config --cflags glfw3` \
-				-o $(NAME) $(OBJS) -L./lib/ -lSOIL -lGLEW -framework OpenGL \
+				-o $(NAME) $(OBJS) -L./lib/ -lSOIL -framework OpenGL \
 				`pkg-config --static --libs glfw3`
 
 				@$(ECHO) "\033[32m> Executable compiled\033[0m\n"

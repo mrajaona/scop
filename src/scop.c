@@ -59,10 +59,11 @@ int			main()
 
 	t_mat4		model;
 	identity(model);
+	/*
 	rotatez(deg_to_rad(180), model);
+	*/
 	GLint uniTrans = glGetUniformLocation(scop.shaderProgram, "model");
 	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, model);
-
 	// camera
 
 	t_mat4		view;

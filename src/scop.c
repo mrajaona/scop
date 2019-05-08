@@ -77,14 +77,10 @@ int			main(void)
 	t_vector	center;
 	t_vector 	up;
 
-	/*
+	
 	coord_to_vec(1.2f, 1.2f, 1.2f, eye);
 	coord_to_vec(0, 0, 0, center);
 	coord_to_vec(0, 0, 1, up);
-	*/
-	coord_to_vec(1, 1, 1, eye);
-	coord_to_vec(1, 1, 0, center);
-	coord_to_vec(0, 1, 0, up);
 
 	lookat(eye, center, up, view);
 

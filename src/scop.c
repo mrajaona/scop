@@ -72,6 +72,7 @@ int			main(void)
 	// camera
 
 	t_mat4		view;
+
 	identity(view);
 
 	t_vector	eye;
@@ -82,7 +83,7 @@ int			main(void)
 	coord_to_vec(0, 0, 0, center);
 	coord_to_vec(0, 0, 1, up);
 
-	// lookat(eye, center, up, view);
+	lookat(eye, center, up, view);
 
 	/*
 	glm::mat4 view = glm::lookAt(

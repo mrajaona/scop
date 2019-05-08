@@ -1,6 +1,6 @@
 #include "exit.h"
 
-void    ft_exit(t_data *scop, int status)
+void    ft_exit(t_data *scop, const int status)
 {
     glDeleteTextures(N_TEXTURES, scop->textures);
 

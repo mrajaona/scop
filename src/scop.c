@@ -49,7 +49,7 @@ static void	clr_scop(t_data *scop)
 #include "matrix_op.h"
 #include "error.h"
 
-int			main()
+int			main(void)
 {
 	t_data	scop;
 	clr_scop(&scop);

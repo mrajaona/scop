@@ -15,7 +15,7 @@ void		clear_vector(t_vector vec)
 	vec[3] = 1;
 }
 
-void		vector_eq(t_vector dst, t_vector src)
+void		vector_eq(t_vector dst, const t_vector src)
 {
 	unsigned char	y;
 
@@ -27,7 +27,7 @@ void		vector_eq(t_vector dst, t_vector src)
 	}
 }
 
-t_vector_ptr	vector_add(t_vector lhs, t_vector rhs, t_vector res)
+t_vector_ptr	vector_add(const t_vector lhs, const t_vector rhs, t_vector res)
 {
 	unsigned char	y;
 
@@ -47,7 +47,7 @@ t_vector_ptr	vector_add(t_vector lhs, t_vector rhs, t_vector res)
 	return (res);
 }
 
-t_vector_ptr	vector_sub(t_vector lhs, t_vector rhs, t_vector res)
+t_vector_ptr	vector_sub(const t_vector lhs, const t_vector rhs, t_vector res)
 {
 	unsigned char	y;
 
@@ -67,7 +67,7 @@ t_vector_ptr	vector_sub(t_vector lhs, t_vector rhs, t_vector res)
 	return (res);
 }
 
-t_vector_ptr	vector_scalar(t_vector vec, int scalar, t_vector res)
+t_vector_ptr	vector_scalar(const t_vector vec, const int scalar, t_vector res)
 {
 	unsigned char	y;
 
@@ -82,7 +82,7 @@ t_vector_ptr	vector_scalar(t_vector vec, int scalar, t_vector res)
 	return (res);
 }
 
-t_vector_ptr	coord_cross_prod(t_vector lhs, t_vector rhs, t_vector res)
+t_vector_ptr	coord_cross_prod(const t_vector lhs, const t_vector rhs, t_vector res)
 {
 	res[0] = (lhs[1] * rhs[2]) - (lhs[2] * rhs[1]);
 	res[1] = (lhs[2] * rhs[0]) - (lhs[0] * rhs[2]);
@@ -91,7 +91,7 @@ t_vector_ptr	coord_cross_prod(t_vector lhs, t_vector rhs, t_vector res)
 	return (res);
 }
 
-float			coord_dot_prod(t_vector lhs, t_vector rhs)
+float			coord_dot_prod(const t_vector lhs, const t_vector rhs)
 {
 	float	res;
 	float	rsum;
@@ -103,7 +103,7 @@ float			coord_dot_prod(t_vector lhs, t_vector rhs)
 	return (res);
 }
 
-void			coord_normalize(t_vector vector, t_vector dest)
+void			coord_normalize(const t_vector vector, t_vector dest)
 {
 	float	len;
 

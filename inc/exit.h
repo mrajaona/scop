@@ -5,6 +5,6 @@
 # include "gl_loader.h"
 # include "common.h"
 
-void	ft_exit(t_data *scop, int status);
+void	ft_exit(t_data *scop, const int status);
 
 #endif

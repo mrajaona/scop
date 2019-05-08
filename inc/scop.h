@@ -9,6 +9,4 @@
 # include "show.h"
 # include "exit.h"
 
-void	shader_program(GLuint *shaderProgram, t_data *scop);
-
 #endif

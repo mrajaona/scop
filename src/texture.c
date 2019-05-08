@@ -9,7 +9,7 @@ static void	bw_checkerboard(void)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, pixels);
 }
 
-void	set_TexParameter(int loaded)
+void	set_TexParameter(const int loaded)
 {
 	if (!loaded)
 	{
@@ -27,7 +27,7 @@ void	set_TexParameter(int loaded)
 	}
 }
 
-void	tex(GLuint textures[N_TEXTURES], t_data *scop)
+void	tex(GLuint textures[N_TEXTURES], const t_data *scop)
 {
 	int	success;
 

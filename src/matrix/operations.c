@@ -1,6 +1,7 @@
 #include "matrix_op.h"
 
-void			coord_to_vec(float x, float y, float z, t_vector dest)
+void			coord_to_vec(const float x, const float y, const float z,
+	t_vector dest)
 {
 	dest[0] = x;
 	dest[1] = y;
@@ -9,7 +10,7 @@ void			coord_to_vec(float x, float y, float z, t_vector dest)
 }
 
 
-void		mat4_vector_prod(t_mat4 lhs, t_vector rhs, t_vector res)
+void		mat4_vector_prod(const t_mat4 lhs, const t_vector rhs, t_vector res)
 {
 	unsigned char	x;
 	unsigned char	y;
@@ -30,7 +31,7 @@ void		mat4_vector_prod(t_mat4 lhs, t_vector rhs, t_vector res)
 	}
 }
 
-static void	transform(t_mat4 trans, t_mat4 dest)
+static void	transform(const t_mat4 trans, t_mat4 dest)
 {
 	t_mat4	tmp_mat;
 
@@ -40,7 +41,7 @@ static void	transform(t_mat4 trans, t_mat4 dest)
 	mat4_mult(trans, tmp_mat, dest);
 }
 
-void			translation(t_vector mov, t_mat4 dest)
+void			translation(const t_vector mov, t_mat4 dest)
 {
 	t_mat4	translate_mat;
 
@@ -54,7 +55,7 @@ void			translation(t_vector mov, t_mat4 dest)
 	transform(translate_mat, dest);
 }
 
-void			scaling(t_scale *scale, t_mat4 dest)
+void			scaling(const t_scale *scale, t_mat4 dest)
 {
 	t_mat4	scale_mat;
 
@@ -73,15 +74,12 @@ void			scaling(t_scale *scale, t_mat4 dest)
 ** angle must be in rad
 */
 
-#define degreesToRadians(angleDegrees) ((angleDegrees) * M_PI / 180.0)
-#define radiansToDegrees(angleRadians) ((angleRadians) * 180.0 / M_PI)
-
-float				deg_to_rad(float angle)
+float				deg_to_rad(const float angle)
 {
 	return (angle * (M_PI / 180.0));
 }
 
-float				rad_to_deg(float angle)
+float				rad_to_deg(const float angle)
 {
 	return (angle * (180.0 / M_PI));
 }
@@ -93,7 +91,7 @@ float				rad_to_deg(float angle)
 ** 0 0  0 1
 */
 
-void			rotatex(t_angle angle, t_mat4 dest)
+void			rotatex(const t_angle angle, t_mat4 dest)
 {
 	t_mat4	rotate_mat;
 	float	c;
@@ -118,7 +116,7 @@ void			rotatex(t_angle angle, t_mat4 dest)
 **  0 0 0 1
 */
 
-void			rotatey(t_angle angle, t_mat4 dest)
+void			rotatey(const t_angle angle, t_mat4 dest)
 {
 	t_mat4	rotate_mat;
 	float	c;
@@ -143,7 +141,7 @@ void			rotatey(t_angle angle, t_mat4 dest)
 ** 0  0 0 1
 */
 
-void			rotatez(t_angle angle, t_mat4 dest)
+void			rotatez(const t_angle angle, t_mat4 dest)
 {
 	t_mat4	rotate_mat;
 	float	c;
@@ -168,7 +166,8 @@ void			rotatez(t_angle angle, t_mat4 dest)
 // To calculate right, find the cross product of (p - l) and (u - p).
 // This will give you a vector orthogonal to both, the "right" vector.
 
-void			lookat(t_vector eye, t_vector target, t_vector up, t_mat4 dest)
+void			lookat(const t_vector eye, const t_vector target,
+	const t_vector up, t_mat4 dest)
 {
 	t_vector	cam_direction;
 	t_vector	tmp;

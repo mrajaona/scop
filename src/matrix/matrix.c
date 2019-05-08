@@ -1,13 +1,14 @@
 #include "matrix.h"
 
-void		mat4_set(t_mat4 mat, unsigned char x, unsigned char y, float value)
+void		mat4_set(t_mat4 mat, const unsigned char x, const unsigned char y,
+	const float value)
 {
 	if (x >= 4 || y >= 4)
 		return ;
 	mat[x + (4 * y)] = value;
 }
 
-float		mat4_get(t_mat4 mat, unsigned char x, unsigned char y)
+float		mat4_get(const t_mat4 mat, const unsigned char x, const unsigned char y)
 {
 	if (x >= 4 || y >= 4)
 		return (0);
@@ -67,7 +68,7 @@ void		identity(t_mat4 mat)
 	}
 }
 
-void		mat4_eq(t_mat4 dst, t_mat4 src)
+void		mat4_eq(t_mat4 dst, const t_mat4 src)
 {
 	unsigned char	x;
 	unsigned char	y;
@@ -86,7 +87,7 @@ void		mat4_eq(t_mat4 dst, t_mat4 src)
 	}	
 }
 
-t_mat4_ptr		mat4_add(t_mat4 lhs, t_mat4 rhs, t_mat4 res)
+t_mat4_ptr		mat4_add(const t_mat4 lhs, const t_mat4 rhs, t_mat4 res)
 {
 	unsigned char	x;
 	unsigned char	y;
@@ -113,7 +114,7 @@ t_mat4_ptr		mat4_add(t_mat4 lhs, t_mat4 rhs, t_mat4 res)
 	return (res);
 }
 
-t_mat4_ptr		mat4_sub(t_mat4 lhs, t_mat4 rhs, t_mat4 res)
+t_mat4_ptr		mat4_sub(const t_mat4 lhs, const t_mat4 rhs, t_mat4 res)
 {
 	unsigned char	x;
 	unsigned char	y;
@@ -140,7 +141,7 @@ t_mat4_ptr		mat4_sub(t_mat4 lhs, t_mat4 rhs, t_mat4 res)
 	return (res);
 }
 
-t_mat4_ptr		mat4_scalar(t_mat4 mat, int scalar, t_mat4 res)
+t_mat4_ptr		mat4_scalar(const t_mat4 mat, const int scalar, t_mat4 res)
 {
 	unsigned char	x;
 	unsigned char	y;
@@ -166,8 +167,8 @@ t_mat4_ptr		mat4_scalar(t_mat4 mat, int scalar, t_mat4 res)
 ** res[x][y] = lhs x row . rhs y col
 */
 
-static float	mult_step(unsigned char x, unsigned char y,
-	t_mat4 lhs, t_mat4 rhs)
+static float	mult_step(const unsigned char x, const unsigned char y,
+	const t_mat4 lhs, const t_mat4 rhs)
 {
 	float	step;
 	unsigned char	i;
@@ -182,7 +183,7 @@ static float	mult_step(unsigned char x, unsigned char y,
 	return (step);
 }
 
-t_mat4_ptr		mat4_mult(t_mat4 lhs, t_mat4 rhs, t_mat4 res)
+t_mat4_ptr		mat4_mult(const t_mat4 lhs, const t_mat4 rhs, t_mat4 res)
 {
 	unsigned char	x;
 	unsigned char	y;

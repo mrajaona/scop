@@ -3,6 +3,6 @@
 
 # include "common.h"
 
-void	show(t_data *scop);
+void	show(const t_data *scop);
 
 #endif

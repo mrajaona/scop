@@ -46,7 +46,10 @@ static void	clr_scop(t_data *scop)
 	}
 }
 
+#include "vector.h"
+#include "matrix.h"
 #include "matrix_op.h"
+#include "matrix_lookat.h"
 #include "error.h"
 
 int			main(void)

@@ -66,9 +66,9 @@ int			main(void)
 	t_mat4		model;
 	identity(model);
 
-	t_vector	edit;
-	coord_to_vec(0.5f, 1.0f, 1.0f, edit);	
-	scaling(edit, model);
+	// t_vector	edit;
+	// coord_to_vec(0.5f, 1.0f, 1.0f, edit);	
+	// scaling(edit, model);
 	rotatez(deg_to_rad(180), model);
 
 	GLint uniTrans = glGetUniformLocation(scop.shaderProgram, "model");
@@ -92,7 +92,7 @@ int			main(void)
 	coord_to_vec(0, 0, -1, center);
 	coord_to_vec(0, 1, 0, up);
 
-	// lookat(eye, center, up, view);
+	lookat(eye, center, up, view);
 
 	/*
 	glm::mat4 view = glm::lookAt(

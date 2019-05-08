@@ -78,12 +78,6 @@ int			main(void)
 	t_vector	center;
 	t_vector 	up;
 
-	/*
-	coord_to_vec(1.2f, 1.2f, 1.2f, eye);
-	coord_to_vec(0, 0, 0, center);
-	coord_to_vec(0, 0, 1, up);
-	*/
-
 	coord_to_vec(1.2f, 1.2f, 1.2f, eye);
 	coord_to_vec(0, 0, 0, center);
 	coord_to_vec(0, 0, 1, up);
@@ -108,13 +102,6 @@ int			main(void)
 	float		planes[2];
 	float		vfov;
 	float		ratio;
-
-	/*
-	vfov = deg_to_rad(45.0f);
-	ratio = 800.0f / 600.0f;
-	planes[NEAR_PLANE] = 1.0f;
-	planes[FAR_PLANE] = 10.0f;
-	*/
 
 	vfov = deg_to_rad(45.0f);
 	ratio = 800.0f / 600.0f;

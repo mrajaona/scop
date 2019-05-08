@@ -78,7 +78,7 @@ int			main(void)
 
 	t_mat4		view;
 
-	identity(view);
+	// identity(view);
 
 	t_vector	eye;
 	t_vector	center;
@@ -87,6 +87,10 @@ int			main(void)
 	// coord_to_vec(1.2f, 1.2f, 1.2f, eye);
 	// coord_to_vec(0, 0, 0, center);
 	// coord_to_vec(0, 0, 1, up);
+
+	// coord_to_vec(0, 0, 0, eye);
+	// coord_to_vec(0, 0, -1, center);
+	// coord_to_vec(0, 1, 0, up);
 
 	coord_to_vec(0, 0, 0, eye);
 	coord_to_vec(0, 0, -1, center);

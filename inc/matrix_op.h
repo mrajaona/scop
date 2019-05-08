@@ -4,8 +4,7 @@
 # include <math.h>
 # include "matrix.h"
 # include "vector.h"
-
-typedef	float	t_angle;
+# include "matrix_rotate.h"
 
 typedef struct	s_scale
 {
@@ -22,9 +21,9 @@ void			translation(const t_vector mov, t_mat4 dest);
 void			scaling(const t_scale *scale, t_mat4 dest);
 float			deg_to_rad(const float angle);
 float			rad_to_deg(const float angle);
-void			rotatex(const t_angle angle, t_mat4 dest);
-void			rotatey(const t_angle angle, t_mat4 dest);
-void			rotatez(const t_angle angle, t_mat4 dest);
+void			rotatex(const float angle, t_mat4 dest);
+void			rotatey(const float angle, t_mat4 dest);
+void			rotatez(const float angle, t_mat4 dest);
 void            lookat(const t_vector eye, const t_vector target,
 	const t_vector up, t_mat4 dest);
 

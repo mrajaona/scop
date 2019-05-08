@@ -7,4 +7,5 @@
 
 void	lookat(const t_vector eye, const t_vector target, const t_vector up,
 	t_mat4 dest);
+
 #endif

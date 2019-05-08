@@ -16,6 +16,7 @@ INC			=	common.h \
 				matrix_op.h \
 				matrix_rotations.h \
 				matrix_lookat.h \
+				matrix_perspective.h \
 				show.h \
 				error.h \
 				exit.h
@@ -45,7 +46,8 @@ SRC_MATRIX	=	matrix.c \
 				vector.c \
 				operations.c \
 				rotations.c \
-				lookat.c
+				lookat.c \
+				perspective.c
 SRCS_MATRIX	=	$(addprefix	$(DIR_MATRIX), $(SRC_MATRIX))
 
 DIR_IMG_LOADER	=	./img_loader/

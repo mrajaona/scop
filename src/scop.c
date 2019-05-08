@@ -50,6 +50,8 @@ static void	clr_scop(t_data *scop)
 #include "matrix.h"
 #include "matrix_op.h"
 #include "matrix_lookat.h"
+#include "matrix_perspective.h"
+#include "matrix_rotations.h"
 #include "error.h"
 
 int			main(void)
@@ -98,7 +100,20 @@ int			main(void)
 
 	// fov
 	t_mat4		proj;
+
 	identity(proj);
+
+	float		planes[2];
+	float		vfov;
+	float		ratio;
+
+	vfov = deg_to_rad(45.0f);
+	ratio = 800.0f / 600.0f;
+	planes[NEAR_PLANE] = 1.0f; // near
+	planes[FAR_PLANE] = 10.0f; // far
+
+	perspective(vfov, ratio, planes, proj);
+
 	/*
 	glm::mat4 proj = glm::perspective(
 		glm::radians(45.0f),	// vertical fov

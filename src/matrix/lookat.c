@@ -1,6 +1,14 @@
 #include "matrix_lookat.h"
 
 // a tester et corriger
+
+/*
+**  rx	ry	rz	0		1	0	0	-ex
+**  ux	uy	uz	0		0	1	0	-ey
+**  dx	dy	dz	0		0	0	1	-ez
+**  0	0	0	1	x	0	0	0	1
+*/
+
 void			lookat(const t_vector eye, const t_vector target,
 	const t_vector up, t_mat4 dest)
 {

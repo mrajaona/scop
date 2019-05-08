@@ -88,6 +88,8 @@ t_vector_ptr	vector_scalar(const t_vector vec, const int scalar, t_vector res)
 	return (res);
 }
 
+#include "error.h"
+
 t_vector_ptr	coord_cross_prod(const t_vector lhs, const t_vector rhs, t_vector res)
 {
 	t_vector	tmp;
@@ -96,6 +98,14 @@ t_vector_ptr	coord_cross_prod(const t_vector lhs, const t_vector rhs, t_vector r
 	tmp[1] = (lhs[2] * rhs[0]) - (lhs[0] * rhs[2]);
 	tmp[2] = (lhs[0] * rhs[1]) - (lhs[1] * rhs[0]);
 	tmp[3] = 1;
+
+	fprintf(stdout, "%+.f %+.f %+.f %+.f\n%+.f %+.f %+.f %+.f\n%+.f %+.f %+.f %+.f\n\n",
+		lhs[0], lhs[1], lhs[2], lhs[3],
+		rhs[0], rhs[1], rhs[2], rhs[3],
+		tmp[0], tmp[1], tmp[2], tmp[3]
+		);
+	fflush(stdout);
+
 	vector_eq(res, tmp);
 	return (res);
 }
@@ -126,5 +136,11 @@ void			coord_normalize(const t_vector vector, t_vector dest)
 	tmp[1] = vector[1] / len;
 	tmp[2] = vector[2] / len;
 	tmp[3] = 1;
+
+	fprintf(stdout, "%+f\n%+.f %+.f %+.f %+.f\n%+.f %+.f %+.f %+.f\n\n", len,
+		vector[0], vector[1], vector[2], vector[3],
+		tmp[0], tmp[1], tmp[2], tmp[3]);
+	fflush(stdout);
+
 	vector_eq(dest, tmp);
 }

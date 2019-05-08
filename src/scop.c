@@ -52,6 +52,7 @@ static void	clr_scop(t_data *scop)
 #include "matrix_lookat.h"
 #include "matrix_perspective.h"
 #include "matrix_rotations.h"
+#include "angle.h"
 #include "error.h"
 
 int			main(void)
@@ -77,12 +78,17 @@ int			main(void)
 	t_vector	center;
 	t_vector 	up;
 
-	
+	/*
+	coord_to_vec(1.2f, 1.2f, 1.2f, eye);
+	coord_to_vec(0, 0, 0, center);
+	coord_to_vec(0, 0, 1, up);
+	*/
+
 	coord_to_vec(1.2f, 1.2f, 1.2f, eye);
 	coord_to_vec(0, 0, 0, center);
 	coord_to_vec(0, 0, 1, up);
 
-	lookat(eye, center, up, view);
+	// lookat(eye, center, up, view);
 
 	/*
 	glm::mat4 view = glm::lookAt(
@@ -103,10 +109,17 @@ int			main(void)
 	float		vfov;
 	float		ratio;
 
+	/*
 	vfov = deg_to_rad(45.0f);
 	ratio = 800.0f / 600.0f;
-	planes[NEAR_PLANE] = 1.0f; // near
-	planes[FAR_PLANE] = 10.0f; // far
+	planes[NEAR_PLANE] = 1.0f;
+	planes[FAR_PLANE] = 10.0f;
+	*/
+
+	vfov = deg_to_rad(45.0f);
+	ratio = 800.0f / 600.0f;
+	planes[NEAR_PLANE] = 1.0f;
+	planes[FAR_PLANE] = 10.0f;
 
 	perspective(vfov, ratio, planes, proj);
 

@@ -1,7 +1,8 @@
 NAME		=	scop
 
 DIR_INC		=	./inc/
-INC			=	common.h \
+INC			=	angle.h \
+				common.h \
 				glfw.h \
 				gl_loader.h \
 				img_format.h \
@@ -28,7 +29,8 @@ SRC_MAIN	=	exit.c \
 				scop.c \
 				glfw_init.c \
 				texture.c \
-				show.c
+				show.c \
+				angle.c
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
 DIR_OBJECT	=	./objects/

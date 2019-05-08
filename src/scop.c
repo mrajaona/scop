@@ -65,7 +65,12 @@ int			main(void)
 
 	t_mat4		model;
 	identity(model);
+
+	t_vector	edit;
+	coord_to_vec(0.5f, 1.0f, 1.0f, edit);	
+	scaling(edit, model);
 	rotatez(deg_to_rad(180), model);
+
 	GLint uniTrans = glGetUniformLocation(scop.shaderProgram, "model");
 	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, model);
 
@@ -79,16 +84,20 @@ int			main(void)
 	t_vector	center;
 	t_vector 	up;
 
-	coord_to_vec(1.2f, 1.2f, 1.2f, eye);
-	coord_to_vec(0, 0, 0, center);
-	coord_to_vec(0, 0, 1, up);
+	// coord_to_vec(1.2f, 1.2f, 1.2f, eye);
+	// coord_to_vec(0, 0, 0, center);
+	// coord_to_vec(0, 0, 1, up);
 
-	lookat(eye, center, up, view);
+	coord_to_vec(0, 0, 0, eye);
+	coord_to_vec(0, 0, -1, center);
+	coord_to_vec(0, 1, 0, up);
+
+	// lookat(eye, center, up, view);
 
 	/*
 	glm::mat4 view = glm::lookAt(
 		glm::vec3(1.2f, 1.2f, 1.2f), 	// camera pos (default : 0, 0, 0)
-		glm::vec3(0.0f, 0.0f, 0.0f), 	// screen center (default : 0, 0, 0) (-z)
+		glm::vec3(0.0f, 0.0f, 0.0f), 	// screen center (default : 0, 0, -1)
 		glm::vec3(0.0f, 0.0f, 1.0f)		// up axis // (world)
 	);
 	*/
@@ -100,16 +109,16 @@ int			main(void)
 
 	identity(proj);
 
-	float		planes[2];
-	float		vfov;
-	float		ratio;
+	// float		planes[2];
+	// float		vfov;
+	// float		ratio;
 
-	vfov = deg_to_rad(45.0f);
-	ratio = 800.0f / 600.0f;
-	planes[NEAR_PLANE] = 1.0f;
-	planes[FAR_PLANE] = 10.0f;
+	// vfov = deg_to_rad(45.0f);
+	// ratio = 800.0f / 600.0f;
+	// planes[NEAR_PLANE] = 1.0f;
+	// planes[FAR_PLANE] = 10.0f;
 
-	perspective(vfov, ratio, planes, proj);
+	// perspective(vfov, ratio, planes, proj);
 
 	/*
 	glm::mat4 proj = glm::perspective(

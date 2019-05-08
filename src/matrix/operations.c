@@ -33,12 +33,12 @@ void		mat4_vector_prod(const t_mat4 lhs, const t_vector rhs, t_vector res)
 
 void			transform(const t_mat4 trans, t_mat4 dest)
 {
-	t_mat4	tmp_mat;
+	t_mat4	tmp;
 
 	if (!dest)
 		return ;
-	mat4_eq(tmp_mat, dest);
-	mat4_mult(trans, tmp_mat, dest);
+	mat4_eq(tmp, dest);
+	mat4_mult(trans, tmp, dest);
 }
 
 void			translation(const t_vector mov, t_mat4 dest)
@@ -55,16 +55,16 @@ void			translation(const t_vector mov, t_mat4 dest)
 	transform(translate_mat, dest);
 }
 
-void			scaling(const t_scale *scale, t_mat4 dest)
+void			scaling(const t_vector scale, t_mat4 dest)
 {
 	t_mat4	scale_mat;
 
 	if (!scale || !dest)
 		return ;
 	clear_matrix(scale_mat);
-	mat4_set(scale_mat, 0, 0, scale->sx);
-	mat4_set(scale_mat, 1, 1, scale->sy);
-	mat4_set(scale_mat, 2, 2, scale->sz);
+	mat4_set(scale_mat, 0, 0, scale[0]);
+	mat4_set(scale_mat, 1, 1, scale[1]);
+	mat4_set(scale_mat, 2, 2, scale[2]);
 	mat4_set(scale_mat, 3, 3, 1);
 	transform(scale_mat, dest);
 }

@@ -95,14 +95,9 @@ int			main(void)
 	// coord_to_vec(0, 0, 1, target);
 	// coord_to_vec(0, -1, 0, up);
 
-	// default
-	coord_to_vec(0, 0, 0, eye);
-	coord_to_vec(0, 0, -1, target);
+	coord_to_vec(0, 0, -1, eye);
+	coord_to_vec(0, 0, 0, target);
 	coord_to_vec(0, 1, 0, up);
-
-	// coord_to_vec(0, 0, 0, eye);
-	// coord_to_vec(0, 0, -1, target);
-	// coord_to_vec(0, 1, 0, up);
 
 	lookat(eye, target, up, view);
 
@@ -119,6 +114,11 @@ int			main(void)
 	// float		ratio;
 
 	// // example
+	// // vfov = deg_to_rad(45.0f);
+	// // ratio = 800.0f / 600.0f;
+	// // planes[NEAR_PLANE] = 1.0f;
+	// // planes[FAR_PLANE] = 10.0f;
+
 	// vfov = deg_to_rad(45.0f);
 	// ratio = 800.0f / 600.0f;
 	// planes[NEAR_PLANE] = 1.0f;

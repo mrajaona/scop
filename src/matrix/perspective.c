@@ -15,6 +15,8 @@ void	perspective(const float vfov, const float ratio, const float planes[2],
 	mat4_set(dest, 0, 0, htan / ratio);
 	mat4_set(dest, 1, 1, htan);
 	mat4_set(dest, 2, 2, -1 * (far + near) / (far - near));
+
+	// si on les inverse, on a un truc, mais c'est pas logique
 	mat4_set(dest, 3, 2, -1);
 	mat4_set(dest, 2, 3, (-2 * far * near) / (far - near));
 }
@@ -43,29 +45,5 @@ GLM_FUNC_QUALIFIER detail::tmat4x4<valType, defaultp> perspective
     Result[2][3] = - valType(1);
     Result[3][2] = - (valType(2) * zFar * zNear) / (zFar - zNear);
     return Result;
-}
-*/
-/*
-void GLAPIENTRY gluPerspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar)
-{
-    GLdouble m[4][4];
-    double sine, cotangent, deltaZ;
-    double radians = fovy / 2 * __glPi / 180;
-
-    deltaZ = zFar - zNear;
-    sine = sin(radians);
-    if ((deltaZ == 0) || (sine == 0) || (aspect == 0)) {
-    return;
-    }
-    cotangent = COS(radians) / sine;
-
-    __gluMakeIdentityd(&m[0][0]);
-    m[0][0] = cotangent / aspect;
-    m[1][1] = cotangent;
-    m[2][2] = -(zFar + zNear) / deltaZ;
-    m[2][3] = -1;
-    m[3][2] = -2 * zNear * zFar / deltaZ;
-    m[3][3] = 0;
-    glMultMatrixd(&m[0][0]);
 }
 */

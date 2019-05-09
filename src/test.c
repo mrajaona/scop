@@ -16,9 +16,9 @@ static void set_model(t_data *scop)
 	
 	identity(model);
 
-	// t_vector	edit;
-	// coord_to_vec(1.0f, 1.0f, 1.0f, edit);	
-	// translation(edit, model);
+	t_vector	edit;
+	coord_to_vec(0.5f, 0.5f, 0.5f, edit);	
+	translation(edit, model);
 
 	// rotatez(deg_to_rad(180.0f), model);
 
@@ -57,7 +57,7 @@ static void	set_view(t_data *scop)
 	// coord_to_vec(0, 0, 0, target);
 	// coord_to_vec(0, 1, 0, up);
 
-	lookat(eye, target, up, view);
+	// lookat(eye, target, up, view);
 	
 	fprintf(stdout, "\nview");
 	mat4_print(view);
@@ -73,22 +73,22 @@ static void	set_proj(t_data *scop)
 
 	identity(proj);
 
-	float		planes[2];
-	float		vfov;
-	float		ratio;
+	// float		planes[2];
+	// float		vfov;
+	// float		ratio;
 
-	// example
-	vfov = deg_to_rad(45.0f);
-	ratio = 800.0f / 600.0f;
-	planes[NEAR_PLANE] = 1.0f;
-	planes[FAR_PLANE] = 10.0f;
-
+	// // example
 	// vfov = deg_to_rad(45.0f);
 	// ratio = 800.0f / 600.0f;
 	// planes[NEAR_PLANE] = 1.0f;
 	// planes[FAR_PLANE] = 10.0f;
+
+	// // vfov = deg_to_rad(45.0f);
+	// // ratio = 800.0f / 600.0f;
+	// // planes[NEAR_PLANE] = 1.0f;
+	// // planes[FAR_PLANE] = 10.0f;
 	
-	perspective(vfov, ratio, planes, proj);
+	// perspective(vfov, ratio, planes, proj);
 
 	fprintf(stdout, "\nproj");
 	mat4_print(proj);

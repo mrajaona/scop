@@ -97,6 +97,8 @@ static unsigned char	*read_data(FILE *ptr,
 	return (image);
 }
 
+// TODO : Padding
+// TODO : bmp chargé à l'envers
 unsigned char			*load_bmp_img(FILE *ptr, int *width, int *height)
 {
 	t_bmp_header	header;

@@ -16,11 +16,9 @@ static void set_model(t_data *scop)
 	
 	identity(model);
 
-	t_vector	edit;
-	coord_to_vec(1.0f, 1.0f, 1.0f, edit);	
-	// // scaling(edit, model);
-
-	translation(edit, model);
+	// t_vector	edit;
+	// coord_to_vec(1.0f, 1.0f, 1.0f, edit);	
+	// translation(edit, model);
 
 	// rotatez(deg_to_rad(180.0f), model);
 
@@ -45,18 +43,18 @@ static void	set_view(t_data *scop)
 	t_vector 	up;
 
 	// example
-	coord_to_vec(1.2f, 1.2f, 1.2f, eye);
-	coord_to_vec(0, 0, 0, target);
-	coord_to_vec(0, 0, 1, up);
+	// coord_to_vec(1.2f, 1.2f, 1.2f, eye);
+	// coord_to_vec(0, 0, 0, target);
+	// coord_to_vec(0, 0, 1, up);
 
-	// identity
+	// normal
 	// coord_to_vec(0, 0, 0, eye);
 	// coord_to_vec(0, 0, 1, target);
 	// coord_to_vec(0, -1, 0, up);
 
-	// coord_to_vec(0, 0, 0, eye);
-	// coord_to_vec(1, 1, -1, target);
-	// coord_to_vec(0, 1, 0, up);
+	coord_to_vec(0, 0, -1, eye);
+	coord_to_vec(0, 0, 1, target);
+	coord_to_vec(0, 1, 0, up);
 
 	lookat(eye, target, up, view);
 	// mat4_print(view);

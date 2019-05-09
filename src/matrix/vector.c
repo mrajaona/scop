@@ -119,17 +119,16 @@ float			coord_dot_prod(const t_vector lhs, const t_vector rhs)
 void			coord_normalize(const t_vector vector, t_vector dest)
 {
 	float		len;
+	float		sqlen;
 	t_vector	tmp;
 
-	len = sqrtf(
-		(vector[0] * vector[0])
+	sqlen = (vector[0] * vector[0])
 		+ (vector[1] * vector[1])
-		+ (vector[2] * vector[2])
-	);
-	tmp[0] = vector[0] / len;
-	tmp[1] = vector[1] / len;
-	tmp[2] = vector[2] / len;
+		+ (vector[2] * vector[2]);
+	len = sqrtf(sqlen);
+	tmp[0] = sqlen ? (vector[0] / len) : 0;
+	tmp[1] = sqlen ? (vector[1] / len) : 0;
+	tmp[2] = sqlen ? (vector[2] / len) : 0;
 	tmp[3] = 1;
-
 	vector_eq(dest, tmp);
 }

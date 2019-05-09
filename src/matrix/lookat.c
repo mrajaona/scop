@@ -14,13 +14,29 @@ void			lookat(const t_vector eye, const t_vector target,
 
 	t_mat4	res;
 
+	fprintf(stdout, "\neye");
+	vector_print(eye);
+	fprintf(stdout, "\ntarget");
+	vector_print(target);
+	fprintf(stdout, "\nup");
+	vector_print(up);
+
+	fprintf(stdout, "\n------\n");
+
 	coord_normalize(vector_sub(target, eye, z), z);
-
-	coord_normalize(vector_sub(up, eye, y), y);
-
+	fprintf(stdout, "\nz");
+	vector_print(z);
+	coord_normalize(up, y);
+	fprintf(stdout, "\ny (tmp)");
+	vector_print(y);
 	coord_normalize(coord_cross_prod(z, y, x), x);
-
+	fprintf(stdout, "\nx");
+	vector_print(x);
 	coord_normalize(coord_cross_prod(z, x, y), y);
+	fprintf(stdout, "\ny");
+	vector_print(y);
+
+	fprintf(stdout, "\n------\n");
 
 	identity(res);
 

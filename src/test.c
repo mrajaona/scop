@@ -80,15 +80,15 @@ static void	set_view(t_data *scop)
 
 	// identity
 	// coord_to_vec(0, 0, 0, eye);
-	// coord_to_vec(0, 0, -1, target);
-	// coord_to_vec(0, 1, 0, up);
+	// coord_to_vec(0, 0, 1, target);
+	// coord_to_vec(0, -1, 0, up);
 
-	coord_to_vec(0, 0, 0, eye);
-	coord_to_vec(0, 0, -1, target);
+	coord_to_vec(0, 0, -1.1f, eye);
+	coord_to_vec(0.5f, 0.5f, 0, target);
 	coord_to_vec(0, 1, 0, up);
 
+	lookat(eye, target, up, view);
 	mat4_print(view);
-	// lookat(eye, target, up, view);
 
 	GLint uniView = glGetUniformLocation(scop->shaderProgram, "view");
 	glUniformMatrix4fv(uniView, 1, GL_FALSE, view);

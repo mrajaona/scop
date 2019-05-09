@@ -44,18 +44,18 @@ static void	set_view(t_data *scop)
 	t_vector 	up;
 
 	// example
-	// coord_to_vec(1.2f, 1.2f, 1.2f, eye);
-	// coord_to_vec(0, 0, 0, target);
-	// coord_to_vec(0, 0, 1, up);
+	coord_to_vec(1.2f, 1.2f, 1.2f, eye);
+	coord_to_vec(0, 0, 0, target);
+	coord_to_vec(0, 0, 1, up);
 
 	// normal
 	// coord_to_vec(0, 0, 0, eye);
 	// coord_to_vec(0, 0, 1, target);
 	// coord_to_vec(0, -1, 0, up);
 
-	coord_to_vec(0, 0, -1, eye);
-	coord_to_vec(0, 0, 1, target);
-	coord_to_vec(0, 1, 0, up);
+	// coord_to_vec(0, 0, -0.3, eye);
+	// coord_to_vec(0, 0, 0, target);
+	// coord_to_vec(0, 1, 0, up);
 
 	lookat(eye, target, up, view);
 	

@@ -21,6 +21,7 @@ void	perspective(const float vfov, const float ratio, const float planes[2],
 	mat4_set(dest, 2, 3, -1);
 	mat4_set(dest, 3, 2, (-2 * far * near) / (far - near));
 }
+
 /*
 void GLAPIENTRY gluPerspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar)
 {

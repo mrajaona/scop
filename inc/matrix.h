@@ -2,6 +2,7 @@
 # define MATRIX_H
 
 # include <stdlib.h>
+# include <stdio.h>
 
 /*
 ** reading matrices :
@@ -11,6 +12,8 @@
 
 typedef float	t_mat4[16];
 typedef float	*t_mat4_ptr;
+
+void			mat4_print(const t_mat4 mat);
 
 void			mat4_set(t_mat4 mat,
 	const unsigned char x, const unsigned char y,

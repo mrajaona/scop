@@ -1,5 +1,12 @@
 #include "vector.h"
 
+void	vector_print(const t_vector vec)
+{
+	fprintf(stdout, "\n% .2f\n% .2f\n% .2f\n% .2f\n",
+		vec[0], vec[1], vec[2], vec[3]);
+	fflush(stdout);
+}
+
 /*
 ** 0
 ** 0
@@ -126,5 +133,6 @@ void			coord_normalize(const t_vector vector, t_vector dest)
 	tmp[1] = vector[1] / len;
 	tmp[2] = vector[2] / len;
 	tmp[3] = 1;
+
 	vector_eq(dest, tmp);
 }

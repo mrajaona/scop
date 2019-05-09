@@ -9,20 +9,23 @@
 **  0	0	0	1	x	0	0	0	1
 */
 
+// The camera in OpenGL cannot move and is defined
+// to be located at (0,0,0) facing the negative Z direction
+
 void			lookat(const t_vector eye, const t_vector target,
 	const t_vector up, t_mat4 dest)
 {
 	t_vector	tmp;
 
-	t_vector	r; // right
-	t_vector	u; // up
-	t_vector	d; // direction
+	t_vector	x; // right
+	t_vector	y; // up
+	t_vector	z; // direction
 
 	t_mat4	lhs;
 
 	coord_normalize(
-		vector_sub(target, eye, d),
-		d
+		vector_sub(target, eye, z),
+		z
 	);
 
 	coord_normalize(
@@ -31,28 +34,28 @@ void			lookat(const t_vector eye, const t_vector target,
 	);
 
 	coord_normalize(
-		coord_cross_prod(d, tmp, r),
-		r
+		coord_cross_prod(z, tmp, x),
+		x
 	);
 
 	coord_normalize(
-		coord_cross_prod(d, r, u),
-		u
+		coord_cross_prod(z, x, y),
+		y
 	);
 
 	identity(lhs);
 
-	mat4_set(lhs, 0, 0, r[0]);
-	mat4_set(lhs, 1, 0, r[1]);
-	mat4_set(lhs, 2, 0, r[2]);
+	mat4_set(lhs, 0, 0, x[0]);
+	mat4_set(lhs, 1, 0, x[1]);
+	mat4_set(lhs, 2, 0, x[2]);
 
-	mat4_set(lhs, 0, 1, u[0]);
-	mat4_set(lhs, 1, 1, u[1]);
-	mat4_set(lhs, 2, 1, u[2]);
+	mat4_set(lhs, 0, 1, y[0]);
+	mat4_set(lhs, 1, 1, y[1]);
+	mat4_set(lhs, 2, 1, y[2]);
 
-	mat4_set(lhs, 0, 2, d[0]);
-	mat4_set(lhs, 1, 2, d[1]);
-	mat4_set(lhs, 2, 2, d[2]);
+	mat4_set(lhs, 0, 2, z[0]);
+	mat4_set(lhs, 1, 2, z[1]);
+	mat4_set(lhs, 2, 2, z[2]);
 
 	t_mat4	rhs;
 

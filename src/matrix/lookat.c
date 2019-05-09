@@ -12,11 +12,7 @@
 void			lookat(const t_vector eye, const t_vector target,
 	const t_vector up, t_mat4 dest)
 {
-	t_vector	cam_direction;
 	t_vector	tmp;
-
-	t_vector	cam_right;
-	t_vector	cam_up;
 
 	t_vector	r; // right
 	t_vector	u; // up
@@ -24,15 +20,25 @@ void			lookat(const t_vector eye, const t_vector target,
 
 	t_mat4	lhs;
 
-	vector_sub(target, eye, cam_direction);
-	vector_sub(up, eye, tmp);
-	coord_cross_prod(cam_direction, tmp, cam_right);
+	coord_normalize(
+		vector_sub(target, eye, d),
+		d
+	);
 
-	coord_cross_prod(cam_direction, cam_right, cam_up);
+	coord_normalize(
+		vector_sub(up, eye, tmp),
+		tmp
+	);
 
-	coord_normalize(cam_direction, d);
-	coord_normalize(cam_up, u);
-	coord_normalize(cam_right, r);
+	coord_normalize(
+		coord_cross_prod(d, tmp, r),
+		r
+	);
+
+	coord_normalize(
+		coord_cross_prod(d, r, u),
+		u
+	);
 
 	identity(lhs);
 

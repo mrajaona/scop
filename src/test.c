@@ -24,12 +24,14 @@ static void set_model(t_data *scop)
 
 	// rotatez(deg_to_rad(180.0f), model);
 
-	mat4_print(model);
+	// mat4_print(model);
 
 	GLint uniTrans = glGetUniformLocation(scop->shaderProgram, "model");
 	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, model);
 }
 
+// The camera in OpenGL cannot move and is defined
+// to be located at (0,0,0) facing the negative Z direction
 static void	set_view(t_data *scop)
 	{
 	// camera
@@ -52,12 +54,12 @@ static void	set_view(t_data *scop)
 	// coord_to_vec(0, 0, 1, target);
 	// coord_to_vec(0, -1, 0, up);
 
-	coord_to_vec(0, 0, -1.1f, eye);
-	coord_to_vec(0.5f, 0.5f, 0, target);
+	coord_to_vec(0, 0, 0, eye);
+	coord_to_vec(0, 0, -1, target);
 	coord_to_vec(0, 1, 0, up);
 
 	lookat(eye, target, up, view);
-	mat4_print(view);
+	// mat4_print(view);
 
 	GLint uniView = glGetUniformLocation(scop->shaderProgram, "view");
 	glUniformMatrix4fv(uniView, 1, GL_FALSE, view);
@@ -85,7 +87,7 @@ static void	set_proj(t_data *scop)
 	// // planes[NEAR_PLANE] = 1.0f;
 	// // planes[FAR_PLANE] = 10.0f;
 
-	mat4_print(proj);
+	// mat4_print(proj);
 	// perspective(vfov, ratio, planes, proj);
 
 	GLint uniProj = glGetUniformLocation(scop->shaderProgram, "proj");

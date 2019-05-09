@@ -54,8 +54,8 @@ static void	set_view(t_data *scop)
 	// coord_to_vec(0, 0, 1, target);
 	// coord_to_vec(0, -1, 0, up);
 
-	coord_to_vec(0, 0, 0, eye);
-	coord_to_vec(0, 0, -1, target);
+	coord_to_vec(1, 1, 0, eye);
+	coord_to_vec(1, 1, -1, target);
 	coord_to_vec(0, 1, 0, up);
 
 	lookat(eye, target, up, view);

@@ -110,12 +110,9 @@ t_vector_ptr	coord_cross_prod(const t_vector lhs, const t_vector rhs, t_vector r
 float			coord_dot_prod(const t_vector lhs, const t_vector rhs)
 {
 	float	res;
-	float	rsum;
-
-	rsum = rhs[0] + rhs[1] + rhs[2];
-	res = (lhs[0] * rsum)
-		+ (lhs[1] * rsum)
-		+ (lhs[2] * rsum);
+	res = (lhs[0] * rhs[0])
+		+ (lhs[1] * rhs[1])
+		+ (lhs[2] * rhs[2]);
 	return (res);
 }
 

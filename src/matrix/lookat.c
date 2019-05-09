@@ -3,9 +3,9 @@
 // a tester et corriger
 
 /*
-**  rx	ry	rz	0		1	0	0	-ex
-**  ux	uy	uz	0		0	1	0	-ey
-**  dx	dy	dz	0		0	0	1	-ez
+**  xx	xy	xz	0		1	0	0	-ex
+**  yx	yy	yz	0		0	1	0	-ey
+**  zx	zy	zz	0		0	0	1	-ez
 **  0	0	0	1	x	0	0	0	1
 */
 

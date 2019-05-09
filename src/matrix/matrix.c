@@ -5,14 +5,14 @@ void		mat4_set(t_mat4 mat, const unsigned char x, const unsigned char y,
 {
 	if (x >= 4 || y >= 4)
 		return ;
-	mat[x + (4 * y)] = value;
+	mat[y + (4 * x)] = value;
 }
 
 float		mat4_get(const t_mat4 mat, const unsigned char x, const unsigned char y)
 {
 	if (x >= 4 || y >= 4)
 		return (0);
-	return (mat[x + (4 * y)]);
+	return (mat[y + (4 * x)]);
 }
 
 /*

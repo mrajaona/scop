@@ -30,7 +30,8 @@ SRC_MAIN	=	exit.c \
 				glfw_init.c \
 				texture.c \
 				show.c \
-				angle.c
+				angle.c \
+				test.c
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
 DIR_OBJECT	=	./objects/

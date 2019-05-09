@@ -16,7 +16,7 @@ void			lookat(const t_vector eye, const t_vector target,
 	coord_normalize(vector_sub(target, eye, z), z);
 	coord_normalize(up, y);
 	coord_normalize(coord_cross_prod(z, y, x), x);
-	coord_normalize(coord_cross_prod(z, x, y), y);
+	coord_normalize(coord_cross_prod(x, z, y), y);
 
 	identity(res);
 

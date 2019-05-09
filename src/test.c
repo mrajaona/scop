@@ -15,38 +15,10 @@ static void set_model(t_data *scop)
 	
 	identity(model);
 
-	t_vector	edit;
-	coord_to_vec(1.0f, 1.0f, 0.0f, edit);	
+	// t_vector	edit;
+	// coord_to_vec(1.0f, 1.0f, 0.0f, edit);	
 	// scaling(edit, model);
-
-	translation(edit, model);
-
-	fprintf(stdout, "% .2f % .2f % .2f % .2f\n",
-		mat4_get(model, 0, 0),
-		mat4_get(model, 1, 0),
-		mat4_get(model, 2, 0),
-		mat4_get(model, 3, 0)
-		);
-	fprintf(stdout, "% .2f % .2f % .2f % .2f\n",
-		mat4_get(model, 0, 1),
-		mat4_get(model, 1, 1),
-		mat4_get(model, 2, 1),
-		mat4_get(model, 3, 1)
-		);
-	fprintf(stdout, "% .2f % .2f % .2f % .2f\n",
-		mat4_get(model, 0, 2),
-		mat4_get(model, 1, 2),
-		mat4_get(model, 2, 2),
-		mat4_get(model, 3, 2)
-		);
-	fprintf(stdout, "% .2f % .2f % .2f % .2f\n",
-		mat4_get(model, 0, 3),
-		mat4_get(model, 1, 3),
-		mat4_get(model, 2, 3),
-		mat4_get(model, 3, 3)
-		);
-
-	fflush(stdout);
+	//translation(edit, model);
 
 	// rotatez(deg_to_rad(180.0f), model);
 

@@ -22,7 +22,8 @@ static void set_model(t_data *scop)
 
 	// rotatez(deg_to_rad(180.0f), model);
 
-	// mat4_print(model);
+	fprintf(stdout, "\nmodel");
+	mat4_print(model);
 
 	GLint uniTrans = glGetUniformLocation(scop->shaderProgram, "model");
 	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, model);
@@ -57,7 +58,9 @@ static void	set_view(t_data *scop)
 	coord_to_vec(0, 1, 0, up);
 
 	lookat(eye, target, up, view);
-	// mat4_print(view);
+	
+	fprintf(stdout, "\nview");
+	mat4_print(view);
 
 	GLint uniView = glGetUniformLocation(scop->shaderProgram, "view");
 	glUniformMatrix4fv(uniView, 1, GL_FALSE, view);
@@ -70,23 +73,25 @@ static void	set_proj(t_data *scop)
 
 	identity(proj);
 
-	// float		planes[2];
-	// float		vfov;
-	// float		ratio;
+	float		planes[2];
+	float		vfov;
+	float		ratio;
 
-	// // example
+	// example
+	vfov = deg_to_rad(45.0f);
+	ratio = 800.0f / 600.0f;
+	planes[NEAR_PLANE] = 1.0f;
+	planes[FAR_PLANE] = 10.0f;
+
 	// vfov = deg_to_rad(45.0f);
 	// ratio = 800.0f / 600.0f;
 	// planes[NEAR_PLANE] = 1.0f;
 	// planes[FAR_PLANE] = 10.0f;
+	
+	perspective(vfov, ratio, planes, proj);
 
-	// // vfov = deg_to_rad(45.0f);
-	// // ratio = 800.0f / 600.0f;
-	// // planes[NEAR_PLANE] = 1.0f;
-	// // planes[FAR_PLANE] = 10.0f;
-
-	// mat4_print(proj);
-	// perspective(vfov, ratio, planes, proj);
+	fprintf(stdout, "\nproj");
+	mat4_print(proj);
 
 	GLint uniProj = glGetUniformLocation(scop->shaderProgram, "proj");
 	glUniformMatrix4fv(uniProj, 1, GL_FALSE, proj);

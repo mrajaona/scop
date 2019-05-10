@@ -16,6 +16,7 @@ static void	edit_output(const t_data *scop)
 #include <unistd.h>
 void	show(const t_data *scop)
 {
+	glEnable(GL_DEPTH_TEST);
 
 	while(!glfwWindowShouldClose(scop->window))
 	{

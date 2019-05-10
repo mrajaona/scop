@@ -1,5 +1,9 @@
 #include "object.h"
 
+/*
+** link points in order
+*/
+
 void	ebo(GLuint *ebo)
 {
 	const GLuint	elements[] = {

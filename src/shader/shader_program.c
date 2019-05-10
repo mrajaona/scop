@@ -14,6 +14,10 @@ static void	shader_status(const GLuint shader, t_data *scop)
 	}
 }
 
+/*
+** place all the stuff
+*/
+
 static void	vertex_shader(const GLuint shaderProgram, t_data *scop)
 {
 	const char *vertexSource = R"glsl(
@@ -45,6 +49,9 @@ static void	vertex_shader(const GLuint shaderProgram, t_data *scop)
 	glAttachShader(shaderProgram, scop->vertexShader);
 }
 
+/*
+** manage colors and textures
+*/
 
 static void	fragment_shader(const GLuint shaderProgram, t_data *scop)
 {

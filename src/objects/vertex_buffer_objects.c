@@ -1,6 +1,7 @@
 #include "object.h"
 
 /*
+** place all points in space
 ** pos		color	tex
 ** x y z	r g b	u v
 */

@@ -25,8 +25,8 @@ static void set_model(t_data *scop)
 	fprintf(stdout, "\nmodel");
 	mat4_print(model);
 
-	GLint uniTrans = glGetUniformLocation(scop->shaderProgram, "model");
-	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, model);
+	GLint uniModel = glGetUniformLocation(scop->shaderProgram, "model");
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model);
 }
 
 // The camera in OpenGL cannot move and is defined
@@ -79,7 +79,7 @@ static void	set_proj(t_data *scop)
 
 	// example
 	// vfov = deg_to_rad(45.0f);
-	vfov = deg_to_rad(120.0f);
+	vfov = deg_to_rad(80.0f);
 	ratio = 800.0f / 600.0f;
 	planes[NEAR_PLANE] = 1.0f;
 	planes[FAR_PLANE] = 10.0f;

@@ -2,7 +2,6 @@
 
 static void	edit_output(const t_data *scop)
 {
-	/*
 	t_mat4			model;
 	static int		deg = 0;
 
@@ -12,8 +11,6 @@ static void	edit_output(const t_data *scop)
 
     GLint uniTrans = glGetUniformLocation(scop->shaderProgram, "model");
 	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, model);
-	*/
-	(void)scop;
 }
 
 #include <unistd.h>

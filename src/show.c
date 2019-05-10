@@ -27,12 +27,6 @@ static void	stencil(const t_data *scop)
 
 	// Draw floor
 
-	glStencilFunc(GL_ALWAYS, 1, 0xFF);
-	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-	glStencilMask(0xFF);
-	glDepthMask(GL_FALSE);
-	glClear(GL_STENCIL_BUFFER_BIT);
-
 	glDrawArrays(GL_TRIANGLES, 36, 6);
 
 	// Draw reflection

@@ -22,9 +22,20 @@ static void	stencil(const t_data *scop, t_mat4 model)
 	glEnable(GL_STENCIL_TEST);
 
 	// Draw floor
+	glStencilFunc(GL_ALWAYS, 1, 0xFF);
+	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+	glStencilMask(0xFF);
+	glDepthMask(GL_FALSE);
+	glClear(GL_STENCIL_BUFFER_BIT);
+	
 	glDrawArrays(GL_TRIANGLES, 36, 6);
 
 	// Draw reflection
+
+	glStencilFunc(GL_EQUAL, 1, 0xFF);
+	glStencilMask(0x00);
+	glDepthMask(GL_TRUE);
+
 	t_vector	edit;
 
 	coord_to_vec(1.0f, 1.0f, -1.0f, edit);
@@ -36,9 +47,9 @@ static void	stencil(const t_data *scop, t_mat4 model)
 	GLint uniModel = glGetUniformLocation(scop->shaderProgram, "model");
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model);
 
-	// glUniform3f(uniColor, 0.3f, 0.3f, 0.3f);
+	glUniform3f(uniColor, 0.3f, 0.3f, 0.3f);
     glDrawArrays(GL_TRIANGLES, 0, 36);
-    // glUniform3f(uniColor, 1.0f, 1.0f, 1.0f);
+    glUniform3f(uniColor, 1.0f, 1.0f, 1.0f);
 
 	glDisable(GL_STENCIL_TEST);
 }

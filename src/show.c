@@ -23,19 +23,18 @@ static void	stencil(const t_data *scop)
 	// Draw cube
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
-	// glEnable(GL_STENCIL_TEST);
+	glEnable(GL_STENCIL_TEST);
 
 	// Draw floor
-/*
+
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	glStencilMask(0xFF);
-
-	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 	glDepthMask(GL_FALSE);
+	glClear(GL_STENCIL_BUFFER_BIT);
 
 	glDrawArrays(GL_TRIANGLES, 36, 6);
-*/
+
 	// Draw reflection
 	/*
 	t_vector	edit;
@@ -59,7 +58,7 @@ static void	stencil(const t_data *scop)
 
 	*/
 
-	// glDisable(GL_STENCIL_TEST);
+	glDisable(GL_STENCIL_TEST);
 }
 
 #include <unistd.h>

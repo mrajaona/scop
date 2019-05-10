@@ -4,7 +4,7 @@ static void	edit_output(const t_data *scop, t_mat4 model)
 {
 	static int		deg = 0;
 
-	deg = (deg + 10) % 360;
+	deg = (deg + 1) % 360;
 	rotatez(deg_to_rad((float)deg), model);
 
 	GLint uniModel = glGetUniformLocation(scop->shaderProgram, "model");
@@ -76,7 +76,7 @@ void	show(const t_data *scop)
 
 		stencil(scop, model);
 
-		sleep(1);
+		usleep(25000);
 	}
 
 	glDisable(GL_DEPTH_TEST);

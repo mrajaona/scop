@@ -33,11 +33,13 @@ static void	vertex_shader(const GLuint shaderProgram, t_data *scop)
 		uniform mat4 model;
 		uniform mat4 view;
 		uniform mat4 proj;
+
+		uniform vec3 overrideColor;
 		
 		void main()
 		{
 			Texcoord = texcoord;
-			Color = color;
+			Color = overrideColor * color;
 			gl_Position = proj * view * model * vec4(position, 1.0);
 		}
 	)glsl";

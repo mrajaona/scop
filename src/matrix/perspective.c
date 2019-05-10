@@ -15,8 +15,8 @@ void	perspective(const float vfov, const float ratio, const float planes[2],
 	mat4_set(dest, 0, 0, htan / ratio);
 	mat4_set(dest, 1, 1, htan);
 	mat4_set(dest, 2, 2, -1 * (far + near) / (far - near));
-	mat4_set(dest, 3, 2, -1);
-	mat4_set(dest, 2, 3, (-2 * far * near) / (far - near));
+	mat4_set(dest, 2, 3, -1);
+	mat4_set(dest, 3, 2, (-2 * far * near) / (far - near));
 }
 
 /*

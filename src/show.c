@@ -15,6 +15,14 @@ static void	edit_output(const t_data *scop)
 
 static void	stencil(const t_data *scop)
 {
+	(void)scop;
+
+	GLint uniColor = glGetUniformLocation(scop->shaderProgram, "overrideColor");
+    glUniform3f(uniColor, 1.0f, 1.0f, 1.0f);
+
+	// Draw cube
+	glDrawArrays(GL_TRIANGLES, 0, 36);
+
 	// glEnable(GL_STENCIL_TEST);
 
 	// Draw floor
@@ -44,9 +52,13 @@ static void	stencil(const t_data *scop)
 
 	GLint uniModel = glGetUniformLocation(scop->shaderProgram, "model");
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model);
-	glDrawArrays(GL_TRIANGLES, 0, 36);
+
+	// glUniform3f(uniColor, 0.3f, 0.3f, 0.3f);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    // glUniform3f(uniColor, 1.0f, 1.0f, 1.0f);
+
 	*/
-	(void)scop;
+
 	// glDisable(GL_STENCIL_TEST);
 }
 
@@ -54,6 +66,7 @@ static void	stencil(const t_data *scop)
 void	show(const t_data *scop)
 {
 	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_STENCIL_TEST);
 
 	while(!glfwWindowShouldClose(scop->window))
 	{
@@ -64,9 +77,6 @@ void	show(const t_data *scop)
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		edit_output(scop);
-
-		// Draw cube
-		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		stencil(scop);
 

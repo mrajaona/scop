@@ -79,7 +79,7 @@ static void	set_proj(t_data *scop)
 
 	// example
 	// vfov = deg_to_rad(45.0f);
-	vfov = deg_to_rad(135.0f);
+	vfov = deg_to_rad(120.0f);
 	ratio = 800.0f / 600.0f;
 	planes[NEAR_PLANE] = 1.0f;
 	planes[FAR_PLANE] = 10.0f;

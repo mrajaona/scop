@@ -18,15 +18,16 @@ static void	stencil(const t_data *scop)
 	glEnable(GL_STENCIL_TEST);
 
 	// Draw floor
-
+/*
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
 	glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 	glStencilMask(0xFF);
+
+	glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
 	glDepthMask(GL_FALSE);
-	glClear(GL_STENCIL_BUFFER_BIT);
 
 	glDrawArrays(GL_TRIANGLES, 36, 6);
-
+*/
 	// Draw reflection
 	/*
 	t_vector	edit;
@@ -43,22 +44,16 @@ static void	stencil(const t_data *scop)
 
 	GLint uniModel = glGetUniformLocation(scop->shaderProgram, "model");
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model);
-
-	glUniform3f(uniColor, 0.3f, 0.3f, 0.3f);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
-	glUniform3f(uniColor, 1.0f, 1.0f, 1.0f);
 	*/
 	(void)scop;
-
-
-	glDisable(GL_DEPTH_TEST);
+	glDisable(GL_STENCIL_TEST);
 }
 
 #include <unistd.h>
 void	show(const t_data *scop)
 {
 	glEnable(GL_DEPTH_TEST);
-
 
 	while(!glfwWindowShouldClose(scop->window))
 	{
@@ -78,5 +73,5 @@ void	show(const t_data *scop)
 		sleep(1);
 	}
 
-	glDisable(GL_STENCIL_TEST);
+	glDisable(GL_DEPTH_TEST);
 }

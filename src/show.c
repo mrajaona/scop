@@ -15,7 +15,7 @@ static void	edit_output(const t_data *scop)
 
 static void	stencil(const t_data *scop)
 {
-	glEnable(GL_STENCIL_TEST);
+	// glEnable(GL_STENCIL_TEST);
 
 	// Draw floor
 /*
@@ -47,7 +47,7 @@ static void	stencil(const t_data *scop)
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	*/
 	(void)scop;
-	glDisable(GL_STENCIL_TEST);
+	// glDisable(GL_STENCIL_TEST);
 }
 
 #include <unistd.h>

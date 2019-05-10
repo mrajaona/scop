@@ -1,22 +1,18 @@
 #include "show.h"
 
-static void	edit_output(const t_data *scop)
+static void	edit_output(const t_data *scop, t_mat4 model)
 {
-	t_mat4			model;
 	static int		deg = 0;
 
-	identity(model);
 	deg = (deg + 10) % 360;
 	rotatez(deg_to_rad((float)deg), model);
 
-    GLint uniTrans = glGetUniformLocation(scop->shaderProgram, "model");
-	glUniformMatrix4fv(uniTrans, 1, GL_FALSE, model);
+	GLint uniModel = glGetUniformLocation(scop->shaderProgram, "model");
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model);
 }
 
-static void	stencil(const t_data *scop)
+static void	stencil(const t_data *scop, t_mat4 model)
 {
-	(void)scop;
-
 	GLint uniColor = glGetUniformLocation(scop->shaderProgram, "overrideColor");
 	glUniform3f(uniColor, 1.0f, 1.0f, 1.0f);
 
@@ -26,14 +22,10 @@ static void	stencil(const t_data *scop)
 	glEnable(GL_STENCIL_TEST);
 
 	// Draw floor
-
-	// glDrawArrays(GL_TRIANGLES, 36, 6);
+	glDrawArrays(GL_TRIANGLES, 36, 6);
 
 	// Draw reflection
 	t_vector	edit;
-	t_mat4		model;
-
-	identity(model);
 
 	coord_to_vec(1.0f, 1.0f, -1.0f, edit);
 	scaling(edit, model);
@@ -51,23 +43,27 @@ static void	stencil(const t_data *scop)
 	glDisable(GL_STENCIL_TEST);
 }
 
-#include <unistd.h>
+#include <unistd.h> // sleep
 void	show(const t_data *scop)
 {
+	t_mat4	model;
+
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_STENCIL_TEST);
 
 	while(!glfwWindowShouldClose(scop->window))
 	{
+		mat4_eq(model, scop->model);
+
 		glfwSwapBuffers(scop->window);
 		glfwPollEvents();
 
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f );
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		edit_output(scop);
+		edit_output(scop, model);
 
-		stencil(scop);
+		stencil(scop, model);
 
 		sleep(1);
 	}

@@ -12,32 +12,26 @@
 
 static void set_model(t_data *scop)
 {
-	t_mat4		model;
-	
-	identity(model);
+	identity(scop->model);
 
 	// t_vector	edit;
 	// coord_to_vec(0.5f, 0.5f, 0.5f, edit);	
-	// translation(edit, model);
+	// translation(edit, scop->model);
 
-	// rotatez(deg_to_rad(180.0f), model);
+	// rotatez(deg_to_rad(180.0f), scop->model);
 
 	fprintf(stdout, "\nmodel");
-	mat4_print(model);
+	mat4_print(scop->model);
 
 	GLint uniModel = glGetUniformLocation(scop->shaderProgram, "model");
-	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model);
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, scop->model);
 }
 
 // The camera in OpenGL cannot move and is defined
 // to be located at (0,0,0) facing the negative Z direction
 static void	set_view(t_data *scop)
 	{
-	// camera
-
-	t_mat4		view;
-
-	identity(view);
+	identity(scop->view);
 
 	t_vector	eye;
 	t_vector	target;
@@ -57,21 +51,18 @@ static void	set_view(t_data *scop)
 	// coord_to_vec(0.5, 0.5, -1, target);
 	// coord_to_vec(0, 1, 0, up);
 
-	lookat(eye, target, up, view);
+	lookat(eye, target, up, scop->view);
 	
 	fprintf(stdout, "\nview");
-	mat4_print(view);
+	mat4_print(scop->view);
 
 	GLint uniView = glGetUniformLocation(scop->shaderProgram, "view");
-	glUniformMatrix4fv(uniView, 1, GL_FALSE, view);
+	glUniformMatrix4fv(uniView, 1, GL_FALSE, scop->view);
 }
 
 static void	set_proj(t_data *scop)
 {
-	// fov
-	t_mat4		proj;
-
-	identity(proj);
+	identity(scop->proj);
 
 	float		planes[2];
 	float		vfov;
@@ -89,13 +80,13 @@ static void	set_proj(t_data *scop)
 	// planes[NEAR_PLANE] = 1.0f;
 	// planes[FAR_PLANE] = 10.0f;
 	
-	perspective(vfov, ratio, planes, proj);
+	perspective(vfov, ratio, planes, scop->proj);
 
 	fprintf(stdout, "\nproj");
-	mat4_print(proj);
+	mat4_print(scop->proj);
 
 	GLint uniProj = glGetUniformLocation(scop->shaderProgram, "proj");
-	glUniformMatrix4fv(uniProj, 1, GL_FALSE, proj);
+	glUniformMatrix4fv(uniProj, 1, GL_FALSE, scop->proj);
 }
 
 

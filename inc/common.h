@@ -2,6 +2,7 @@
 # define COMMON_H
 
 # include "glfw.h"
+# include "matrix.h"
 
 /*
 ** libc -lc
@@ -55,6 +56,9 @@ typedef struct  s_data
 	GLuint		fragmentShader;
 	GLuint		shaderProgram;
 	GLuint		textures[N_TEXTURES];
+	t_mat4		model;
+	t_mat4		view;
+	t_mat4		proj;
 }			   t_data;
 
 #endif

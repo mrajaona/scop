@@ -21,7 +21,7 @@ static void	init(t_data *scop)
 	glew_init(&(scop->vertexBuffer));
 	vbo(&(scop->vbo));
 	vao(&(scop->vao));
-	ebo(&(scop->ebo));
+	// ebo(&(scop->ebo));
 	shader_program(&(scop->shaderProgram), scop);
 	tex(scop->textures, scop);
 }

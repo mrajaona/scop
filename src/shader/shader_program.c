@@ -20,7 +20,7 @@ static void	vertex_shader(const GLuint shaderProgram, t_data *scop)
 		#version 150 core
 		
 		in vec2 texcoord;
-		in vec2 position;
+		in vec3 position;
 		in vec3 color;
 		
 		out vec3 Color;
@@ -34,7 +34,7 @@ static void	vertex_shader(const GLuint shaderProgram, t_data *scop)
 		{
 			Texcoord = texcoord;
 			Color = color;
-			gl_Position = proj * view * model * vec4(position, 0.0, 1.0);
+			gl_Position = proj * view * model * vec4(position, 1.0);
 		}
 	)glsl";
 	
@@ -60,9 +60,9 @@ static void	fragment_shader(const GLuint shaderProgram, t_data *scop)
 		
 		void main()
 		{
-			vec4 colKitten = texture(texKitten, Texcoord);
-			vec4 colPuppy = texture(texPuppy, Texcoord);
-			outColor = mix(colKitten, colPuppy, 0.5);
+			vec4 texColor = mix(texture(texKitten, Texcoord),
+				texture(texPuppy, Texcoord), 0.5);
+			outColor = vec4(Color, 1.0) * texColor;
 		}
 	)glsl";
 
@@ -81,18 +81,18 @@ static void	vertex_attribute_array(const GLuint shaderProgram)
 
 	posAttrib = glGetAttribLocation(shaderProgram, "position");
 	glEnableVertexAttribArray(posAttrib);
-	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE,
-		7 * sizeof(float), 0);
+	glVertexAttribPointer(posAttrib, 3, GL_FLOAT, GL_FALSE,
+		8 * sizeof(float), 0);
 	
 	colAttrib = glGetAttribLocation(shaderProgram, "color");
 	glEnableVertexAttribArray(colAttrib);
 	glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE,
-		7 * sizeof(float), (void *)(2 * sizeof(float)));
+		8 * sizeof(float), (void *)(3 * sizeof(float)));
 
 	texAttrib = glGetAttribLocation(shaderProgram, "texcoord");
 	glEnableVertexAttribArray(texAttrib);
 	glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE,
-		7 * sizeof(float), (void *)(5 * sizeof(float)));
+		8 * sizeof(float), (void *)(6 * sizeof(float)));
 }
 
 void	shader_program(GLuint *shaderProgram, t_data *scop)

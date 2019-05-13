@@ -1,5 +1,5 @@
 #ifndef EXIT_H
-# define ERROR_H
+# define EXIT_H
 
 # include <stdlib.h>
 # include "gl_loader.h"

@@ -139,7 +139,6 @@ unsigned char  *load_bmp_img(FILE *ptr, int *width, int *height);
 typedef struct  s_data
 {
 	GLFWwindow	*window;
-	GLuint		vertexBuffer;
 	GLuint		vbo;
 	GLuint		vao;
 	GLuint		ebo;	

@@ -1,7 +1,8 @@
 #ifndef MAT4_TRANSFORM_H
 # define MAT4_TRANSFORM_H
 
-# include "matrix.h"
+# include "mat4.h"
+# include "mat4_op.h"
 # include "vector.h"
 
 void			transform(const t_mat4 trans, t_mat4 dest);

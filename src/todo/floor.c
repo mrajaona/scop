@@ -1,9 +1,9 @@
-static void set_model(t_data *scop)
+static void set_model(t_data *data)
 {
-	identity(scop->model);
+	identity(data->model);
 
-	GLint uniModel = glGetUniformLocation(scop->shaderProgram, "model");
-	glUniformMatrix4fv(uniModel, 1, GL_FALSE, scop->model);
+	GLint uniModel = glGetUniformLocation(data->shaderProgram, "model");
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->model);
 }
 
 /*
@@ -49,7 +49,7 @@ static void	vbo(GLuint *vbo)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // copy the vertex data
 }
 
-static void	stencil(const t_data *scop, t_mat4 model)
+static void	stencil(const t_data *data, t_mat4 model)
 {
 	glEnable(GL_STENCIL_TEST);
 
@@ -64,18 +64,11 @@ static void	stencil(const t_data *scop, t_mat4 model)
 	glDisable(GL_STENCIL_TEST);
 }
 
-void	set_floor()
+void	set_floor(t_model *model)
 {
-	vbo();
-	vao();
-	ebo();
-}
-
-void	select_floor()
-{
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ebo); // make active
-	glBindVertexArray(*vao); // make active
-	glBindBuffer(GL_ARRAY_BUFFER, *vbo); // make active array buffer
+	vbo(&(model->vbo));
+	vao(&(model->vao));
+	ebo(&(model->ebo));
 }
 
 void	draw_floor()

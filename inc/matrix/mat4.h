@@ -20,7 +20,7 @@ void			mat4_set(t_mat4 mat,
 float			mat4_get(const t_mat4 mat,
 	const unsigned char x, const unsigned char y);
 
-void			clear_matrix(t_mat4 mat);
+void			mat4_clr(t_mat4 mat);
 void			identity(t_mat4 mat);
 
 void			mat4_eq(t_mat4 dst, const t_mat4 src);

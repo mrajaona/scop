@@ -38,51 +38,23 @@
 # include "../matrix/lookat.h"
 # include "../matrix/perspective.h"
 
-# define FAILURE 0
-# define SUCCESS 1
 
 # define BYTES_PER_PIXEL 3
-# define TEX_FORMAT GL_RGB
 
-# define BMP_MAGIC "\x42\x4D"
-# define PNG_MAGIC "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A"
-# define JPG_MAGIC "\xFF\xD8\xFF"
 
-typedef struct	s_model
-{
-	t_mat4		mat;
-	GLuint		vbo;
-	GLuint		vao;
-	GLuint		ebo;	
-}				t_model;
 
-typedef struct	s_shader
-{
-	GLuint	program;
-	GLuint	vertex;
-	GLuint	fragment;
-}				t_shader;
 
-# define N_TEXTURES 2
 
-typedef struct	s_data
-{
-	void		*data;
-	t_shader	shader;
-	GLuint		textures[N_TEXTURES];
-	t_mat4		view;
-	t_mat4		proj;
-	t_model		model;
-	t_model		floor; // tuto
-}				t_data;
+
+
 
 /* functions */
 
 	void	model_del(t_model *model);
 	void	model_clr(t_model *model);
-	void	set_view(t_data *scop);
-	void	set_proj(t_data *scop);
-	void		set_scene(t_data *scop);
+	void	set_view(t_data *data);
+	void	set_proj(t_data *data);
+	void		set_scene(t_data *data);
 	unsigned char	*load(const char *path, int *width, int *height);
 	int						load_img(const char *path);
 	void	bw_checkerboard(void);
@@ -93,12 +65,12 @@ typedef struct	s_data
 	int	fragment_shader(t_shader *shader);
 	void	vertex_attribute_array(const GLuint shaderProgram);
 	int	shader_init(t_shader *shader);
-	void	scop_exit(t_data *scop, const int status);
-	void	scop_del(t_data *scop);
-	void	scop_clr(t_data *scop);
-	void	scop_init(t_data *scop);
+	void	data_exit(t_data *data, const int status);
+	void	data_del(t_data *data);
+	void	data_clr(t_data *data);
+	void	data_init(t_data *data);
 	void	glfw_init();
 	void	glew_init();
-	void	init(t_data *scop);
+	void	init(t_data *data);
 
 #endif

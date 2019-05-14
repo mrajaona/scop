@@ -51,7 +51,7 @@ float		mat4_get(const t_mat4 mat, const unsigned char x, const unsigned char y)
 ** 0 0 0 0
 */
 
-void		clear_matrix(t_mat4 mat)
+void		mat4_clr(t_mat4 mat)
 {
 	unsigned char	x;
 	unsigned char	y;

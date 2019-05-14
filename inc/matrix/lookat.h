@@ -4,6 +4,7 @@
 # include <math.h>
 
 # include "vector.h"
+# include "vector_op.h"
 # include "coord_op.h"
 # include "mat4.h"
 

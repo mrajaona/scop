@@ -173,7 +173,7 @@ typedef struct  s_data
 # include "gl_loader.h"
 # include "common.h"
 
-void	ft_exit(t_data *scop, const int status);
+void	ft_exit(t_data *data, const int status);
 
 #endif
 
@@ -394,7 +394,7 @@ void	ebo(GLuint *ebo);
 # include "error.h"
 # include "exit.h"
 
-void	shader_program(GLuint *shaderProgram, t_data *scop);
+void	shader_program(GLuint *shaderProgram, t_data *data);
 
 #endif
 
@@ -407,7 +407,7 @@ void	shader_program(GLuint *shaderProgram, t_data *scop);
 # include "common.h"
 # include "matrix_rotations.h"
 
-void	show(const t_data *scop);
+void	show(const t_data *data);
 
 #endif
 
@@ -425,6 +425,6 @@ void	show(const t_data *scop);
 ** N_TEXTURES is defined in common.h
 */
 
-void	tex(GLuint *tex, const t_data *scop);
+void	tex(GLuint *tex, const t_data *data);
 
 #endif

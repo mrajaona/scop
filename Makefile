@@ -4,23 +4,33 @@ DIR_INC		=	./inc/
 DIR_SRC		=	./src/
 
 DIR_MAIN	=	test/
-SRC_MAIN	=	test.c
+SRC_MAIN	=	img_loader.c \
+				init.c \
+				main.c \
+				model.c \
+				scene.c \
+				data.c \
+				shader.c \
+				texture.c
+
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
 DIR_MATRIX	=	matrix/
 SRC_MATRIX	=	angle.c \
 				coord.c \
+				coord_op.c \
 				lookat.c \
 				mat4.c \
 				mat4_op.c \
 				mat4_rotate.c \
-				mat4_tranform.c \
+				mat4_transform.c \
 				mat4_vect_prod.c \
 				perspective.c \
 				vector.c \
 				vector_op.c
 
-SRCS_MATRIX	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
+
+SRCS_MATRIX	=	$(addprefix	$(DIR_MATRIX), $(SRC_MATRIX))
 
 SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX)
 INC			=	$(SRC:.c=.h)

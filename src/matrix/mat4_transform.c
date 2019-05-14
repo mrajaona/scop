@@ -30,7 +30,7 @@ void			scaling(const t_vector scale, t_mat4 dest)
 
 	if (!scale || !dest)
 		return ;
-	clear_matrix(scale_mat);
+	mat4_clr(scale_mat);
 	mat4_set(scale_mat, 0, 0, scale[0]);
 	mat4_set(scale_mat, 1, 1, scale[1]);
 	mat4_set(scale_mat, 2, 2, scale[2]);

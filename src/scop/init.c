@@ -1,9 +1,7 @@
 #include "init.h"
 
-static void	glfw_init(void)
+static void	glfw_init(GLFWwindow *window)
 {
-	GLFWwindow	*window;
-
 	if (!glfwInit())
 	{
 		fprintf(stderr, "glfw init error\n");
@@ -51,7 +49,7 @@ static void	glew_init(void)
 
 void	init(t_data *data)
 {
-	glfw_init();
+	glfw_init(data->window);
 	glew_init();
 	data_init(data);
 }

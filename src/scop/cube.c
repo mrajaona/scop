@@ -122,20 +122,20 @@ static void stencil_reflection(const t_data *data, t_mat4 model)
 	glDisable(GL_STENCIL_TEST);
 }
 
-void		draw_cube(t_data *data)
+void		draw_cube(const t_data *data, const t_mat4 edit)
 {
 	t_mat4	model;
 
-	mat4_eq(model, data->model.mat);
+	mat4_mult(data->model.mat, edit, model);
 	model_select(data->shader.program, &(data->model));
 	stencil_cube(data, model);
 }
 
-void		draw_cube_reflection(t_data *data)
+void		draw_cube_reflection(const t_data *data, const t_mat4 edit)
 {
 	t_mat4	model;
 
-	mat4_eq(model, data->model.mat);
+	mat4_mult(data->model.mat, edit, model);
 	model_select(data->shader.program, &(data->model));
 	stencil_reflection(data, model);
 }

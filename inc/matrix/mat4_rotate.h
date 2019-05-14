@@ -5,8 +5,8 @@
 # include "mat4.h"
 # include "mat4_transform.h"
 
-void	rotatex(const float angle, t_mat4 dest);
-void	rotatey(const float angle, t_mat4 dest);
-void	rotatez(const float angle, t_mat4 dest);
+void	mat4_rotatex(const float angle, t_mat4 dest);
+void	mat4_rotatey(const float angle, t_mat4 dest);
+void	mat4_rotatez(const float angle, t_mat4 dest);
 
 #endif

@@ -43,7 +43,7 @@ static void	vbo(GLuint *vbo)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // copy the vertex data
 }
 
-static void	stencil(const t_data *data, t_mat4 model)
+static void	stencil(const t_data *data, const t_mat4 model)
 {
 	GLint uniModel = glGetUniformLocation(data->shader.program, "model");
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model);
@@ -69,11 +69,11 @@ void	set_floor(t_model *model)
 	ebo(&(model->ebo));
 }
 
-void	draw_floor(t_data *data)
+void	draw_floor(const t_data *data, const t_mat4 edit)
 {
 	t_mat4	model;
 
-	mat4_eq(model, data->floor.mat);
+	mat4_mult(data->floor.mat, edit, model);
 	model_select(data->shader.program, &(data->floor));
 	stencil(data, model);
 }

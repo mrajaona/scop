@@ -15,7 +15,7 @@ void	model_clr(t_model *model)
 	model->vao = 0;
 }
 
-void	model_select(GLuint shaderProgram, t_model *model)
+void	model_select(const GLuint shaderProgram, const t_model *model)
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, model->ebo); // make active
 	glBindVertexArray(model->vao); // make active

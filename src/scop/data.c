@@ -3,25 +3,22 @@
 void	data_exit(t_data *data, const int status)
 {
 	data_del(data);
-	glfwTerminate();
 	exit(status);
 }
 
 void	data_del(t_data *data)
 {
-	if (data->data)
-		free(data->data);
 	shader_del(&(data->shader));
     glDeleteTextures(N_TEXTURES, data->textures);
 	model_del(&(data->model));
 	model_del(&(data->floor)); // tuto
+	glfwTerminate();
 }
 
 void	data_clr(t_data *data)
 {
 	unsigned int	i;
 
-	data->data = NULL;
 	data->shader.program = 0;
 	data->shader.vertex = 0;
 	data->shader.fragment = 0;

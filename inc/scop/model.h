@@ -25,6 +25,6 @@ typedef struct	s_model
 
 void	model_del(t_model *model);
 void	model_clr(t_model *model);
-void	model_select(GLuint shaderProgram, t_model *model);
+void	model_select(const GLuint shaderProgram, const t_model *model);
 
 #endif

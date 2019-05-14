@@ -1,6 +1,12 @@
 #ifndef DATA_H
 # define DATA_H
 
+/* GLFW */
+# ifdef __APPLE__
+#  define GLFW_INCLUDE_GLCOREARB
+# endif
+/* GLFW */
+
 # include "texture.h"
 # include "shader.h"
 # include "mat4.h"
@@ -8,7 +14,7 @@
 
 typedef struct	s_data
 {
-	void		*data;
+	GLFWwindow	*window;
 	t_shader	shader;
 	GLuint		textures[N_TEXTURES];
 	t_mat4		view;

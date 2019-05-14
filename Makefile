@@ -13,7 +13,8 @@ SRC_MAIN	=	img_loader.c \
 				texture.c \
 				cube.c \
 				floor.c \
-				data.c
+				data.c \
+				show.c
 
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 

@@ -7,8 +7,8 @@ int	main(void)
 	init(&data);
 
 	set_scene(&data);
-	// set_cube();
-	// set_floor();
-	// show();
+	set_cube(&(data.cube));
+	set_floor(&(data.floor));
+	show(&data);
 	data_exit(&data, 0);
 }

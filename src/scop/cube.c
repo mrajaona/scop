@@ -1,3 +1,5 @@
+#include "cube.h"
+
 /*
 ** link points in order
 */
@@ -76,13 +78,26 @@ static void	vbo(GLuint *vbo)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // copy the vertex data
 }
 
+void	set_cube(t_model *model)
+{
+	identity(model->mat);
+	vbo(&(model->vbo));
+	vao(&(model->vao));
+	ebo(&(model->ebo));
+}
+
 static void	stencil_cube()
 {
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 }
 
+
 static void stencil_reflection(const t_data *data, t_mat4 model)
 {
+	GLint uniColor;
+
+	uniColor = glGetUniformLocation(data->shader.program, "overrideColor");
+
 	glEnable(GL_STENCIL_TEST);
 
 	glStencilFunc(GL_EQUAL, 1, 0xFF);
@@ -97,7 +112,7 @@ static void stencil_reflection(const t_data *data, t_mat4 model)
 	coord_to_vec(0.0f, 0.0f, -1.0f, edit);
 	translation(edit, model);
 
-	GLint uniModel = glGetUniformLocation(data->shaderProgram, "model");
+	GLint uniModel = glGetUniformLocation(data->shader.program, "model");
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model);
 
 	glUniform3f(uniColor, 0.3f, 0.3f, 0.3f);
@@ -107,21 +122,20 @@ static void stencil_reflection(const t_data *data, t_mat4 model)
 	glDisable(GL_STENCIL_TEST);
 }
 
-void	set_cube(t_model *model)
+void		draw_cube(t_data *data)
 {
-	vbo(&(model->vbo));
-	vao(&(model->vao));
-	ebo(&(model->ebo));
+	t_mat4	model;
+
+	mat4_eq(model, data->model.mat);
+	model_select(data->shader.program, &(data->model));
+	stencil_cube(data, model);
 }
 
-draw_cube()
+void		draw_cube_reflection(t_data *data)
 {
-	select_cube();
-	stencil_cube();
-}
+	t_mat4	model;
 
-draw_cube_reflection()
-{
-	select_cube();
-	stencil_reflection();
+	mat4_eq(model, data->model.mat);
+	model_select(data->shader.program, &(data->model));
+	stencil_reflection(data, model);
 }

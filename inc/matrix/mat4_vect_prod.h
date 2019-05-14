@@ -1,5 +1,5 @@
-#ifndef MATRIX_OP_H
-# define MATRIX_OP_H
+#ifndef MAT4_VECT_PROD_H
+# define MAT4_VECT_PROD_H
 
 # include "mat4.h"
 # include "vector.h"

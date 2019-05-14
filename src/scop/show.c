@@ -1,3 +1,5 @@
+#include "show.h"
+
 static void	edit_output(const t_data *data, t_mat4 model)
 {
 	static int		deg = 0;
@@ -9,19 +11,15 @@ static void	edit_output(const t_data *data, t_mat4 model)
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model);
 }
 
-static void	stencil(const t_data *data, t_mat4 model)
-{
-	GLint uniColor = glGetUniformLocation(data->shaderProgram, "overrideColor");
-	glUniform3f(uniColor, 1.0f, 1.0f, 1.0f);
-}
-
 #include <unistd.h> // sleep
 void	show(const t_data *data)
 {
 	t_mat4	model;
 
 	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_STENCIL_TEST);
+
+	GLint uniColor = glGetUniformLocation(data->shaderProgram, "overrideColor");
+	glUniform3f(uniColor, 1.0f, 1.0f, 1.0f);
 
 	while(!glfwWindowShouldClose(data->window))
 	{
@@ -35,7 +33,6 @@ void	show(const t_data *data)
 
 		edit_output(data, model);
 
-		stencil(data, model);
 		draw_cube();
 		draw_floor();
 		draw_reflection();

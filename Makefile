@@ -9,9 +9,11 @@ SRC_MAIN	=	img_loader.c \
 				main.c \
 				model.c \
 				scene.c \
-				data.c \
 				shader.c \
-				texture.c
+				texture.c \
+				cube.c \
+				floor.c \
+				data.c
 
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 

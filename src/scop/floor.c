@@ -1,3 +1,5 @@
+#include "floor.h"
+
 /*
 ** link points in order
 */
@@ -43,6 +45,9 @@ static void	vbo(GLuint *vbo)
 
 static void	stencil(const t_data *data, t_mat4 model)
 {
+	GLint uniModel = glGetUniformLocation(data->shader.program, "model");
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model);
+
 	glEnable(GL_STENCIL_TEST);
 
 	glStencilFunc(GL_ALWAYS, 1, 0xFF);
@@ -58,13 +63,17 @@ static void	stencil(const t_data *data, t_mat4 model)
 
 void	set_floor(t_model *model)
 {
+	identity(model->mat);
 	vbo(&(model->vbo));
 	vao(&(model->vao));
 	ebo(&(model->ebo));
 }
 
-void	draw_floor()
+void	draw_floor(t_data *data)
 {
-	select_floor();
-	stencil();
+	t_mat4	model;
+
+	mat4_eq(model, data->floor.mat);
+	model_select(data->shader.program, &(data->floor));
+	stencil(data, model);
 }

@@ -1,5 +1,5 @@
-#ifndef MATRIX_PERSPECTIVE_H
-# define MATRIX_PERSPECTIVE_H
+#ifndef PERSPECTIVE_H
+# define PERSPECTIVE_H
 
 # include <math.h>
 # include "mat4.h"

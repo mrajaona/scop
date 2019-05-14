@@ -1,5 +1,5 @@
-#ifndef MATRIX_OP_H
-# define MATRIX_OP_H
+#ifndef MAT4_OP_H
+# define MAT4_OP_H
 
 # include <stdlib.h>
 # include "mat4.h"

@@ -1,5 +1,5 @@
-#ifndef MATRIX_H
-# define MATRIX_H
+#ifndef MAT4_H
+# define MAT4_H
 
 # include <stdio.h>
 

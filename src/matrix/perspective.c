@@ -1,6 +1,4 @@
-#include "matrix_perspective.h"
-
-// a tester et corriger
+#include "perspective.h"
 
 void	perspective(const float vfov, const float ratio, const float planes[2],
 	t_mat4 dest)
@@ -18,30 +16,3 @@ void	perspective(const float vfov, const float ratio, const float planes[2],
 	mat4_set(dest, 2, 3, -1);
 	mat4_set(dest, 3, 2, (-2 * far * near) / (far - near));
 }
-
-/*
-template <typename valType>
-GLM_FUNC_QUALIFIER detail::tmat4x4<valType, defaultp> perspective
-(
-    valType const & fovy,
-    valType const & aspect,
-    valType const & zNear,
-    valType const & zFar
-)
-{
-    assert(aspect != valType(0));
-    assert(zFar != zNear);
-
-    valType const rad = fovy;
-
-    valType tanHalfFovy = tan(rad / valType(2));
-
-    detail::tmat4x4<valType, defaultp> Result(valType(0));
-    Result[0][0] = valType(1) / (aspect * tanHalfFovy);
-    Result[1][1] = valType(1) / (tanHalfFovy);
-    Result[2][2] = - (zFar + zNear) / (zFar - zNear);
-    Result[2][3] = - valType(1);
-    Result[3][2] = - (valType(2) * zFar * zNear) / (zFar - zNear);
-    return Result;
-}
-*/

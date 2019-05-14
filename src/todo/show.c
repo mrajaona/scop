@@ -1,0 +1,44 @@
+static void	edit_output(const t_data *scop, t_mat4 model)
+{
+	static int		deg = 0;
+
+	deg = (deg + 1) % 360;
+	mat4_rotatez(deg_to_rad((float)deg), model);
+
+	GLint uniModel = glGetUniformLocation(scop->shaderProgram, "model");
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model);
+}
+
+static void	stencil(const t_data *scop, t_mat4 model)
+{
+	GLint uniColor = glGetUniformLocation(scop->shaderProgram, "overrideColor");
+	glUniform3f(uniColor, 1.0f, 1.0f, 1.0f);
+}
+
+#include <unistd.h> // sleep
+void	show(const t_data *scop)
+{
+	t_mat4	model;
+
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_STENCIL_TEST);
+
+	while(!glfwWindowShouldClose(scop->window))
+	{
+		mat4_eq(model, scop->model);
+
+		glfwSwapBuffers(scop->window);
+		glfwPollEvents();
+
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f );
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		edit_output(scop, model);
+
+		stencil(scop, model);
+
+		usleep(25000);
+	}
+
+	glDisable(GL_DEPTH_TEST);
+}

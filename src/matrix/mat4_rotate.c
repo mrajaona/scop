@@ -1,4 +1,4 @@
-# include "matrix_rotations.h"
+#include "mat4_rotate.h"
 
 /*
 ** 1 0  0 0
@@ -7,7 +7,7 @@
 ** 0 0  0 1
 */
 
-void	rotatex(const float angle, t_mat4 dest)
+void	mat4_rotatex(const float angle, t_mat4 dest)
 {
 	t_mat4	rotate_mat;
 	float	c;
@@ -32,7 +32,7 @@ void	rotatex(const float angle, t_mat4 dest)
 **  0 0 0 1
 */
 
-void	rotatey(const float angle, t_mat4 dest)
+void	mat4_rotatey(const float angle, t_mat4 dest)
 {
 	t_mat4	rotate_mat;
 	float	c;
@@ -57,7 +57,7 @@ void	rotatey(const float angle, t_mat4 dest)
 ** 0  0 0 1
 */
 
-void	rotatez(const float angle, t_mat4 dest)
+void	mat4_rotatez(const float angle, t_mat4 dest)
 {
 	t_mat4	rotate_mat;
 	float	c;

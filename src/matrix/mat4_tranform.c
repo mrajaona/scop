@@ -1,35 +1,4 @@
-#include "matrix_op.h"
-
-void			coord_to_vec(const float x, const float y, const float z,
-	t_vector dest)
-{
-	dest[0] = x;
-	dest[1] = y;
-	dest[2] = z;
-	dest[3] = 1;
-}
-
-
-void		mat4_vector_prod(const t_mat4 lhs, const t_vector rhs, t_vector res)
-{
-	unsigned char	x;
-	unsigned char	y;
-
-	if (!lhs || !rhs || !res)
-		return ;
-	y = 0;
-	while (y < 4)
-	{
-		x = 0;
-		res[y] = 0;
-		while (x < 4)
-		{
-			res[y] += mat4_get(lhs, x, y) * rhs[y];
-			x++;
-		}
-		y++;
-	}
-}
+#include "mat4_transform.h"
 
 void			transform(const t_mat4 trans, t_mat4 dest)
 {

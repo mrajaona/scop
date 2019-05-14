@@ -1,72 +1,39 @@
 NAME		=	scop
 
 DIR_INC		=	./inc/
-INC			=	angle.h \
-				common.h \
-				glfw.h \
-				gl_loader.h \
-				img_format.h \
-				img_loader.h \
-				bmp_img_loader.h \
-				scop.h \
-				object.h \
-				shader.h \
-				texture.h \
-				matrix.h \
-				vector.h \
-				matrix_op.h \
-				matrix_rotations.h \
-				matrix_lookat.h \
-				matrix_perspective.h \
-				show.h \
-				error.h \
-				exit.h
-
 DIR_SRC		=	./src/
 
-DIR_MAIN	=	./
-SRC_MAIN	=	exit.c \
-				scop.c \
-				glfw_init.c \
-				texture.c \
-				show.c \
-				angle.c \
-				test.c
+DIR_MAIN	=	test/
+SRC_MAIN	=	test.c
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
-DIR_OBJECT	=	./objects/
-SRC_OBJECT	=	vertex_buffer_objects.c \
-				vertex_array_objects.c \
-				element_array_buffer.c
-SRCS_OBJECT	=	$(addprefix	$(DIR_OBJECT), $(SRC_OBJECT))
-
-DIR_SHADER	=	./shader/
-SRC_SHADER	=	shader_program.c
-SRCS_SHADER	=	$(addprefix	$(DIR_SHADER), $(SRC_SHADER))
-
-DIR_MATRIX	=	./matrix/
-SRC_MATRIX	=	matrix.c \
-				vector.c \
-				operations.c \
-				rotations.c \
+DIR_MATRIX	=	matrix/
+SRC_MATRIX	=	angle.c \
+				coord.c \
 				lookat.c \
-				perspective.c
-SRCS_MATRIX	=	$(addprefix	$(DIR_MATRIX), $(SRC_MATRIX))
+				mat4.c \
+				mat4_op.c \
+				mat4_rotate.c \
+				mat4_tranform.c \
+				mat4_vect_prod.c \
+				perspective.c \
+				vector.c \
+				vector_op.c
 
-DIR_IMG_LOADER	=	./img_loader/
-SRC_IMG_LOADER	=	img_loader.c \
-					bmp_img_loader.c
-SRCS_IMG_LOADER	=	$(addprefix	$(DIR_IMG_LOADER), $(SRC_IMG_LOADER))
+SRCS_MATRIX	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
-SRC			=	$(SRCS_MAIN) $(SRCS_OBJECT) $(SRCS_SHADER) $(SRCS_MATRIX) \
-				$(SRCS_IMG_LOADER)
+SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX)
+INC			=	$(SRC:.c=.h)
 
 INCS		=	$(addprefix $(DIR_INC), $(INC))
 SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
+DIRS		=	$(DIR_MAIN) $(DIR_MATRIX)
+DIRS_INC	=	$(addprefix -I$(DIR_INC), $(DIRS))
+
 OBJS		=	$(SRCS:.c=.o)
 
-CFLAGS		=	-Wall -Wextra -Werror -I$(DIR_INC) -I./lib
+CFLAGS		=	-Wall -Wextra -Werror $(DIRS_INC) -I./lib
 
 CC			=	/usr/bin/gcc
 RM			=	/bin/rm -f

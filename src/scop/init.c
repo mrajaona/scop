@@ -1,6 +1,6 @@
 #include "init.h"
 
-static void	glfw_init(GLFWwindow *window)
+static void	glfw_init(GLFWwindow **window)
 {
 	if (!glfwInit())
 	{
@@ -16,10 +16,10 @@ static void	glfw_init(GLFWwindow *window)
 
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	
-	window = glfwCreateWindow(800, 600, "OpenGL", NULL, NULL); // Windowed
+	*window = glfwCreateWindow(800, 600, "OpenGL", NULL, NULL); // Windowed
 	// window = glfwCreateWindow(800, 600, "OpenGL", glfwGetPrimaryMonitor(), NULL); // Fullscreen
 
-	if (!(window))
+	if (!(*window))
 	{
 		const char *description;
 		int code;
@@ -32,7 +32,7 @@ static void	glfw_init(GLFWwindow *window)
 		glfwTerminate();
 		exit(1);
 	}
-	glfwMakeContextCurrent(window);	
+	glfwMakeContextCurrent(*window);	
 }
 
 static void	glew_init(void)
@@ -49,7 +49,7 @@ static void	glew_init(void)
 
 void	init(t_data *data)
 {
-	glfw_init(data->window);
+	glfw_init(&(data->window));
 	glew_init();
 	data_init(data);
 }

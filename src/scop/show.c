@@ -20,6 +20,8 @@ void	show(const t_data *data)
 	GLint uniColor = glGetUniformLocation(data->shader.program, "overrideColor");
 	glUniform3f(uniColor, 1.0f, 1.0f, 1.0f);
 
+	// !window
+
 	while(!glfwWindowShouldClose(data->window))
 	{
 		glfwSwapBuffers(data->window);

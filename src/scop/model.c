@@ -21,3 +21,9 @@ void	model_select(t_model *model)
 	glBindVertexArray(model->vao); // make active
 	glBindBuffer(GL_ARRAY_BUFFER, model->vbo); // make active array buffer
 }
+
+void	set_model(t_data *data, t_model *model)
+{
+	GLint uniModel = glGetUniformLocation(data->shaderProgram, "model");
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model->mat);
+}

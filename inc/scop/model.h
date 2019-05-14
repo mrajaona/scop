@@ -26,5 +26,6 @@ typedef struct	s_model
 void	model_del(t_model *model);
 void	model_clr(t_model *model);
 void	model_select(t_model *model);
+void	set_model(t_data *data, t_model *model);
 
 #endif

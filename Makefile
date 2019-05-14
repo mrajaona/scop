@@ -3,7 +3,7 @@ NAME		=	scop
 DIR_INC		=	./inc/
 DIR_SRC		=	./src/
 
-DIR_MAIN	=	test/
+DIR_MAIN	=	scop/
 SRC_MAIN	=	img_loader.c \
 				init.c \
 				main.c \

@@ -1,6 +1,6 @@
 #include "texture.h"
 
-void			bw_checkerboard(void)
+static void		bw_checkerboard(void)
 {
 	float pixels[] = {
 		0.0f, 0.0f, 0.0f,	1.0f, 1.0f, 1.0f,
@@ -9,7 +9,7 @@ void			bw_checkerboard(void)
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, pixels);
 }
 
-void			set_TexParameter(const int loaded)
+static void		set_TexParameter(const int loaded)
 {
 	if (!loaded)
 	{

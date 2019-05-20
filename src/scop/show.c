@@ -1,6 +1,6 @@
 #include "show.h"
 
-void			edit_output(const t_data *data, t_mat4 model)
+static void		edit_output(const t_data *data, t_mat4 model)
 {
 	static int		deg = 0;
 
@@ -11,7 +11,7 @@ void			edit_output(const t_data *data, t_mat4 model)
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, model);
 }
 
-void			stencil(const t_data *data, t_mat4 model)
+static void		stencil(const t_data *data, t_mat4 model)
 {
 	GLint uniColor = glGetUniformLocation(data->shader.program, "overrideColor");
 	glUniform3f(uniColor, 1.0f, 1.0f, 1.0f);

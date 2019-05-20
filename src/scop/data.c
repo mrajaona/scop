@@ -1,6 +1,6 @@
 #include "data.h"
 
-void			data_del(t_data *data)
+static void		data_del(t_data *data)
 {
 	if (data->shader.program)
 		glDeleteProgram(data->shader.program);

@@ -1,6 +1,6 @@
 #include "shader.h"
 
-int				shader_status(const GLuint shader)
+static int		shader_status(const GLuint shader)
 {
 	GLint status;
 	
@@ -14,7 +14,7 @@ int				shader_status(const GLuint shader)
 	return (1);
 }
 
-int				vertex_shader(t_shader *shader)
+static int		vertex_shader(t_shader *shader)
 {
 	const char *vertexSource = R"glsl(
 		#version 150 core
@@ -49,7 +49,7 @@ int				vertex_shader(t_shader *shader)
 	return (1);
 }
 
-int				fragment_shader(t_shader *shader)
+static int		fragment_shader(t_shader *shader)
 {
 	const char *fragmentSource = R"glsl(
 		#version 150 core
@@ -78,7 +78,7 @@ int				fragment_shader(t_shader *shader)
 	return (1);
 }
 
-void			vertex_attribute_array(const GLuint shaderProgram)
+static void		vertex_attribute_array(const GLuint shaderProgram)
 {
 	GLint posAttrib;
 	GLint colAttrib;

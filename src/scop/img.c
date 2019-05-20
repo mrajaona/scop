@@ -1,6 +1,6 @@
 #include "img.h"
 
-unsigned char	*load(const char *path, int *width, int *height)
+static unsigned char	*load(const char *path, int *width, int *height)
 {
 	FILE			*fp;
 	unsigned char	*image;
@@ -65,7 +65,7 @@ unsigned char	*load(const char *path, int *width, int *height)
 	return (image);
 }
 
-int				load_img(const char *path)
+int						load_img(const char *path)
 {
 	// SOIL
 	int				width;

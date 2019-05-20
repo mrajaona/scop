@@ -4,16 +4,7 @@ DIR_INC		=	./inc/
 DIR_SRC		=	./src/
 
 DIR_MAIN	=	scop/
-SRC_MAIN	=	img_loader.c \
-				init.c \
-				main.c \
-				model.c \
-				scene.c \
-				shader.c \
-				texture.c \
-				obj.c \
-				data.c \
-				show.c
+SRC_MAIN	=	scop.c
 
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 

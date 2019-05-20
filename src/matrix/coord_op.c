@@ -1,6 +1,6 @@
 #include "coord_op.h"
 
-t_coord_ptr	coord_cross_prod(const t_coord lhs, const t_coord rhs, t_coord res)
+t_coord_ptr		coord_cross_prod(const t_coord lhs, const t_coord rhs, t_coord res)
 {
 	t_coord	tmp;
 

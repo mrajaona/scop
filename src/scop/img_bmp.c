@@ -67,12 +67,28 @@ static int				read_pixel(unsigned char *pixel, FILE *ptr)
 	return (1);
 }
 
+static int				read_line(FILE *ptr, unsigned char *line, t_bmp_info *info)
+{
+	unsigned char	*pixel;
+	unsigned char	*last;
+
+	last = line + (info->width * info->bits / 8);
+	pixel = line;
+	while (pixel < last)
+	{
+		if (!read_pixel(pixel, ptr))
+			return (0);
+		pixel += BYTES_PER_PIXEL;
+	}	
+	return (1);
+}
+
 static unsigned char	*read_data(FILE *ptr,
 	t_bmp_header *header, t_bmp_info *info)
 {
 	unsigned char	*image;
-	unsigned char	*pixel;
-	unsigned char	*last;
+	unsigned char	*line;
+	int				n;
 	size_t			size;
 
 	if (fseek(ptr, header->offset, SEEK_SET) < 0)
@@ -82,17 +98,17 @@ static unsigned char	*read_data(FILE *ptr,
 	if (!(image = (unsigned char *)malloc(size * sizeof(unsigned char))))
 		return (NULL);
 
-	last = image + size;
-
-	pixel = image;
-	while (pixel < last)
+	line = image;
+	n = 0;
+	while (n < info->height)
 	{
-		if (!read_pixel(pixel, ptr))
+		if (!read_line(ptr, line, info))
 		{
 			free(image);
 			return (NULL);
 		}
-		pixel += 3;
+		line += BYTES_PER_PIXEL * info->width;
+		n++;
 	}
 	return (image);
 }

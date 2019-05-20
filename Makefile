@@ -7,6 +7,7 @@ DIR_MAIN	=	scop/
 SRC_MAIN	=	arrays.c \
 				data.c \
 				img.c \
+				img_bmp.c \
 				init_ext.c \
 				scop.c \
 				set_data.c \

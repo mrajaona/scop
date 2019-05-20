@@ -16,6 +16,8 @@
 
 # include "SOIL.h"
 
+# include "img_bmp.h"
+
 # define TEX_FORMAT GL_RGB
 
 # define BMP_MAGIC "\x42\x4D"

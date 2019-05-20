@@ -54,31 +54,34 @@ static void				read_info(t_bmp_info *info, FILE *ptr)
 }
 
 // bgr to rgb
-static int				read_pixel(unsigned char *pixel, FILE *ptr)
+static int				read_pixel(unsigned char *pixel, FILE *ptr,
+	t_bmp_info *info)
 {
-	unsigned char	px[BYTES_PER_PIXEL];
+	unsigned char	px;
 	unsigned int	npixels = 1;
 
-	if (fread(px, npixels, BYTES_PER_PIXEL, ptr) != BYTES_PER_PIXEL * npixels)
+	if (fread(pixel, npixels, info->bits / 8, ptr) != info->bits / 8 * npixels)
 		return (0);
-	pixel[0] = px[2];
-	pixel[1] = px[1];
-	pixel[2] = px[0];
+	px = pixel[0];
+	pixel[0] = pixel[2];
+	pixel[1] = pixel[1];
+	pixel[2] = px;
 	return (1);
 }
 
-static int				read_line(FILE *ptr, unsigned char *line, t_bmp_info *info)
+static int				read_line(FILE *ptr, unsigned char *line,
+	size_t line_size, t_bmp_info *info)
 {
 	unsigned char	*pixel;
 	unsigned char	*last;
 
-	last = line + (info->width * info->bits / 8);
+	last = line + line_size;
 	pixel = line;
 	while (pixel < last)
 	{
-		if (!read_pixel(pixel, ptr))
+		if (!read_pixel(pixel, ptr, info))
 			return (0);
-		pixel += BYTES_PER_PIXEL;
+		pixel += info->bits / 8;
 	}	
 	return (1);
 }
@@ -93,21 +96,22 @@ static unsigned char	*read_data(FILE *ptr,
 
 	if (fseek(ptr, header->offset, SEEK_SET) < 0)
 		return (NULL);
-	size = (info->width * info->height * info->bits / 8);
+	size = header->size - header->offset;
 	
 	if (!(image = (unsigned char *)malloc(size * sizeof(unsigned char))))
 		return (NULL);
 
-	line = image;
+	line = image + size - (size / info->height);
+	size = size / info->height;
 	n = 0;
-	while (n < info->height)
+	while (n < info->height && line >= image)
 	{
-		if (!read_line(ptr, line, info))
+		if (!read_line(ptr, line, size, info))
 		{
 			free(image);
 			return (NULL);
 		}
-		line += BYTES_PER_PIXEL * info->width;
+		line -= size;
 		n++;
 	}
 	return (image);

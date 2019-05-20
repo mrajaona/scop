@@ -4,8 +4,8 @@ void 			set_model(t_data *data)
 {
 	identity(data->model);
 
-	fprintf(stdout, "\nmodel");
-	mat4_print(data->model);
+	// fprintf(stdout, "\nmodel");
+	// mat4_print(data->model);
 
 	GLint uniModel = glGetUniformLocation(data->shader.program, "model");
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->model);
@@ -28,8 +28,8 @@ void			set_view(t_data *data)
 
 	lookat(eye, target, up, data->view);
 	
-	fprintf(stdout, "\nview");
-	mat4_print(data->view);
+	// fprintf(stdout, "\nview");
+	// mat4_print(data->view);
 
 	GLint uniView = glGetUniformLocation(data->shader.program, "view");
 	glUniformMatrix4fv(uniView, 1, GL_FALSE, data->view);
@@ -52,8 +52,8 @@ void			set_proj(t_data *data)
 
 	perspective(vfov, ratio, planes, data->proj);
 
-	fprintf(stdout, "\nproj");
-	mat4_print(data->proj);
+	// fprintf(stdout, "\nproj");
+	// mat4_print(data->proj);
 
 	GLint uniProj = glGetUniformLocation(data->shader.program, "proj");
 	glUniformMatrix4fv(uniProj, 1, GL_FALSE, data->proj);

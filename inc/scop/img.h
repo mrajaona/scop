@@ -16,11 +16,9 @@
 
 # include "SOIL.h"
 
+# include "img_format.h"
 # include "img_bmp.h"
 
-# define TEX_FORMAT GL_RGB
-
-# define BMP_MAGIC "\x42\x4D"
 # define PNG_MAGIC "\x89\x50\x4E\x47\x0D\x0A\x1A\x0A"
 # define JPG_MAGIC "\xFF\xD8\xFF"
 

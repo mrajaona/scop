@@ -7,7 +7,7 @@ static void				read_header(t_bmp_header *header, FILE *ptr)
 	fread(&(header->reserved1), 2, 1, ptr);
 	fread(&(header->reserved2), 2, 1, ptr);
 	fread(&(header->offset), 4, 1, ptr);
-	/*
+	
 	// debug
 	fprintf(stdout, "\n--- Header\ntype: %c%c\nsize: %u\nr1: %hu\nr2: %hu\noffset: %u\n",
 		((char *)(&(header->type)))[0],
@@ -18,7 +18,7 @@ static void				read_header(t_bmp_header *header, FILE *ptr)
 		header->offset
 	);
 	fflush(stdout);
-	*/
+	
 }
 
 static void				read_info(t_bmp_info *info, FILE *ptr)
@@ -34,7 +34,7 @@ static void				read_info(t_bmp_info *info, FILE *ptr)
 	fread(&(info->yresolution), 4, 1, ptr);
 	fread(&(info->ncolours), 4, 1, ptr);
 	fread(&(info->importantcolours), 4, 1, ptr);
-	/*
+	
 	// debug
 	fprintf(stdout, "\n--- Info\nsize: %u\nwidth: %i\nheight: %i\nplanes: %hu\nbits: %hu\ncompression: %u\nimagesize: %u\nxresolution: %i\nyresolution: %i\nncolours: %u\nimportantcolours: %u\n",
 		info->size,
@@ -50,15 +50,16 @@ static void				read_info(t_bmp_info *info, FILE *ptr)
 		info->importantcolours
 	);
 	fflush(stdout);
-	*/
+	
 }
 
 // bgr to rgb
 static int				read_pixel(unsigned char *pixel, FILE *ptr)
 {
 	unsigned char	px[BYTES_PER_PIXEL];
+	unsigned int	npixels = 1;
 
-	if (fread(px, 1, 3, ptr) != 3)
+	if (fread(px, npixels, BYTES_PER_PIXEL, ptr) != BYTES_PER_PIXEL * npixels)
 		return (0);
 	pixel[0] = px[2];
 	pixel[1] = px[1];
@@ -76,7 +77,7 @@ static unsigned char	*read_data(FILE *ptr,
 
 	if (fseek(ptr, header->offset, SEEK_SET) < 0)
 		return (NULL);
-	size = (info->width * info->height * BYTES_PER_PIXEL);
+	size = (info->width * info->height * info->bits / 8);
 	
 	if (!(image = (unsigned char *)malloc(size * sizeof(unsigned char))))
 		return (NULL);

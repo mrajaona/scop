@@ -1,0 +1,4 @@
+pixels par ligne		: info->width
+bytes utiles par ligne	: info->width * info->bits / 8
+bytes totaux par ligne	: (header->size (bytes) - header->offset (bytes)) / info->height
+padding					: total - utile

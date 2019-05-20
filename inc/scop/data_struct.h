@@ -19,7 +19,7 @@ typedef struct	s_arrays
 {
 	GLuint		vbo;
 	GLuint		vao;
-	GLuint		ebo;
+	// GLuint		ebo;
 }				t_arrays;
 
 typedef struct	s_data

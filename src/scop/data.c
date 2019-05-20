@@ -11,7 +11,7 @@ static void		data_del(t_data *data)
 
     glDeleteTextures(N_TEXTURES, data->textures);
 
-	glDeleteBuffers(1, &(data->arrays.ebo));
+	// glDeleteBuffers(1, &(data->arrays.ebo));
 	glDeleteBuffers(1, &(data->arrays.vbo));
 	glDeleteVertexArrays(1, &(data->arrays.vao));
 
@@ -36,7 +36,7 @@ void			data_clr(t_data *data)
 	mat4_clr(data->proj);
 	mat4_clr(data->model);
 
-	data->arrays.ebo = 0;
+	// data->arrays.ebo = 0;
 	data->arrays.vbo = 0;
 	data->arrays.vao = 0;
 

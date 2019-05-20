@@ -6,10 +6,7 @@
 
 void			ebo(GLuint *ebo)
 {
-	const GLuint	elements[] = {
-		0, 1, 2,
-		2, 3, 0
-	};
+	const GLuint	elements[] = {};
 
 	glGenBuffers(1, ebo); // generate
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ebo); // make active

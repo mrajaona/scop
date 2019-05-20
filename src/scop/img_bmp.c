@@ -117,6 +117,47 @@ static unsigned char	*read_data(FILE *ptr,
 	return (image);
 }
 
+/*
+
+static int				read_line(FILE *ptr, unsigned char *line,
+	size_t line_size, t_bmp_info *info)
+{
+	unsigned char	*pixel;
+	unsigned char	*last;
+	unsigned int	rd;
+
+	last = line + line_size;
+	pixel = line;
+	while (pixel < line + info->width)
+	{
+		if (!read_pixel(pixel, ptr, info))
+			return (0);
+		pixel += info->bits / 8;
+	}
+
+	fprintf(stdout, "%p %p %zu\n", pixel, last, last - pixel);
+	fflush(stdout);
+
+	while (pixel < last)
+	{
+		if ((rd = fread(pixel, 1, last - pixel, ptr)) == 0)
+			return (0);
+		fprintf(stdout, "%u\n", rd);
+		pixel += rd;
+	}
+	if (pixel > last)
+	{
+		fprintf(stderr, "Got past end of line\n");
+		fflush(stderr);
+		return (0);
+	}
+
+	return (1);
+}
+
+
+*/
+
 unsigned char			*load_bmp(FILE *ptr, int *width, int *height)
 {
 	t_bmp_header	header;

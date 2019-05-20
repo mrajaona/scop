@@ -76,7 +76,7 @@ static unsigned char	*read_data(FILE *ptr,
 
 	if (fseek(ptr, header->offset, SEEK_SET) < 0)
 		return (NULL);
-	size = (info->width * info->height * info->bits / 8);
+	size = (info->width * info->height * BYTES_PER_PIXEL);
 	
 	if (!(image = (unsigned char *)malloc(size * sizeof(unsigned char))))
 		return (NULL);

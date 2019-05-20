@@ -18,8 +18,7 @@
 # include "mat4.h"
 # include "mat4_rotate.h"
 # include "angle.h"
-# include "cube.h"
-# include "floor.h"
+# include "obj.h"
 
 void	show(const t_data *data);
 

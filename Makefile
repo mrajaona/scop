@@ -11,8 +11,7 @@ SRC_MAIN	=	img_loader.c \
 				scene.c \
 				shader.c \
 				texture.c \
-				cube.c \
-				floor.c \
+				obj.c \
 				data.c \
 				show.c
 

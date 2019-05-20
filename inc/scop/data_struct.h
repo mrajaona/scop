@@ -12,9 +12,15 @@
 /* GLFW */
 
 # include "shader_struct.h"
-# include "model_struct.h"
 
 # include "mat4.h"
+
+typedef struct	s_arrays
+{
+	GLuint		vbo;
+	GLuint		vao;
+	GLuint		ebo;
+}				t_arrays;
 
 typedef struct	s_data
 {
@@ -23,7 +29,8 @@ typedef struct	s_data
 	GLuint		textures[N_TEXTURES];
 	t_mat4		view;
 	t_mat4		proj;
-	t_model		model;
+	t_mat4		model;
+	t_arrays	arrays;
 }				t_data;
 
 #endif

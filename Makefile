@@ -34,7 +34,6 @@ SRCS_MATRIX	=	$(addprefix	$(DIR_MATRIX), $(SRC_MATRIX))
 
 DIR_MORE_INC	=	scop/
 MORE_INC		=	data_struct.h \
-					model_struct.h \
 					shader_struct.h
 
 MORE_INCS		=	$(addprefix	$(DIR_MORE_INC), $(MORE_INC))

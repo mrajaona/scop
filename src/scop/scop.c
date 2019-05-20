@@ -9,9 +9,9 @@ int				main(void)
 	glfw_init(&(data.window));
 	glew_init();
 
-	vbo(&(data.model.vbo));
-	vao(&(data.model.vao));
-	// ebo(&(data.model.ebo));
+	vbo(&(data.arrays.vbo));
+	vao(&(data.arrays.vao));
+	// ebo(&(data.arrays.ebo));
 
 	if (!shader_init(&(data.shader)))
 		data_exit(&data, 1);

@@ -62,7 +62,7 @@ void			show(const t_data *data)
 
 	while(!glfwWindowShouldClose(data->window))
 	{
-		mat4_eq(model, data->model.mat);
+		mat4_eq(model, data->model);
 
 		glfwSwapBuffers(data->window);
 		glfwPollEvents();

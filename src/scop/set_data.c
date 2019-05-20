@@ -2,13 +2,13 @@
 
 void 			set_model(t_data *data)
 {
-	identity(data->model.mat);
+	identity(data->model);
 
 	fprintf(stdout, "\nmodel");
-	mat4_print(data->model.mat);
+	mat4_print(data->model);
 
 	GLint uniModel = glGetUniformLocation(data->shader.program, "model");
-	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->model.mat);
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->model);
 }
 
 // The camera in OpenGL cannot move and is defined

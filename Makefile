@@ -4,7 +4,15 @@ DIR_INC		=	./inc/
 DIR_SRC		=	./src/
 
 DIR_MAIN	=	scop/
-SRC_MAIN	=	scop.c
+SRC_MAIN	=	arrays.c \
+				data.c \
+				img.c \
+				init_ext.c \
+				scop.c \
+				set_data.c \
+				shader.c \
+				show.c \
+				texture.c
 
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
@@ -22,11 +30,17 @@ SRC_MATRIX	=	angle.c \
 				vector.c \
 				vector_op.c
 
-
 SRCS_MATRIX	=	$(addprefix	$(DIR_MATRIX), $(SRC_MATRIX))
 
+DIR_MORE_INC	=	scop/
+MORE_INC		=	data_struct.h \
+					model_struct.h \
+					shader_struct.h
+
+MORE_INCS		=	$(addprefix	$(DIR_MORE_INC), $(MORE_INC))
+
 SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX)
-INC			=	$(SRC:.c=.h)
+INC			=	$(SRC:.c=.h) $(MORE_INCS)
 
 INCS		=	$(addprefix $(DIR_INC), $(INC))
 SRCS		=	$(addprefix $(DIR_SRC), $(SRC))

@@ -1,7 +1,7 @@
-#ifndef SCOP_H
-# define SCOP_H
+#ifndef DATA_H
+# define DATA_H
 
-/* GLEW */ // prevent conflict
+/* GLEW */
 # define GLEW_STATIC
 
 # ifdef __APPLE__
@@ -13,14 +13,11 @@
 # endif
 /* GLEW */
 
+# include <stdlib.h>
+
 # include "data_struct.h"
 
-# include "data.h"
-# include "init_ext.h"
-# include "arrays.h"
-# include "shader.h"
-# include "texture.h"
-# include "set_data.h"
-# include "show.h"
+void			data_clr(t_data *data);
+void			data_exit(t_data *data, const int status);
 
 #endif

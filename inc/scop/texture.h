@@ -1,7 +1,7 @@
-#ifndef SCOP_H
-# define SCOP_H
+#ifndef TEXTURE_H
+# define TEXTURE_H
 
-/* GLEW */ // prevent conflict
+/* GLEW */
 # define GLEW_STATIC
 
 # ifdef __APPLE__
@@ -14,13 +14,8 @@
 /* GLEW */
 
 # include "data_struct.h"
+# include "img.h"
 
-# include "data.h"
-# include "init_ext.h"
-# include "arrays.h"
-# include "shader.h"
-# include "texture.h"
-# include "set_data.h"
-# include "show.h"
+void			texture_init(GLuint textures[N_TEXTURES], const GLuint shader);
 
 #endif

@@ -57,15 +57,15 @@ static void				read_info(t_bmp_info *info, FILE *ptr)
 static int				read_pixel(unsigned char *pixel, FILE *ptr,
 	t_bmp_info *info)
 {
-	unsigned char	px;
-	unsigned int	npixels = 1;
+	// unsigned char		px;
+	const unsigned int	npixels = 1;
 
 	if (fread(pixel, npixels, info->bits / 8, ptr) != info->bits / 8 * npixels)
 		return (0);
-	px = pixel[0];
-	pixel[0] = pixel[2];
-	pixel[1] = pixel[1];
-	pixel[2] = px;
+	// px = pixel[0];
+	// pixel[0] = pixel[2];
+	// pixel[1] = pixel[1];
+	// pixel[2] = px;
 	return (1);
 }
 

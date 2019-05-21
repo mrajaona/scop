@@ -36,8 +36,9 @@ void			texture_init(GLuint textures[N_TEXTURES], const GLuint shader)
 	// CAT
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textures[0]);
-	success = load_img("textures/sample.png");
+	// success = load_img("textures/sample.png");
 	// success = load_img("textures/marbles.bmp");
+	success = load_img("textures/flag_b24.bmp");
 	glUniform1i(glGetUniformLocation(shader, "texKitten"), 0);
 	set_TexParameter(success);
 
@@ -45,8 +46,7 @@ void			texture_init(GLuint textures[N_TEXTURES], const GLuint shader)
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, textures[1]);
 	// success = load_img("textures/sample2.png");
-	success = load_img("textures/img_test.bmp");
-	// success = load_img("textures/marbles.bmp");
+	success = load_img("textures/drop.bmp");
 	glUniform1i(glGetUniformLocation(shader, "texPuppy"), 1);
 	set_TexParameter(success);
 }

@@ -75,14 +75,21 @@ static int				read_line(FILE *ptr, unsigned char *line,
 	unsigned char	*pixel;
 	unsigned char	*last;
 
-	last = line + line_size;
+	last = line + (info->width * info->bits / 8);
 	pixel = line;
 	while (pixel < last)
 	{
 		if (!read_pixel(pixel, ptr, info))
 			return (0);
 		pixel += info->bits / 8;
-	}	
+	}
+
+	fprintf(stdout, "%p %p %zu\n", pixel, last, last - pixel);
+	fflush(stdout);
+
+	if (fseek(ptr, line_size - (info->width * info->bits / 8), SEEK_CUR) < 0)
+		return (0);
+
 	return (1);
 }
 
@@ -96,13 +103,14 @@ static unsigned char	*read_data(FILE *ptr,
 
 	if (fseek(ptr, header->offset, SEEK_SET) < 0)
 		return (NULL);
-	size = header->size - header->offset;
+	size = info->height * info->width * (info->bits / 8);
 	
 	if (!(image = (unsigned char *)malloc(size * sizeof(unsigned char))))
 		return (NULL);
 
-	line = image + size - (size / info->height);
-	size = size / info->height;
+	line = image + size;
+	size = (header->size - header->offset) / info->height;
+	line -= size;
 	n = 0;
 	while (n < info->height && line >= image)
 	{
@@ -116,47 +124,6 @@ static unsigned char	*read_data(FILE *ptr,
 	}
 	return (image);
 }
-
-/*
-
-static int				read_line(FILE *ptr, unsigned char *line,
-	size_t line_size, t_bmp_info *info)
-{
-	unsigned char	*pixel;
-	unsigned char	*last;
-	unsigned int	rd;
-
-	last = line + line_size;
-	pixel = line;
-	while (pixel < line + info->width)
-	{
-		if (!read_pixel(pixel, ptr, info))
-			return (0);
-		pixel += info->bits / 8;
-	}
-
-	fprintf(stdout, "%p %p %zu\n", pixel, last, last - pixel);
-	fflush(stdout);
-
-	while (pixel < last)
-	{
-		if ((rd = fread(pixel, 1, last - pixel, ptr)) == 0)
-			return (0);
-		fprintf(stdout, "%u\n", rd);
-		pixel += rd;
-	}
-	if (pixel > last)
-	{
-		fprintf(stderr, "Got past end of line\n");
-		fflush(stderr);
-		return (0);
-	}
-
-	return (1);
-}
-
-
-*/
 
 unsigned char			*load_bmp(FILE *ptr, int *width, int *height)
 {

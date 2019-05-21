@@ -59,8 +59,9 @@ static int				read_pixel(unsigned char *pixel, FILE *ptr,
 {
 	unsigned char		px;
 	const unsigned int	npixels = 1;
+	const unsigned int	nbytes = info->bits / 8;
 
-	if (fread(pixel, npixels, info->bits / 8, ptr) != info->bits / 8 * npixels)
+	if (fread(pixel, npixels, nbytes, ptr) != nbytes * npixels)
 		return (0);
 	px = pixel[0];
 	pixel[0] = pixel[2];
@@ -74,9 +75,12 @@ static int				read_line(FILE *ptr, unsigned char *line,
 {
 	unsigned char	*pixel;
 	unsigned char	*last;
+	size_t			len;
 
-	last = line + (info->width * info->bits / 8);
+	len = info->width * info->bits / 8;
+	last = line + len;
 	pixel = line;
+
 	while (pixel < last)
 	{
 		if (!read_pixel(pixel, ptr, info))
@@ -84,10 +88,7 @@ static int				read_line(FILE *ptr, unsigned char *line,
 		pixel += info->bits / 8;
 	}
 
-	fprintf(stdout, "%p %p %zu\n", pixel, last, last - pixel);
-	fflush(stdout);
-
-	if (fseek(ptr, line_size - (info->width * info->bits / 8), SEEK_CUR) < 0)
+	if (fseek(ptr, line_size - len, SEEK_CUR) < 0)
 		return (0);
 
 	return (1);
@@ -100,21 +101,23 @@ static unsigned char	*read_data(FILE *ptr,
 	unsigned char	*line;
 	int				n;
 	size_t			size;
+	size_t			line_size;
 
 	if (fseek(ptr, header->offset, SEEK_SET) < 0)
 		return (NULL);
-	size = info->height * info->width * (info->bits / 8);
-	
+
+	size = info->height * info->width * (info->bits / 8);	
 	if (!(image = (unsigned char *)malloc(size * sizeof(unsigned char))))
 		return (NULL);
 
 	line = image + size;
-	size = (header->size - header->offset) / info->height;
+	size = info->width * (info->bits / 8);
 	line -= size;
+	line_size = (header->size - header->offset) / info->height;
 	n = 0;
 	while (n < info->height && line >= image)
 	{
-		if (!read_line(ptr, line, size, info))
+		if (!read_line(ptr, line, line_size, info))
 		{
 			free(image);
 			return (NULL);

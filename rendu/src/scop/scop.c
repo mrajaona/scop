@@ -9,6 +9,7 @@ int				main(void)
 	glfw_init(&(data.window));
 	glew_init();
 
+	load_model("resources/cube.obj", &data);
 	vbo(&(data.arrays.vbo));
 	vao(&(data.arrays.vao));
 	// ebo(&(data.arrays.ebo));
@@ -17,7 +18,6 @@ int				main(void)
 		data_exit(&data, 1);
 	texture_init(data.textures, data.shader.program);
 
-	load_model("resources/cube.obj");
 
 	set_model(&data);
 	set_view(&data);

@@ -61,25 +61,23 @@ static int		read_v(FILE *fp, t_model *model)
 
 	if (!(current = new_elem(&(model->vertices), 3 * sizeof(float))))
 		return (0);
+	model->nvertices++;
 	tmp = (float *)(current->data);
-
 	if (fscanf(fp, "%f %f %f\n",
 			&(tmp[0]),
 			&(tmp[1]),
 			&(tmp[2]))
 		!= 3)
 		return (0);
-
 	return (1);
 }
 
 static int		read_f(FILE *fp, t_model *model)
 {
 	t_list			*current;
-	unsigned int	*tmp;
+	GLuint	*tmp;
 	int				rd;
-	unsigned int	face[4];
-
+	GLuint	face[4];
 
 	rd = fscanf(fp, "%u %u %u %u\n",
 		&(face[0]),
@@ -89,18 +87,20 @@ static int		read_f(FILE *fp, t_model *model)
 
 	if (rd == 4 || rd == 3)
 	{
-		if (!(current = new_elem(&(model->faces), 3 * sizeof(unsigned int))))
+		if (!(current = new_elem(&(model->faces), 3 * sizeof(GLuint))))
 			return (0);
-		tmp = (unsigned int *)(current->data);
+		model->nfaces++;
+		tmp = (GLuint *)(current->data);
 		tmp[0] = face[0];
 		tmp[1] = face[1];
 		tmp[2] = face[2];
 
 		if (rd == 4)
 		{
-			if (!(current = new_elem(&(model->faces), 3 * sizeof(unsigned int))))
+			if (!(current = new_elem(&(model->faces), 3 * sizeof(GLuint))))
 				return (0);
-			tmp = (unsigned int *)(current->data);
+			model->nfaces++;
+			tmp = (GLuint *)(current->data);
 			tmp[0] = face[1];
 			tmp[1] = face[2];
 			tmp[2] = face[3];
@@ -146,7 +146,9 @@ static t_model	*read_model(const char *path)
 	}
 
 	model->vertices = NULL;	// vbo
-	model->faces = NULL;		// ebo
+	model->nvertices = 0;
+	model->faces = NULL;	// ebo
+	model->nfaces = 0;
 
 	while (fscanf(fp, "%ms", &type) != EOF) // read first word
 	{
@@ -201,9 +203,9 @@ static float	*process_model(const t_model *data)
 	while (list)
 	{
 		printf("f %u %u %u\n",
-			((unsigned int *)(list->data))[0],
-			((unsigned int *)(list->data))[1],
-			((unsigned int *)(list->data))[2]
+			((GLuint *)(list->data))[0],
+			((GLuint *)(list->data))[1],
+			((GLuint *)(list->data))[2]
 			);
 		list = list->next;
 	}
@@ -226,14 +228,19 @@ static float	*process_model(const t_model *data)
 ** -			These must be divided into triangles before WebGL rendering.
 */
 
-float			*load_model(const char *path)
+int				load_model(const char *path, t_data *data)
 {
-	float	*data;
 	t_model	*model;
 
 	if (!(model = read_model(path)))
-		return (NULL);
-	data = process_model(model);
+		return (0);
+	process_model(model);
+	(void)data;
+
+	// vbo(&(data->arrays.vbo));
+	// vao(&(data->arrays.vao));
+	// ebo(&(data->arrays.ebo));
+
 	free_model(&model);
-	return (data);
+	return (1);
 }

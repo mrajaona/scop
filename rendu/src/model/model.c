@@ -57,6 +57,19 @@ static int		read_f(FILE *fp, t_model *model)
 	return (1);
 }
 
+static int		skip_line(FILE *fp)
+{
+	char	s[1025];
+
+	while (fgets(s, 1025, fp) != NULL)
+	{
+		if (strchr(s, '\n'))
+			return (1);
+	}
+
+	return (1);
+}
+
 static t_model	*read_model(const char *path)
 {
 	t_model	*model;
@@ -80,7 +93,7 @@ static t_model	*read_model(const char *path)
 	model->tmp_vertices = NULL;	// vbo
 	model->faces = NULL;		// ebo
 
-	while (fscanf(file, "%ms", &type)) // read first word
+	while (fscanf(file, "%ms", &type) != EOF) // read first word
 	{
 		if (!type)
 		{
@@ -94,7 +107,7 @@ static t_model	*read_model(const char *path)
 		else if (strcmp( type, "f") == 0)
 			ret = read_f(fp, model);
 		else
-			ret = 1; // skip line
+			ret = skip_line(fp);
 
 		ft_strdel(&type);
 		if (!ret)

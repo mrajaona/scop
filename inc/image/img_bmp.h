@@ -4,8 +4,6 @@
 # include <stdlib.h>
 # include <stdio.h>
 
-# include "img_format.h"
-
 # define BMP_MAGIC "\x42\x4D"
 
 /*

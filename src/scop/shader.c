@@ -64,7 +64,7 @@ static int		fragment_shader(t_shader *shader)
 		void main()
 		{
 			vec4 texColor = mix(texture(texKitten, Texcoord),
-				texture(texPuppy, Texcoord), 0.2);
+				texture(texPuppy, Texcoord), 0.5);
 			outColor = vec4(Color, 1.0) * texColor;
 		}
 	)glsl";

@@ -6,8 +6,6 @@ DIR_SRC		=	./src/
 DIR_MAIN	=	scop/
 SRC_MAIN	=	arrays.c \
 				data.c \
-				img.c \
-				img_bmp.c \
 				init_ext.c \
 				scop.c \
 				set_data.c \
@@ -33,20 +31,25 @@ SRC_MATRIX	=	angle.c \
 
 SRCS_MATRIX	=	$(addprefix	$(DIR_MATRIX), $(SRC_MATRIX))
 
+DIR_IMAGE	=	image/
+SRC_IMAGE	=	img.c \
+				img_bmp.c
+
+SRCS_IMAGE	=	$(addprefix	$(DIR_IMAGE), $(SRC_IMAGE))
+
 DIR_MORE_INC	=	scop/
 MORE_INC		=	data_struct.h \
-					shader_struct.h \
-					img_format.h
+					shader_struct.h
 
 MORE_INCS		=	$(addprefix	$(DIR_MORE_INC), $(MORE_INC))
 
-SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX)
+SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX) $(SRCS_IMAGE)
 INC			=	$(SRC:.c=.h) $(MORE_INCS)
 
 INCS		=	$(addprefix $(DIR_INC), $(INC))
 SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
-DIRS		=	$(DIR_MAIN) $(DIR_MATRIX)
+DIRS		=	$(DIR_MAIN) $(DIR_MATRIX) $(DIR_IMAGE)
 DIRS_INC	=	$(addprefix -I$(DIR_INC), $(DIRS))
 
 OBJS		=	$(SRCS:.c=.o)

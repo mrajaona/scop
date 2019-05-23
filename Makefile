@@ -37,19 +37,24 @@ SRC_IMAGE	=	img.c \
 
 SRCS_IMAGE	=	$(addprefix	$(DIR_IMAGE), $(SRC_IMAGE))
 
+DIR_MODEL	=	model/
+SRC_MODEL	=	model.c
+
+SRCS_MODEL	=	$(addprefix	$(DIR_MODEL), $(SRC_MODEL))
+
 DIR_MORE_INC	=	scop/
 MORE_INC		=	data_struct.h \
 					shader_struct.h
 
 MORE_INCS		=	$(addprefix	$(DIR_MORE_INC), $(MORE_INC))
 
-SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX) $(SRCS_IMAGE)
+SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX) $(SRCS_IMAGE) # $(SRCS_MODEL)
 INC			=	$(SRC:.c=.h) $(MORE_INCS)
 
 INCS		=	$(addprefix $(DIR_INC), $(INC))
 SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
-DIRS		=	$(DIR_MAIN) $(DIR_MATRIX) $(DIR_IMAGE)
+DIRS		=	$(DIR_MAIN) $(DIR_MATRIX) $(DIR_IMAGE) # $(DIR_MODEL)
 DIRS_INC	=	$(addprefix -I$(DIR_INC), $(DIRS))
 
 OBJS		=	$(SRCS:.c=.o)

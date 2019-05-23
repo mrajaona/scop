@@ -15,9 +15,6 @@ void			show(const t_data *data)
 {
 	t_mat4	model;
 
-	GLint uniColor = glGetUniformLocation(data->shader.program, "overrideColor");
-	glUniform3f(uniColor, 1.0f, 1.0f, 1.0f);
-
 	glEnable(GL_DEPTH_TEST);
 
 	while(!glfwWindowShouldClose(data->window))

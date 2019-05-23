@@ -101,9 +101,9 @@ static int		read_f(FILE *fp, t_model *model)
 				return (0);
 			model->nfaces++;
 			tmp = (GLuint *)(current->data);
-			tmp[0] = face[1];
-			tmp[1] = face[2];
-			tmp[2] = face[3];
+			tmp[0] = face[2];
+			tmp[1] = face[3];
+			tmp[2] = face[0];
 		}
 	}
 	else

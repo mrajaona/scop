@@ -1,15 +1,69 @@
 #include "model.h"
 
+static	t_list	*new_elem(t_list **list, size_t data_size)
+{
+	t_list	*elem;
+	t_list	*prev;
+
+	if (!list || !(elem = (t_list *)malloc(sizeof(t_list))))
+		return (NULL);
+
+	if (!(elem->data = malloc(data_size)))
+	{
+		free(elem);
+		return (NULL);
+	}
+
+	elem->next = NULL;
+	if (!(*list))
+		*list = elem;
+	else
+	{
+		prev = *list;
+		while (prev->next)
+			prev = prev->next;
+		prev->next = elem;
+	}
+	return (elem);
+}
+
+static void		free_list(t_list **list)
+{
+	t_list	*next;
+	t_list	*cur;
+
+	if (!list)
+		return ;
+	cur = *list;
+	while (cur)
+	{
+		next = cur->next;
+		free(cur);
+		cur = next;
+	}
+	*list = NULL;
+}
+
+static void		free_model(t_model **model)
+{
+	if (!model || !(*model))
+		return ;
+	free_list(&((*model)->vertices));
+	free_list(&((*model)->faces));
+	free(*model);
+	*model = NULL;
+}
+
 static int		read_v(FILE *fp, t_model *model)
 {
 	t_list	*current;
 	float	*tmp;
 
-	if (!(current = new_elem(&(model->tmp_vertices))))
+	if (!(current = new_elem(&(model->vertices), 3 * sizeof(float))))
 		return (0);
-	tmp = (float *)(current.data);
+	tmp = (float *)(current->data);
 
-	if (fscanf(file, "%f %f %f\n",
+	if (fscanf(fp, "%f %f %f\n",
 			&(tmp[0]),
 			&(tmp[1]),
 			&(tmp[2]))
@@ -21,31 +75,41 @@ static int		read_v(FILE *fp, t_model *model)
 
 static int		read_f(FILE *fp, t_model *model)
 {
-	t_list	*current;
-	float	*tmp;
-	int		rd;
-	float	face[4];
+	t_list			*current;
+	unsigned int	*tmp;
+	int				rd;
+	unsigned int	face[4];
 
-	rd = fscanf(file, "%f %f %f %f\n",
+
+	rd = fscanf(fp, "%u %u %u %u\n",
 		&(face[0]),
 		&(face[1]),
 		&(face[2]),
 		&(face[3]));
 
+	printf("\nrd : %i\n", rd); fflush(stdout);
+	printf("\nf : %u %u %u %u\n",
+		face[0],
+		face[1],
+		face[2],
+		face[3]
+	);
+	fflush(stdout);
+
 	if (rd == 4 || rd == 3)
 	{
-		if (!(current = new_elem(&(model->tmp_faces))))
+		if (!(current = new_elem(&(model->faces), 3 * sizeof(unsigned int))))
 			return (0);
-		tmp = (float *)(current.data);
+		tmp = (unsigned int *)(current->data);
 		tmp[0] = face[0];
 		tmp[1] = face[1];
 		tmp[2] = face[2];
 
 		if (rd == 4)
 		{
-			if (!(current = new_elem(&(model->tmp_faces))))
+			if (!(current = new_elem(&(model->faces), 3 * sizeof(unsigned int))))
 				return (0);
-			tmp = (float *)(current.data);
+			tmp = (unsigned int *)(current->data);
 			tmp[0] = face[1];
 			tmp[1] = face[2];
 			tmp[2] = face[3];
@@ -84,16 +148,16 @@ static t_model	*read_model(const char *path)
 
 	if (!fp)
 	{
-		free_model(model);
+		free_model(&model);
 		fprintf(stderr, "Could not open %s\n", path);
 		fflush(stderr);
 		return (NULL);
 	}
 
-	model->tmp_vertices = NULL;	// vbo
+	model->vertices = NULL;	// vbo
 	model->faces = NULL;		// ebo
 
-	while (fscanf(file, "%ms", &type) != EOF) // read first word
+	while (fscanf(fp, "%ms", &type) != EOF) // read first word
 	{
 		if (!type)
 		{
@@ -109,11 +173,13 @@ static t_model	*read_model(const char *path)
 		else
 			ret = skip_line(fp);
 
-		ft_strdel(&type);
+		free(type);
+		type = NULL;
+
 		if (!ret)
 		{
 			fclose(fp);
-			free_model(model);
+			free_model(&model);
 			return (NULL);	
 		}
 	}
@@ -125,7 +191,35 @@ static t_model	*read_model(const char *path)
 
 static float	*process_model(const t_model *data)
 {
-	;
+	t_list	*list;
+
+	printf("vertices\n");
+	list = data->vertices;
+	while (list)
+	{
+		printf("v %+f %+f %+f\n",
+			((float *)(list->data))[0],
+			((float *)(list->data))[1],
+			((float *)(list->data))[2]
+			);
+		list = list->next;
+	}
+
+	printf("faces\n");
+	list = data->faces;
+	while (list)
+	{
+		printf("f %u %u %u\n",
+			((unsigned int *)(list->data))[0],
+			((unsigned int *)(list->data))[1],
+			((unsigned int *)(list->data))[2]
+			);
+		list = list->next;
+	}
+
+	fflush(stdout);
+
+	return (NULL);
 }
 
 /*

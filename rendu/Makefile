@@ -48,13 +48,13 @@ MORE_INC		=	data_struct.h \
 
 MORE_INCS		=	$(addprefix	$(DIR_MORE_INC), $(MORE_INC))
 
-SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX) $(SRCS_IMAGE) # $(SRCS_MODEL)
+SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX) $(SRCS_IMAGE) $(SRCS_MODEL)
 INC			=	$(SRC:.c=.h) $(MORE_INCS)
 
 INCS		=	$(addprefix $(DIR_INC), $(INC))
 SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
-DIRS		=	$(DIR_MAIN) $(DIR_MATRIX) $(DIR_IMAGE) # $(DIR_MODEL)
+DIRS		=	$(DIR_MAIN) $(DIR_MATRIX) $(DIR_IMAGE) $(DIR_MODEL)
 DIRS_INC	=	$(addprefix -I$(DIR_INC), $(DIRS))
 
 OBJS		=	$(SRCS:.c=.o)

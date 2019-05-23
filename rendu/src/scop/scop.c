@@ -17,6 +17,8 @@ int				main(void)
 		data_exit(&data, 1);
 	texture_init(data.textures, data.shader.program);
 
+	load_model("resources/cube.obj");
+
 	set_model(&data);
 	set_view(&data);
 	set_proj(&data);

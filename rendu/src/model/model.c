@@ -87,15 +87,6 @@ static int		read_f(FILE *fp, t_model *model)
 		&(face[2]),
 		&(face[3]));
 
-	printf("\nrd : %i\n", rd); fflush(stdout);
-	printf("\nf : %u %u %u %u\n",
-		face[0],
-		face[1],
-		face[2],
-		face[3]
-	);
-	fflush(stdout);
-
 	if (rd == 4 || rd == 3)
 	{
 		if (!(current = new_elem(&(model->faces), 3 * sizeof(unsigned int))))

@@ -24,7 +24,7 @@ int				main(void)
 	load_model("resources/cube.obj", &data);
 	vbo(&(data.arrays.vbo));
 	vao(&(data.arrays.vao));
-	// ebo(&(data.arrays.ebo));
+	ebo(&(data.arrays.ebo));
 
 	if (!shader_init(&(data.shader)))
 		data_exit(&data, 1);

@@ -65,14 +65,11 @@ static int		fragment_shader(t_shader *shader)
 		in vec2 Texcoord; \
 		out vec4 outColor; \
 		\
-		uniform sampler2D texKitten; \
-		uniform sampler2D texPuppy; \
+		uniform sampler2D texScop; \
 		\
 		void main() \
 		{ \
-			vec4 texColor = mix(texture(texKitten, Texcoord), \
-				texture(texPuppy, Texcoord), 0.5); \
-			outColor = vec4(1.0, 1.0, 1.0, 1.0) * texColor; \
+			outColor = texture(texScop, Texcoord); \
 		} \
 	";
 

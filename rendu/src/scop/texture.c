@@ -48,19 +48,10 @@ void			texture_init(GLuint textures[N_TEXTURES], const GLuint shader)
 
 	glGenTextures(N_TEXTURES, textures);
 
-	// CAT
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textures[0]);
 	// success = load_img("textures/sample.png");
 	success = load_img("textures/img_test.bmp");
-	glUniform1i(glGetUniformLocation(shader, "texKitten"), 0);
-	set_texparameter(success);
-
-	// DOG
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, textures[1]);
-	// success = load_img("textures/sample2.png");
-	success = load_img("textures/drop.bmp");
-	glUniform1i(glGetUniformLocation(shader, "texPuppy"), 1);
+	glUniform1i(glGetUniformLocation(shader, "texScop"), 0);
 	set_texparameter(success);
 }

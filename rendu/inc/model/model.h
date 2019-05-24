@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   model.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:25:22 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:25:25 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MODEL_H
 # define MODEL_H
 
@@ -15,11 +27,16 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+/*
+** float	tmp_vertices[3]
+** GLuint	faces[3]
+*/
+
 typedef struct	s_model
 {
-	t_list		*vertices;		// float tmp_vertices[3];
+	t_list		*vertices;
 	size_t		nvertices;
-	t_list		*faces; 		// GLuint	faces[3];
+	t_list		*faces;
 	size_t		nfaces;
 }				t_model;
 

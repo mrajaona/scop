@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   img_bmp.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:31:49 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:31:51 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "img_bmp.h"
 
 static void				read_header(t_bmp_header *header, FILE *ptr)
@@ -7,18 +19,6 @@ static void				read_header(t_bmp_header *header, FILE *ptr)
 	fread(&(header->reserved1), 2, 1, ptr);
 	fread(&(header->reserved2), 2, 1, ptr);
 	fread(&(header->offset), 4, 1, ptr);
-	
-	// // debug
-	// fprintf(stdout, "\n--- Header\ntype: %c%c\nsize: %u\nr1: %hu\nr2: %hu\noffset: %u\n",
-	// 	((char *)(&(header->type)))[0],
-	// 	((char *)(&(header->type)))[1],
-	// 	header->size,
-	// 	header->reserved1,
-	// 	header->reserved2,
-	// 	header->offset
-	// );
-	// fflush(stdout);
-	
 }
 
 static void				read_info(t_bmp_info *info, FILE *ptr)
@@ -34,26 +34,12 @@ static void				read_info(t_bmp_info *info, FILE *ptr)
 	fread(&(info->yresolution), 4, 1, ptr);
 	fread(&(info->ncolours), 4, 1, ptr);
 	fread(&(info->importantcolours), 4, 1, ptr);
-	
-	// // debug
-	// fprintf(stdout, "\n--- Info\nsize: %u\nwidth: %i\nheight: %i\nplanes: %hu\nbits: %hu\ncompression: %u\nimagesize: %u\nxresolution: %i\nyresolution: %i\nncolours: %u\nimportantcolours: %u\n",
-	// 	info->size,
-	// 	info->width,
-	// 	info->height,
-	// 	info->planes,
-	// 	info->bits,
-	// 	info->compression,
-	// 	info->imagesize,
-	// 	info->xresolution,
-	// 	info->yresolution,
-	// 	info->ncolours,
-	// 	info->importantcolours
-	// );
-	// fflush(stdout);
-	
 }
 
-// bgr to rgb
+/*
+** bgr to rgb
+*/
+
 static int				read_pixel(unsigned char *pixel, FILE *ptr,
 	t_bmp_info *info)
 {
@@ -80,17 +66,14 @@ static int				read_line(FILE *ptr, unsigned char *line,
 	len = info->width * info->bits / 8;
 	last = line + len;
 	pixel = line;
-
 	while (pixel < last)
 	{
 		if (!read_pixel(pixel, ptr, info))
 			return (0);
 		pixel += info->bits / 8;
 	}
-
 	if (fseek(ptr, line_size - len, SEEK_CUR) < 0)
 		return (0);
-
 	return (1);
 }
 
@@ -105,11 +88,9 @@ static unsigned char	*read_data(FILE *ptr,
 
 	if (fseek(ptr, header->offset, SEEK_SET) < 0)
 		return (NULL);
-
-	size = info->height * info->width * (info->bits / 8);	
+	size = info->height * info->width * (info->bits / 8);
 	if (!(image = (unsigned char *)malloc(size * sizeof(unsigned char))))
 		return (NULL);
-
 	line = image + size;
 	size = info->width * (info->bits / 8);
 	line -= size;

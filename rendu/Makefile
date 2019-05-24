@@ -89,15 +89,6 @@ fclean	:		clean
 
 re		:		fclean all
 
-setup	:
-				xcode-select --install
-				brew reinstall cmake
-				brew reinstall glfw3
-
-submodule	:
-				git submodule update --init --recursive
-
-.PHONY	:		all clean fclean re \
-				setup submodule
+.PHONY	:		all clean fclean re
 
 .DEFAULT_GOAL	:=	all

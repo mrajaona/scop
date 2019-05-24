@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_data.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:26:36 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:26:37 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SET_DATA_H
 # define SET_DATA_H
 
@@ -13,7 +25,7 @@
 
 # include "angle.h"
 
-void 			set_model(t_data *data);
+void			set_model(t_data *data);
 void			set_view(t_data *data);
 void			set_proj(t_data *data);
 

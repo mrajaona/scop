@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   data.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:33:54 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:33:55 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "data.h"
 
 static void		data_del(t_data *data)
@@ -8,13 +20,10 @@ static void		data_del(t_data *data)
 		glDeleteShader(data->shader.fragment);
 	if (data->shader.vertex)
 		glDeleteShader(data->shader.vertex);
-
-    glDeleteTextures(N_TEXTURES, data->textures);
-
+	glDeleteTextures(N_TEXTURES, data->textures);
 	// glDeleteBuffers(1, &(data->arrays.ebo));
 	glDeleteBuffers(1, &(data->arrays.vbo));
 	glDeleteVertexArrays(1, &(data->arrays.vao));
-
 	glfwTerminate();
 }
 
@@ -31,15 +40,12 @@ void			data_clr(t_data *data)
 	data->shader.program = 0;
 	data->shader.vertex = 0;
 	data->shader.fragment = 0;
-
 	mat4_clr(data->view);
 	mat4_clr(data->proj);
 	mat4_clr(data->model);
-
 	// data->arrays.ebo = 0;
 	data->arrays.vbo = 0;
 	data->arrays.vao = 0;
-
 	i = 0;
 	while (i < N_TEXTURES)
 	{

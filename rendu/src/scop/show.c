@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "show.h"
-/*
+
 static void		edit_output(const t_data *data, t_mat4 model)
 {
 	static int	deg = 0;
@@ -23,7 +23,7 @@ static void		edit_output(const t_data *data, t_mat4 model)
 	uni_model = glGetUniformLocation(data->shader.program, "model");
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);
 }
-*/
+
 void			show(const t_data *data)
 {
 	t_mat4	model;
@@ -40,7 +40,7 @@ void			show(const t_data *data)
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // background
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// edit_output(data, model);
+		edit_output(data, model);
 
 		// glDrawArrays(GL_TRIANGLES, 0, 36);
 		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (void *)(6 * 0));

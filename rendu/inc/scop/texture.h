@@ -1,0 +1,11 @@
+#ifndef TEXTURE_H
+# define TEXTURE_H
+
+# include "glew_inc.h"
+
+# include "data_struct.h"
+# include "img.h"
+
+void			texture_init(GLuint textures[N_TEXTURES], const GLuint shader);
+
+#endif

@@ -13,37 +13,23 @@
 #ifndef MODEL_H
 # define MODEL_H
 
-# include "glew_inc.h"
-
-# include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
+
+# include "glew_inc.h"
 
 # include "data_struct.h"
 # include "arrays.h"
 
-typedef struct	s_list
-{
-	void			*data;
-	struct s_list	*next;
-}				t_list;
+# include "model_struct.h"
+# include "list.h"
 
-/*
-** float	tmp_vertices[3]
-** GLuint	faces[3]
-*/
+# include "read_model.h"
+# include "process_model.h"
 
-typedef struct	s_model
-{
-	t_list		*vertices;
-	size_t		nvertices;
-	t_list		*faces;
-	size_t		nfaces;
-}				t_model;
-
-# define N_DATA_PER_VERTICE 3
+# define N_DATA_PER_VERTICE 3 // 5
 # define N_VERTICES_PER_FACE 3
 
-int				load_model(const char *path, t_data *data);
+int			load_model(const char *path, t_data *data);
+void		free_model(t_model **model);
 
 #endif

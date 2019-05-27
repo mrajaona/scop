@@ -202,6 +202,7 @@ static t_model	*read_model(const char *path)
 
 static float	*process_model(const t_model *model, t_data *data)
 {
+	/*
 		// print debug
 
 		t_list	*list;
@@ -231,8 +232,8 @@ static float	*process_model(const t_model *model, t_data *data)
 		}
 
 		fflush(stdout);
-
-	// t_list			*list;
+	*/
+	t_list			*list;
 	GLuint			*elements;
 	GLuint			*element;
 	unsigned int	i;
@@ -257,25 +258,7 @@ static float	*process_model(const t_model *model, t_data *data)
 		list = list->next;
 		element += N_VERTICES_PER_FACE;
 	}
-
-		printf("faces %zu\n", model->nfaces);
-		element = elements;
-		i = 0;
-		while (i < model->nfaces)
-		{
-			printf("f %u %u %u\n",
-				element[0],
-				element[1],
-				element[2]
-			);
-			i++;
-			element += N_VERTICES_PER_FACE;
-		}
-
-		fflush(stdout);
-
 	ebo(&(data->arrays.ebo), elements, model->nfaces * N_VERTICES_PER_FACE);
-
 	free(elements);
 
 	return (NULL);

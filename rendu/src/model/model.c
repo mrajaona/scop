@@ -202,7 +202,6 @@ static t_model	*read_model(const char *path)
 
 static float	*process_model(const t_model *model, t_data *data)
 {
-	/*
 		// print debug
 
 		t_list	*list;
@@ -215,7 +214,7 @@ static float	*process_model(const t_model *model, t_data *data)
 				((float *)(list->data))[0],
 				((float *)(list->data))[1],
 				((float *)(list->data))[2]
-				);
+			);
 			list = list->next;
 		}
 
@@ -227,18 +226,57 @@ static float	*process_model(const t_model *model, t_data *data)
 				((GLuint *)(list->data))[0],
 				((GLuint *)(list->data))[1],
 				((GLuint *)(list->data))[2]
-				);
+			);
 			list = list->next;
 		}
 
 		fflush(stdout);
-	*/
 
-	(void)model;
+	// t_list			*list;
+	GLuint			*elements;
+	GLuint			*element;
+	unsigned int	i;
+
+	data->nfaces = model->nfaces;
 
 	vbo(&(data->arrays.vbo));
 	vao(&(data->arrays.vao));
-	ebo(&(data->arrays.ebo));
+
+	if (!(elements = (GLuint *)malloc(model->nfaces * N_VERTICES_PER_FACE * sizeof(GLuint))))
+		return (NULL);
+	list = model->faces;
+	element = elements;
+	while (list)
+	{
+		i = 0;
+		while (i < N_VERTICES_PER_FACE)
+		{
+			element[i] = ((GLuint *)(list->data))[i];
+			i++;
+		}
+		list = list->next;
+		element += N_VERTICES_PER_FACE;
+	}
+
+		printf("faces %zu\n", model->nfaces);
+		element = elements;
+		i = 0;
+		while (i < model->nfaces)
+		{
+			printf("f %u %u %u\n",
+				element[0],
+				element[1],
+				element[2]
+			);
+			i++;
+			element += N_VERTICES_PER_FACE;
+		}
+
+		fflush(stdout);
+
+	ebo(&(data->arrays.ebo), elements, model->nfaces * N_VERTICES_PER_FACE);
+
+	free(elements);
 
 	return (NULL);
 }

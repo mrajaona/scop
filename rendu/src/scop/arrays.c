@@ -17,8 +17,9 @@
 ** indices
 */
 
-void			ebo(GLuint *ebo)
+void			ebo(GLuint *ebo, const GLuint *elements, size_t size)
 {
+	/*
 	const GLuint	elements[] = {
 		0, 1, 2,
 		2, 3, 0,
@@ -38,10 +39,12 @@ void			ebo(GLuint *ebo)
 		4, 0, 3,
 		3, 7, 4
 	};
+	*/
 
 	glGenBuffers(1, ebo); // generate
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ebo); // make active
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(elements), elements, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * size, elements,
+		GL_STATIC_DRAW);
 }
 
 void			vao(GLuint *vao)

@@ -46,6 +46,7 @@ void			data_clr(t_data *data)
 	data->arrays.ebo = 0;
 	data->arrays.vbo = 0;
 	data->arrays.vao = 0;
+	data->nfaces = 0;
 	i = 0;
 	while (i < N_TEXTURES)
 	{

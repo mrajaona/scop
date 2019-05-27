@@ -1,4 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mat4.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:32:35 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:32:36 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mat4.h"
+
+// debug
 
 void	mat4_print(const t_mat4 mat)
 {
@@ -6,30 +20,26 @@ void	mat4_print(const t_mat4 mat)
 		mat4_get(mat, 0, 0),
 		mat4_get(mat, 1, 0),
 		mat4_get(mat, 2, 0),
-		mat4_get(mat, 3, 0)
-		);
+		mat4_get(mat, 3, 0));
 	fprintf(stdout, "% .2f % .2f % .2f % .2f\n",
 		mat4_get(mat, 0, 1),
 		mat4_get(mat, 1, 1),
 		mat4_get(mat, 2, 1),
-		mat4_get(mat, 3, 1)
-		);
+		mat4_get(mat, 3, 1));
 	fprintf(stdout, "% .2f % .2f % .2f % .2f\n",
 		mat4_get(mat, 0, 2),
 		mat4_get(mat, 1, 2),
 		mat4_get(mat, 2, 2),
-		mat4_get(mat, 3, 2)
-		);
+		mat4_get(mat, 3, 2));
 	fprintf(stdout, "% .2f % .2f % .2f % .2f\n",
 		mat4_get(mat, 0, 3),
 		mat4_get(mat, 1, 3),
 		mat4_get(mat, 2, 3),
-		mat4_get(mat, 3, 3)
-		);
+		mat4_get(mat, 3, 3));
 	fflush(stdout);
 }
 
-void		mat4_set(t_mat4 mat, const unsigned char x, const unsigned char y,
+void	mat4_set(t_mat4 mat, const unsigned char x, const unsigned char y,
 	const float value)
 {
 	if (x >= 4 || y >= 4)
@@ -37,7 +47,7 @@ void		mat4_set(t_mat4 mat, const unsigned char x, const unsigned char y,
 	mat[y + (4 * x)] = value;
 }
 
-float		mat4_get(const t_mat4 mat, const unsigned char x, const unsigned char y)
+float	mat4_get(const t_mat4 mat, const unsigned char x, const unsigned char y)
 {
 	if (x >= 4 || y >= 4)
 		return (0);
@@ -51,7 +61,7 @@ float		mat4_get(const t_mat4 mat, const unsigned char x, const unsigned char y)
 ** 0 0 0 0
 */
 
-void		mat4_clr(t_mat4 mat)
+void	mat4_clr(t_mat4 mat)
 {
 	unsigned char	x;
 	unsigned char	y;
@@ -76,7 +86,7 @@ void		mat4_clr(t_mat4 mat)
 ** 0 0 0 1
 */
 
-void		identity(t_mat4 mat)
+void	identity(t_mat4 mat)
 {
 	unsigned char	x;
 	unsigned char	y;
@@ -97,7 +107,7 @@ void		identity(t_mat4 mat)
 	}
 }
 
-void		mat4_eq(t_mat4 dst, const t_mat4 src)
+void	mat4_eq(t_mat4 dst, const t_mat4 src)
 {
 	unsigned char	x;
 	unsigned char	y;
@@ -113,5 +123,5 @@ void		mat4_eq(t_mat4 dst, const t_mat4 src)
 			x++;
 		}
 		y++;
-	}	
+	}
 }

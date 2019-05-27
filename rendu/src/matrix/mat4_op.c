@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mat4_op.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:32:44 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:32:44 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mat4_op.h"
 
 t_mat4_ptr		mat4_add(const t_mat4 lhs, const t_mat4 rhs, t_mat4 res)
@@ -89,7 +101,7 @@ t_mat4_ptr		mat4_scalar(const t_mat4 mat, const int scalar, t_mat4 res)
 static float	mult_step(const unsigned char x, const unsigned char y,
 	const t_mat4 lhs, const t_mat4 rhs)
 {
-	float	step;
+	float			step;
 	unsigned char	i;
 
 	step = 0;

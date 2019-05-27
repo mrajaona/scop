@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   coord_op.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:32:19 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:32:19 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "coord_op.h"
 
-t_coord_ptr		coord_cross_prod(const t_coord lhs, const t_coord rhs, t_coord res)
+t_coord_ptr		coord_cross_prod(const t_coord lhs, const t_coord rhs,
+	t_coord res)
 {
 	t_coord	tmp;
 
@@ -14,6 +27,7 @@ t_coord_ptr		coord_cross_prod(const t_coord lhs, const t_coord rhs, t_coord res)
 float			coord_dot_prod(const t_coord lhs, const t_coord rhs)
 {
 	float	res;
+
 	res = (lhs[0] * rhs[0])
 		+ (lhs[1] * rhs[1])
 		+ (lhs[2] * rhs[2]);
@@ -24,7 +38,7 @@ void			coord_normalize(const t_coord coord, t_coord dest)
 {
 	float		len;
 	float		sqlen;
-	t_coord	tmp;
+	t_coord		tmp;
 
 	sqlen = (coord[0] * coord[0])
 		+ (coord[1] * coord[1])

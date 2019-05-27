@@ -1,19 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   show.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:27:02 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:27:02 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SHOW_H
 # define SHOW_H
 
-/* GLEW */
-# define GLEW_STATIC
+# include "glew_inc.h"
 
-# ifdef __APPLE__
-#  define GL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED
-#  define GLFW_INCLUDE_GLCOREARB
-#  include "glew.h"
-# else
-#  include <GL/glew.h>
-# endif
-/* GLEW */
+# include <unistd.h>
 
-# include <unistd.h> // sleep
+/*
+** <unistd.h> sleep
+*/
 
 # include "data_struct.h"
 

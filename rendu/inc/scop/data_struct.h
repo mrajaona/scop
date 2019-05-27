@@ -1,15 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   data_struct.h                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:25:56 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:25:56 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DATA_STRUCT_H
 # define DATA_STRUCT_H
 
 # define N_TEXTURES 2
 
-/* GLFW */
-# ifdef __APPLE__
-#  define GLFW_INCLUDE_GLCOREARB
-# endif
-
-# include <GLFW/glfw3.h>
-/* GLFW */
+# include "glfw_inc.h"
 
 # include "shader_struct.h"
 
@@ -19,7 +25,7 @@ typedef struct	s_arrays
 {
 	GLuint		vbo;
 	GLuint		vao;
-	// GLuint		ebo;
+	GLuint		ebo;
 }				t_arrays;
 
 typedef struct	s_data

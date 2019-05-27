@@ -1,17 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   data.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:25:49 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:25:50 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DATA_H
 # define DATA_H
 
-/* GLEW */
-# define GLEW_STATIC
-
-# ifdef __APPLE__
-#  define GL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED
-#  define GLFW_INCLUDE_GLCOREARB
-#  include "glew.h"
-# else
-#  include <GL/glew.h>
-# endif
-/* GLEW */
+# include "glew_inc.h"
 
 # include <stdlib.h>
 

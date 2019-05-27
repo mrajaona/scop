@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_data.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:34:17 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:34:18 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "set_data.h"
 
 void 			set_model(t_data *data)
@@ -11,8 +23,6 @@ void 			set_model(t_data *data)
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->model);
 }
 
-// The camera in OpenGL cannot move and is defined
-// to be located at (0,0,0) facing the negative Z direction
 void			set_view(t_data *data)
 	{
 	identity(data->view);

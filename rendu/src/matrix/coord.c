@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   coord.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:32:14 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:32:14 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "coord.h"
 
 void	coord_print(const t_coord vec)
@@ -14,14 +26,14 @@ void	coord_print(const t_coord vec)
 ** 1
 */
 
-void		clear_coord(t_coord coord)
+void	clear_coord(t_coord coord)
 {
 	coord[0] = 0;
 	coord[1] = 0;
 	coord[2] = 0;
 }
 
-void		coord_eq(t_coord dst, const t_coord src)
+void	coord_eq(t_coord dst, const t_coord src)
 {
 	unsigned char	y;
 
@@ -33,7 +45,7 @@ void		coord_eq(t_coord dst, const t_coord src)
 	}
 }
 
-void		coord_to_vec(const float x, const float y, const float z,
+void	coord_to_vec(const float x, const float y, const float z,
 	t_vector dest)
 {
 	dest[0] = x;

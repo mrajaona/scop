@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   img.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:31:42 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:31:43 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "img.h"
 
 static unsigned char	*load(const char *path, int *width, int *height)
@@ -5,6 +17,7 @@ static unsigned char	*load(const char *path, int *width, int *height)
 	FILE			*fp;
 	unsigned char	*image;
 	char			magic[8];
+	size_t			rd;
 
 	fp = fopen(path, "r");
 	if (!fp)
@@ -13,8 +26,6 @@ static unsigned char	*load(const char *path, int *width, int *height)
 		fflush(stderr);
 		return (NULL);
 	}
-
-	size_t	rd;
 	rd = fread(magic, 1, 8, fp);
 	if (!rd)
 	{
@@ -23,7 +34,6 @@ static unsigned char	*load(const char *path, int *width, int *height)
 		fclose(fp);
 		return (NULL);
 	}
-
 	errno = 0;
 	rewind(fp);
 	if (errno)
@@ -31,22 +41,20 @@ static unsigned char	*load(const char *path, int *width, int *height)
 		fclose(fp);
 		return (NULL);
 	}
-
-	// check format
 	if (rd >= 2 && !strncmp(magic, BMP_MAGIC, 2))
 	{
 		image = load_bmp(fp, width, height);
-		// image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);	// tmp // floating point exception
+		// image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);
 	}
 	else if (rd >= 8 && !strncmp(magic, PNG_MAGIC, 8))
 	{
 		// image = load_png();
-		image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);	// tmp
+		image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);
 	}
 	else if (rd >= 3 && !strncmp(magic, JPG_MAGIC, 3))
 	{
 		// image = load_jpg();
-		image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);	// tmp
+		image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);
 	}
 	else
 	{
@@ -54,14 +62,12 @@ static unsigned char	*load(const char *path, int *width, int *height)
 		fflush(stderr);
 		image = NULL;
 	}
-
 	fclose(fp);
 	return (image);
 }
 
 int						load_img(const char *path)
 {
-	// SOIL
 	int				width;
 	int				height;
 	unsigned char	*image;

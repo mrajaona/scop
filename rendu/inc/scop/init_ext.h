@@ -1,25 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_ext.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:26:22 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:26:22 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef INIT_EXT_H
 # define INIT_EXT_H
 
-/* GLEW */
-# define GLEW_STATIC
+# include "glew_inc.h"
 
-# ifdef __APPLE__
-#  define GL_DO_NOT_WARN_IF_MULTI_GL_VERSION_HEADERS_INCLUDED
-#  define GLFW_INCLUDE_GLCOREARB
-#  include "glew.h"
-# else
-#  include <GL/glew.h>
-# endif
-/* GLEW */
-
-/* GLFW */
-# ifdef __APPLE__
-#  define GLFW_INCLUDE_GLCOREARB
-# endif
-
-# include <GLFW/glfw3.h>
-/* GLFW */
+# include "glfw_inc.h"
 
 # include <stdio.h>
 # include <stdlib.h>

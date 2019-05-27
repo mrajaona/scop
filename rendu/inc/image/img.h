@@ -1,13 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   img.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:20:13 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:20:17 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef IMG_H
 # define IMG_H
 
-/* GLFW */
-# ifdef __APPLE__
-#  define GLFW_INCLUDE_GLCOREARB
-# endif
-
-# include <GLFW/glfw3.h>
-/* GLFW */
+# include "glfw_inc.h"
 
 # include <stdio.h>
 # include <stdlib.h>

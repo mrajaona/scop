@@ -44,7 +44,9 @@ SRCS_MODEL	=	$(addprefix	$(DIR_MODEL), $(SRC_MODEL))
 
 DIR_MORE_INC	=	scop/
 MORE_INC		=	data_struct.h \
-					shader_struct.h
+					shader_struct.h \
+					glew_inc.h \
+					glfw_inc.h
 
 MORE_INCS		=	$(addprefix	$(DIR_MORE_INC), $(MORE_INC))
 

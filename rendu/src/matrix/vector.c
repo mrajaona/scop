@@ -1,4 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/05/24 11:33:21 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/05/24 11:33:21 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vector.h"
+
+// debug
 
 void	vector_print(const t_vector vec)
 {
@@ -14,7 +28,7 @@ void	vector_print(const t_vector vec)
 ** 1
 */
 
-void		clear_vector(t_vector vec)
+void	clear_vector(t_vector vec)
 {
 	vec[0] = 0;
 	vec[1] = 0;
@@ -22,7 +36,7 @@ void		clear_vector(t_vector vec)
 	vec[3] = 1;
 }
 
-void		vector_eq(t_vector dst, const t_vector src)
+void	vector_eq(t_vector dst, const t_vector src)
 {
 	unsigned char	y;
 

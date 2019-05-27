@@ -47,7 +47,6 @@ void			show(const t_data *data)
 				0,
 				data->nfaces * N_VERTICES_PER_FACE);
 		*/
-		//
 		glDrawElements(GL_TRIANGLES,
 			data->nfaces * N_VERTICES_PER_FACE,
 			GL_UNSIGNED_INT,

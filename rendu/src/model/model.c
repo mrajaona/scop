@@ -202,37 +202,6 @@ static t_model	*read_model(const char *path)
 
 static float	*process_model(const t_model *model, t_data *data)
 {
-	/*
-		// print debug
-
-		t_list	*list;
-
-		printf("vertices %zu\n", model->nvertices);
-		list = model->vertices;
-		while (list)
-		{
-			printf("v %+f %+f %+f\n",
-				((float *)(list->data))[0],
-				((float *)(list->data))[1],
-				((float *)(list->data))[2]
-			);
-			list = list->next;
-		}
-
-		printf("faces %zu\n", model->nfaces);
-		list = model->faces;
-		while (list)
-		{
-			printf("f %u %u %u\n",
-				((GLuint *)(list->data))[0],
-				((GLuint *)(list->data))[1],
-				((GLuint *)(list->data))[2]
-			);
-			list = list->next;
-		}
-
-		fflush(stdout);
-	*/
 	t_list			*list;
 	unsigned int	i;
 	size_t			size;

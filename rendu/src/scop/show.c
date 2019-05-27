@@ -18,7 +18,7 @@ static void		edit_output(const t_data *data, t_mat4 model)
 	GLint		uni_model;
 
 	deg = (deg + 1) % 360;
-	mat4_rotatez(deg_to_rad((float)deg), model);
+	mat4_rotatey(deg_to_rad((float)deg), model);
 
 	uni_model = glGetUniformLocation(data->shader.program, "model");
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);

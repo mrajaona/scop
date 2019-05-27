@@ -31,10 +31,9 @@ void			set_view(t_data *data)
 	t_vector	target;
 	t_vector 	up;
 
-	// example
-	coord_to_vec(1.2f, 1.2f, 1.2f, eye);
+	coord_to_vec(0.0f, 2.0f, 5.0f, eye);
 	coord_to_vec(0, 0, 0, target);
-	coord_to_vec(0, 0, 1, up);
+	coord_to_vec(0, 1, 0, up);
 
 	lookat(eye, target, up, data->view);
 	
@@ -53,9 +52,7 @@ void			set_proj(t_data *data)
 	float		vfov;
 	float		ratio;
 
-	// example
-	// vfov = deg_to_rad(45.0f);
-	vfov = deg_to_rad(80.0f);
+	vfov = deg_to_rad(60.0f);
 	ratio = 800.0f / 600.0f;
 	planes[NEAR_PLANE] = 1.0f;
 	planes[FAR_PLANE] = 10.0f;

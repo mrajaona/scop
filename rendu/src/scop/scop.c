@@ -21,7 +21,7 @@ int				main(void)
 	glfw_init(&(data.window));
 	glew_init();
 
-	load_model("resources/cube.obj", &data);
+	load_model("resources/42.obj", &data);
 
 	if (!shader_init(&(data.shader)))
 		data_exit(&data, 1);

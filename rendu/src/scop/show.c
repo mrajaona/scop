@@ -43,7 +43,19 @@ void			show(const t_data *data)
 		edit_output(data, model);
 
 		// glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
+		/*
+			glDrawArrays(GL_TRIANGLES,
+				0,
+				n_faces * n_vertices_per_face);
+		*/
+
 		glDrawElements(GL_TRIANGLES, 12 * 3, GL_UNSIGNED_INT, (void *)(5 * 0));
+		/*
+			glDrawElements(GL_TRIANGLES,
+				n_faces * n_vertices_per_face,
+				GL_UNSIGNED_INT,
+				(void *)(n_data_per_vertice * offset));
+		*/
 
 		usleep(25000);
 	}

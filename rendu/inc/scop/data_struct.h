@@ -40,7 +40,7 @@ typedef struct	s_data
 	size_t		nfaces;
 }				t_data;
 
-# define N_DATA_PER_VERTICE 5
+# define N_DATA_PER_VERTICE 3
 # define N_VERTICES_PER_FACE 3
 
 #endif

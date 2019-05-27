@@ -90,17 +90,18 @@ static int		fragment_shader(t_shader *shader)
 static void		vertex_attribute_array(const GLuint shader_program)
 {
 	GLint pos_attrib;
-	GLint tex_attrib;
+	// GLint tex_attrib;
 
 	pos_attrib = glGetAttribLocation(shader_program, "position");
 	glEnableVertexAttribArray(pos_attrib);
 	glVertexAttribPointer(pos_attrib, 3, GL_FLOAT, GL_FALSE,
-		5 * sizeof(float), 0);
-	
+		3 * sizeof(float), 0);
+	/*
 	tex_attrib = glGetAttribLocation(shader_program, "texcoord");
 	glEnableVertexAttribArray(tex_attrib);
 	glVertexAttribPointer(tex_attrib, 2, GL_FLOAT, GL_FALSE,
 		5 * sizeof(float), (void *)(3 * sizeof(float)));
+	*/
 }
 
 int				shader_init(t_shader *shader)

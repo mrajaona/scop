@@ -1,6 +1,6 @@
 #include "read_model.h"
 
-int		skip_line(FILE *fp)
+int			skip_line(FILE *fp)
 {
 	char	s[1025];
 
@@ -13,12 +13,45 @@ int		skip_line(FILE *fp)
 	return (1);
 }
 
+static void	read_lines(FILE *fp, t_model *model)
+{
+	char	*type;
+	int		ret;
+
+	while (fscanf(fp, "%ms", &type) != EOF) // read first word
+	{
+		if (!type)
+		{
+			free_model(&model);
+			return ;
+		}
+
+		if (strcmp(type, "v") == 0)
+			ret = read_v(fp, model);
+		else if (strcmp( type, "f") == 0)
+			ret = read_f(fp, model);
+		else if (strcmp( type, "mtllib") == 0)
+			ret = read_mtllib(fp, model);
+		else if (strcmp( type, "usemtl") == 0)
+			ret = read_usemtl(fp, model);
+		else
+			ret = skip_line(fp);
+
+		free(type);
+		type = NULL;
+
+		if (!ret)
+		{
+			free_model(&model);
+			return ;	
+		}
+	}
+}
+
 t_model		*read_model(const char *path)
 {
 	t_model	*model;
 	FILE	*fp;
-	char	*type;
-	int		ret;
 
 	if (!(model = (t_model *)malloc(sizeof(t_model))))
 		return (NULL);
@@ -38,33 +71,7 @@ t_model		*read_model(const char *path)
 	model->faces = NULL;	// ebo
 	model->nfaces = 0;
 
-	while (fscanf(fp, "%ms", &type) != EOF) // read first word
-	{
-		if (!type)
-		{
-			fclose(fp);
-			free_model(&model);
-			return (NULL);
-		}
-
-		if (strcmp(type, "v") == 0)
-			ret = read_v(fp, model);
-		else if (strcmp( type, "f") == 0)
-			ret = read_f(fp, model);
-		else
-			ret = skip_line(fp);
-
-		free(type);
-		type = NULL;
-
-		if (!ret)
-		{
-			fclose(fp);
-			free_model(&model);
-			return (NULL);	
-		}
-	}
-
+	read_lines(fp, model);
 	fclose(fp);
 
 	return (model);

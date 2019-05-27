@@ -12,8 +12,6 @@
 
 #include "arrays.h"
 
-#include <stdio.h>
-
 /*
 ** link points in order
 ** indices

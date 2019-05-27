@@ -86,9 +86,9 @@ static int		read_v(FILE *fp, t_model *model)
 
 static int		read_f(FILE *fp, t_model *model)
 {
-	t_list			*current;
+	t_list	*current;
 	GLuint	*tmp;
-	int				rd;
+	int		rd;
 	GLuint	face[4];
 
 	rd = fscanf(fp, "%u %u %u %u\n",
@@ -97,15 +97,21 @@ static int		read_f(FILE *fp, t_model *model)
 		&(face[2]),
 		&(face[3]));
 
+	if (face[0] == 0
+		|| face[1] == 0
+		|| face[2] == 0
+		|| (rd == 4 && face[3] == 0))
+		return (0);
+
 	if (rd == 4 || rd == 3)
 	{
 		if (!(current = new_elem(&(model->faces), 3 * sizeof(GLuint))))
 			return (0);
 		model->nfaces++;
 		tmp = (GLuint *)(current->data);
-		tmp[0] = face[0];
-		tmp[1] = face[1];
-		tmp[2] = face[2];
+		tmp[0] = face[0] - 1;
+		tmp[1] = face[1] - 1;
+		tmp[2] = face[2] - 1;
 
 		if (rd == 4)
 		{
@@ -113,9 +119,9 @@ static int		read_f(FILE *fp, t_model *model)
 				return (0);
 			model->nfaces++;
 			tmp = (GLuint *)(current->data);
-			tmp[0] = face[2];
-			tmp[1] = face[3];
-			tmp[2] = face[0];
+			tmp[0] = face[2] - 1;
+			tmp[1] = face[3] - 1;
+			tmp[2] = face[0] - 1;
 		}
 	}
 	else
@@ -198,7 +204,7 @@ static float	*process_model(const t_model *data)
 {
 	t_list	*list;
 
-	printf("vertices\n");
+	printf("vertices %zu\n", data->nvertices);
 	list = data->vertices;
 	while (list)
 	{
@@ -210,7 +216,7 @@ static float	*process_model(const t_model *data)
 		list = list->next;
 	}
 
-	printf("faces\n");
+	printf("faces %zu\n", data->nfaces);
 	list = data->faces;
 	while (list)
 	{

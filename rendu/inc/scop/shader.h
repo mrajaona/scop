@@ -18,6 +18,7 @@
 # include <stdio.h>
 
 # include "shader_struct.h"
+# include "model.h"
 
 int				shader_init(t_shader *shader);
 

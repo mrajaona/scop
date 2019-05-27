@@ -33,6 +33,8 @@
 
 # include "angle.h"
 
+# include "model.h"
+
 void			show(const t_data *data);
 
 #endif

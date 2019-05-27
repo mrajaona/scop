@@ -41,6 +41,9 @@ typedef struct	s_model
 	size_t		nfaces;
 }				t_model;
 
+# define N_DATA_PER_VERTICE 3
+# define N_VERTICES_PER_FACE 3
+
 int				load_model(const char *path, t_data *data);
 
 #endif

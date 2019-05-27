@@ -95,7 +95,7 @@ static void		vertex_attribute_array(const GLuint shader_program)
 	pos_attrib = glGetAttribLocation(shader_program, "position");
 	glEnableVertexAttribArray(pos_attrib);
 	glVertexAttribPointer(pos_attrib, 3, GL_FLOAT, GL_FALSE,
-		3 * sizeof(float), 0);
+		N_DATA_PER_VERTICE * sizeof(float), 0);
 	/*
 	tex_attrib = glGetAttribLocation(shader_program, "texcoord");
 	glEnableVertexAttribArray(tex_attrib);

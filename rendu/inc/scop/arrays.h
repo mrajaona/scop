@@ -18,6 +18,6 @@
 
 void			ebo(GLuint *ebo, const GLuint *elements, size_t size);
 void			vao(GLuint *vao);
-void			vbo(GLuint *vbo, size_t size);
+void			vbo(GLuint *vbo, const float *vertices, size_t size);
 
 #endif

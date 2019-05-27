@@ -37,6 +37,8 @@ typedef struct	s_data
 	t_mat4		proj;
 	t_mat4		model;
 	t_arrays	arrays;
+	size_t		n_data_per_vertice;
+	size_t		n_faces;
 }				t_data;
 
 #endif

@@ -42,8 +42,8 @@ void			show(const t_data *data)
 
 		edit_output(data, model);
 
-		// glDrawArrays(GL_TRIANGLES, 0, 36);
-		glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, (void *)(6 * 0));
+		// glDrawArrays(GL_TRIANGLES, 0, 12 * 3);
+		glDrawElements(GL_TRIANGLES, 12 * 3, GL_UNSIGNED_INT, (void *)(5 * 0));
 
 		usleep(25000);
 	}

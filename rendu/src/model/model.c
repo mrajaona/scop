@@ -200,35 +200,45 @@ static t_model	*read_model(const char *path)
 	return (model);
 }
 
-static float	*process_model(const t_model *data)
+static float	*process_model(const t_model *model, t_data *data)
 {
-	t_list	*list;
+	/*
+		// print debug
 
-	printf("vertices %zu\n", data->nvertices);
-	list = data->vertices;
-	while (list)
-	{
-		printf("v %+f %+f %+f\n",
-			((float *)(list->data))[0],
-			((float *)(list->data))[1],
-			((float *)(list->data))[2]
-			);
-		list = list->next;
-	}
+		t_list	*list;
 
-	printf("faces %zu\n", data->nfaces);
-	list = data->faces;
-	while (list)
-	{
-		printf("f %u %u %u\n",
-			((GLuint *)(list->data))[0],
-			((GLuint *)(list->data))[1],
-			((GLuint *)(list->data))[2]
-			);
-		list = list->next;
-	}
+		printf("vertices %zu\n", model->nvertices);
+		list = model->vertices;
+		while (list)
+		{
+			printf("v %+f %+f %+f\n",
+				((float *)(list->data))[0],
+				((float *)(list->data))[1],
+				((float *)(list->data))[2]
+				);
+			list = list->next;
+		}
 
-	fflush(stdout);
+		printf("faces %zu\n", model->nfaces);
+		list = model->faces;
+		while (list)
+		{
+			printf("f %u %u %u\n",
+				((GLuint *)(list->data))[0],
+				((GLuint *)(list->data))[1],
+				((GLuint *)(list->data))[2]
+				);
+			list = list->next;
+		}
+
+		fflush(stdout);
+	*/
+
+	(void)model;
+
+	vbo(&(data->arrays.vbo));
+	vao(&(data->arrays.vao));
+	ebo(&(data->arrays.ebo));
 
 	return (NULL);
 }
@@ -252,13 +262,7 @@ int				load_model(const char *path, t_data *data)
 
 	if (!(model = read_model(path)))
 		return (0);
-	process_model(model);
-	(void)data;
-
-	// vbo(&(data->arrays.vbo));
-	// vao(&(data->arrays.vao));
-	// ebo(&(data->arrays.ebo));
-
+	process_model(model, data);
 	free_model(&model);
 	return (1);
 }

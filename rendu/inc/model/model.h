@@ -20,6 +20,7 @@
 # include <string.h>
 
 # include "data_struct.h"
+# include "arrays.h"
 
 typedef struct	s_list
 {

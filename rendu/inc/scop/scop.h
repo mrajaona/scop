@@ -20,7 +20,6 @@
 # include "data.h"
 # include "init_ext.h"
 # include "model.h"
-# include "arrays.h"
 # include "shader.h"
 # include "texture.h"
 # include "set_data.h"

@@ -64,27 +64,39 @@ int	read_f(FILE *fp, t_model *model)
 	return (1);
 }
 
+/*
+** off = 0
+*/
+
+int	read_s(FILE *fp, t_model *model)
+{
+	fscanf(fp, "%*s\n");
+	(void)model;
+	return (1);
+}
+
 int	read_mtllib(FILE *fp, t_model *model)
 {
-	// char	*name;
+	char	*name;
 	int		rd;
 
-	rd = fscanf(fp, "%*s\n");
+	rd = fscanf(fp, "%ms\n", &name);
 	(void)model;
-	(void)rd;
-	// if (!rd)
-		// return (0);
+	free(name); // tmp
+	if (!rd)
+		return (0);
 	return (1);
 }
 
 int	read_usemtl(FILE *fp, t_model *model)
 {
+	char	*name;
 	int		rd;
 
-	rd = fscanf(fp, "%*s\n");
+	rd = fscanf(fp, "%ms\n", &name);
 	(void)model;
-	(void)rd;
-	// if (!rd)
-		// return (0);
+	free(name); // tmp
+	if (!rd)
+		return (0);
 	return (1);
 }

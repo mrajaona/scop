@@ -9,6 +9,7 @@
 
 int	read_v(FILE *fp, t_model *model);
 int	read_f(FILE *fp, t_model *model);
+int	read_s(FILE *fp, t_model *model);
 int	read_mtllib(FILE *fp, t_model *model);
 int	read_usemtl(FILE *fp, t_model *model);
 

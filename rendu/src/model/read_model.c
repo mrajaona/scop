@@ -15,8 +15,11 @@ int			skip_line(FILE *fp)
 
 static void	read_lines(FILE *fp, t_model *model)
 {
-	char	*type;
-	int		ret;
+	const char		*str_tab[] = {"v", "f", "s", "mtllib", "usemtl"};
+	int 			(*fn_tab[])(FILE *, t_model *) = {&read_v, &read_f, &read_s, &read_mtllib, &read_usemtl};
+	char			*type;
+	int				ret;
+	unsigned int	i;
 
 	while (fscanf(fp, "%ms", &type) != EOF) // read first word
 	{
@@ -26,15 +29,17 @@ static void	read_lines(FILE *fp, t_model *model)
 			return ;
 		}
 
-		if (strcmp(type, "v") == 0)
-			ret = read_v(fp, model);
-		else if (strcmp( type, "f") == 0)
-			ret = read_f(fp, model);
-		else if (strcmp( type, "mtllib") == 0)
-			ret = read_mtllib(fp, model);
-		else if (strcmp( type, "usemtl") == 0)
-			ret = read_usemtl(fp, model);
-		else
+		i = 0;
+		while (i < 5)
+		{
+			if (strcmp(type, str_tab[i]) == 0)
+			{
+				ret = fn_tab[i](fp, model);
+				break ;
+			}
+			i++;
+		}
+		if (i == 5)
 			ret = skip_line(fp);
 
 		free(type);

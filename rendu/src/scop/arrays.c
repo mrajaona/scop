@@ -17,10 +17,10 @@
 ** indices
 */
 
-void			ebo(GLuint *ebo, const GLuint *elements, size_t size)
+void			ibo(GLuint *ibo, const GLuint *elements, size_t size)
 {
-	glGenBuffers(1, ebo); // generate
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ebo); // make active
+	glGenBuffers(1, ibo); // generate
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ibo); // make active
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * size, elements,
 		GL_STATIC_DRAW);
 }
@@ -35,73 +35,6 @@ void			vao(GLuint *vao)
 ** place all points in space
 ** pos		tex
 ** x y z	u v
-*/
-
-/*
-	// 0123
-	+0.5f, -0.5f, -0.5f,	1.0f, 1.0f, // 0
-	+0.5f, -0.5f, +0.5f,	1.0f, 0.0f, // 1
-	-0.5f, -0.5f, +0.5f,	0.0f, 0.0f, // 2
-
-	-0.5f, -0.5f, +0.5f,	0.0f, 0.0f, // 2
-	-0.5f, -0.5f, -0.5f,	0.0f, 1.0f, // 3
-	+0.5f, -0.5f, -0.5f,	1.0f, 1.0f, // 0
-
-	// 4765
-	+0.5f, +0.5f, -0.5f,	1.0f, 1.0f, // 4
-	-0.5f, +0.5f, -0.5f,	0.0f, 1.0f, // 7
-	-0.5f, +0.5f, +0.5f,	0.0f, 0.0f, // 6
-
-	-0.5f, +0.5f, +0.5f,	0.0f, 0.0f, // 6
-	+0.5f, +0.5f, +0.5f,	1.0f, 0.0f, // 5
-	+0.5f, +0.5f, -0.5f,	1.0f, 1.0f, // 4
-
-	// 0451
-	+0.5f, -0.5f, -0.5f,	0.0f, 1.0f, // 0
-	+0.5f, +0.5f, -0.5f,	1.0f, 1.0f, // 4
-	+0.5f, +0.5f, +0.5f,	1.0f, 0.0f, // 5
-
-	+0.5f, +0.5f, +0.5f,	1.0f, 0.0f, // 5
-	+0.5f, -0.5f, +0.5f,	0.0f, 0.0f, // 1
-	+0.5f, -0.5f, -0.5f,	0.0f, 1.0f, // 0
-
-	// 1562
-	+0.5f, -0.5f, +0.5f,	1.0f, 0.0f, // 1
-	+0.5f, +0.5f, +0.5f,	1.0f, 1.0f, // 5
-	-0.5f, +0.5f, +0.5f,	0.0f, 1.0f, // 6
-
-	-0.5f, +0.5f, +0.5f,	0.0f, 1.0f, // 6
-	-0.5f, -0.5f, +0.5f,	0.0f, 0.0f, // 2
-	+0.5f, -0.5f, +0.5f,	1.0f, 0.0f, // 1
-
-	// 2673
-	-0.5f, -0.5f, +0.5f,	0.0f, 0.0f, // 2
-	-0.5f, +0.5f, +0.5f,	1.0f, 0.0f, // 6
-	-0.5f, +0.5f, -0.5f,	1.0f, 1.0f, // 7
-
-	-0.5f, +0.5f, -0.5f,	1.0f, 1.0f, // 7
-	-0.5f, -0.5f, -0.5f,	0.0f, 1.0f, // 3
-	-0.5f, -0.5f, +0.5f,	0.0f, 0.0f, // 2
-
-	// 4037
-	+0.5f, +0.5f, -0.5f,	1.0f, 1.0f, // 4
-	+0.5f, -0.5f, -0.5f,	1.0f, 0.0f, // 0
-	-0.5f, -0.5f, -0.5f,	0.0f, 0.0f, // 3
-
-	-0.5f, -0.5f, -0.5f,	0.0f, 0.0f, // 3
-	-0.5f, +0.5f, -0.5f,	0.0f, 1.0f, // 7
-	+0.5f, +0.5f, -0.5f,	1.0f, 1.0f, // 4
-*/
-
-/*
-	+0.5f, -0.5f, -0.5f,	1.0f, 1.0f, // 0
-	+0.5f, -0.5f, +0.5f,	1.0f, 0.0f, // 1
-	-0.5f, -0.5f, +0.5f,	0.0f, 0.0f, // 2
-	-0.5f, -0.5f, -0.5f,	0.0f, 1.0f, // 3
-	+0.5f, +0.5f, -0.5f,	1.0f, 1.0f, // 4
-	+0.5f, +0.5f, +0.5f,	1.0f, 0.0f, // 5
-	-0.5f, +0.5f, +0.5f,	0.0f, 0.0f, // 6
-	-0.5f, +0.5f, -0.5f,	0.0f, 1.0f  // 7
 */
 
 void			vbo(GLuint *vbo, const float *vertices, size_t size)

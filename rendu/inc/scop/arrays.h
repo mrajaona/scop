@@ -16,7 +16,7 @@
 # include "glew_inc.h"
 # include "glfw_inc.h"
 
-void			ebo(GLuint *ebo, const GLuint *elements, size_t size);
+void			ibo(GLuint *ibo, const GLuint *elements, size_t size);
 void			vao(GLuint *vao);
 void			vbo(GLuint *vbo, const float *vertices, size_t size);
 

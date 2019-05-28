@@ -102,7 +102,7 @@ t_model		*read_model(const char *path)
 
 	model->vertices = NULL;	// vbo
 	model->nvertices = 0;
-	model->faces = NULL;	// ebo
+	model->faces = NULL;	// ibo
 	model->nfaces = 0;
 	model->mtl_fp = NULL;
 

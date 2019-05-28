@@ -8,6 +8,8 @@ int	process_model(const t_model *model, t_data *data)
 
 	data->nfaces = model->nfaces;
 
+	vao(&(data->arrays.vao));
+
 	float			*vertices;
 	float			*vertice;
 
@@ -30,8 +32,6 @@ int	process_model(const t_model *model, t_data *data)
 	vbo(&(data->arrays.vbo), vertices, size);
 	free(vertices);
 	
-	vao(&(data->arrays.vao));
-
 	GLuint			*elements;
 	GLuint			*element;
 
@@ -51,8 +51,8 @@ int	process_model(const t_model *model, t_data *data)
 		list = list->next;
 		element += N_VERTICES_PER_FACE;
 	}
-	ebo(&(data->arrays.ebo), elements, size);
+	ibo(&(data->arrays.ibo), elements, size);
 	free(elements);
-
+	
 	return (1);
 }

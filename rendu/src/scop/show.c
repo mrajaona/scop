@@ -52,6 +52,7 @@ void			show(const t_data *data)
 			GL_UNSIGNED_INT,
 			(void *)(N_DATA_PER_VERTICE * 0));
 		//
+		
 		usleep(25000);
 	}
 

@@ -1,6 +1,6 @@
 #include "process_model.h"
 
-float	*process_model(const t_model *model, t_data *data)
+int	process_model(const t_model *model, t_data *data)
 {
 	t_list			*list;
 	unsigned int	i;
@@ -13,7 +13,7 @@ float	*process_model(const t_model *model, t_data *data)
 
 	size = model->nvertices * N_DATA_PER_VERTICE;
 	if (!(vertices = (float *)malloc(size * sizeof(float))))
-		return (NULL);
+		return (0);
 	list = model->vertices;
 	vertice = vertices;
 	while (list)
@@ -37,7 +37,7 @@ float	*process_model(const t_model *model, t_data *data)
 
 	size = model->nfaces * N_VERTICES_PER_FACE;
 	if (!(elements = (GLuint *)malloc(size * sizeof(GLuint))))
-		return (NULL);
+		return (0);
 	list = model->faces;
 	element = elements;
 	while (list)
@@ -54,5 +54,5 @@ float	*process_model(const t_model *model, t_data *data)
 	ebo(&(data->arrays.ebo), elements, size);
 	free(elements);
 
-	return (NULL);
+	return (1);
 }

@@ -8,6 +8,6 @@
 
 # include "model.h"
 
-float	*process_model(const t_model *model, t_data *data);
+int	process_model(const t_model *model, t_data *data);
 
 #endif

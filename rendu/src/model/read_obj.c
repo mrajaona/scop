@@ -82,9 +82,12 @@ int	read_mtllib(FILE *fp, t_model *model)
 	int		rd;
 
 	rd = fscanf(fp, "%ms\n", &name);
-	(void)model;
-	free(name); // tmp
-	if (!rd)
+	if (!rd || !name)
+		return (0);
+	printf("mtllib %s\n", name); fflush(stdout);
+	model->mtl_fp = fopen(name, "r");
+	free(name);
+	if (!(model->mtl_fp))
 		return (0);
 	return (1);
 }
@@ -96,9 +99,10 @@ int	read_usemtl(FILE *fp, t_model *model)
 	int		rd;
 
 	rd = fscanf(fp, "%ms\n", &name);
-	(void)model;
-	free(name); // tmp
-	if (!rd)
+	if (!rd || !name)
 		return (0);
+	(void)model;
+	printf("usemtl %s\n", name); fflush(stdout);
+	free(name); // tmp
 	return (1);
 }

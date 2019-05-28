@@ -13,7 +13,7 @@ int			skip_line(FILE *fp)
 	return (1);
 }
 
-static void	read_lines(FILE *fp, t_model *model)
+static void	read_lines(FILE *fp, t_model **model)
 {
 	const char		*str_tab[] = {"v", "f", "s", "mtllib", "usemtl"};
 	int 			(*fn_tab[])(FILE *, t_model *) = {&read_v, &read_f, &read_s, &read_mtllib, &read_usemtl};
@@ -25,7 +25,7 @@ static void	read_lines(FILE *fp, t_model *model)
 	{
 		if (!type)
 		{
-			free_model(&model);
+			free_model(model);
 			return ;
 		}
 
@@ -34,7 +34,7 @@ static void	read_lines(FILE *fp, t_model *model)
 		{
 			if (strcmp(type, str_tab[i]) == 0)
 			{
-				ret = fn_tab[i](fp, model);
+				ret = fn_tab[i](fp, *model);
 				break ;
 			}
 			i++;
@@ -47,7 +47,7 @@ static void	read_lines(FILE *fp, t_model *model)
 
 		if (!ret)
 		{
-			free_model(&model);
+			free_model(model);
 			return ;	
 		}
 	}
@@ -75,8 +75,9 @@ t_model		*read_model(const char *path)
 	model->nvertices = 0;
 	model->faces = NULL;	// ebo
 	model->nfaces = 0;
+	model->mtl_fp = NULL;
 
-	read_lines(fp, model);
+	read_lines(fp, &model);
 	fclose(fp);
 
 	return (model);

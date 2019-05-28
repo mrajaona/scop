@@ -53,6 +53,29 @@ static void	read_lines(FILE *fp, t_model **model)
 	}
 }
 
+char		*get_res_folder(const char *path)
+{
+	char	*tmp;
+	char	*folder;
+
+	folder = (char *)malloc(strlen(path) + 1);
+	strcpy(folder, path);
+	folder[strlen(path)] = '\0';
+
+	tmp = strrchr(folder, '/');
+	if (!tmp)
+	{
+		if ((folder = (char *)realloc(folder, 3)) != NULL)
+			strcpy(folder, "./");
+	}
+	else
+	{
+		*(tmp + 1) = '\0';
+		folder = (char *)realloc(folder, strlen(folder) + 1);
+	}
+	return (folder);
+}
+
 t_model		*read_model(const char *path)
 {
 	t_model	*model;
@@ -60,6 +83,12 @@ t_model		*read_model(const char *path)
 
 	if (!(model = (t_model *)malloc(sizeof(t_model))))
 		return (NULL);
+
+	if (!(model->res_folder = get_res_folder(path)))
+	{
+		free_model(&model);
+		return (NULL);
+	}
 
 	fp = fopen(path, "r");
 

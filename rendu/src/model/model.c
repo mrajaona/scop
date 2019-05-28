@@ -23,6 +23,7 @@ void		free_model(t_model **model)
 		fclose((*model)->mtl_fp);
 		(*model)->mtl_fp = NULL;
 	}
+	free((*model)->res_folder);
 	free(*model);
 	*model = NULL;
 }
@@ -46,18 +47,8 @@ int				load_model(const char *path, t_data *data)
 
 	if (!(model = read_model(path)))
 		return (0);
-	else
-	{
-		fprintf(stdout, "model read\n");
-		fflush(stdout);
-	}
 	if (!(process_model(model, data)))
 		return (0);
-	else
-	{
-		fprintf(stdout, "model processed\n");
-		fflush(stdout);
-	}
 	free_model(&model);
 	return (1);
 }

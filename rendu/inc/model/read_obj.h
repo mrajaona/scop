@@ -2,6 +2,7 @@
 # define READ_OBJ_H
 
 # include <stdio.h>
+# include <string.h>
 
 # include "glew_inc.h"
 

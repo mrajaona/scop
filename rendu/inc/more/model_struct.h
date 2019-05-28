@@ -20,6 +20,7 @@ typedef struct	s_model
 	size_t		nvertices;
 	t_list		*faces;
 	size_t		nfaces;
+	char		*res_folder;
 	FILE		*mtl_fp;
 	t_material	material;
 }				t_model;

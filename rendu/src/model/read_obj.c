@@ -84,6 +84,11 @@ int	read_mtllib(FILE *fp, t_model *model)
 	rd = fscanf(fp, "%ms\n", &name);
 	if (!rd || !name)
 		return (0);
+	if ((model->mtl_fp))
+	{
+		fclose(model->mtl_fp);
+		model->mtl_fp = 0;
+	}
 	open_mtl(name, model);
 	free(name);
 	if (!(model->mtl_fp))

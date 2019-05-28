@@ -79,26 +79,13 @@ int	read_s(FILE *fp, t_model *model)
 int	read_mtllib(FILE *fp, t_model *model)
 {
 	char	*name;
-	char	*path;
 	int		rd;
-	size_t	len;
 
 	rd = fscanf(fp, "%ms\n", &name);
 	if (!rd || !name)
 		return (0);
-
-	len = strlen(model->res_folder) + strlen(name) + 1;
-	if ((path = (char *)malloc(len)) == NULL)
-	{
-		free(name);
-		return (0);
-	}
-	memset(path, '\0', len);
-	strcat(path, model->res_folder);
-	strcat(path, name);
+	open_mtl(name, model);
 	free(name);
-	model->mtl_fp = fopen(path, "r");
-	free(path);
 	if (!(model->mtl_fp))
 		return (0);
 	return (1);
@@ -114,6 +101,7 @@ int	read_usemtl(FILE *fp, t_model *model)
 	if (!rd || !name)
 		return (0);
 	(void)model;
+	// use_mtl(name, &(model->material));
 	free(name);
 	return (1);
 }

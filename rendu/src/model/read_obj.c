@@ -75,6 +75,7 @@ int	read_s(FILE *fp, t_model *model)
 	return (1);
 }
 
+// mtl file
 int	read_mtllib(FILE *fp, t_model *model)
 {
 	char	*name;
@@ -88,6 +89,7 @@ int	read_mtllib(FILE *fp, t_model *model)
 	return (1);
 }
 
+// material in mtl file (-> newmtl)
 int	read_usemtl(FILE *fp, t_model *model)
 {
 	char	*name;

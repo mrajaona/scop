@@ -6,7 +6,13 @@
 
 typedef struct	s_material
 {
-	
+	// ns
+	// Ka
+	// Kd
+	// Ks
+	// Ni
+	// d
+	// illum
 }				t_material;
 
 /*

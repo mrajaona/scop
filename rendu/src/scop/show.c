@@ -37,7 +37,7 @@ static void		edit_output(const t_data *data)
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);
 }
 
-static void		show_model(const t_data *data)
+/*static*/ void		show_model(const t_data *data)
 {
 	edit_output(data);
 
@@ -72,8 +72,8 @@ void			show(const t_data *data)
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // background
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		//show_light(data);
 		show_model(data);
-		show_light(data);
 
 		usleep(25000);
 	}

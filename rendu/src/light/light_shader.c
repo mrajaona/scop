@@ -1,16 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   model.shader.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/24 11:34:26 by mrajaona          #+#    #+#             */
-/*   Updated: 2019/05/24 11:34:26 by mrajaona         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "model_shader.h"
+#include "light_shader.h"
 
 static int		shader_status(const GLuint shader)
 {
@@ -85,7 +73,7 @@ static int		fragment_shader(t_shader *shader)
 	return (1);
 }
 
-int				model_shader_init(t_shader *shader)
+int				light_shader_init(t_shader *shader)
 {
 	shader->program = glCreateProgram();
 	if (!vertex_shader(shader))

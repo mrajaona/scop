@@ -9,8 +9,7 @@ SRC_MAIN	=	data.c \
 				scop.c \
 				set_data.c \
 				show.c \
-				texture.c \
-				light.c
+				texture.c
 
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
@@ -49,8 +48,7 @@ SRCS_MODEL	=	$(addprefix	$(DIR_MODEL), $(SRC_MODEL))
 
 DIR_LIGHT	=	light/
 SRC_LIGHT	=	light.c \
-				light_shader.c \
-				process_light.c
+				light_shader.c
 
 SRCS_LIGHT	=	$(addprefix	$(DIR_LIGHT), $(SRC_LIGHT))
 
@@ -63,7 +61,8 @@ MORE_INC		=	data_struct.h \
 
 MORE_INCS		=	$(addprefix	$(DIR_MORE_INC), $(MORE_INC))
 
-SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX) $(SRCS_IMAGE) $(SRCS_MODEL)
+SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX) $(SRCS_IMAGE) \
+				$(SRCS_MODEL) $(SRCS_LIGHT)
 INC			=	$(SRC:.c=.h) $(MORE_INCS)
 
 INCS		=	$(addprefix $(DIR_INC), $(INC))
@@ -73,6 +72,7 @@ DIRS		=	$(DIR_MAIN) \
 				$(DIR_MATRIX) \
 				$(DIR_IMAGE) \
 				$(DIR_MODEL) \
+				$(DIR_LIGHT) \
 				$(DIR_MORE_INC)
 DIRS_INC	=	$(addprefix -I$(DIR_INC), $(DIRS))
 

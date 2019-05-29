@@ -28,8 +28,6 @@ void			show(const t_data *data)
 {
 	t_mat4	model;
 
-	glBindVertexArray(data->arrays_model.vao);
-
 	glEnable(GL_DEPTH_TEST);
 
 	while (!glfwWindowShouldClose(data->window))
@@ -44,6 +42,7 @@ void			show(const t_data *data)
 
 		edit_output(data, model);
 
+		glBindVertexArray(data->arrays_model.vao);
 		/*
 			glDrawArrays(GL_TRIANGLES,
 				0,
@@ -54,6 +53,7 @@ void			show(const t_data *data)
 			GL_UNSIGNED_INT,
 			(void *)(N_DATA_PER_VERTICE * 0));
 		//
+		glBindVertexArray(0);
 		
 		usleep(25000);
 	}

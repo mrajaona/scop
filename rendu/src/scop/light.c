@@ -76,5 +76,7 @@ int				process_light(t_data *data)
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
 	glEnableVertexAttribArray(0);
 
+	glBindVertexArray(0);
+
 	return (1);
 }

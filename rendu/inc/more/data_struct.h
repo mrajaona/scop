@@ -31,14 +31,14 @@ typedef struct	s_arrays
 typedef struct	s_data
 {
 	GLFWwindow	*window;
-	t_shader	shader;
-	GLuint		textures[N_TEXTURES];
 	t_mat4		view;
 	t_mat4		proj;
 	t_mat4		model;
+	GLuint		textures[N_TEXTURES];
+	t_shader	shader;
+	size_t		nfaces;
 	t_arrays	arrays_model;
 	t_arrays	arrays_light;
-	size_t		nfaces;
 }				t_data;
 
 #endif

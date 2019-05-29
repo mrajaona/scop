@@ -19,7 +19,7 @@ static void		center(const t_data *data)
 
 	identity(model);
 
-	uni_model = glGetUniformLocation(data->shader.program, "model");
+	uni_model = glGetUniformLocation(data->model_shader.program, "model");
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);
 }
 
@@ -33,7 +33,7 @@ static void		edit_output(const t_data *data)
 	deg = (deg + 1) % 360;
 	mat4_rotatey(deg_to_rad((float)deg), model);
 
-	uni_model = glGetUniformLocation(data->shader.program, "model");
+	uni_model = glGetUniformLocation(data->model_shader.program, "model");
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);
 }
 
@@ -53,14 +53,14 @@ void			show(const t_data *data)
 
 		edit_output(data);
 
-		glBindVertexArray(data->arrays_model.vao);
+		glBindVertexArray(data->model_arrays.vao);
 		glDrawElements(GL_TRIANGLES,
 			data->nfaces * N_VERTICES_PER_FACE,
 			GL_UNSIGNED_INT,
 			(void *)(N_DATA_PER_VERTICE * 0));
 		
 		center(data);
-		glBindVertexArray(data->arrays_light.vao);
+		glBindVertexArray(data->light_arrays.vao);
 		glDrawArrays(GL_TRIANGLES, 0, 36);
 
 		glBindVertexArray(0);

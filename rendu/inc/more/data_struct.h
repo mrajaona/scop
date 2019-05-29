@@ -35,10 +35,10 @@ typedef struct	s_data
 	t_mat4		proj;
 	t_mat4		model;
 	GLuint		textures[N_TEXTURES];
-	t_shader	shader;
 	size_t		nfaces;
-	t_arrays	arrays_model;
-	t_arrays	arrays_light;
+	t_shader	model_shader;
+	t_arrays	model_arrays;
+	t_arrays	light_arrays;
 }				t_data;
 
 #endif

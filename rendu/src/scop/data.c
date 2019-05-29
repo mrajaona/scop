@@ -34,12 +34,12 @@ static void		del_arrays(t_arrays *arrays)
 
 static void		data_del(t_data *data)
 {
-	del_shader(&(data->shader));
+	del_shader(&(data->model_shader));
 	
 	glDeleteTextures(N_TEXTURES, data->textures);
 
-	del_arrays(&(data->arrays_model));
-	del_arrays(&(data->arrays_light));
+	del_arrays(&(data->model_arrays));
+	del_arrays(&(data->light_arrays));
 	
 	glfwTerminate();
 }
@@ -68,12 +68,12 @@ void			data_clr(t_data *data)
 {
 	unsigned int	i;
 
-	clr_shader(&(data->shader));
+	clr_shader(&(data->model_shader));
 	mat4_clr(data->view);
 	mat4_clr(data->proj);
 	mat4_clr(data->model);
-	clr_arrays(&(data->arrays_model));
-	clr_arrays(&(data->arrays_light));
+	clr_arrays(&(data->model_arrays));
+	clr_arrays(&(data->light_arrays));
 	data->nfaces = 0;
 	i = 0;
 	while (i < N_TEXTURES)

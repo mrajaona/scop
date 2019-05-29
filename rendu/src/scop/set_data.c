@@ -19,7 +19,7 @@ void 			set_model(t_data *data)
 	// fprintf(stdout, "\nmodel");
 	// mat4_print(data->model);
 
-	GLint uniModel = glGetUniformLocation(data->shader.program, "model");
+	GLint uniModel = glGetUniformLocation(data->model_shader.program, "model");
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->model);
 }
 
@@ -40,7 +40,7 @@ void			set_view(t_data *data)
 	// fprintf(stdout, "\nview");
 	// mat4_print(data->view);
 
-	GLint uniView = glGetUniformLocation(data->shader.program, "view");
+	GLint uniView = glGetUniformLocation(data->model_shader.program, "view");
 	glUniformMatrix4fv(uniView, 1, GL_FALSE, data->view);
 }
 
@@ -62,6 +62,6 @@ void			set_proj(t_data *data)
 	// fprintf(stdout, "\nproj");
 	// mat4_print(data->proj);
 
-	GLint uniProj = glGetUniformLocation(data->shader.program, "proj");
+	GLint uniProj = glGetUniformLocation(data->model_shader.program, "proj");
 	glUniformMatrix4fv(uniProj, 1, GL_FALSE, data->proj);
 }

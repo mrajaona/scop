@@ -68,9 +68,9 @@ static int		vbo(GLuint *vbo)
 
 int				process_light(t_data *data)
 {
-	if (!vao(&(data->arrays_light.vao)))
+	if (!vao(&(data->light_arrays.vao)))
 		return (0);
-	if (!vbo(&(data->arrays_light.vbo)))
+	if (!vbo(&(data->light_arrays.vbo)))
 		return (0);
 	
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);

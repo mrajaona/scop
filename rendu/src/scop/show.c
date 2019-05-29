@@ -12,12 +12,15 @@
 
 #include "show.h"
 
-static void		center(const GLuint program)
+static void		center(const GLuint program, const t_mat4 src)
 {
 	GLint		uni_model;
 	t_mat4		model;
 
-	identity(model);
+	if (src)
+		mat4_eq(model, src);
+	else
+		identity(model);
 
 	uni_model = glGetUniformLocation(program, "model");
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);
@@ -29,7 +32,11 @@ static void		edit_output(const GLuint program, const t_mat4 src)
 	t_mat4		model;
 	GLint		uni_model;
 
-	mat4_eq(model, src);
+	if (src)
+		mat4_eq(model, src);
+	else
+		identity(model);
+
 	deg = (deg - 1) % 360;
 	mat4_rotatey(deg_to_rad((float)deg), model);
 
@@ -52,7 +59,7 @@ static void		edit_output(const GLuint program, const t_mat4 src)
 
 /*static*/ void		show_light(const t_data *data)
 {
-	center(data->light.shader.program);
+	center(data->light.shader.program, NULL);
 
 	glBindVertexArray(data->light.arrays.vao);
 	glUseProgram(data->light.shader.program);

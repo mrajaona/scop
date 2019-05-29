@@ -50,22 +50,30 @@ void			data_exit(t_data *data, const int status)
 	exit(status);
 }
 
+static void		clr_shader(t_shader *shader)
+{
+	shader->program = 0;
+	shader->vertex = 0;
+	shader->fragment = 0;
+}
+
+static void		clr_arrays(t_arrays *arrays)
+{
+	arrays->vao = 0;
+	arrays->vbo = 0;
+	arrays->ibo = 0;
+}
+
 void			data_clr(t_data *data)
 {
 	unsigned int	i;
 
-	data->shader.program = 0;
-	data->shader.vertex = 0;
-	data->shader.fragment = 0;
+	clr_shader(&(data->shader));
 	mat4_clr(data->view);
 	mat4_clr(data->proj);
 	mat4_clr(data->model);
-	data->arrays_model.vao = 0;
-	data->arrays_model.vbo = 0;
-	data->arrays_model.ibo = 0;
-	data->arrays_light.vao = 0;
-	data->arrays_light.vbo = 0;
-	data->arrays_light.ibo = 0;
+	clr_arrays(&(data->arrays_model));
+	clr_arrays(&(data->arrays_light));
 	data->nfaces = 0;
 	i = 0;
 	while (i < N_TEXTURES)

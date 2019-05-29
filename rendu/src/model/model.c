@@ -44,11 +44,11 @@ void		free_model(t_model **model)
 int				load_model(const char *path, t_data *data)
 {
 	t_model	*model;
+	int		ret;
 
 	if (!(model = read_model(path)))
 		return (0);
-	if (!(process_model(model, data)))
-		return (0);
+	ret = process_model(model, data);
 	free_model(&model);
-	return (1);
+	return (ret);
 }

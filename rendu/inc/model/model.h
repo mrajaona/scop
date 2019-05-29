@@ -18,7 +18,6 @@
 # include "glew_inc.h"
 
 # include "data_struct.h"
-# include "arrays.h"
 
 # include "model_struct.h"
 # include "list.h"

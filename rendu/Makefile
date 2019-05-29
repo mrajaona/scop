@@ -4,8 +4,7 @@ DIR_INC		=	./inc/
 DIR_SRC		=	./src/
 
 DIR_MAIN	=	scop/
-SRC_MAIN	=	arrays.c \
-				data.c \
+SRC_MAIN	=	data.c \
 				init_ext.c \
 				scop.c \
 				set_data.c \

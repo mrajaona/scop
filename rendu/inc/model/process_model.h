@@ -2,6 +2,7 @@
 # define PROCESS_MODEL_H
 
 # include "glew_inc.h"
+# include "glfw_inc.h"
 
 # include "model_struct.h"
 # include "data_struct.h"

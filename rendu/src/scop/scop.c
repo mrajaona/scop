@@ -28,6 +28,10 @@ int				main(int ac, char **av)
 	glfw_init(&(data.window));
 	glew_init();
 
+	if (!light_shader_init(&(data.light.shader)))
+		data_exit(&data, 1);
+	process_light(&data);	
+
 	if (!model_shader_init(&(data.model.shader)))
 		data_exit(&data, 1);
 	texture_init(data.textures, data.model.shader.program);
@@ -38,10 +42,6 @@ int				main(int ac, char **av)
 		fflush(stderr);
 		return (1);
 	}
-
-	if (!light_shader_init(&(data.light.shader)))
-		data_exit(&data, 1);
-	process_light(&data);	
 
 	set_model(&data);
 	set_view(&data);

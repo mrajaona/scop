@@ -42,6 +42,7 @@ static void		show_model(const t_data *data)
 	edit_output(data);
 
 	glBindVertexArray(data->model.arrays.vao);
+	glUseProgram(data->model.shader.program);
 	glDrawElements(GL_TRIANGLES,
 		data->nfaces * N_VERTICES_PER_FACE,
 		GL_UNSIGNED_INT,
@@ -49,11 +50,12 @@ static void		show_model(const t_data *data)
 	glBindVertexArray(0);
 }
 
-static void		show_light(const t_data *data)
+/*static*/ void		show_light(const t_data *data)
 {
 	center(data);
 
 	glBindVertexArray(data->light.arrays.vao);
+	glUseProgram(data->light.shader.program);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 	glBindVertexArray(0);
 }
@@ -70,7 +72,7 @@ void			show(const t_data *data)
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // background
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		show_light(data);
+		// show_light(data);
 		show_model(data);
 
 		usleep(25000);

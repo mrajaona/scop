@@ -61,7 +61,6 @@ static int		fragment_shader(t_shader *shader)
 	const char *fragment_source = R"glsl(
 		#version 150 core
 
-		in vec3 Color;
 		in vec2 Texcoord;
 		out vec4 outColor;
 

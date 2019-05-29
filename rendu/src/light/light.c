@@ -77,7 +77,7 @@ int				process_light(t_data *data)
 	
     pos_attrib = glGetAttribLocation(data->light.shader.program, "position");
     glVertexAttribPointer(pos_attrib, 3, GL_FLOAT, GL_FALSE,
-        N_DATA_PER_VERTICE * sizeof(float), 0);
+        3 * sizeof(float), 0);
 	glEnableVertexAttribArray(pos_attrib);
 
 	glBindVertexArray(0);

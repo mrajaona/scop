@@ -14,12 +14,17 @@
 
 void 			set_model(t_data *data)
 {
+	GLint	uniModel;
+
 	identity(data->mat_model);
 
 	// fprintf(stdout, "\nmodel");
 	// mat4_print(data->mat_model);
 
-	GLint uniModel = glGetUniformLocation(data->model.shader.program, "model");
+	uniModel = glGetUniformLocation(data->model.shader.program, "model");
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->mat_model);
+
+	uniModel = glGetUniformLocation(data->light.shader.program, "model");
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->mat_model);
 }
 
@@ -30,6 +35,7 @@ void			set_view(t_data *data)
 	t_vector	eye;
 	t_vector	target;
 	t_vector 	up;
+	GLint		uniView;
 
 	coord_to_vec(0.0f, 2.0f, 5.0f, eye);
 	coord_to_vec(0, 0, 0, target);
@@ -40,7 +46,10 @@ void			set_view(t_data *data)
 	// fprintf(stdout, "\nview");
 	// mat4_print(data->mat_view);
 
-	GLint uniView = glGetUniformLocation(data->model.shader.program, "view");
+	uniView = glGetUniformLocation(data->model.shader.program, "view");
+	glUniformMatrix4fv(uniView, 1, GL_FALSE, data->mat_view);
+
+	uniView = glGetUniformLocation(data->light.shader.program, "view");
 	glUniformMatrix4fv(uniView, 1, GL_FALSE, data->mat_view);
 }
 
@@ -51,6 +60,7 @@ void			set_proj(t_data *data)
 	float		planes[2];
 	float		vfov;
 	float		ratio;
+	GLint		uniProj;
 
 	vfov = deg_to_rad(60.0f);
 	ratio = 800.0f / 600.0f;
@@ -62,6 +72,9 @@ void			set_proj(t_data *data)
 	// fprintf(stdout, "\nproj");
 	// mat4_print(data->mat_proj);
 
-	GLint uniProj = glGetUniformLocation(data->model.shader.program, "proj");
+	uniProj = glGetUniformLocation(data->model.shader.program, "proj");
+	glUniformMatrix4fv(uniProj, 1, GL_FALSE, data->mat_proj);
+
+	uniProj = glGetUniformLocation(data->light.shader.program, "proj");
 	glUniformMatrix4fv(uniProj, 1, GL_FALSE, data->mat_proj);
 }

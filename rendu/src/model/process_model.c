@@ -88,6 +88,8 @@ static int		ibo(GLuint *ibo, const t_model *model)
 
 int				process_model(const t_model *model, t_data *data)
 {
+	GLint pos_attrib;
+	// GLint tex_attrib;
 	data->nfaces = model->nfaces;
 
 	if (!vao(&(data->model.arrays.vao)))
@@ -96,9 +98,6 @@ int				process_model(const t_model *model, t_data *data)
 		return (0);
 	if (!ibo(&(data->model.arrays.ibo), model))
 		return (0);
-	
-	GLint pos_attrib;
-	// GLint tex_attrib;
 
 	pos_attrib = glGetAttribLocation(data->model.shader.program, "position");
 	glVertexAttribPointer(pos_attrib, 3, GL_FLOAT, GL_FALSE,

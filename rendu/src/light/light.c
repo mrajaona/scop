@@ -9,54 +9,54 @@ static int		vao(GLuint *vao)
 
 /*
 ** place all points in space
-** pos		tex
-** x y z	u v
+** pos
+** x y z
 */
 
 static int		vbo(GLuint *vbo)
 {
     float			vertices[] = {
-        -0.1f, -0.1f, -0.1f,
-         0.1f, -0.1f, -0.1f,
-         0.1f,  0.1f, -0.1f,
-         0.1f,  0.1f, -0.1f,
-        -0.1f,  0.1f, -0.1f,
-        -0.1f, -0.1f, -0.1f, 
+        -0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+        -0.5f,  0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f, 
 
-        -0.1f, -0.1f,  0.1f,
-         0.1f, -0.1f,  0.1f,
-         0.1f,  0.1f,  0.1f,
-         0.1f,  0.1f,  0.1f,
-        -0.1f,  0.1f,  0.1f,
-        -0.1f, -0.1f,  0.1f, 
+        -0.5f, -0.5f,  0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f, 
 
-        -0.1f,  0.1f,  0.1f,
-        -0.1f,  0.1f, -0.1f,
-        -0.1f, -0.1f, -0.1f,
-        -0.1f, -0.1f, -0.1f,
-        -0.1f, -0.1f,  0.1f,
-        -0.1f,  0.1f,  0.1f, 
+        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f, -0.5f,
+        -0.5f, -0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f, 
 
-         0.1f,  0.1f,  0.1f,
-         0.1f,  0.1f, -0.1f,
-         0.1f, -0.1f, -0.1f,
-         0.1f, -0.1f, -0.1f,
-         0.1f, -0.1f,  0.1f,
-         0.1f,  0.1f,  0.1f,  
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,  
 
-        -0.1f, -0.1f, -0.1f,
-         0.1f, -0.1f, -0.1f,
-         0.1f, -0.1f,  0.1f,
-         0.1f, -0.1f,  0.1f,
-        -0.1f, -0.1f,  0.1f,
-        -0.1f, -0.1f, -0.1f, 
+        -0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f, -0.5f,
+         0.5f, -0.5f,  0.5f,
+         0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f,  0.5f,
+        -0.5f, -0.5f, -0.5f, 
 
-        -0.1f,  0.1f, -0.1f,
-         0.1f,  0.1f, -0.1f,
-         0.1f,  0.1f,  0.1f,
-         0.1f,  0.1f,  0.1f,
-        -0.1f,  0.1f,  0.1f,
-        -0.1f,  0.1f, -0.1f,
+        -0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f, -0.5f,
+         0.5f,  0.5f,  0.5f,
+         0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f,  0.5f,
+        -0.5f,  0.5f, -0.5f
     };
 
 	glGenBuffers(1, vbo); // Generate 1 buffer
@@ -68,13 +68,17 @@ static int		vbo(GLuint *vbo)
 
 int				process_light(t_data *data)
 {
+    GLint pos_attrib;
+
 	if (!vao(&(data->light.arrays.vao)))
 		return (0);
 	if (!vbo(&(data->light.arrays.vbo)))
 		return (0);
 	
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), 0);
-	glEnableVertexAttribArray(0);
+    pos_attrib = glGetAttribLocation(data->light.shader.program, "position");
+    glVertexAttribPointer(pos_attrib, 3, GL_FLOAT, GL_FALSE,
+        N_DATA_PER_VERTICE * sizeof(float), 0);
+	glEnableVertexAttribArray(pos_attrib);
 
 	glBindVertexArray(0);
 

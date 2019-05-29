@@ -12,21 +12,35 @@
 
 #include "data.h"
 
+static void		del_shader(t_shader *shader)
+{
+	if (shader->program)
+		glDeleteProgram(shader->program);
+	if (shader->fragment)
+		glDeleteShader(shader->fragment);
+	if (shader->vertex)
+		glDeleteShader(shader->vertex);	
+}
+
+static void		del_arrays(t_arrays *arrays)
+{
+	if (arrays->vao)
+		glDeleteVertexArrays(1, &(arrays->vao));
+	if (arrays->vbo)
+		glDeleteBuffers(1, &(arrays->vbo));
+	if (arrays->ibo)
+		glDeleteBuffers(1, &(arrays->ibo));
+}
+
 static void		data_del(t_data *data)
 {
-	if (data->shader.program)
-		glDeleteProgram(data->shader.program);
-	if (data->shader.fragment)
-		glDeleteShader(data->shader.fragment);
-	if (data->shader.vertex)
-		glDeleteShader(data->shader.vertex);
+	del_shader(&(data->shader));
+	
 	glDeleteTextures(N_TEXTURES, data->textures);
-	glDeleteVertexArrays(1, &(data->arrays_model.vao));
-	glDeleteBuffers(1, &(data->arrays_model.vbo));
-	glDeleteBuffers(1, &(data->arrays_model.ibo));
-	glDeleteVertexArrays(1, &(data->arrays_light.vao));
-	glDeleteBuffers(1, &(data->arrays_light.vbo));
-	glDeleteBuffers(1, &(data->arrays_light.ibo));
+
+	del_arrays(&(data->arrays_model));
+	del_arrays(&(data->arrays_light));
+	
 	glfwTerminate();
 }
 

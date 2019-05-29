@@ -12,11 +12,24 @@
 
 #include "show.h"
 
-static void		edit_output(const t_data *data, t_mat4 model)
+static void		center(const t_data *data)
+{
+	GLint		uni_model;
+	t_mat4		model;
+
+	identity(model);
+
+	uni_model = glGetUniformLocation(data->shader.program, "model");
+	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);
+}
+
+static void		edit_output(const t_data *data)
 {
 	static int	deg = 0;
+	t_mat4		model;
 	GLint		uni_model;
 
+	mat4_eq(model, data->model);
 	deg = (deg + 1) % 360;
 	mat4_rotatey(deg_to_rad((float)deg), model);
 
@@ -26,13 +39,11 @@ static void		edit_output(const t_data *data, t_mat4 model)
 
 void			show(const t_data *data)
 {
-	t_mat4	model;
 
 	glEnable(GL_DEPTH_TEST);
 
 	while (!glfwWindowShouldClose(data->window))
 	{
-		mat4_eq(model, data->model);
 
 		glfwSwapBuffers(data->window);
 		glfwPollEvents();
@@ -40,21 +51,20 @@ void			show(const t_data *data)
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // background
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		edit_output(data, model);
+		edit_output(data);
 
 		glBindVertexArray(data->arrays_model.vao);
-		/*
-			glDrawArrays(GL_TRIANGLES,
-				0,
-				data->nfaces * N_VERTICES_PER_FACE);
-		*/
 		glDrawElements(GL_TRIANGLES,
 			data->nfaces * N_VERTICES_PER_FACE,
 			GL_UNSIGNED_INT,
 			(void *)(N_DATA_PER_VERTICE * 0));
-		//
-		glBindVertexArray(0);
 		
+		center(data);
+		glBindVertexArray(data->arrays_light.vao);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		glBindVertexArray(0);
+
 		usleep(25000);
 	}
 

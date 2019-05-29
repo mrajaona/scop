@@ -10,7 +10,8 @@ SRC_MAIN	=	data.c \
 				set_data.c \
 				shader.c \
 				show.c \
-				texture.c
+				texture.c \
+				light.c
 
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 

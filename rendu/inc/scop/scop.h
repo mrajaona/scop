@@ -19,9 +19,10 @@
 
 # include "data.h"
 # include "init_ext.h"
-# include "model.h"
 # include "shader.h"
 # include "texture.h"
+# include "model.h"
+# include "light.h"
 # include "set_data.h"
 # include "show.h"
 

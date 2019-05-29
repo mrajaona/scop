@@ -13,7 +13,7 @@
 #ifndef DATA_STRUCT_H
 # define DATA_STRUCT_H
 
-# define N_TEXTURES 2
+# define N_TEXTURES 1
 
 # include "glfw_inc.h"
 
@@ -36,7 +36,8 @@ typedef struct	s_data
 	t_mat4		view;
 	t_mat4		proj;
 	t_mat4		model;
-	t_arrays	arrays;
+	t_arrays	arrays_model;
+	t_arrays	arrays_light;
 	size_t		nfaces;
 }				t_data;
 

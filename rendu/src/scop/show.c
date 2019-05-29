@@ -28,6 +28,8 @@ void			show(const t_data *data)
 {
 	t_mat4	model;
 
+	glBindVertexArray(data->arrays_model.vao);
+
 	glEnable(GL_DEPTH_TEST);
 
 	while (!glfwWindowShouldClose(data->window))

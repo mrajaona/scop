@@ -69,7 +69,10 @@ static int		fragment_shader(t_shader *shader)
 
 		void main()
 		{
-			outColor = texture(texScop, Texcoord);
+			// outColor = texture(texScop, Texcoord);
+
+			vec4 defaultColor = vec4(1.0, 0.5, 0.31, 0.1);
+			outColor = defaultColor;
 		}
 	)glsl";
 
@@ -82,28 +85,6 @@ static int		fragment_shader(t_shader *shader)
 	return (1);
 }
 
-/*
-** pos_attrib = x, y, z
-** tex_attrib = u, v
-*/
-
-static void		vertex_attribute_array(const GLuint shader_program)
-{
-	GLint pos_attrib;
-	// GLint tex_attrib;
-
-	pos_attrib = glGetAttribLocation(shader_program, "position");
-	glEnableVertexAttribArray(pos_attrib);
-	glVertexAttribPointer(pos_attrib, 3, GL_FLOAT, GL_FALSE,
-		N_DATA_PER_VERTICE * sizeof(float), 0);
-	/*
-	tex_attrib = glGetAttribLocation(shader_program, "texcoord");
-	glEnableVertexAttribArray(tex_attrib);
-	glVertexAttribPointer(tex_attrib, 2, GL_FLOAT, GL_FALSE,
-		5 * sizeof(float), (void *)(3 * sizeof(float)));
-	*/
-}
-
 int				shader_init(t_shader *shader)
 {
 	shader->program = glCreateProgram();
@@ -114,6 +95,6 @@ int				shader_init(t_shader *shader)
 	glBindFragDataLocation(shader->program, 0, "outColor");
 	glLinkProgram(shader->program);
 	glUseProgram(shader->program);
-	vertex_attribute_array(shader->program);
+	// vertex_attribute_array(shader->program);
 	return (1);
 }

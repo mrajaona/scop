@@ -90,12 +90,26 @@ int				process_model(const t_model *model, t_data *data)
 {
 	data->nfaces = model->nfaces;
 
-	if (!vao(&(data->arrays.vao)))
+	if (!vao(&(data->arrays_model.vao)))
 		return (0);
-	if (!vbo(&(data->arrays.vbo), model))
+	if (!vbo(&(data->arrays_model.vbo), model))
 		return (0);
-	if (!ibo(&(data->arrays.ibo), model))
+	if (!ibo(&(data->arrays_model.ibo), model))
 		return (0);
 	
+	GLint pos_attrib;
+	// GLint tex_attrib;
+
+	pos_attrib = glGetAttribLocation(data->shader.program, "position");
+	glVertexAttribPointer(pos_attrib, 3, GL_FLOAT, GL_FALSE,
+		N_DATA_PER_VERTICE * sizeof(float), 0);
+	glEnableVertexAttribArray(pos_attrib);
+	/*
+	tex_attrib = glGetAttribLocation(data->shader.program, "texcoord");
+	glVertexAttribPointer(tex_attrib, 2, GL_FLOAT, GL_FALSE,
+		5 * sizeof(float), (void *)(3 * sizeof(float)));
+	glEnableVertexAttribArray(tex_attrib);
+	*/
+
 	return (1);
 }

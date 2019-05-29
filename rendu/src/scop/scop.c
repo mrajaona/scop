@@ -28,6 +28,10 @@ int				main(int ac, char **av)
 	glfw_init(&(data.window));
 	glew_init();
 
+	if (!shader_init(&(data.shader)))
+		data_exit(&data, 1);
+	texture_init(data.textures, data.shader.program);
+
 	if (!(load_model(av[1], &data)))
 	{
 		fprintf(stderr, "Could not load model %s\n", av[1]);
@@ -35,9 +39,7 @@ int				main(int ac, char **av)
 		return (1);
 	}
 
-	if (!shader_init(&(data.shader)))
-		data_exit(&data, 1);
-	texture_init(data.textures, data.shader.program);
+	process_light(&data);	
 
 	set_model(&data);
 	set_view(&data);

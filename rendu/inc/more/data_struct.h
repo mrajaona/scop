@@ -28,17 +28,22 @@ typedef struct	s_arrays
 	GLuint		ibo;
 }				t_arrays;
 
+typedef struct	s_info
+{
+	t_shader	shader;
+	t_arrays	arrays;
+}				t_info;
+
 typedef struct	s_data
 {
 	GLFWwindow	*window;
-	t_mat4		view;
-	t_mat4		proj;
-	t_mat4		model;
+	t_mat4		mat_view;
+	t_mat4		mat_proj;
+	t_mat4		mat_model;
 	GLuint		textures[N_TEXTURES];
 	size_t		nfaces;
-	t_shader	model_shader;
-	t_arrays	model_arrays;
-	t_arrays	light_arrays;
+	t_info		model;
+	t_info		light;
 }				t_data;
 
 #endif

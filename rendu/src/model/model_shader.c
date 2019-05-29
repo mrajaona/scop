@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shader.c                                           :+:      :+:    :+:   */
+/*   model.shader.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shader.h"
+#include "model_shader.h"
 
 static int		shader_status(const GLuint shader)
 {
@@ -95,6 +95,5 @@ int				shader_init(t_shader *shader)
 	glBindFragDataLocation(shader->program, 0, "outColor");
 	glLinkProgram(shader->program);
 	glUseProgram(shader->program);
-	// vertex_attribute_array(shader->program);
 	return (1);
 }

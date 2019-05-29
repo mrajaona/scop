@@ -28,9 +28,9 @@ int				main(int ac, char **av)
 	glfw_init(&(data.window));
 	glew_init();
 
-	if (!shader_init(&(data.model_shader)))
+	if (!shader_init(&(data.model.shader)))
 		data_exit(&data, 1);
-	texture_init(data.textures, data.model_shader.program);
+	texture_init(data.textures, data.model.shader.program);
 
 	if (!(load_model(av[1], &data)))
 	{

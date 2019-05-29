@@ -8,7 +8,6 @@ SRC_MAIN	=	data.c \
 				init_ext.c \
 				scop.c \
 				set_data.c \
-				shader.c \
 				show.c \
 				texture.c \
 				light.c
@@ -39,6 +38,7 @@ SRCS_IMAGE	=	$(addprefix	$(DIR_IMAGE), $(SRC_IMAGE))
 
 DIR_MODEL	=	model/
 SRC_MODEL	=	model.c \
+				model_shader.c \
 				read_model.c \
 				read_obj.c \
 				read_mtl.c \
@@ -46,6 +46,13 @@ SRC_MODEL	=	model.c \
 				list.c
 
 SRCS_MODEL	=	$(addprefix	$(DIR_MODEL), $(SRC_MODEL))
+
+DIR_LIGHT	=	light/
+SRC_LIGHT	=	light.c \
+				light_shader.c \
+				process_light.c
+
+SRCS_LIGHT	=	$(addprefix	$(DIR_LIGHT), $(SRC_LIGHT))
 
 DIR_MORE_INC	=	more/
 MORE_INC		=	data_struct.h \

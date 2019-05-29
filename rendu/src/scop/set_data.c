@@ -14,18 +14,18 @@
 
 void 			set_model(t_data *data)
 {
-	identity(data->model);
+	identity(data->mat_model);
 
 	// fprintf(stdout, "\nmodel");
-	// mat4_print(data->model);
+	// mat4_print(data->mat_model);
 
-	GLint uniModel = glGetUniformLocation(data->model_shader.program, "model");
-	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->model);
+	GLint uniModel = glGetUniformLocation(data->model.shader.program, "model");
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->mat_model);
 }
 
 void			set_view(t_data *data)
 	{
-	identity(data->view);
+	identity(data->mat_view);
 
 	t_vector	eye;
 	t_vector	target;
@@ -35,18 +35,18 @@ void			set_view(t_data *data)
 	coord_to_vec(0, 0, 0, target);
 	coord_to_vec(0, 1, 0, up);
 
-	lookat(eye, target, up, data->view);
+	lookat(eye, target, up, data->mat_view);
 	
 	// fprintf(stdout, "\nview");
-	// mat4_print(data->view);
+	// mat4_print(data->mat_view);
 
-	GLint uniView = glGetUniformLocation(data->model_shader.program, "view");
-	glUniformMatrix4fv(uniView, 1, GL_FALSE, data->view);
+	GLint uniView = glGetUniformLocation(data->model.shader.program, "view");
+	glUniformMatrix4fv(uniView, 1, GL_FALSE, data->mat_view);
 }
 
 void			set_proj(t_data *data)
 {
-	identity(data->proj);
+	identity(data->mat_proj);
 
 	float		planes[2];
 	float		vfov;
@@ -57,11 +57,11 @@ void			set_proj(t_data *data)
 	planes[NEAR_PLANE] = 1.0f;
 	planes[FAR_PLANE] = 10.0f;
 
-	perspective(vfov, ratio, planes, data->proj);
+	perspective(vfov, ratio, planes, data->mat_proj);
 
 	// fprintf(stdout, "\nproj");
-	// mat4_print(data->proj);
+	// mat4_print(data->mat_proj);
 
-	GLint uniProj = glGetUniformLocation(data->model_shader.program, "proj");
-	glUniformMatrix4fv(uniProj, 1, GL_FALSE, data->proj);
+	GLint uniProj = glGetUniformLocation(data->model.shader.program, "proj");
+	glUniformMatrix4fv(uniProj, 1, GL_FALSE, data->mat_proj);
 }

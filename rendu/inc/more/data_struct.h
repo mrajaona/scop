@@ -23,8 +23,8 @@
 
 typedef struct	s_arrays
 {
-	GLuint		vbo;
 	GLuint		vao;
+	GLuint		vbo;
 	GLuint		ibo;
 }				t_arrays;
 

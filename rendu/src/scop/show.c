@@ -12,34 +12,34 @@
 
 #include "show.h"
 
-static void		center(const t_data *data)
+static void		center(const GLuint program)
 {
 	GLint		uni_model;
 	t_mat4		model;
 
 	identity(model);
 
-	uni_model = glGetUniformLocation(data->model.shader.program, "model");
+	uni_model = glGetUniformLocation(program, "model");
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);
 }
 
-static void		edit_output(const t_data *data)
+static void		edit_output(const GLuint program, const t_mat4 src)
 {
 	static int	deg = 0;
 	t_mat4		model;
 	GLint		uni_model;
 
-	mat4_eq(model, data->mat_model);
-	deg = (deg + 1) % 360;
+	mat4_eq(model, src);
+	deg = (deg - 1) % 360;
 	mat4_rotatey(deg_to_rad((float)deg), model);
 
-	uni_model = glGetUniformLocation(data->model.shader.program, "model");
+	uni_model = glGetUniformLocation(program, "model");
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);
 }
 
 /*static*/ void		show_model(const t_data *data)
 {
-	edit_output(data);
+	edit_output(data->model.shader.program, data->mat_model);
 
 	glBindVertexArray(data->model.arrays.vao);
 	glUseProgram(data->model.shader.program);
@@ -52,7 +52,7 @@ static void		edit_output(const t_data *data)
 
 /*static*/ void		show_light(const t_data *data)
 {
-	center(data);
+	center(data->light.shader.program);
 
 	glBindVertexArray(data->light.arrays.vao);
 	glUseProgram(data->light.shader.program);
@@ -66,16 +66,16 @@ void			show(const t_data *data)
 
 	while (!glfwWindowShouldClose(data->window))
 	{
-		glfwSwapBuffers(data->window);
-		glfwPollEvents();
-
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // background
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		//show_light(data);
+		// show_light(data);
 		show_model(data);
 
 		usleep(25000);
+
+		glfwSwapBuffers(data->window);
+		glfwPollEvents();
 	}
 
 	glDisable(GL_DEPTH_TEST);

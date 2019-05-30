@@ -60,6 +60,10 @@ void 			set_light(t_data *data)
 	glUniform3fv(uniModel, 1, color);
 
 	use_model(&(data->model));
+
+	uniModel = glGetUniformLocation(data->model.shader.program, "lightPos");
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->light.mat_model);
+
 	uniModel = glGetUniformLocation(data->model.shader.program, "lightColor");
 	glUniform3fv(uniModel, 1, color);
 

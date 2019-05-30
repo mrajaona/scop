@@ -89,8 +89,8 @@ static int		vbo(GLuint *vbo, const t_model *model)
 
 int				process_model(const t_model *model, t_data *data)
 {
-	GLint pos_attrib;
-	// GLint tex_attrib;
+	GLint attrib;
+
 	data->nfaces = model->nfaces;
 
 	if (!vao(&(data->model.arrays.vao)))
@@ -98,20 +98,21 @@ int				process_model(const t_model *model, t_data *data)
 	if (!vbo(&(data->model.arrays.vbo), model))
 		return (0);
 
-	pos_attrib = glGetAttribLocation(data->model.shader.program, "position");
-	glVertexAttribPointer(pos_attrib, 3, GL_FLOAT, GL_FALSE,
+	attrib = glGetAttribLocation(data->model.shader.program, "position");
+	glVertexAttribPointer(attrib, 3, GL_FLOAT, GL_FALSE,
 		N_DATA_PER_VERTICE * sizeof(float), 0);
-	glEnableVertexAttribArray(pos_attrib);
+	glEnableVertexAttribArray(attrib);
 
-	pos_attrib = glGetAttribLocation(data->model.shader.program, "normal");
-	glVertexAttribPointer(pos_attrib, 3, GL_FLOAT, GL_FALSE,
+	attrib = glGetAttribLocation(data->model.shader.program, "normal");
+	glVertexAttribPointer(attrib, 3, GL_FLOAT, GL_FALSE,
 		N_DATA_PER_VERTICE * sizeof(float), (void *)(3 * sizeof(float)));
-	glEnableVertexAttribArray(pos_attrib);
+	glEnableVertexAttribArray(attrib);
+	
 	/*
-	tex_attrib = glGetAttribLocation(data->model.shader.program, "texcoord");
-	glVertexAttribPointer(tex_attrib, 2, GL_FLOAT, GL_FALSE,
+	attrib = glGetAttribLocation(data->model.shader.program, "texcoord");
+	glVertexAttribPointer(attrib, 2, GL_FLOAT, GL_FALSE,
 		N_DATA_PER_VERTICE * sizeof(float, (void *)(3 * sizeof(float)));
-	glEnableVertexAttribArray(tex_attrib);
+	glEnableVertexAttribArray(attrib);
 	*/
 
 	use_no_model();

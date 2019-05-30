@@ -61,7 +61,6 @@ void 			set_light(t_data *data)
 
 	use_model(&(data->model));
 	uniModel = glGetUniformLocation(data->model.shader.program, "lightColor");
-	printf("%i\n", uniModel); fflush(stdout);
 	glUniform3fv(uniModel, 1, color);
 
 	use_no_model();

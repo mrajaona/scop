@@ -37,7 +37,7 @@ static int		vertex_shader(t_shader *shader)
 
 		// out vec2 Texcoord;
 		out vec3 Normal;
-		out vec3 FragPos;
+		out vec3 ModelPos;
 
 		uniform mat4 model;
 		uniform mat4 view;
@@ -46,8 +46,8 @@ static int		vertex_shader(t_shader *shader)
 		void main()
 		{
 			gl_Position = proj * view * model * vec4(position, 1.0);
+			ModelPos = vec3(model * vec4(position, 1.0));
 			Normal = normal;
-			FragPos = vec3(model * vec4(position, 1.0));
 			// Texcoord = texcoord;
 		}
 	)glsl";
@@ -68,7 +68,7 @@ static int		fragment_shader(t_shader *shader)
 
 		// in vec2 Texcoord;
 		in vec3 Normal;
-		in vec3 FragPos;
+		in vec3 ModelPos;
 
 		out vec4 outColor;
 
@@ -82,15 +82,14 @@ static int		fragment_shader(t_shader *shader)
 		{
 			// outColor = texture(texScop, Texcoord);
 
-			float ambientStrength = 0.1;
-			vec3 ambient = ambientStrength * lightColor;
+			float ambient = 0.1;
 
 			vec3 norm = normalize(Normal);
-			vec3 lightDir = normalize(lightPos - FragPos);
-			float diff = max(dot(norm, lightDir), 0.0);
-			vec3 diffuse = diff * lightColor;
+			vec3 lightDir = normalize(lightPos - ModelPos);
 
-			vec3 finalColor = (ambient + diffuse) * modelColor;
+			float diffuse = max(dot(norm, lightDir), 0.0);
+
+			vec3 finalColor = (ambient + diffuse) * lightColor * modelColor;
 			outColor = vec4(finalColor, 1.0);
 		}
 	)glsl";

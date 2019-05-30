@@ -37,8 +37,14 @@ static void		edit_output(const GLuint program, const t_mat4 src)
 	else
 		identity(model);
 
+	static float	a = 0;
+	t_vector		mov;
+	coord_to_vec(-a, a, a, mov);
+	translation(mov, model);
+	a = a >= 3.0f ? -3.0f : (a + 0.05);
+
 	deg = (deg - 1) % 360;
-	mat4_rotatey(deg_to_rad((float)deg), model);
+	// mat4_rotatey(deg_to_rad((float)deg), model);
 
 	uni_model = glGetUniformLocation(program, "model");
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);

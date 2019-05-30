@@ -19,6 +19,10 @@ void 			set_model(t_data *data)
 
 	identity(data->model.mat_model);
 
+	t_vector	mov;
+	coord_to_vec(0.0f, 0.0f, 0.0f, mov);
+	translation(mov, data->model.mat_model);
+
 	// fprintf(stdout, "\nmodel");
 	// mat4_print(data->mat_model);
 
@@ -43,7 +47,7 @@ void 			set_light(t_data *data)
 
 	identity(data->light.mat_model);
 
-	coord_to_vec(0.0f, 5.0f, 0.0f, mov);
+	coord_to_vec(0.0f, 0.0f, 0.0f, mov);
 	translation(mov, data->light.mat_model);
 
 	// fprintf(stdout, "\nmodel");
@@ -79,7 +83,7 @@ void			set_view(t_data *data)
 	t_vector 	up;
 	GLint		uniView;
 
-	coord_to_vec(0.0f, 0.0f, 7.0f, eye);
+	coord_to_vec(5.0f, 5.0f, 5.0f, eye);
 	coord_to_vec(0, 0, 0, target);
 	coord_to_vec(0, 1, 0, up);
 
@@ -110,8 +114,8 @@ void			set_proj(t_data *data)
 
 	vfov = deg_to_rad(80.0f);
 	ratio = 800.0f / 600.0f;
-	planes[NEAR_PLANE] = 1.0f;
-	planes[FAR_PLANE] = 10.0f;
+	planes[NEAR_PLANE] = 0.01f;
+	planes[FAR_PLANE] = 100.0f;
 
 	perspective(vfov, ratio, planes, data->mat_proj);
 

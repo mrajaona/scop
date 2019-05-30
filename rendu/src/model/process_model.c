@@ -9,13 +9,13 @@ static int		vao(GLuint *vao)
 
 static t_vector_ptr	get_triangle_normal(t_triangle *triangle)
 {
-	t_vector	va;
-	t_vector	vb;
+	t_vector	tmp_a;
+	t_vector	tmp_b;
 
-	vector_sub(triangle->v2, triangle->v1, va);
-	vector_sub(triangle->v3, triangle->v1, vb);
+	vector_sub(triangle->v2, triangle->v1, tmp_a);
+	vector_sub(triangle->v3, triangle->v1, tmp_b);
 
-	coord_cross_prod(va, vb, triangle->normal);
+	coord_cross_prod(tmp_b, tmp_a, triangle->normal);
 	coord_normalize(triangle->normal, triangle->normal);
 
 	return (triangle->normal);

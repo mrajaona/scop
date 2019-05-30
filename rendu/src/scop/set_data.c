@@ -15,16 +15,22 @@
 void 			set_model(t_data *data)
 {
 	GLint		uniModel;
+	t_vector	color;
 
 	identity(data->model.mat_model);
 
 	// fprintf(stdout, "\nmodel");
 	// mat4_print(data->mat_model);
 
+	coord_to_vec(1.0f, 0.5f, 0.31f, color);
+
 	use_model(&(data->model));
 
 	uniModel = glGetUniformLocation(data->model.shader.program, "model");
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->model.mat_model);
+
+	uniModel = glGetUniformLocation(data->model.shader.program, "modelColor");
+	glUniform3fv(uniModel, 1, color);
 
 	use_no_model();
 }
@@ -33,6 +39,7 @@ void 			set_light(t_data *data)
 {
 	GLint		uniModel;
 	t_vector	mov;
+	t_vector	color;
 
 	identity(data->light.mat_model);
 
@@ -42,10 +49,19 @@ void 			set_light(t_data *data)
 	// fprintf(stdout, "\nmodel");
 	// mat4_print(data->mat_model);
 
+	coord_to_vec(1.0f, 1.0f, 1.0f, color);
+
 	use_model(&(data->light));
 
 	uniModel = glGetUniformLocation(data->light.shader.program, "model");
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->light.mat_model);
+
+	uniModel = glGetUniformLocation(data->light.shader.program, "lightColor");
+	glUniform3fv(uniModel, 1, color);
+
+	use_model(&(data->model));
+	uniModel = glGetUniformLocation(data->model.shader.program, "lightColor");
+	glUniform3fv(uniModel, 1, color);
 
 	use_no_model();
 }

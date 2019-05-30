@@ -66,11 +66,14 @@ static int		fragment_shader(t_shader *shader)
 
 		uniform sampler2D texScop;
 
+		uniform vec3 lightColor;
+		uniform vec3 modelColor;
+
 		void main()
 		{
 			// outColor = texture(texScop, Texcoord);
 
-			vec4 defaultColor = vec4(1.0, 0.5, 0.31, 0.1);
+			vec4 defaultColor = vec4(modelColor, 0.1);
 			outColor = defaultColor;
 		}
 	)glsl";

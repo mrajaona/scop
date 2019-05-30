@@ -47,10 +47,11 @@ static int		fragment_shader(t_shader *shader)
 
 		out vec4 outColor;
 
+		uniform vec3 lightColor;
+
 		void main()
 		{
-			vec4 defaultColor = vec4(1.0, 1.0, 1.0, 0.1);
-			outColor = defaultColor;
+			outColor = vec4(lightColor, 0.1);
 		}
 	)glsl";
 

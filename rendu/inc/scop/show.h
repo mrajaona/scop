@@ -34,6 +34,7 @@
 # include "angle.h"
 
 # include "model.h"
+# include "use_model.h"
 
 void			show(const t_data *data);
 

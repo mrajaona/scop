@@ -46,25 +46,21 @@ static void		edit_output(const GLuint program, const t_mat4 src)
 
 /*static*/ void		show_model(const t_data *data)
 {
-	edit_output(data->model.shader.program, data->mat_model);
-
-	glBindVertexArray(data->model.arrays.vao);
-	glUseProgram(data->model.shader.program);
+	use_model(&(data->model));
+	edit_output(data->model.shader.program, data->model.mat_model);
 	glDrawElements(GL_TRIANGLES,
 		data->nfaces * N_VERTICES_PER_FACE,
 		GL_UNSIGNED_INT,
 		(void *)(N_DATA_PER_VERTICE * 0));
-	glBindVertexArray(0);
+	use_no_model();
 }
 
 /*static*/ void		show_light(const t_data *data)
 {
-	center(data->light.shader.program, NULL);
-
-	glBindVertexArray(data->light.arrays.vao);
-	glUseProgram(data->light.shader.program);
+	use_model(&(data->light));
+	center(data->light.shader.program, data->light.mat_model);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
-	glBindVertexArray(0);
+	use_no_model();
 }
 
 void			show(const t_data *data)
@@ -76,8 +72,8 @@ void			show(const t_data *data)
 		glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // background
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// show_light(data);
 		show_model(data);
+		show_light(data);
 
 		usleep(25000);
 

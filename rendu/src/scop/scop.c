@@ -12,6 +12,30 @@
 
 #include "scop.h"
 
+static void		model(t_data *data, const char *path)
+{
+	if (!model_shader_init(&(data->model.shader)))
+		data_exit(data, 1);
+	texture_init(data->textures, data->model.shader.program);
+
+	if (!(load_model(path, data)))
+	{
+		fprintf(stderr, "Could not load model %s\n", path);
+		fflush(stderr);
+		exit(1);
+	}
+
+	set_model(data);
+}
+
+static void		light(t_data *data)
+{
+	if (!light_shader_init(&(data->light.shader)))
+		data_exit(data, 1);
+	process_light(data);	
+	set_light(data);
+}
+
 int				main(int ac, char **av)
 {
 	t_data	data;
@@ -28,22 +52,9 @@ int				main(int ac, char **av)
 	glfw_init(&(data.window));
 	glew_init();
 
-	if (!light_shader_init(&(data.light.shader)))
-		data_exit(&data, 1);
-	process_light(&data);	
+	light(&data);
+	model(&data, av[1]);
 
-	if (!model_shader_init(&(data.model.shader)))
-		data_exit(&data, 1);
-	texture_init(data.textures, data.model.shader.program);
-
-	if (!(load_model(av[1], &data)))
-	{
-		fprintf(stderr, "Could not load model %s\n", av[1]);
-		fflush(stderr);
-		return (1);
-	}
-
-	set_model(&data);
 	set_view(&data);
 	set_proj(&data);
 

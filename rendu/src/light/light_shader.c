@@ -47,8 +47,6 @@ static int		fragment_shader(t_shader *shader)
 
 		out vec4 outColor;
 
-		uniform sampler2D texScop;
-
 		void main()
 		{
 			vec4 defaultColor = vec4(1.0, 1.0, 1.0, 0.1);

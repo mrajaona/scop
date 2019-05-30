@@ -9,7 +9,8 @@ SRC_MAIN	=	data.c \
 				scop.c \
 				set_data.c \
 				show.c \
-				texture.c
+				texture.c \
+				use_model.c
 
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 

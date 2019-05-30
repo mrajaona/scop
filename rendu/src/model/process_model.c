@@ -110,7 +110,7 @@ int				process_model(const t_model *model, t_data *data)
 	glEnableVertexAttribArray(tex_attrib);
 	*/
 
-	glBindVertexArray(0);
+	use_no_model();
 
 	return (1);
 }

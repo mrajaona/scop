@@ -46,6 +46,7 @@ void			data_exit(t_data *data, const int status)
 
 static void		clr_info(t_info *info)
 {
+	mat4_clr(info->mat_model);
 	info->shader.program = 0;
 	info->shader.vertex = 0;
 	info->shader.fragment = 0;
@@ -60,7 +61,6 @@ void			data_clr(t_data *data)
 
 	mat4_clr(data->mat_view);
 	mat4_clr(data->mat_proj);
-	mat4_clr(data->mat_model);
 	clr_info(&(data->model));
 	clr_info(&(data->light));
 	data->nfaces = 0;

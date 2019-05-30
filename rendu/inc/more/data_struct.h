@@ -30,6 +30,7 @@ typedef struct	s_arrays
 
 typedef struct	s_info
 {
+	t_mat4		mat_model;
 	t_shader	shader;
 	t_arrays	arrays;
 }				t_info;
@@ -39,7 +40,6 @@ typedef struct	s_data
 	GLFWwindow	*window;
 	t_mat4		mat_view;
 	t_mat4		mat_proj;
-	t_mat4		mat_model;
 	GLuint		textures[N_TEXTURES];
 	size_t		nfaces;
 	t_info		model;

@@ -80,7 +80,7 @@ int				process_light(t_data *data)
         3 * sizeof(float), 0);
 	glEnableVertexAttribArray(pos_attrib);
 
-	glBindVertexArray(0);
+	use_no_model();
 
 	return (1);
 }

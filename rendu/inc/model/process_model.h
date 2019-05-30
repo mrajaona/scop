@@ -8,6 +8,7 @@
 # include "data_struct.h"
 
 # include "model.h"
+# include "use_model.h"
 
 int	process_model(const t_model *model, t_data *data);
 

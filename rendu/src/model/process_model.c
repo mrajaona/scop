@@ -33,9 +33,10 @@ static t_vector_ptr	get_vertex(const t_model *model, GLuint index)
 	return ((t_vector_ptr)(list->data));
 }
 
-static void			cpy_vertice(t_coord dest, t_coord coord)
+static void			cpy_vertice(t_coord dest, t_coord coord, t_coord normal)
 {
 	coord_eq(dest, coord);
+	coord_eq(dest + 3, normal);
 }
 
 /*
@@ -69,9 +70,9 @@ static int		vbo(GLuint *vbo, const t_model *model)
 		coord_eq(triangle.v3, get_vertex(model, ((GLuint *)(list->data))[2]));
 		get_triangle_normal(&triangle);
 
-		cpy_vertice(vertice + (0 * N_DATA_PER_VERTICE), triangle.v1);
-		cpy_vertice(vertice + (1 * N_DATA_PER_VERTICE), triangle.v2);
-		cpy_vertice(vertice + (2 * N_DATA_PER_VERTICE), triangle.v3);
+		cpy_vertice(vertice + (0 * N_DATA_PER_VERTICE), triangle.v1, triangle.normal);
+		cpy_vertice(vertice + (1 * N_DATA_PER_VERTICE), triangle.v2, triangle.normal);
+		cpy_vertice(vertice + (2 * N_DATA_PER_VERTICE), triangle.v3, triangle.normal);
 
 		vertice += N_VERTICES_PER_FACE * N_DATA_PER_VERTICE;
 

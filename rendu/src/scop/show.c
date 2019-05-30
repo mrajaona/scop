@@ -44,7 +44,7 @@ static void		edit_output(const GLuint program, const t_mat4 src)
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);
 }
 
-/*static*/ void		show_model(const t_data *data)
+static void		show_model(const t_data *data)
 {
 	use_model(&(data->model));
 	edit_output(data->model.shader.program, data->model.mat_model);
@@ -55,7 +55,7 @@ static void		edit_output(const GLuint program, const t_mat4 src)
 	use_no_model();
 }
 
-/*static*/ void		show_light(const t_data *data)
+static void		show_light(const t_data *data)
 {
 	use_model(&(data->light));
 	center(data->light.shader.program, data->light.mat_model);

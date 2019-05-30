@@ -52,8 +52,8 @@ int				main(int ac, char **av)
 	glfw_init(&(data.window));
 	glew_init();
 
-	light(&data);
 	model(&data, av[1]);
+	light(&data);
 
 	set_view(&data);
 	set_proj(&data);

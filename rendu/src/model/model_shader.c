@@ -73,8 +73,10 @@ static int		fragment_shader(t_shader *shader)
 		{
 			// outColor = texture(texScop, Texcoord);
 
-			vec4 defaultColor = vec4(modelColor, 0.1);
-			outColor = defaultColor;
+			float ambientStrength = 0.1;
+			vec3 ambient = ambientStrength * lightColor;
+			vec3 finalColor = ambient * modelColor;
+			outColor = vec4(finalColor, 1.0);
 		}
 	)glsl";
 

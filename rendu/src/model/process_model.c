@@ -7,6 +7,41 @@ static int		vao(GLuint *vao)
 	return (1);
 }
 
+/********************************************/
+/*
+static t_vector_ptr	get_triangle_normal(t_triangle *triangle)
+{
+	t_vector	va;
+	t_vector	vb;
+
+	vector_sub(triangle->v2, triangle->v1, va);
+	vector_sub(triangle->v3, triangle->v1, vb);
+
+	coord_cross_prod(va, vb, triangle->normal);
+	coord_normalize(triangle->normal, triangle->normal);
+
+	return (triangle->normal);
+}
+*/
+/********************************************/
+
+static t_vector_ptr	get_vertex(const t_model *model, GLuint index)
+{
+	t_list	*list;
+
+	list = model->vertices;
+	while (list && list->index != index)
+		list = list->next;
+	if (!list)
+		return (NULL);
+	return ((t_vector_ptr)(list->data));
+}
+
+static void			cpy_vertice(t_coord dest, t_coord coord)
+{
+	coord_eq(dest, coord);
+}
+
 /*
 ** place all points in space
 ** pos		tex
@@ -16,26 +51,30 @@ static int		vao(GLuint *vao)
 static int		vbo(GLuint *vbo, const t_model *model)
 {
 	t_list			*list;
-	unsigned int	i;
 	size_t			size;
+	t_coord_ptr		srcs[3];
 	float			*vertices;
 	float			*vertice;
 
-	size = model->nvertices * N_DATA_PER_VERTICE;
+	size = model->nfaces * N_VERTICES_PER_FACE * N_DATA_PER_VERTICE;
 	if (!(vertices = (float *)malloc(size * sizeof(float))))
 		return (0);
-	list = model->vertices;
 	vertice = vertices;
+
+	list = model->faces;
 	while (list)
 	{
-		i = 0;
-		while (i < N_DATA_PER_VERTICE)
-		{
-			vertice[i] = ((float *)(list->data))[i];
-			i++;
-		}
+		srcs[0] = get_vertex(model, ((GLuint *)(list->data))[0]);
+		srcs[1] = get_vertex(model, ((GLuint *)(list->data))[1]);
+		srcs[2] = get_vertex(model, ((GLuint *)(list->data))[2]);
+
+		cpy_vertice(vertice + (0 * N_DATA_PER_VERTICE), srcs[0]);
+		cpy_vertice(vertice + (1 * N_DATA_PER_VERTICE), srcs[1]);
+		cpy_vertice(vertice + (2 * N_DATA_PER_VERTICE), srcs[2]);
+
+		vertice += N_VERTICES_PER_FACE * N_DATA_PER_VERTICE;
+
 		list = list->next;
-		vertice += N_DATA_PER_VERTICE;
 	}
 
 	glGenBuffers(1, vbo); // Generate 1 buffer
@@ -43,46 +82,6 @@ static int		vbo(GLuint *vbo, const t_model *model)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * size, vertices, GL_STATIC_DRAW); // copy the vertex data
 
 	free(vertices);
-	return (1);
-}
-
-/*
-** link points in order
-** indices
-*/
-
-static int		ibo(GLuint *ibo, const t_model *model)
-{
-	
-	t_list			*list;
-	unsigned int	i;
-	size_t			size;
-	GLuint			*elements;
-	GLuint			*element;
-
-	size = model->nfaces * N_VERTICES_PER_FACE;
-	if (!(elements = (GLuint *)malloc(size * sizeof(GLuint))))
-		return (0);
-	list = model->faces;
-	element = elements;
-	while (list)
-	{
-		i = 0;
-		while (i < N_VERTICES_PER_FACE)
-		{
-			element[i] = ((GLuint *)(list->data))[i];
-			i++;
-		}
-		list = list->next;
-		element += N_VERTICES_PER_FACE;
-	}
-
-	glGenBuffers(1, ibo); // generate
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *ibo); // make active
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * size, elements,
-		GL_STATIC_DRAW);
-
-	free(elements);
 	return (1);
 }
 
@@ -95,8 +94,6 @@ int				process_model(const t_model *model, t_data *data)
 	if (!vao(&(data->model.arrays.vao)))
 		return (0);
 	if (!vbo(&(data->model.arrays.vbo), model))
-		return (0);
-	if (!ibo(&(data->model.arrays.ibo), model))
 		return (0);
 
 	pos_attrib = glGetAttribLocation(data->model.shader.program, "position");

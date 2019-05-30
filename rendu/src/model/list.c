@@ -24,6 +24,7 @@ t_list	*new_elem(t_list **list, size_t data_size)
 			prev = prev->next;
 		prev->next = elem;
 	}
+	elem->index = 0;
 	return (elem);
 }
 

@@ -5,6 +5,7 @@
 
 typedef struct	s_list
 {
+	unsigned int	index;
 	void			*data;
 	struct s_list	*next;
 }				t_list;

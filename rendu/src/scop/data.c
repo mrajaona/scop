@@ -24,8 +24,6 @@ static void		del_info(t_info *info)
 		glDeleteVertexArrays(1, &(info->arrays.vao));
 	if (info->arrays.vbo)
 		glDeleteBuffers(1, &(info->arrays.vbo));
-	if (info->arrays.ibo)
-		glDeleteBuffers(1, &(info->arrays.ibo));
 }
 
 static void		data_del(t_data *data)
@@ -52,7 +50,6 @@ static void		clr_info(t_info *info)
 	info->shader.fragment = 0;
 	info->arrays.vao = 0;
 	info->arrays.vbo = 0;
-	info->arrays.ibo = 0;
 }
 
 void			data_clr(t_data *data)

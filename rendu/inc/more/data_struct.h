@@ -25,7 +25,6 @@ typedef struct	s_arrays
 {
 	GLuint		vao;
 	GLuint		vbo;
-	GLuint		ibo;
 }				t_arrays;
 
 typedef struct	s_info

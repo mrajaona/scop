@@ -2,8 +2,9 @@
 
 int	read_v(FILE *fp, t_model *model)
 {
-	t_list	*current;
-	float	*tmp;
+	t_list				*current;
+	float				*tmp;
+	static unsigned int	index = 0;
 
 	if (!(current = new_elem(&(model->vertices), 3 * sizeof(float))))
 		return (0);
@@ -15,6 +16,8 @@ int	read_v(FILE *fp, t_model *model)
 			&(tmp[2]))
 		!= 3)
 		return (0);
+	current->index = index;
+	index++;
 	return (1);
 }
 

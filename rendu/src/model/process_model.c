@@ -7,8 +7,6 @@ static int		vao(GLuint *vao)
 	return (1);
 }
 
-/********************************************/
-/*
 static t_vector_ptr	get_triangle_normal(t_triangle *triangle)
 {
 	t_vector	va;
@@ -22,8 +20,6 @@ static t_vector_ptr	get_triangle_normal(t_triangle *triangle)
 
 	return (triangle->normal);
 }
-*/
-/********************************************/
 
 static t_vector_ptr	get_vertex(const t_model *model, GLuint index)
 {
@@ -52,25 +48,30 @@ static int		vbo(GLuint *vbo, const t_model *model)
 {
 	t_list			*list;
 	size_t			size;
-	t_coord_ptr		srcs[3];
 	float			*vertices;
 	float			*vertice;
+	t_triangle		triangle;
 
 	size = model->nfaces * N_VERTICES_PER_FACE * N_DATA_PER_VERTICE;
 	if (!(vertices = (float *)malloc(size * sizeof(float))))
 		return (0);
 	vertice = vertices;
 
+	clear_vector(triangle.v1);
+	clear_vector(triangle.v2);
+	clear_vector(triangle.v3);
+
 	list = model->faces;
 	while (list)
 	{
-		srcs[0] = get_vertex(model, ((GLuint *)(list->data))[0]);
-		srcs[1] = get_vertex(model, ((GLuint *)(list->data))[1]);
-		srcs[2] = get_vertex(model, ((GLuint *)(list->data))[2]);
+		coord_eq(triangle.v1, get_vertex(model, ((GLuint *)(list->data))[0]));
+		coord_eq(triangle.v2, get_vertex(model, ((GLuint *)(list->data))[1]));
+		coord_eq(triangle.v3, get_vertex(model, ((GLuint *)(list->data))[2]));
+		get_triangle_normal(&triangle);
 
-		cpy_vertice(vertice + (0 * N_DATA_PER_VERTICE), srcs[0]);
-		cpy_vertice(vertice + (1 * N_DATA_PER_VERTICE), srcs[1]);
-		cpy_vertice(vertice + (2 * N_DATA_PER_VERTICE), srcs[2]);
+		cpy_vertice(vertice + (0 * N_DATA_PER_VERTICE), triangle.v1);
+		cpy_vertice(vertice + (1 * N_DATA_PER_VERTICE), triangle.v2);
+		cpy_vertice(vertice + (2 * N_DATA_PER_VERTICE), triangle.v3);
 
 		vertice += N_VERTICES_PER_FACE * N_DATA_PER_VERTICE;
 

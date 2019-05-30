@@ -31,10 +31,11 @@ static int		vertex_shader(t_shader *shader)
 	const char *vertex_source = R"glsl(
 		#version 150 core
 
-		in vec2 texcoord;
+		// in vec2 texcoord;
 		in vec3 position;
+		in vec3 normal;
 
-		out vec2 Texcoord;
+		// out vec2 Texcoord;
 
 		uniform mat4 model;
 		uniform mat4 view;
@@ -42,7 +43,7 @@ static int		vertex_shader(t_shader *shader)
 
 		void main()
 		{
-			Texcoord = texcoord;
+			// Texcoord = texcoord;
 			gl_Position = proj * view * model * vec4(position, 1.0);
 		}
 	)glsl";
@@ -61,7 +62,7 @@ static int		fragment_shader(t_shader *shader)
 	const char *fragment_source = R"glsl(
 		#version 150 core
 
-		in vec2 Texcoord;
+		// in vec2 Texcoord;
 		out vec4 outColor;
 
 		uniform sampler2D texScop;

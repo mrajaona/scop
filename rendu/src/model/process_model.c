@@ -102,10 +102,15 @@ int				process_model(const t_model *model, t_data *data)
 	glVertexAttribPointer(pos_attrib, 3, GL_FLOAT, GL_FALSE,
 		N_DATA_PER_VERTICE * sizeof(float), 0);
 	glEnableVertexAttribArray(pos_attrib);
+
+	pos_attrib = glGetAttribLocation(data->model.shader.program, "normal");
+	glVertexAttribPointer(pos_attrib, 3, GL_FLOAT, GL_FALSE,
+		N_DATA_PER_VERTICE * sizeof(float), (void *)(3 * sizeof(float)));
+	glEnableVertexAttribArray(pos_attrib);
 	/*
 	tex_attrib = glGetAttribLocation(data->model.shader.program, "texcoord");
 	glVertexAttribPointer(tex_attrib, 2, GL_FLOAT, GL_FALSE,
-		5 * sizeof(float), (void *)(3 * sizeof(float)));
+		N_DATA_PER_VERTICE * sizeof(float, (void *)(3 * sizeof(float)));
 	glEnableVertexAttribArray(tex_attrib);
 	*/
 

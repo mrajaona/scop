@@ -36,6 +36,7 @@ static int		vertex_shader(t_shader *shader)
 		in vec3 normal;
 
 		// out vec2 Texcoord;
+		out vec3 Normal;
 
 		uniform mat4 model;
 		uniform mat4 view;
@@ -44,6 +45,7 @@ static int		vertex_shader(t_shader *shader)
 		void main()
 		{
 			// Texcoord = texcoord;
+			Normal = normal;
 			gl_Position = proj * view * model * vec4(position, 1.0);
 		}
 	)glsl";
@@ -63,6 +65,8 @@ static int		fragment_shader(t_shader *shader)
 		#version 150 core
 
 		// in vec2 Texcoord;
+		in vec3 Normal;
+
 		out vec4 outColor;
 
 		uniform sampler2D texScop;

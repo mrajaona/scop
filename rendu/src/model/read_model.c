@@ -16,7 +16,7 @@ int			skip_line(FILE *fp)
 static void	read_lines(FILE *fp, t_model **model)
 {
 	const char		*str_tab[] = {"v", "f", "s", "mtllib", "usemtl"};
-	int 			(*fn_tab[])(FILE *, t_model *) = {&read_v, &read_f, &read_s, &read_mtllib, &read_usemtl};
+	int 			(* const fn_tab[])(FILE *, t_model *) = {&read_v, &read_f, &read_s, &read_mtllib, &read_usemtl};
 	char			*type;
 	int				ret;
 	unsigned int	i;

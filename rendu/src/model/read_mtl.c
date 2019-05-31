@@ -49,9 +49,9 @@ void	use_mtl(const char *name, FILE *fp, t_material *material)
 			if (strcmp(type, vector_str[i]) == 0)
 			{
 				ret = fscanf(fp, "%f %f %f\n",
-						&(((*vector_tab)[i])[0]) ,
-						&(((*vector_tab)[i])[1]) ,
-						&(((*vector_tab)[i])[2]) )
+						&(((*vector_tab)[i])[0]),
+						&(((*vector_tab)[i])[1]),
+						&(((*vector_tab)[i])[2]))
 					!= 3 ? 0 : 1;
 				break ;
 			}

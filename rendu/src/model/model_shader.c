@@ -74,6 +74,7 @@ static int		fragment_shader(t_shader *shader)
 
 		uniform sampler2D texScop;
 
+		uniform vec3 viewPos;
 		uniform vec3 lightPos;
 		uniform vec3 lightColor;
 		uniform vec3 modelColor;
@@ -86,10 +87,16 @@ static int		fragment_shader(t_shader *shader)
 
 			vec3 norm = normalize(Normal);
 			vec3 lightDir = normalize(lightPos - ModelPos);
-
 			float diffuse = max(dot(norm, lightDir), 0.0);
 
-			vec3 finalColor = (ambient + diffuse) * lightColor * modelColor;
+			float specularStrength = 0.5;
+			float shininess = pow(2, 3);
+			vec3 viewDir = normalize(viewPos - ModelPos);
+			vec3 reflectDir = reflect(-lightDir, norm);
+			float spec = pow(max(dot(viewDir, reflectDir), 0.0), shininess);
+			float specular = specularStrength * spec;
+
+			vec3 finalColor = (ambient + diffuse + specular) * lightColor * modelColor;
 			outColor = vec4(finalColor, 1.0);
 		}
 	)glsl";

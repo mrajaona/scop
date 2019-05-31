@@ -50,7 +50,7 @@ void 			set_light(t_data *data)
 
 	identity(data->light.mat_model);
 
-	coord_to_vec(5.0f, 5.0f, 5.0f, pos);
+	coord_to_vec(2.0f, 1.0f, 2.0f, pos);
 	translation(pos, data->light.mat_model);
 
 	coord_to_vec(1.0f, 1.0f, 1.0f, color);
@@ -95,6 +95,9 @@ void			set_view(t_data *data)
 	use_model(&(data->model));
 	uniView = glGetUniformLocation(data->model.shader.program, "view");
 	glUniformMatrix4fv(uniView, 1, GL_FALSE, data->mat_view);
+
+	uniView = glGetUniformLocation(data->model.shader.program, "viewPos");
+	glUniform3fv(uniView, 1, eye);
 
 	use_model(&(data->light));
 	uniView = glGetUniformLocation(data->light.shader.program, "view");

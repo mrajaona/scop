@@ -108,7 +108,7 @@ int	read_usemtl(FILE *fp, t_model *model)
 	if (!rd || !name)
 		return (0);
 	(void)model;
-	// use_mtl(name, &(model->material));
+	use_mtl(name, model->mtl_fp, &(model->material));
 	free(name);
 	return (1);
 }

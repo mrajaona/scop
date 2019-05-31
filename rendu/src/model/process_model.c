@@ -65,6 +65,7 @@ static int		vbo(GLuint *vbo, const t_model *model)
 	list = model->faces;
 	while (list)
 	{
+		// TODO : check vertex found
 		coord_eq(triangle.v1, get_vertex(model, ((GLuint *)(list->data))[0]));
 		coord_eq(triangle.v2, get_vertex(model, ((GLuint *)(list->data))[1]));
 		coord_eq(triangle.v3, get_vertex(model, ((GLuint *)(list->data))[2]));

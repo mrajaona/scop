@@ -1,6 +1,6 @@
 #include "read_model.h"
 
-int			skip_line(FILE *fp)
+static int	skip_line(FILE *fp)
 {
 	char	s[1025];
 
@@ -105,8 +105,21 @@ t_model		*read_model(const char *path)
 	model->nfaces = 0;
 	model->mtl_fp = NULL;
 
+	model->material.Ns = 32;
+	clear_vector(model->material.Ka);
+	clear_vector(model->material.Kd);
+	clear_vector(model->material.Ks);
+	model->material.Ni = 1.0f;
+	model->material.d = 1.0f;
+	model->material.illum = 0;
+
 	read_lines(fp, &model);
 	fclose(fp);
+	if ((model->mtl_fp))
+	{
+		fclose(model->mtl_fp);
+		model->mtl_fp = 0;
+	}
 
 	return (model);
 }

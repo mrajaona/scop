@@ -13,6 +13,11 @@
 ** Kd		: diffuse color
 ** Ks		: specular color
 ** Ni		: optical_density (index of refraction)
+** ** The values can range from 0.001 to 10.
+** ** 1.0 means that light does not bend as it passes through an object.
+** ** Increasing the optical_density increases the amount of bending.
+** ** Glass has an index of refraction of about 1.5.
+** ** Values of less than 1.0 produce bizarre results and are not recommended.
 ** d		: dissolve (opacity)
 ** ** Tr	: transparency = 1 - d
 ** illum	: illumination model
@@ -29,10 +34,8 @@
 ** ** 10. Casts shadows onto invisible surfaces
 */
 
-
 typedef struct	s_material
 {
-	char		*name;
 	float		Ns;
 	t_vector	Ka;
 	t_vector	Kd;
@@ -56,5 +59,11 @@ typedef struct	s_model
 	FILE		*mtl_fp;
 	t_material	material;
 }				t_model;
+
+/*
+** Things to check :
+** one material per object
+** enough vertices for processing
+*/
 
 #endif

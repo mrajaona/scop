@@ -42,16 +42,13 @@ void 			set_model(t_data *data)
 void 			set_light(t_data *data)
 {
 	GLint		uniModel;
-	t_vector	mov;
+	t_vector	pos;
 	t_vector	color;
 
 	identity(data->light.mat_model);
 
-	coord_to_vec(0.0f, 0.0f, 5.0f, mov);
-	translation(mov, data->light.mat_model);
-
-	// fprintf(stdout, "\nmodel");
-	// mat4_print(data->mat_model);
+	coord_to_vec(5.0f, 0.0f, 0.0f, pos);
+	translation(pos, data->light.mat_model);
 
 	coord_to_vec(1.0f, 1.0f, 1.0f, color);
 
@@ -66,7 +63,7 @@ void 			set_light(t_data *data)
 	use_model(&(data->model));
 
 	uniModel = glGetUniformLocation(data->model.shader.program, "lightPos");
-	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->light.mat_model);
+	glUniform3fv(uniModel, 1, pos);
 
 	uniModel = glGetUniformLocation(data->model.shader.program, "lightColor");
 	glUniform3fv(uniModel, 1, color);

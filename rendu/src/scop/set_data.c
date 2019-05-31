@@ -50,7 +50,7 @@ void 			set_light(t_data *data)
 
 	identity(data->light.mat_model);
 
-	coord_to_vec(2.0f, 1.0f, 2.0f, pos);
+	coord_to_vec(4.0f, 1.0f, 4.0f, pos);
 	translation(pos, data->light.mat_model);
 
 	coord_to_vec(1.0f, 1.0f, 1.0f, color);
@@ -117,7 +117,7 @@ void			set_proj(t_data *data)
 
 	vfov = deg_to_rad(80.0f);
 	ratio = 800.0f / 600.0f;
-	planes[NEAR_PLANE] = 0.01f;
+	planes[NEAR_PLANE] = 0.001f;
 	planes[FAR_PLANE] = 100.0f;
 
 	perspective(vfov, ratio, planes, data->mat_proj);

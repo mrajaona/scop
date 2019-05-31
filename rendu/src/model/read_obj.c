@@ -8,7 +8,6 @@ int	read_v(FILE *fp, t_model *model)
 
 	if (!(current = new_elem(&(model->vertices), 3 * sizeof(float))))
 		return (0);
-	model->nvertices++;
 	tmp = (float *)(current->data);
 	if (fscanf(fp, "%f %f %f\n",
 			&(tmp[0]),

@@ -4,15 +4,18 @@
 # include <stdio.h>
 # include "list.h"
 
+# include "vector.h"
+
 typedef struct	s_material
 {
-	// ns
-	// Ka
-	// Kd
-	// Ks
-	// Ni
-	// d
-	// illum
+	char		*name;
+	float		Ns;
+	t_vector	Ka;
+	t_vector	Kd;
+	t_vector	Ks;
+	float		Ni;
+	float		d;
+	int			illum;
 }				t_material;
 
 /*
@@ -23,7 +26,6 @@ typedef struct	s_material
 typedef struct	s_model
 {
 	t_list		*vertices;
-	size_t		nvertices;
 	t_list		*faces;
 	size_t		nfaces;
 	char		*res_folder;

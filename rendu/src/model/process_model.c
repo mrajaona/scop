@@ -70,9 +70,12 @@ static int		vbo(GLuint *vbo, const t_model *model)
 		coord_eq(triangle.v3, get_vertex(model, ((GLuint *)(list->data))[2]));
 		get_triangle_normal(&triangle);
 
-		cpy_vertice(vertice + (0 * N_DATA_PER_VERTICE), triangle.v1, triangle.normal);
-		cpy_vertice(vertice + (1 * N_DATA_PER_VERTICE), triangle.v2, triangle.normal);
-		cpy_vertice(vertice + (2 * N_DATA_PER_VERTICE), triangle.v3, triangle.normal);
+		cpy_vertice(vertice + (0 * N_DATA_PER_VERTICE),
+			triangle.v1, triangle.normal);
+		cpy_vertice(vertice + (1 * N_DATA_PER_VERTICE),
+			triangle.v2, triangle.normal);
+		cpy_vertice(vertice + (2 * N_DATA_PER_VERTICE),
+			triangle.v3, triangle.normal);
 
 		vertice += N_VERTICES_PER_FACE * N_DATA_PER_VERTICE;
 
@@ -111,7 +114,7 @@ int				process_model(const t_model *model, t_data *data)
 	/*
 	attrib = glGetAttribLocation(data->model.shader.program, "texcoord");
 	glVertexAttribPointer(attrib, 2, GL_FLOAT, GL_FALSE,
-		N_DATA_PER_VERTICE * sizeof(float, (void *)(3 * sizeof(float)));
+		N_DATA_PER_VERTICE * sizeof(float, (void *)(6 * sizeof(float)));
 	glEnableVertexAttribArray(attrib);
 	*/
 

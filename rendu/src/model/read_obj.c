@@ -67,7 +67,7 @@ int	read_f(FILE *fp, t_model *model)
 }
 
 /*
-** off = 0
+** off = 0 // TODO
 */
 
 int	read_s(FILE *fp, t_model *model)
@@ -110,5 +110,24 @@ int	read_usemtl(FILE *fp, t_model *model)
 	(void)model;
 	use_mtl(name, model->mtl_fp, &(model->material));
 	free(name);
+
+	printf("Ns %f\n", model->material.Ns);
+	printf("Ka %f %f %f\n",
+		model->material.Ka[0],
+		model->material.Ka[1],
+		model->material.Ka[2]);
+	printf("Kd %f %f %f\n",
+		model->material.Kd[0],
+		model->material.Kd[1],
+		model->material.Kd[2]);
+	printf("Ks %f %f %f\n",
+		model->material.Ks[0],
+		model->material.Ks[1],
+		model->material.Ks[2]);
+	printf("Ni %f\n", model->material.Ni);
+	printf("d %f\n", model->material.d);
+	printf("illum %i\n", model->material.illum);
+
+	fflush(stdout);
 	return (1);
 }

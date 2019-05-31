@@ -13,13 +13,19 @@ static int	skip_line(FILE *fp)
 	return (1);
 }
 
-void	use_mtl(char *name, FILE *fp, t_material *material)
+void	use_mtl(const char *name, FILE *fp, t_material *material)
 {
 	const char	*vector_str[] = {"Ka", "Kd", "Ks"};
 	t_vector	*vector_tab[] = {&(material->Ka), &(material->Kd), &(material->Ks)};
 
 	const char	*float_str[] = {"Ns", "Ni", "d", "Tr"};
 	float 		*float_tab[] = {&(material->Ns), &(material->Ni),  &(material->d), &(material->d)};
+
+	(void)material;
+
+	// TODO : check open
+
+	fseek(fp, 0, SEEK_SET);
 
 	// TODO : find mtl
 	(void)name;
@@ -35,43 +41,46 @@ void	use_mtl(char *name, FILE *fp, t_material *material)
 		if (!type)
 			return ;
 
-		if (strcmp(type, "newmtl") == 0)
-			return ;
-
+		// if (strcmp(type, "newmtl") == 0)
+			// return ;
 		i = 0;
 		while (i < 3)
 		{
 			if (strcmp(type, vector_str[i]) == 0)
 			{
 				ret = fscanf(fp, "%f %f %f\n",
-						&(*vector_tab[i][0]),
-						&(*vector_tab[i][1]),
-						&(*vector_tab[i][2]))
+						&(((*vector_tab)[i])[0]) ,
+						&(((*vector_tab)[i])[1]) ,
+						&(((*vector_tab)[i])[2]) )
 					!= 3 ? 0 : 1;
 				break ;
 			}
 			i++;
 		}
-		if (i < 3)
-			break ;
-		i = 0;
-		while (i < 4)
+		if (i == 3)
 		{
-			if (strcmp(type, float_str[i]) == 0)
+			i = 0;
+			while (i < 4)
 			{
-				ret = fscanf(fp, "%f\n", float_tab[i]) != 1 ? 0 : 1;
-				if (i == 3)
-					material->d = 1 - material->d;
-				break ;
+				if (strcmp(type, float_str[i]) == 0)
+				{
+					ret = fscanf(fp, "%f\n", float_tab[i]) != 1 ? 0 : 1;
+					if (i == 3)
+						material->d = 1 - material->d;
+					break ;
+				}
+				i++;
 			}
-			i++;
+			if (i == 4)
+			{
+				if (strcmp(type, "illum") == 0)
+					ret = fscanf(fp, "%i\n", &(material->illum)) != 1 ? 0 : 1;
+				else
+					ret = skip_line(fp);
+			}
 		}
-		if (i < 4)
-			break ;
-		if (strcmp(type, "illum") == 0)
-				ret = fscanf(fp, "%i\n", &(material->illum)) != 1 ? 0 : 1;
-		else
-			ret = skip_line(fp);
+
+		ret = skip_line(fp);
 
 		free(type);
 		type = NULL;
@@ -79,10 +88,9 @@ void	use_mtl(char *name, FILE *fp, t_material *material)
 		if (!ret)
 			return ;	
 	}
-
 }
 
-void	open_mtl(char *name, t_model *model)
+void	open_mtl(const char *name, t_model *model)
 {
 	char	*path;
 	size_t	len;

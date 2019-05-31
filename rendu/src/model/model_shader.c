@@ -47,7 +47,7 @@ static int		vertex_shader(t_shader *shader)
 		{
 			gl_Position = proj * view * model * vec4(position, 1.0);
 			ModelPos = vec3(model * vec4(position, 1.0));
-			Normal = normal;
+			Normal = mat3(transpose(inverse(model))) * normal;
 			// Texcoord = texcoord;
 		}
 	)glsl";

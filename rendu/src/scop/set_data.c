@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "set_data.h"
+#include "mat4_rotate.h"
 
 void 			set_model(t_data *data)
 {
@@ -22,6 +23,8 @@ void 			set_model(t_data *data)
 	t_vector	mov;
 	coord_to_vec(0.0f, 0.0f, 0.0f, mov);
 	translation(mov, data->model.mat_model);
+
+	mat4_rotatey(deg_to_rad(90.0f), data->model.mat_model);
 
 	// fprintf(stdout, "\nmodel");
 	// mat4_print(data->mat_model);

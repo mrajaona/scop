@@ -37,12 +37,6 @@ static void		edit_output(const GLuint program, const t_mat4 src)
 	else
 		identity(model);
 
-	// static float	a = 0;
-	// t_vector		mov;
-	// coord_to_vec(0, a, 0, mov);
-	// translation(mov, model);
-	// a = a >= 3.0f ? -3.0f : (a + 0.05);
-
 	deg = (deg - 1) % 360;
 	mat4_rotatey(deg_to_rad((float)deg), model);
 

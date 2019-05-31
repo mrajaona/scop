@@ -83,7 +83,7 @@ void			set_view(t_data *data)
 	t_vector 	up;
 	GLint		uniView;
 
-	coord_to_vec(5.0f, 10.0f, 5.0f, eye);
+	coord_to_vec(5.0f, 5.0f, 5.0f, eye);
 	coord_to_vec(0, 0, 0, target);
 	coord_to_vec(0, 1, 0, up);
 

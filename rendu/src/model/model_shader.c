@@ -85,7 +85,9 @@ static int		fragment_shader(t_shader *shader)
 			float ambient = 0.1;
 
 			vec3 norm = normalize(Normal);
-			vec3 lightDir = normalize(lightPos - ModelPos);
+			vec3 potato = vec3(0.0, 0.0, 5.0);
+			// vec3 lightDir = normalize(lightPos - ModelPos);
+			vec3 lightDir = normalize(potato - ModelPos);
 
 			float diffuse = max(dot(norm, lightDir), 0.0);
 

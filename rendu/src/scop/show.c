@@ -39,7 +39,7 @@ static void		edit_output(const GLuint program, const t_mat4 src)
 
 	static float	a = 0;
 	t_vector		mov;
-	coord_to_vec(-a, a, a, mov);
+	coord_to_vec(0, a, 0, mov);
 	translation(mov, model);
 	a = a >= 3.0f ? -3.0f : (a + 0.05);
 

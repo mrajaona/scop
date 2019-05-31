@@ -12,8 +12,8 @@ static t_vector_ptr	get_triangle_normal(t_triangle *triangle)
 	t_vector	tmp_a;
 	t_vector	tmp_b;
 
-	vector_sub(triangle->v2, triangle->v1, tmp_a);
-	vector_sub(triangle->v3, triangle->v1, tmp_b);
+	vector_sub(triangle->v1, triangle->v2, tmp_a);
+	vector_sub(triangle->v3, triangle->v2, tmp_b);
 
 	coord_cross_prod(tmp_b, tmp_a, triangle->normal);
 	coord_normalize(triangle->normal, triangle->normal);

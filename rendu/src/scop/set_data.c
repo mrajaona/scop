@@ -47,7 +47,7 @@ void 			set_light(t_data *data)
 
 	identity(data->light.mat_model);
 
-	coord_to_vec(0.0f, 0.0f, 0.0f, mov);
+	coord_to_vec(0.0f, 0.0f, 5.0f, mov);
 	translation(mov, data->light.mat_model);
 
 	// fprintf(stdout, "\nmodel");

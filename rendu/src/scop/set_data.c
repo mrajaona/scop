@@ -50,7 +50,7 @@ void 			set_light(t_data *data)
 
 	identity(data->light.mat_model);
 
-	coord_to_vec(-3.0f, 5.0f, 3.0f, pos);
+	coord_to_vec(5.0f, 5.0f, 5.0f, pos);
 	translation(pos, data->light.mat_model);
 
 	coord_to_vec(1.0f, 1.0f, 1.0f, color);
@@ -83,7 +83,7 @@ void			set_view(t_data *data)
 	t_vector 	up;
 	GLint		uniView;
 
-	coord_to_vec(5.0f, 5.0f, 5.0f, eye);
+	coord_to_vec(5.0f, 5.0f, 0.0f, eye);
 	coord_to_vec(0, 0, 0, target);
 	coord_to_vec(0, 1, 0, up);
 

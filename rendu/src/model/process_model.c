@@ -39,8 +39,8 @@ static void			cpy_vertice(float *dest, t_coord coord, t_coord normal)
 	coord_eq(dest + 3, normal);
 	// dest[6] = 0; // u
 	// dest[7] = 0; // v
-	dest[6] = (coord[0] + coord[1] + coord[2]); // u // test
-	dest[7] = (coord[0] + coord[1] + coord[2]); // v // test
+	dest[6] = (coord[0] + coord[1] - coord[2]); // u // test
+	dest[7] = (coord[0] - coord[1] + coord[2]); // v // test
 }
 
 /*

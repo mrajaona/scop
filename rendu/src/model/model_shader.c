@@ -100,20 +100,20 @@ static int		fragment_shader(t_shader *shader)
 			// outColor = texture(texScop, Texcoord);
 
 			// ambient
-			vec3 ambient = material.ambient * light.color;
+			vec3 ambient = material.ambient * light.ambient * light.color;
 			
 			// diffuse 
 			vec3 norm = normalize(Normal);
 			vec3 lightDir = normalize(light.position - ModelPos);
 			float diff = max(dot(norm, lightDir), 0.0);
-			vec3 diffuse = diff * material.diffuse * light.color;
+			vec3 diffuse = diff * material.diffuse * light.diffuse * light.color;
 			
 			// specular
 			vec3 viewDir = normalize(viewPos - ModelPos);
 			vec3 reflectDir = reflect(-lightDir, norm);  
 			float spec = pow(max(dot(viewDir, reflectDir), 0.0),
 			 material.shininess);
-			vec3 specular = spec * material.specular * light.color;  
+			vec3 specular = spec * material.specular * light.specular * light.color;  
 				
 			vec3 result = ambient + diffuse + specular;
 			outColor = vec4(result, 1.0);

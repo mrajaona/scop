@@ -100,5 +100,6 @@ void	open_mtl(const char *name, t_model *model)
 	strcat(path, model->res_folder);
 	strcat(path, name);
 	model->mtl_fp = fopen(path, "r");
+
 	free(path);
 }

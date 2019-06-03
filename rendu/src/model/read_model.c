@@ -115,7 +115,8 @@ t_model		*read_model(const char *path)
 
 	read_lines(fp, &model);
 	fclose(fp);
-	if ((model->mtl_fp))
+
+	if (model && (model->mtl_fp))
 	{
 		fclose(model->mtl_fp);
 		model->mtl_fp = 0;

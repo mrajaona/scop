@@ -104,6 +104,11 @@ int	read_usemtl(FILE *fp, t_model *model)
 	char	*name;
 	int		rd;
 
+	if (!fp)
+	{
+		printf("bbbbbbbbbbbb\n"); fflush(stderr);
+		return (0);
+	}
 	rd = fscanf(fp, "%ms\n", &name);
 	if (!rd || !name)
 		return (0);

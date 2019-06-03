@@ -19,10 +19,6 @@ void 			set_model(t_data *data)
 
 	identity(data->model.mat_model);
 
-	t_vector	mov;
-	coord_to_vec(0.0f, 0.0f, 0.0f, mov);
-	translation(mov, data->model.mat_model);
-
 	mat4_rotatey(deg_to_rad(90.0f), data->model.mat_model);
 
 	// fprintf(stdout, "\nmodel");
@@ -39,19 +35,25 @@ void 			set_model(t_data *data)
 void 			set_light(t_data *data)
 {
 	GLint		uniModel;
-	t_vector	pos;
-	t_vector	color;
-
-	coord_to_vec(4.0f, 1.0f, 4.0f, pos);
-	coord_to_vec(1.0f, 1.0f, 1.0f, color);
 
 	use_model(&(data->model));
 
-	uniModel = glGetUniformLocation(data->model.shader.program, "lightPos");
-	glUniform3fv(uniModel, 1, pos);
+	coord_to_vec(4.0f, 1.0f, 4.0f, data->light.position);
+	coord_to_vec(1.0f, 1.0f, 1.0f, data->light.color);
+	coord_to_vec(0.2f, 0.2f, 0.2f, data->light.ambient);
+	coord_to_vec(0.5f, 0.5f, 0.5f, data->light.diffuse);
+	coord_to_vec(1.0f, 1.0f, 1.0f, data->light.specular);
 
-	uniModel = glGetUniformLocation(data->model.shader.program, "lightColor");
-	glUniform3fv(uniModel, 1, color);
+	uniModel = glGetUniformLocation(data->model.shader.program, "light.position");
+	glUniform3fv(uniModel, 1, data->light.position);
+	uniModel = glGetUniformLocation(data->model.shader.program, "light.color");
+	glUniform3fv(uniModel, 1, data->light.color);
+	uniModel = glGetUniformLocation(data->model.shader.program, "light.ambient");
+	glUniform3fv(uniModel, 1, data->light.ambient);
+	uniModel = glGetUniformLocation(data->model.shader.program, "light.diffuse");
+	glUniform3fv(uniModel, 1, data->light.diffuse);
+	uniModel = glGetUniformLocation(data->model.shader.program, "light.specular");
+	glUniform3fv(uniModel, 1, data->light.specular);
 
 	use_no_model();
 }

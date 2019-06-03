@@ -75,11 +75,10 @@ static int		fragment_shader(t_shader *shader)
 		uniform sampler2D texScop;
 
 		uniform vec3 viewPos;
-		uniform vec3 lightPos;
-		uniform vec3 lightColor;
 
 		struct Light {
 			vec3 position;
+			vec3 color;
 			vec3 ambient;
 			vec3 diffuse;
 			vec3 specular;
@@ -101,20 +100,20 @@ static int		fragment_shader(t_shader *shader)
 			// outColor = texture(texScop, Texcoord);
 
 			// ambient
-			vec3 ambient = material.ambient * lightColor;
+			vec3 ambient = material.ambient * light.color;
 			
 			// diffuse 
 			vec3 norm = normalize(Normal);
-			vec3 lightDir = normalize(lightPos - ModelPos);
+			vec3 lightDir = normalize(light.position - ModelPos);
 			float diff = max(dot(norm, lightDir), 0.0);
-			vec3 diffuse = diff * material.diffuse * lightColor;
+			vec3 diffuse = diff * material.diffuse * light.color;
 			
 			// specular
 			vec3 viewDir = normalize(viewPos - ModelPos);
 			vec3 reflectDir = reflect(-lightDir, norm);  
 			float spec = pow(max(dot(viewDir, reflectDir), 0.0),
 			 material.shininess);
-			vec3 specular = spec * material.specular * lightColor;  
+			vec3 specular = spec * material.specular * light.color;  
 				
 			vec3 result = ambient + diffuse + specular;
 			outColor = vec4(result, 1.0);

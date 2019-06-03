@@ -20,6 +20,16 @@
 # include "shader_struct.h"
 
 # include "mat4.h"
+# include "vector.h"
+
+typedef struct	s_light
+{
+	t_vector	position;
+	t_vector	color;
+	t_vector	ambient;
+	t_vector	diffuse;
+	t_vector	specular;
+}				t_light;
 
 typedef struct	s_arrays
 {
@@ -42,6 +52,7 @@ typedef struct	s_data
 	GLuint		textures[N_TEXTURES];
 	size_t		nfaces;
 	t_info		model;
+	t_light		light;
 }				t_data;
 
 #endif

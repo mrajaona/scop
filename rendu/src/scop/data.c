@@ -49,6 +49,15 @@ static void		clr_info(t_info *info)
 	info->arrays.vbo = 0;
 }
 
+static void		clr_light(t_light *light)
+{
+	clear_vector(light->position);
+	clear_vector(light->color);
+	clear_vector(light->ambient);
+	clear_vector(light->diffuse);
+	clear_vector(light->specular);
+}
+
 void			data_clr(t_data *data)
 {
 	unsigned int	i;
@@ -56,6 +65,7 @@ void			data_clr(t_data *data)
 	mat4_clr(data->mat_view);
 	mat4_clr(data->mat_proj);
 	clr_info(&(data->model));
+	clr_light(&(data->light));
 	data->nfaces = 0;
 	i = 0;
 	while (i < N_TEXTURES)

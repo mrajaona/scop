@@ -31,11 +31,11 @@ static int		vertex_shader(t_shader *shader)
 	const char *vertex_source = R"glsl(
 		#version 150 core
 
-		// in vec2 texcoord;
+		in vec2 texcoord;
 		in vec3 position;
 		in vec3 normal;
 
-		// out vec2 Texcoord;
+		out vec2 Texcoord;
 		out vec3 Normal;
 		out vec3 ModelPos;
 
@@ -48,7 +48,7 @@ static int		vertex_shader(t_shader *shader)
 			gl_Position = proj * view * model * vec4(position, 1.0);
 			ModelPos = vec3(model * vec4(position, 1.0));
 			Normal = mat3(transpose(inverse(model))) * normal;
-			// Texcoord = texcoord;
+			Texcoord = texcoord;
 		}
 	)glsl";
 
@@ -66,7 +66,7 @@ static int		fragment_shader(t_shader *shader)
 	const char *fragment_source = R"glsl(
 		#version 150 core
 
-		// in vec2 Texcoord;
+		in vec2 Texcoord;
 		in vec3 Normal;
 		in vec3 ModelPos;
 
@@ -97,6 +97,8 @@ static int		fragment_shader(t_shader *shader)
 
 		void main()
 		{
+			vec4 tex = texture(texScop, Texcoord);
+
 			// ambient
 			vec3 ambient = material.ambient * light.ambient * light.color;
 			
@@ -115,8 +117,6 @@ static int		fragment_shader(t_shader *shader)
 				
 			vec3 result = ambient + diffuse + specular;
 			outColor = vec4(result, 1.0);
-
-			// outColor = texture(texScop, Texcoord);
 		}
 
 	)glsl";

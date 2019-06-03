@@ -22,8 +22,6 @@
 # include "texture.h"
 # include "model.h"
 # include "model_shader.h"
-# include "light.h"
-# include "light_shader.h"
 # include "set_data.h"
 # include "show.h"
 

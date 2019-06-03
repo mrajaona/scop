@@ -78,6 +78,15 @@ static int		fragment_shader(t_shader *shader)
 		uniform vec3 lightPos;
 		uniform vec3 lightColor;
 
+		struct Light {
+			vec3 position;
+			vec3 ambient;
+			vec3 diffuse;
+			vec3 specular;
+		};
+
+		uniform Light light;
+
 		struct Material {
 			vec3 ambient;
 			vec3 diffuse;

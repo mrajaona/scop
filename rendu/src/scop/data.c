@@ -29,10 +29,7 @@ static void		del_info(t_info *info)
 static void		data_del(t_data *data)
 {
 	glDeleteTextures(N_TEXTURES, data->textures);
-
 	del_info(&(data->model));
-	del_info(&(data->light));
-	
 	glfwTerminate();
 }
 
@@ -59,7 +56,6 @@ void			data_clr(t_data *data)
 	mat4_clr(data->mat_view);
 	mat4_clr(data->mat_proj);
 	clr_info(&(data->model));
-	clr_info(&(data->light));
 	data->nfaces = 0;
 	i = 0;
 	while (i < N_TEXTURES)

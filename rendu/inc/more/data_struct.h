@@ -42,7 +42,6 @@ typedef struct	s_data
 	GLuint		textures[N_TEXTURES];
 	size_t		nfaces;
 	t_info		model;
-	t_info		light;
 }				t_data;
 
 #endif

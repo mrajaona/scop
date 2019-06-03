@@ -28,14 +28,6 @@ static void		model(t_data *data, const char *path)
 	set_model(data);
 }
 
-static void		light(t_data *data)
-{
-	if (!light_shader_init(&(data->light.shader)))
-		data_exit(data, 1);
-	process_light(data);	
-	set_light(data);
-}
-
 int				main(int ac, char **av)
 {
 	t_data	data;
@@ -53,7 +45,7 @@ int				main(int ac, char **av)
 	glew_init();
 
 	model(&data, av[1]);
-	light(&data);
+	set_light(&data);
 
 	set_view(&data);
 	set_proj(&data);

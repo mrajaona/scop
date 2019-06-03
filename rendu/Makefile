@@ -47,12 +47,6 @@ SRC_MODEL	=	model.c \
 
 SRCS_MODEL	=	$(addprefix	$(DIR_MODEL), $(SRC_MODEL))
 
-DIR_LIGHT	=	light/
-SRC_LIGHT	=	light.c \
-				light_shader.c
-
-SRCS_LIGHT	=	$(addprefix	$(DIR_LIGHT), $(SRC_LIGHT))
-
 DIR_MORE_INC	=	more/
 MORE_INC		=	data_struct.h \
 					shader_struct.h \
@@ -73,7 +67,6 @@ DIRS		=	$(DIR_MAIN) \
 				$(DIR_MATRIX) \
 				$(DIR_IMAGE) \
 				$(DIR_MODEL) \
-				$(DIR_LIGHT) \
 				$(DIR_MORE_INC)
 DIRS_INC	=	$(addprefix -I$(DIR_INC), $(DIRS))
 

@@ -42,20 +42,8 @@ void 			set_light(t_data *data)
 	t_vector	pos;
 	t_vector	color;
 
-	identity(data->light.mat_model);
-
 	coord_to_vec(4.0f, 1.0f, 4.0f, pos);
-	translation(pos, data->light.mat_model);
-
 	coord_to_vec(1.0f, 1.0f, 1.0f, color);
-
-	use_model(&(data->light));
-
-	uniModel = glGetUniformLocation(data->light.shader.program, "model");
-	glUniformMatrix4fv(uniModel, 1, GL_FALSE, data->light.mat_model);
-
-	uniModel = glGetUniformLocation(data->light.shader.program, "lightColor");
-	glUniform3fv(uniModel, 1, color);
 
 	use_model(&(data->model));
 
@@ -93,10 +81,6 @@ void			set_view(t_data *data)
 	uniView = glGetUniformLocation(data->model.shader.program, "viewPos");
 	glUniform3fv(uniView, 1, eye);
 
-	use_model(&(data->light));
-	uniView = glGetUniformLocation(data->light.shader.program, "view");
-	glUniformMatrix4fv(uniView, 1, GL_FALSE, data->mat_view);
-
 	use_no_model();
 }
 
@@ -121,10 +105,6 @@ void			set_proj(t_data *data)
 
 	use_model(&(data->model));
 	uniProj = glGetUniformLocation(data->model.shader.program, "proj");
-	glUniformMatrix4fv(uniProj, 1, GL_FALSE, data->mat_proj);
-
-	use_model(&(data->light));
-	uniProj = glGetUniformLocation(data->light.shader.program, "proj");
 	glUniformMatrix4fv(uniProj, 1, GL_FALSE, data->mat_proj);
 
 	use_no_model();

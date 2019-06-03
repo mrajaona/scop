@@ -25,7 +25,7 @@
 # include "read_model.h"
 # include "process_model.h"
 
-# define N_DATA_PER_VERTICE 6 // +2 (uv)
+# define N_DATA_PER_VERTICE 8
 # define N_VERTICES_PER_FACE 3
 
 int			load_model(const char *path, t_data *data);

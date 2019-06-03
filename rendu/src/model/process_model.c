@@ -33,10 +33,12 @@ static t_vector_ptr	get_vertex(const t_model *model, GLuint index)
 	return ((t_vector_ptr)(list->data));
 }
 
-static void			cpy_vertice(t_coord dest, t_coord coord, t_coord normal)
+static void			cpy_vertice(float *dest, t_coord coord, t_coord normal)
 {
 	coord_eq(dest, coord);
 	coord_eq(dest + 3, normal);
+	dest[6] = 0; // u
+	dest[7] = 0; // v
 }
 
 /*
@@ -115,12 +117,10 @@ int				process_model(const t_model *model, t_data *data)
 		N_DATA_PER_VERTICE * sizeof(float), (void *)(3 * sizeof(float)));
 	glEnableVertexAttribArray(attrib);
 	
-	/*
 	attrib = glGetAttribLocation(data->model.shader.program, "texcoord");
 	glVertexAttribPointer(attrib, 2, GL_FLOAT, GL_FALSE,
-		N_DATA_PER_VERTICE * sizeof(float, (void *)(6 * sizeof(float)));
+		N_DATA_PER_VERTICE * sizeof(float), (void *)(6 * sizeof(float)));
 	glEnableVertexAttribArray(attrib);
-	*/
 
 	attrib = glGetUniformLocation(data->model.shader.program,
 		"material.ambient");

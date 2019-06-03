@@ -97,8 +97,6 @@ static int		fragment_shader(t_shader *shader)
 
 		void main()
 		{
-			// outColor = texture(texScop, Texcoord);
-
 			// ambient
 			vec3 ambient = material.ambient * light.ambient * light.color;
 			
@@ -117,6 +115,8 @@ static int		fragment_shader(t_shader *shader)
 				
 			vec3 result = ambient + diffuse + specular;
 			outColor = vec4(result, 1.0);
+
+			// outColor = texture(texScop, Texcoord);
 		}
 
 	)glsl";

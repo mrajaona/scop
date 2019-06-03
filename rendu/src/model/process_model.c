@@ -2,8 +2,8 @@
 
 static int		vao(GLuint *vao)
 {
-	glGenVertexArrays(1, vao); // generate
-	glBindVertexArray(*vao); // make active
+	glGenVertexArrays(1, vao);
+	glBindVertexArray(*vao);
 	return (1);
 }
 
@@ -65,7 +65,8 @@ static int		vbo(GLuint *vbo, const t_model *model)
 	list = model->faces;
 	while (list)
 	{
-		memset((void *)face, 0,  N_VERTICES_PER_FACE * N_DATA_PER_VERTICE * sizeof(float));
+		memset((void *)face, 0,
+			N_VERTICES_PER_FACE * N_DATA_PER_VERTICE * sizeof(float));
 
 		coord_eq(triangle.v1, get_vertex(model, ((GLuint *)(list->data))[0]));
 		coord_eq(triangle.v2, get_vertex(model, ((GLuint *)(list->data))[1]));
@@ -84,9 +85,10 @@ static int		vbo(GLuint *vbo, const t_model *model)
 		list = list->next;
 	}
 
-	glGenBuffers(1, vbo); // Generate 1 buffer
-	glBindBuffer(GL_ARRAY_BUFFER, *vbo); // make active array buffer
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * size, vertices, GL_STATIC_DRAW); // copy the vertex data
+	glGenBuffers(1, vbo);
+	glBindBuffer(GL_ARRAY_BUFFER, *vbo);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * size, vertices,
+		GL_STATIC_DRAW);
 
 	free(vertices);
 	return (1);

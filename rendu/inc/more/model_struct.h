@@ -36,11 +36,11 @@
 
 typedef struct	s_material
 {
-	float		Ns;
-	t_vector	Ka;
-	t_vector	Kd;
-	t_vector	Ks;
-	float		Ni;
+	float		ns;
+	t_vector	ka;
+	t_vector	kd;
+	t_vector	ks;
+	float		ni;
 	float		d;
 	int			illum;
 }				t_material;

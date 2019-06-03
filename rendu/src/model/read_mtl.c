@@ -16,10 +16,10 @@ static int	skip_line(FILE *fp)
 void	use_mtl(const char *name, FILE *fp, t_material *material)
 {
 	const char	*vector_str[] = {"Ka", "Kd", "Ks"};
-	t_vector	*vector_tab[] = {&(material->Ka), &(material->Kd), &(material->Ks)};
+	t_vector	*vector_tab[] = {&(material->ka), &(material->kd), &(material->ks)};
 
 	const char	*float_str[] = {"Ns", "Ni", "d", "Tr"};
-	float 		*float_tab[] = {&(material->Ns), &(material->Ni),  &(material->d), &(material->d)};
+	float 		*float_tab[] = {&(material->ns), &(material->ni),  &(material->d), &(material->d)};
 
 	(void)material;
 

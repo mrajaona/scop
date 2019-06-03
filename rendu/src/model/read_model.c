@@ -105,11 +105,11 @@ t_model		*read_model(const char *path)
 	model->nfaces = 0;
 	model->mtl_fp = NULL;
 
-	model->material.Ns = 32;
-	clear_vector(model->material.Ka);
-	clear_vector(model->material.Kd);
-	clear_vector(model->material.Ks);
-	model->material.Ni = 1.0f;
+	model->material.ns = 32;
+	clear_vector(model->material.ka);
+	clear_vector(model->material.kd);
+	clear_vector(model->material.ks);
+	model->material.ni = 1.0f;
 	model->material.d = 1.0f;
 	model->material.illum = 0;
 

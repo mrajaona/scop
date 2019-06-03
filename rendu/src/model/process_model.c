@@ -119,6 +119,23 @@ int				process_model(const t_model *model, t_data *data)
 	glEnableVertexAttribArray(attrib);
 	*/
 
+	attrib = glGetUniformLocation(data->model.shader.program,
+		"material.ambient");
+	glUniform3fv(attrib, 1, model->material.ka);
+
+	attrib = glGetUniformLocation(data->model.shader.program,
+		"material.diffuse");
+	glUniform3fv(attrib, 1, model->material.kd);
+
+	attrib = glGetUniformLocation(data->model.shader.program,
+		"material.specular");
+	glUniform3fv(attrib, 1, model->material.ks);
+
+	attrib = glGetUniformLocation(data->model.shader.program,
+		"material.shininess");
+	glUniform1f(attrib, model->material.ns);
+
+
 	use_no_model();
 
 	return (1);

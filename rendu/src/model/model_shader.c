@@ -77,28 +77,40 @@ static int		fragment_shader(t_shader *shader)
 		uniform vec3 viewPos;
 		uniform vec3 lightPos;
 		uniform vec3 lightColor;
-		uniform vec3 modelColor;
+
+		struct Material {
+			vec3 ambient;
+			vec3 diffuse;
+			vec3 specular;
+			float shininess;
+		};
+
+		uniform Material material;
 
 		void main()
 		{
 			// outColor = texture(texScop, Texcoord);
 
-			float ambient = 0.1;
-
+			// ambient
+			vec3 ambient = material.ambient;
+			
+			// diffuse 
 			vec3 norm = normalize(Normal);
 			vec3 lightDir = normalize(lightPos - ModelPos);
-			float diffuse = max(dot(norm, lightDir), 0.0);
-
-			float specularStrength = 0.5;
-			float shininess = pow(2, 3);
+			float diff = max(dot(norm, lightDir), 0.0);
+			vec3 diffuse = diff * material.diffuse;
+			
+			// specular
 			vec3 viewDir = normalize(viewPos - ModelPos);
-			vec3 reflectDir = reflect(-lightDir, norm);
-			float spec = pow(max(dot(viewDir, reflectDir), 0.0), shininess);
-			float specular = specularStrength * spec;
-
-			vec3 finalColor = (ambient + diffuse + specular) * lightColor * modelColor;
-			outColor = vec4(finalColor, 1.0);
+			vec3 reflectDir = reflect(-lightDir, norm);  
+			float spec = pow(max(dot(viewDir, reflectDir), 0.0),
+				material.shininess);
+			vec3 specular = spec * material.specular;  
+				
+			vec3 result = (ambient + diffuse + specular) * lightColor;
+			outColor = vec4(result, 1.0);
 		}
+
 	)glsl";
 
 	shader->fragment = glCreateShader(GL_FRAGMENT_SHADER);

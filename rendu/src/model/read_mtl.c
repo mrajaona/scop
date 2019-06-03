@@ -48,7 +48,7 @@ void	use_mtl(const char *name, FILE *fp, t_material *material)
 		{
 			if (strcmp(type, vector_str[i]) == 0)
 			{
-				ret = fscanf(fp, "%f %f %f\n",
+				ret = fscanf(fp, "%f %f %f",
 						&(((*vector_tab)[i])[0]),
 						&(((*vector_tab)[i])[1]),
 						&(((*vector_tab)[i])[2]))
@@ -64,7 +64,7 @@ void	use_mtl(const char *name, FILE *fp, t_material *material)
 			{
 				if (strcmp(type, float_str[i]) == 0)
 				{
-					ret = fscanf(fp, "%f\n", float_tab[i]) != 1 ? 0 : 1;
+					ret = fscanf(fp, "%f", float_tab[i]) != 1 ? 0 : 1;
 					if (i == 3)
 						material->d = 1 - material->d;
 					break ;
@@ -74,9 +74,7 @@ void	use_mtl(const char *name, FILE *fp, t_material *material)
 			if (i == 4)
 			{
 				if (strcmp(type, "illum") == 0)
-					ret = fscanf(fp, "%i\n", &(material->illum)) != 1 ? 0 : 1;
-				else
-					ret = skip_line(fp);
+					ret = fscanf(fp, "%i", &(material->illum)) != 1 ? 0 : 1;
 			}
 		}
 

@@ -19,6 +19,8 @@ void	perspective(const float vfov, const float ratio, const float planes[2],
 	const float	far = planes[FAR_PLANE];
 	const float	htan = tanf(vfov / 2);
 
+	if (!dest || !planes)
+		return ;
 	mat4_clr(dest);
 	if (near == far || htan == 0.0f || ratio == 0.0f)
 		return ;

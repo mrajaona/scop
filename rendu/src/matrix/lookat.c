@@ -31,6 +31,8 @@ void			lookat(const t_vector eye, const t_vector target,
 	t_vector	z;
 	t_mat4		res;
 
+	if (!eye || !target || !up || !dest)
+		return ;
 	coord_normalize(vector_sub(target, eye, z), z);
 	coord_normalize(up, y);
 	coord_normalize(coord_cross_prod(z, y, x), x);

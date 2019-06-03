@@ -16,6 +16,8 @@
 
 void	vector_print(const t_vector vec)
 {
+	if (!vec)
+		return ;
 	fprintf(stdout, "\n% .2f\n% .2f\n% .2f\n% .2f\n",
 		vec[0], vec[1], vec[2], vec[3]);
 	fflush(stdout);
@@ -30,6 +32,8 @@ void	vector_print(const t_vector vec)
 
 void	clear_vector(t_vector vec)
 {
+	if (!vec)
+		return ;
 	vec[0] = 0;
 	vec[1] = 0;
 	vec[2] = 0;
@@ -40,6 +44,8 @@ void	vector_eq(t_vector dst, const t_vector src)
 {
 	unsigned char	y;
 
+	if (!dst || !src)
+		return ;
 	y = 0;
 	while (y < 4)
 	{

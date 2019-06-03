@@ -16,6 +16,8 @@
 
 void	mat4_print(const t_mat4 mat)
 {
+	if (!mat)
+		return ;
 	fprintf(stdout, "\n% .2f % .2f % .2f % .2f\n",
 		mat4_get(mat, 0, 0),
 		mat4_get(mat, 1, 0),
@@ -42,14 +44,14 @@ void	mat4_print(const t_mat4 mat)
 void	mat4_set(t_mat4 mat, const unsigned char x, const unsigned char y,
 	const float value)
 {
-	if (x >= 4 || y >= 4)
+	if (!mat || x >= 4 || y >= 4)
 		return ;
 	mat[y + (4 * x)] = value;
 }
 
 float	mat4_get(const t_mat4 mat, const unsigned char x, const unsigned char y)
 {
-	if (x >= 4 || y >= 4)
+	if (!mat || x >= 4 || y >= 4)
 		return (0);
 	return (mat[y + (4 * x)]);
 }
@@ -66,6 +68,8 @@ void	mat4_clr(t_mat4 mat)
 	unsigned char	x;
 	unsigned char	y;
 
+	if (!mat)
+		return ;
 	y = 0;
 	while (y < 4)
 	{
@@ -91,6 +95,8 @@ void	identity(t_mat4 mat)
 	unsigned char	x;
 	unsigned char	y;
 
+	if (!mat)
+		return ;
 	y = 0;
 	while (y < 4)
 	{
@@ -112,6 +118,8 @@ void	mat4_eq(t_mat4 dst, const t_mat4 src)
 	unsigned char	x;
 	unsigned char	y;
 
+	if (!dst || !src)
+		return ;
 	y = 0;
 	while (y < 4)
 	{

@@ -50,13 +50,13 @@ static int		vbo(GLuint *vbo, const t_model *model)
 	t_list			*list;
 	size_t			size;
 	float			*vertices;
-	float			*vertice;
+	float			*face;
 	t_triangle		triangle;
 
 	size = model->nfaces * N_VERTICES_PER_FACE * N_DATA_PER_VERTICE;
 	if (!(vertices = (float *)malloc(size * sizeof(float))))
 		return (0);
-	vertice = vertices;
+	face = vertices;
 
 	clear_vector(triangle.v1);
 	clear_vector(triangle.v2);
@@ -65,20 +65,21 @@ static int		vbo(GLuint *vbo, const t_model *model)
 	list = model->faces;
 	while (list)
 	{
-		// TODO : check vertex found
+		memset((void *)face, 0,  N_VERTICES_PER_FACE * N_DATA_PER_VERTICE * sizeof(float));
+
 		coord_eq(triangle.v1, get_vertex(model, ((GLuint *)(list->data))[0]));
 		coord_eq(triangle.v2, get_vertex(model, ((GLuint *)(list->data))[1]));
 		coord_eq(triangle.v3, get_vertex(model, ((GLuint *)(list->data))[2]));
 		get_triangle_normal(&triangle);
 
-		cpy_vertice(vertice + (0 * N_DATA_PER_VERTICE),
+		cpy_vertice(face + (0 * N_DATA_PER_VERTICE),
 			triangle.v1, triangle.normal);
-		cpy_vertice(vertice + (1 * N_DATA_PER_VERTICE),
+		cpy_vertice(face + (1 * N_DATA_PER_VERTICE),
 			triangle.v2, triangle.normal);
-		cpy_vertice(vertice + (2 * N_DATA_PER_VERTICE),
+		cpy_vertice(face + (2 * N_DATA_PER_VERTICE),
 			triangle.v3, triangle.normal);
 
-		vertice += N_VERTICES_PER_FACE * N_DATA_PER_VERTICE;
+		face += N_VERTICES_PER_FACE * N_DATA_PER_VERTICE;
 
 		list = list->next;
 	}

@@ -20,9 +20,9 @@ void	perspective(t_mat4 dest)
 	if (!dest)
 		return ;
 	mat4_clr(dest);
-	if (P_NEAR == P_FAR || htan == 0.0f || RATIO == 0.0f)
+	if (P_NEAR == P_FAR || htan == 0.0f || SCREEN_RATIO == 0.0f)
 		return ;
-	mat4_set(dest, 0, 0, htan / RATIO);
+	mat4_set(dest, 0, 0, htan / SCREEN_RATIO);
 	mat4_set(dest, 1, 1, htan);
 	mat4_set(dest, 2, 2, -1 * (P_FAR + P_NEAR) / (P_FAR - P_NEAR));
 	mat4_set(dest, 2, 3, -1);

@@ -25,9 +25,9 @@
 # define P_NEAR 0.001f
 # define P_FAR 100.0f
 # define VFOV_DEG 80.0f
-# define WIDTH 800
-# define HEIGHT 600
-# define RATIO ((float)WIDTH / (float)HEIGHT)
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 600
+# define SCREEN_RATIO ((float)SCREEN_WIDTH / (float)SCREEN_HEIGHT)
 
 void	perspective(t_mat4 dest);
 

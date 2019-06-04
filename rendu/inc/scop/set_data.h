@@ -26,8 +26,6 @@
 # include "lookat.h"
 # include "perspective.h"
 
-# include "angle.h"
-
 void			set_model(t_data *data);
 void			set_light(t_data *data);
 void			set_view(t_data *data);

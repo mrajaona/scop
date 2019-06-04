@@ -90,17 +90,9 @@ void			set_proj(t_data *data)
 {
 	identity(data->mat_proj);
 
-	float		planes[2];
-	float		vfov;
-	float		ratio;
 	GLint		uniProj;
 
-	vfov = deg_to_rad(80.0f);
-	ratio = 800.0f / 600.0f;
-	planes[NEAR_PLANE] = 0.001f;
-	planes[FAR_PLANE] = 100.0f;
-
-	perspective(vfov, ratio, planes, data->mat_proj);
+	perspective(data->mat_proj);
 
 	// fprintf(stdout, "\nproj");
 	// mat4_print(data->mat_proj);

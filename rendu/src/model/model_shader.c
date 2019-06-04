@@ -104,7 +104,8 @@ static int		fragment_shader(t_shader *shader)
 			
 			// diffuse 
 			vec3 norm = normalize(Normal);
-			vec3 lightDir = normalize(light.position - ModelPos);
+			vec3 lightDir = normalize(light.position);
+			// vec3 lightDir = normalize(light.position - ModelPos);
 			float diff = max(dot(norm, lightDir), 0.0);
 			vec3 diffuse = diff * material.diffuse * light.diffuse * light.color;
 			
@@ -116,7 +117,8 @@ static int		fragment_shader(t_shader *shader)
 			vec3 specular = spec * material.specular * light.specular * light.color;  
 				
 			vec3 result = ambient + diffuse + specular;
-			outColor = tex * vec4(result, 1.0);
+			outColor = vec4(result, 1.0);
+			// outColor = tex * vec4(result, 1.0);
 		}
 
 	)glsl";

@@ -12,21 +12,19 @@
 
 #include "perspective.h"
 
-void	perspective(const float vfov, const float ratio, const float planes[2],
-	t_mat4 dest)
+void	perspective(t_mat4 dest)
 {
-	const float	near = planes[NEAR_PLANE];
-	const float	far = planes[FAR_PLANE];
+	const float vfov = deg_to_rad(VFOV_DEG);
 	const float	htan = tanf(vfov / 2);
 
-	if (!dest || !planes)
+	if (!dest)
 		return ;
 	mat4_clr(dest);
-	if (near == far || htan == 0.0f || ratio == 0.0f)
+	if (P_NEAR == P_FAR || htan == 0.0f || RATIO == 0.0f)
 		return ;
-	mat4_set(dest, 0, 0, htan / ratio);
+	mat4_set(dest, 0, 0, htan / RATIO);
 	mat4_set(dest, 1, 1, htan);
-	mat4_set(dest, 2, 2, -1 * (far + near) / (far - near));
+	mat4_set(dest, 2, 2, -1 * (P_FAR + P_NEAR) / (P_FAR - P_NEAR));
 	mat4_set(dest, 2, 3, -1);
-	mat4_set(dest, 3, 2, (-2 * far * near) / (far - near));
+	mat4_set(dest, 3, 2, (-2 * P_FAR * P_NEAR) / (P_FAR - P_NEAR));
 }

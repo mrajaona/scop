@@ -15,16 +15,18 @@
 
 # include <math.h>
 # include "mat4.h"
+# include "angle.h"
 
 /*
 ** plane[0] = near plane
 ** plane[1] = far plane
 */
 
-# define NEAR_PLANE 0
-# define FAR_PLANE 1
+# define P_NEAR 0.001f
+# define P_FAR 100.0f
+# define VFOV_DEG 80.0f
+# define RATIO (800.0f / 600.0f)
 
-void	perspective(const float vfov, const float ratio, const float planes[2],
-	t_mat4 dest);
+void	perspective(t_mat4 dest);
 
 #endif

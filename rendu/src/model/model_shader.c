@@ -29,7 +29,7 @@ static int		shader_status(const GLuint shader)
 static int		vertex_shader(t_shader *shader)
 {
 	const char *vertex_source = R"glsl(
-		#version 150 core
+		#version 330 core
 
 		in vec2 texcoord;
 		in vec3 position;
@@ -64,7 +64,7 @@ static int		vertex_shader(t_shader *shader)
 static int		fragment_shader(t_shader *shader)
 {
 	const char *fragment_source = R"glsl(
-		#version 150 core
+		#version 330 core
 
 		in vec2 Texcoord;
 		in vec3 Normal;
@@ -104,8 +104,8 @@ static int		fragment_shader(t_shader *shader)
 			
 			// diffuse 
 			vec3 norm = normalize(Normal);
-			vec3 lightDir = normalize(light.position);
-			// vec3 lightDir = normalize(light.position - ModelPos);
+			// vec3 lightDir = normalize(light.position); // directional light
+			vec3 lightDir = normalize(light.position - ModelPos);
 			float diff = max(dot(norm, lightDir), 0.0);
 			vec3 diffuse = diff * material.diffuse * light.diffuse * light.color;
 			

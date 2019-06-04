@@ -15,9 +15,8 @@
 
 # include "glew_inc.h"
 
-# include <stdio.h>
-
 # include "shader_struct.h"
+# include "shader_status.h"
 # include "model.h"
 
 int	model_shader_init(t_shader *shader);

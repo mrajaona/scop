@@ -25,7 +25,9 @@
 # define P_NEAR 0.001f
 # define P_FAR 100.0f
 # define VFOV_DEG 80.0f
-# define RATIO (800.0f / 600.0f)
+# define WIDTH 800
+# define HEIGHT 600
+# define RATIO ((float)WIDTH / (float)HEIGHT)
 
 void	perspective(t_mat4 dest);
 

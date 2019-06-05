@@ -7,6 +7,6 @@
 
 # include "shader_struct.h"
 
-int	model_shader_init(t_shader *shader);
+int		shader_status(const GLuint shader);
 
 #endif

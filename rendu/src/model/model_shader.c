@@ -12,20 +12,6 @@
 
 #include "model_shader.h"
 
-static int		shader_status(const GLuint shader)
-{
-	GLint status;
-
-	glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
-	if (status != GL_TRUE)
-	{
-		fprintf(stderr, "shader init error\n");
-		fflush(stderr);
-		return (0);
-	}
-	return (1);
-}
-
 static int		vertex_shader(t_shader *shader)
 {
 	const char *vertex_source = R"glsl(

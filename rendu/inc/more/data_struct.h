@@ -35,6 +35,7 @@ typedef struct	s_arrays
 {
 	GLuint		vao;
 	GLuint		vbo;
+	GLuint		fbo;
 }				t_arrays;
 
 typedef struct	s_info
@@ -50,6 +51,7 @@ typedef struct	s_data
 	t_mat4		mat_view;
 	t_mat4		mat_proj;
 	GLuint		textures[N_TEXTURES];
+	GLuint		depth_map;
 	size_t		nfaces;
 	t_info		model;
 	t_light		light;

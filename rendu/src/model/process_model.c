@@ -109,10 +109,14 @@ int				process_model(const t_model *model, t_data *data)
 	if (!vbo(&(data->model.arrays.vbo), model))
 		return (0);
 
+	// position
+
 	attrib = glGetAttribLocation(data->model.shader.program, "position");
 	glVertexAttribPointer(attrib, 3, GL_FLOAT, GL_FALSE,
 		N_DATA_PER_VERTICE * sizeof(float), 0);
 	glEnableVertexAttribArray(attrib);
+
+	// texture
 
 	attrib = glGetAttribLocation(data->model.shader.program, "normal");
 	glVertexAttribPointer(attrib, 3, GL_FLOAT, GL_FALSE,
@@ -123,6 +127,8 @@ int				process_model(const t_model *model, t_data *data)
 	glVertexAttribPointer(attrib, 2, GL_FLOAT, GL_FALSE,
 		N_DATA_PER_VERTICE * sizeof(float), (void *)(6 * sizeof(float)));
 	glEnableVertexAttribArray(attrib);
+
+	// light
 
 	attrib = glGetUniformLocation(data->model.shader.program,
 		"material.ambient");

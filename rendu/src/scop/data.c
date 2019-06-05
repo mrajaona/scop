@@ -24,6 +24,8 @@ static void		del_info(t_info *info)
 		glDeleteVertexArrays(1, &(info->arrays.vao));
 	if (info->arrays.vbo)
 		glDeleteBuffers(1, &(info->arrays.vbo));
+	if (info->arrays.fbo)
+		glDeleteFramebuffers(1, &(info->arrays.fbo));
 }
 
 static void		data_del(t_data *data)
@@ -47,6 +49,7 @@ static void		clr_info(t_info *info)
 	info->shader.fragment = 0;
 	info->arrays.vao = 0;
 	info->arrays.vbo = 0;
+	info->arrays.fbo = 0;
 }
 
 static void		clr_light(t_light *light)
@@ -73,4 +76,5 @@ void			data_clr(t_data *data)
 		data->textures[i] = 0;
 		i++;
 	}
+	data->depth_map = 0;
 }

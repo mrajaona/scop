@@ -49,6 +49,9 @@ typedef struct	s_depth
 	GLuint		fbo;
 	GLuint		map;
 	t_shader	shader;
+	t_mat4		mat_model;
+	t_mat4		mat_view;
+	t_mat4		mat_proj;
 }				t_depth;
 
 typedef struct	s_data

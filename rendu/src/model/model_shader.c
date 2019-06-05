@@ -21,9 +21,9 @@ static int		vertex_shader(t_shader *shader)
 		in vec3 position;
 		in vec3 normal;
 
-		out vec2 Texcoord;
-		out vec3 Normal;
 		out vec3 ModelPos;
+		out vec3 Normal;
+		out vec2 Texcoord;
 
 		uniform mat4 model;
 		uniform mat4 view;

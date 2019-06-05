@@ -69,6 +69,9 @@ static void		clr_depth(t_depth *depth)
 	depth->shader.program = 0;
 	depth->shader.vertex = 0;
 	depth->shader.fragment = 0;
+	mat4_clr(depth->mat_model);
+	mat4_clr(depth->mat_view);
+	mat4_clr(depth->mat_proj);
 }
 
 static void		clr_light(t_light *light)

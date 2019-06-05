@@ -26,13 +26,19 @@ int framebuffer(t_data *data)
 	return (1);
 }
 
-static void	depth_model(t_mat4 model)
+static void	depth_model(t_depth *depth)
 {
-	identity(model);
+	GLint	uni_model;
+
+	identity(depth->mat_model);
+
+	uni_model = glGetUniformLocation(depth->shader.program, "model");
+	glUniformMatrix4fv(uni_model, 1, GL_FALSE, depth->mat_model);
 }
 
-static void	depth_view(t_mat4 view)
+static void	depth_view(t_depth *depth)
 {
+	GLint		uni_view;
 
 	t_vector	lightPos;
 	t_vector	target;
@@ -42,11 +48,15 @@ static void	depth_view(t_mat4 view)
 	coord_to_vec(0, 0, 0, target);
 	coord_to_vec(0, 1, 0, up);
 
-	lookat(view, lightPos, target, up);
+	lookat(depth->mat_view, lightPos, target, up);
+
+	uni_view = glGetUniformLocation(depth->shader.program, "view");
+	glUniformMatrix4fv(uni_view, 1, GL_FALSE, depth->mat_view);
 }
 
-static void	depth_proj(t_mat4 proj)
+static void	depth_proj(t_depth *depth)
 {
+	GLint	uni_proj;
 	t_ortho	params;
 
 	params.left = -10;
@@ -56,18 +66,21 @@ static void	depth_proj(t_mat4 proj)
 	params.near = -10;
 	params.far = 20;
 
-	orthographic(proj, params);
+	orthographic(depth->mat_proj, params);
+
+	uni_proj = glGetUniformLocation(depth->shader.program, "proj");
+	glUniformMatrix4fv(uni_proj, 1, GL_FALSE, depth->mat_proj);
 }
 
-void	testing(t_data *data)
+void	depth(t_data *data)
 {
 	t_matrices	matrices;
 	t_mat4		depth_mvp;
 
 	// Compute the MVP matrix from the light's point of view
-	depth_model(matrices.model);
-	depth_view(matrices.view);
-	depth_proj(matrices.proj);
+	depth_model(&(data->depth));
+	depth_view(&(data->depth));
+	depth_proj(&(data->depth));
 
 	mat4_mult(matrices.model, matrices.view, depth_mvp);
 	mat4_mult(depth_mvp, matrices.proj, depth_mvp);

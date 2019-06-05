@@ -1,6 +1,6 @@
 #include "depth.h"
 
-int framebuffer(t_data *data)
+static int	depth_fbo(t_data *data)
 {
 	// The framebuffer, which regroups 0, 1, or more textures, and 0 or 1 depth buffer.
 	glGenFramebuffers(1, &(data->depth.fbo));
@@ -76,6 +76,13 @@ void	depth(t_data *data)
 {
 	t_matrices	matrices;
 	t_mat4		depth_mvp;
+
+	if (!depth_fbo(data))
+	{
+		fprintf(stderr, "fbo failed\n");
+		fflush(stderr);			
+		return ;
+	}
 
 	// Compute the MVP matrix from the light's point of view
 	depth_model(&(data->depth));

@@ -24,4 +24,7 @@ typedef struct	s_matrices
 	t_mat4 proj;
 }				t_matrices;
 
+void	depth(t_data *data);
+
+
 #endif

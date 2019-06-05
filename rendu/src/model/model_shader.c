@@ -102,7 +102,7 @@ static int		fragment_shader(t_shader *shader)
 			// ambient
 			vec3 ambient = material.ambient * light.ambient * light.color;
 			
-			// diffuse 
+			// diffuse
 			vec3 norm = normalize(Normal);
 			// vec3 lightDir = normalize(light.position); // directional light
 			vec3 lightDir = normalize(light.position - ModelPos);

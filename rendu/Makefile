@@ -11,6 +11,8 @@ SRC_MAIN	=	data.c \
 				show.c \
 				texture.c \
 				use_model.c \
+				lookat.c \
+				perspective.c \
 				shader_status.c
 
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
@@ -19,13 +21,11 @@ DIR_MATRIX	=	matrix/
 SRC_MATRIX	=	angle.c \
 				coord.c \
 				coord_op.c \
-				lookat.c \
 				mat4.c \
 				mat4_op.c \
 				mat4_rotate.c \
 				mat4_transform.c \
 				mat4_vect_prod.c \
-				perspective.c \
 				vector.c \
 				vector_op.c
 

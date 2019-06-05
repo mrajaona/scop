@@ -35,7 +35,6 @@ typedef struct	s_arrays
 {
 	GLuint		vao;
 	GLuint		vbo;
-	GLuint		fbo;
 }				t_arrays;
 
 typedef struct	s_info
@@ -45,13 +44,20 @@ typedef struct	s_info
 	t_arrays	arrays;
 }				t_info;
 
+typedef struct	s_depth
+{
+	GLuint		fbo;
+	GLuint		map;
+	t_shader	shader;
+}				t_depth;
+
 typedef struct	s_data
 {
 	GLFWwindow	*window;
 	t_mat4		mat_view;
 	t_mat4		mat_proj;
 	GLuint		textures[N_TEXTURES];
-	GLuint		depth_map;
+	t_depth		depth;
 	size_t		nfaces;
 	t_info		model;
 	t_light		light;

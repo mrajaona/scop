@@ -73,7 +73,7 @@ DIRS_INC	=	$(addprefix -I$(DIR_INC), $(DIRS))
 
 OBJS		=	$(SRCS:.c=.o)
 
-CFLAGS		=	-Wall -Wextra -Werror $(DIRS_INC) -I./lib
+CFLAGS		=	-Wall -Wextra -Werror $(DIRS_INC)
 
 CC			=	/usr/bin/gcc
 RM			=	/bin/rm -f
@@ -85,7 +85,7 @@ $(OBJS)	:		$(INCS)
 
 $(NAME)	:		$(INCS) $(SRCS) $(OBJS)
 				$(CC) `pkg-config --cflags glfw3` \
-				-o $(NAME) $(OBJS) -lGLEW -lGLU -lGL -lSOIL \
+				-o $(NAME) $(OBJS) -lGLEW -lGLU -lGL \
 				`pkg-config --static --libs glfw3`
 				@$(ECHO) "\033[32m> Executable compiled\033[0m\n"
 

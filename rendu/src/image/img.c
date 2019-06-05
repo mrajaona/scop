@@ -42,20 +42,7 @@ static unsigned char	*load(const char *path, int *width, int *height)
 		return (NULL);
 	}
 	if (rd >= 2 && !strncmp(magic, BMP_MAGIC, 2))
-	{
 		image = load_bmp(fp, width, height);
-		// image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);
-	}
-	else if (rd >= 8 && !strncmp(magic, PNG_MAGIC, 8))
-	{
-		// image = load_png();
-		image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);
-	}
-	else if (rd >= 3 && !strncmp(magic, JPG_MAGIC, 3))
-	{
-		// image = load_jpg();
-		image = SOIL_load_image(path, width, height, 0, SOIL_LOAD_RGB);
-	}
 	else
 	{
 		fprintf(stderr, "File format not supported\n");

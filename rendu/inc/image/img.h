@@ -20,8 +20,6 @@
 # include <string.h>
 # include <errno.h>
 
-# include "SOIL.h"
-
 # include "img_bmp.h"
 
 # define TEX_FORMAT GL_RGB

@@ -47,6 +47,7 @@ void			show(const t_data *data)
 		glClearColor(0.5f, 0.5f, 0.5f, 0.5f); // background
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		glBindTexture(GL_TEXTURE_2D, data->textures[0]);
 		show_model(data);
 
 		usleep(25000);

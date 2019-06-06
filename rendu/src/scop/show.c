@@ -12,7 +12,8 @@
 
 #include "show.h"
 
-int	g_blend_factor = -1;
+int			g_blend_factor = -1;
+t_vector	g_move = {0, 0, 0, 1};
 
 static void		glfw_callback(GLFWwindow *window, int key, int scancode,
 	int action, int mods)
@@ -20,8 +21,26 @@ static void		glfw_callback(GLFWwindow *window, int key, int scancode,
 	(void)window;
 	(void)scancode;
 	(void)mods;
-	if (key == GLFW_KEY_E && action == GLFW_PRESS)
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
 		g_blend_factor *= -1;
+	if (key == GLFW_KEY_UP
+		&& (action == GLFW_PRESS || action == GLFW_REPEAT))
+		g_move[2] += MV_VALUE;
+	if (key == GLFW_KEY_DOWN
+		&& (action == GLFW_PRESS || action == GLFW_REPEAT))
+		g_move[2] -= MV_VALUE;
+	if (key == GLFW_KEY_RIGHT
+		&& (action == GLFW_PRESS || action == GLFW_REPEAT))
+		g_move[0] += MV_VALUE;
+	if (key == GLFW_KEY_LEFT
+		&& (action == GLFW_PRESS || action == GLFW_REPEAT))
+		g_move[0] -= MV_VALUE;
+	if (key == GLFW_KEY_PAGE_UP
+		&& (action == GLFW_PRESS || action == GLFW_REPEAT))
+		g_move[1] += MV_VALUE;
+	if (key == GLFW_KEY_PAGE_DOWN
+		&& (action == GLFW_PRESS || action == GLFW_REPEAT))
+		g_move[1] -= MV_VALUE;
 }
 
 static void		edit_output(const GLuint program, const t_info *src)
@@ -51,6 +70,8 @@ static void		edit_output(const GLuint program, const t_info *src)
 	mat4_rotatey(deg_to_rad((float)deg), model);
 
 	translation(to_origin, model);
+
+	translation(g_move, model);
 
 	uni_model = glGetUniformLocation(program, "model");
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);

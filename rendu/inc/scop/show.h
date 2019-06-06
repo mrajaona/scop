@@ -36,6 +36,8 @@
 # include "model.h"
 # include "use_model.h"
 
+# define MV_VALUE 0.1
+
 void			show(const t_data *data);
 
 #endif

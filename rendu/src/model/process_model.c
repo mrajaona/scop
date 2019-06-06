@@ -41,8 +41,8 @@ static void			cpy_vertice(float *dest, t_coord coord, t_coord normal,
 
 	coord_eq(dest, coord);
 	coord_eq(dest + 3, normal);
-	dest[6] = (coord[2] - model->min[2]) / (model->max[2] - model->min[2]); // u // test
-	dest[7] = (coord[1] - model->min[1]) / (model->max[1] - model->min[1]); // v // test
+	dest[6] = (coord[2] - model->min[2]); // u // test
+	dest[7] = (coord[1] - model->min[1]); // v // test
 	dest[8] = j; // r
 	dest[9] = j; // g
 	dest[10] = j; // b

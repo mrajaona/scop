@@ -12,7 +12,7 @@
 
 #include "show.h"
 
-int	g_blend_factor = 1;
+int	g_blend_factor = -1;
 
 static void		glfw_callback(GLFWwindow *window, int key, int scancode,
 	int action, int mods)

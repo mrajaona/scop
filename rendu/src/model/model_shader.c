@@ -95,8 +95,7 @@ static int		fragment_shader(t_shader *shader)
 			
 			// diffuse
 			vec3 norm = normalize(Normal);
-			vec3 lightDir = normalize(light.position); // directional
-			// vec3 lightDir = normalize(light.position - ModelPos); // spot
+			vec3 lightDir = normalize(light.position - ModelPos);
 			float diff = max(dot(norm, lightDir), 0.0);
 			vec3 diffuse = diff * material.diffuse * light.diffuse * light.color;
 			

@@ -50,7 +50,7 @@ static void		edit_output(const GLuint program, const t_info *src)
 	t_mat4		model;
 	t_vector	to_center;
 	t_vector	to_origin;
-	GLint		uni_model;
+	GLint		uniform;
 
 	if (src->mat_model)
 	{
@@ -73,11 +73,11 @@ static void		edit_output(const GLuint program, const t_info *src)
 
 	translation(g_move, model);
 
-	uni_model = glGetUniformLocation(program, "model");
-	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);
+	uniform = glGetUniformLocation(program, "model");
+	glUniformMatrix4fv(uniform, 1, GL_FALSE, model);
 
-	uni_model = glGetUniformLocation(program, "blend");
-	glUniform1f(uni_model, blend);
+	uniform = glGetUniformLocation(program, "blend");
+	glUniform1f(uniform, blend);
 
 	blend += 0.01f * g_blend_factor;
 

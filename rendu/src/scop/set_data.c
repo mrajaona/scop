@@ -36,7 +36,7 @@ void 			set_light(t_data *data)
 
 	use_model(&(data->model));
 
-	coord_to_vec(2.0f, 10.0f, 2.0f, data->light.position);
+	coord_to_vec(0.0f, 0.0f, 5.0f, data->light.position);
 	coord_to_vec(1.0f, 1.0f, 1.0f, data->light.color);
 	coord_to_vec(0.3f, 0.3f, 0.3f, data->light.ambient);
 	coord_to_vec(0.7f, 0.7f, 0.7f, data->light.diffuse);

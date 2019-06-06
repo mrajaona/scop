@@ -42,13 +42,13 @@ static void			cpy_vertice(float *dest, t_coord coord, t_coord normal)
 	coord_eq(dest + 3, normal);
 	dest[6] = (coord[0] + coord[1] - coord[2]); // u // test
 	dest[7] = (coord[0] - coord[1] + coord[2]); // v // test
-	dest[8] = (j == 0); // r
-	dest[9] = (j == 1); // g
-	dest[10] = (j == 2); // b
+	dest[8] = (j % 2); // r
+	dest[9] = (j % 2); // g
+	dest[10] = (j % 2); // b
 
 	i = (i + 1) % 3;
 	if (!i)
-		j = (j + 1) % 3;
+		j = (j + 1) % 2;
 }
 
 /*

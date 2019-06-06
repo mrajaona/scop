@@ -53,7 +53,7 @@ static int		fragment_shader(t_shader *shader)
 	return (1);
 }
 
-int				depth_shader_init(t_shader *shader)
+int				shadow_shader_init(t_shader *shader)
 {
 	shader->program = glCreateProgram();
 	if (!vertex_shader(shader))

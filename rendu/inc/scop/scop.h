@@ -25,9 +25,7 @@
 # include "set_data.h"
 # include "show.h"
 
-/*
 # include "shadow.h"
 # include "shadow_shader.h"
-*/
 
 #endif

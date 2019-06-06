@@ -44,16 +44,13 @@ int				main(int ac, char **av)
 	glfw_init(&(data.window));
 	glew_init();
 
-/*
-	if (!depth_shader_init(&(data.depth.shader)))
+	if (!shadow_shader_init(&(data.shadow.shader)))
 	{
 		fprintf(stderr, "shader failed\n");
-		fflush(stderr);			
+		fflush(stderr);
 		return (1);
 	}
-
-	depth(&data);
-*/
+	shadow(&data);
 
 	model(&data, av[1]);
 	set_light(&data);

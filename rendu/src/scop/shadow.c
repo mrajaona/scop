@@ -1,30 +1,41 @@
 #include "shadow.h"
 
+void	bind_fbo_w(GLuint fbo)
+{
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, fbo);
+}
+
+void	bind_fbo_r(GLuint fbo, GLenum TextureUnit)
+{
+    glActiveTexture(TextureUnit);
+    glBindTexture(GL_TEXTURE_2D, fbo);
+}
+
 static int	shadow_fbo(t_data *data)
 {
-	// The framebuffer, which regroups 0, 1, or more textures, and 0 or 1 shadow buffer.
 	glGenFramebuffers(1, &(data->shadow.fbo));
 	glBindFramebuffer(GL_FRAMEBUFFER, data->shadow.fbo);
 
-	// Depth texture. Slower than a shadow buffer, but you can sample it later in your shader
+	// Depth texture
 	glGenTextures(1, &(data->shadow.map));
 	glBindTexture(GL_TEXTURE_2D, data->shadow.map);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SCREEN_WIDTH, SCREEN_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-	glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, data->shadow.map, 0);
+	glBindFramebuffer(GL_FRAMEBUFFER, data->shadow.fbo);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, data->shadow.map, 0);
+	glDrawBuffer(GL_NONE);
+	glReadBuffer(GL_NONE);
 
-	glDrawBuffer(GL_NONE); // No color buffer is drawn to.
-
-	// Always check that our framebuffer is ok
 	if(glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
 		return (0);
 
 	return (1);
 }
+
 
 static void	shadow_model(t_shadow *shadow)
 {
@@ -48,7 +59,7 @@ static void	shadow_view(t_shadow *shadow)
 	coord_to_vec(0, 0, 0, target);
 	coord_to_vec(0, 1, 0, up);
 
-	lookat(shadow->mat_view, lightPos, target, up);
+	lookat(lightPos, target, up, shadow->mat_view);
 
 	uni_view = glGetUniformLocation(shadow->shader.program, "view");
 	glUniformMatrix4fv(uni_view, 1, GL_FALSE, shadow->mat_view);
@@ -72,11 +83,9 @@ static void	shadow_proj(t_shadow *shadow)
 	glUniformMatrix4fv(uni_proj, 1, GL_FALSE, shadow->mat_proj);
 }
 
+
 void	shadow(t_data *data)
 {
-	t_matrices	matrices;
-	t_mat4		shadow_mvp;
-
 	if (!shadow_fbo(data))
 	{
 		fprintf(stderr, "fbo failed\n");
@@ -85,16 +94,14 @@ void	shadow(t_data *data)
 	}
 
 	// Compute the MVP matrix from the light's point of view
+
 	shadow_model(&(data->shadow));
 	shadow_view(&(data->shadow));
 	shadow_proj(&(data->shadow));
 
-	mat4_mult(matrices.model, matrices.view, shadow_mvp);
-	mat4_mult(shadow_mvp, matrices.proj, shadow_mvp);
-
 	// Send our transformation to the currently bound shader,
 	// in the "MVP" uniform
-	GLint		uni_shadow;
-	uni_shadow = glGetUniformLocation(data->model.shader.program, "shadowMatrix");
-	glUniformMatrix4fv(uni_shadow, 1, GL_FALSE, shadow_mvp);
+
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glUseProgram(0);
 }

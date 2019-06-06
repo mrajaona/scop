@@ -33,6 +33,8 @@
 
 # include "angle.h"
 
+# include "shadow.h"
+
 # include "model.h"
 # include "use_model.h"
 

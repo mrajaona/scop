@@ -14,14 +14,10 @@
 # include "lookat.h"
 # include "orthographic.h"
 
-# define SHADOW_WIDTH 1024
-# define SHADOW_HEIGHT 1024
+# include "perspective.h"
 
-typedef struct	s_matrices
-{
-	t_mat4 model;
-	t_mat4 view;
-	t_mat4 proj;
-}				t_matrices;
+void	bind_fbo_w(GLuint fbo);
+void	bind_fbo_r(GLuint fbo, GLenum TextureUnit);
+void	shadow(t_data *data);
 
 #endif

@@ -7,4 +7,6 @@
 # include "shader_status.h"
 # include "shadow.h"
 
+int		shadow_shader_init(t_shader *shader);
+
 #endif

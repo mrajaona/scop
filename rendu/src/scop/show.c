@@ -25,16 +25,16 @@ static void		glfw_callback(GLFWwindow *window, int key, int scancode,
 		g_blend_factor *= -1;
 	if (key == GLFW_KEY_UP
 		&& (action == GLFW_PRESS || action == GLFW_REPEAT))
-		g_move[2] += MV_VALUE;
+		g_move[2] -= MV_VALUE;
 	if (key == GLFW_KEY_DOWN
 		&& (action == GLFW_PRESS || action == GLFW_REPEAT))
-		g_move[2] -= MV_VALUE;
-	if (key == GLFW_KEY_RIGHT
-		&& (action == GLFW_PRESS || action == GLFW_REPEAT))
-		g_move[0] += MV_VALUE;
+		g_move[2] += MV_VALUE;
 	if (key == GLFW_KEY_LEFT
 		&& (action == GLFW_PRESS || action == GLFW_REPEAT))
 		g_move[0] -= MV_VALUE;
+	if (key == GLFW_KEY_RIGHT
+		&& (action == GLFW_PRESS || action == GLFW_REPEAT))
+		g_move[0] += MV_VALUE;
 	if (key == GLFW_KEY_PAGE_UP
 		&& (action == GLFW_PRESS || action == GLFW_REPEAT))
 		g_move[1] += MV_VALUE;

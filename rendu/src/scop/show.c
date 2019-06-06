@@ -33,6 +33,7 @@ static void		edit_output(const GLuint program, const t_mat4 src)
 static void		show_model(const t_data *data)
 {
 	glBindTexture(GL_TEXTURE_2D, data->textures[0]);
+	
 	use_model(&(data->model));
 	edit_output(data->model.shader.program, data->model.mat_model);
 	glDrawArrays(GL_TRIANGLES, 0, data->model.nfaces * N_VERTICES_PER_FACE);

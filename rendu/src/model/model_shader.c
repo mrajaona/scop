@@ -103,8 +103,8 @@ static int		fragment_shader(t_shader *shader)
 			vec3 specular = spec * material.specular * light.specular * light.color;  
 				
 			vec3 result = ambient + diffuse + specular;
-			outColor = vec4(result, 1.0);
-			// outColor = tex * vec4(result, 1.0);
+			// outColor = vec4(result, 1.0);
+			outColor = tex * vec4(result, 1.0);
 		}
 
 	)glsl";

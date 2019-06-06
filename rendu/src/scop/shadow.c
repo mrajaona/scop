@@ -102,6 +102,6 @@ void	shadow(t_data *data)
 	// Send our transformation to the currently bound shader,
 	// in the "MVP" uniform
 
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glUseProgram(0);
+	// glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	// glUseProgram(0);
 }

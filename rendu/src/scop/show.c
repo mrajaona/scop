@@ -34,7 +34,7 @@ static void		show_model(const t_data *data)
 {
 	use_model(&(data->model));
 	edit_output(data->model.shader.program, data->model.mat_model);
-	glDrawArrays(GL_TRIANGLES, 0, data->nfaces * N_VERTICES_PER_FACE);
+	glDrawArrays(GL_TRIANGLES, 0, data->model.nfaces * N_VERTICES_PER_FACE);
 	use_no_model();
 }
 

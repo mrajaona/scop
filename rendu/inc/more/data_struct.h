@@ -42,9 +42,10 @@ typedef struct	s_info
 	t_mat4		mat_model;
 	t_shader	shader;
 	t_arrays	arrays;
+	size_t		nfaces;
 }				t_info;
 
-typedef struct	s_depth
+typedef struct	s_shadow
 {
 	GLuint		fbo;
 	GLuint		map;
@@ -52,7 +53,7 @@ typedef struct	s_depth
 	t_mat4		mat_model;
 	t_mat4		mat_view;
 	t_mat4		mat_proj;
-}				t_depth;
+}				t_shadow;
 
 typedef struct	s_data
 {
@@ -60,9 +61,8 @@ typedef struct	s_data
 	t_mat4		mat_view;
 	t_mat4		mat_proj;
 	GLuint		textures[N_TEXTURES];
-	t_depth		depth;
-	size_t		nfaces;
 	t_info		model;
+	t_shadow	shadow;
 	t_light		light;
 }				t_data;
 

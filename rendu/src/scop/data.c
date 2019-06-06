@@ -26,23 +26,23 @@ static void		del_info(t_info *info)
 		glDeleteBuffers(1, &(info->arrays.vbo));
 }
 
-static void		del_depth(t_depth *depth)
+static void		del_shadow(t_shadow *shadow)
 {
-	if (depth->fbo)
-		glDeleteFramebuffers(1, &(depth->fbo));
-	if (depth->shader.program)
-		glDeleteProgram(depth->shader.program);
-	if (depth->shader.fragment)
-		glDeleteShader(depth->shader.fragment);
-	if (depth->shader.vertex)
-		glDeleteShader(depth->shader.vertex);	
+	if (shadow->fbo)
+		glDeleteFramebuffers(1, &(shadow->fbo));
+	if (shadow->shader.program)
+		glDeleteProgram(shadow->shader.program);
+	if (shadow->shader.fragment)
+		glDeleteShader(shadow->shader.fragment);
+	if (shadow->shader.vertex)
+		glDeleteShader(shadow->shader.vertex);	
 }
 
 static void		data_del(t_data *data)
 {
 	glDeleteTextures(N_TEXTURES, data->textures);
 	del_info(&(data->model));
-	del_depth(&(data->depth));
+	del_shadow(&(data->shadow));
 	glfwTerminate();
 }
 
@@ -60,18 +60,19 @@ static void		clr_info(t_info *info)
 	info->shader.fragment = 0;
 	info->arrays.vao = 0;
 	info->arrays.vbo = 0;
+	info->nfaces = 0;
 }
 
-static void		clr_depth(t_depth *depth)
+static void		clr_shadow(t_shadow *shadow)
 {
-	depth->fbo = 0;
-	depth->map = 0;
-	depth->shader.program = 0;
-	depth->shader.vertex = 0;
-	depth->shader.fragment = 0;
-	mat4_clr(depth->mat_model);
-	mat4_clr(depth->mat_view);
-	mat4_clr(depth->mat_proj);
+	shadow->fbo = 0;
+	shadow->map = 0;
+	shadow->shader.program = 0;
+	shadow->shader.vertex = 0;
+	shadow->shader.fragment = 0;
+	mat4_clr(shadow->mat_model);
+	mat4_clr(shadow->mat_view);
+	mat4_clr(shadow->mat_proj);
 }
 
 static void		clr_light(t_light *light)
@@ -91,8 +92,7 @@ void			data_clr(t_data *data)
 	mat4_clr(data->mat_proj);
 	clr_info(&(data->model));
 	clr_light(&(data->light));
-	clr_depth(&(data->depth));
-	data->nfaces = 0;
+	clr_shadow(&(data->shadow));
 	i = 0;
 	while (i < N_TEXTURES)
 	{

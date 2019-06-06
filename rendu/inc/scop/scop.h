@@ -26,8 +26,8 @@
 # include "show.h"
 
 /*
-# include "depth.h"
-# include "depth_shader.h"
+# include "shadow.h"
+# include "shadow_shader.h"
 */
 
 #endif

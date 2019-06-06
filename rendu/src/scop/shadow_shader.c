@@ -1,4 +1,4 @@
-#include "depth_shader.h"
+#include "shadow_shader.h"
 
 static int		vertex_shader(t_shader *shader)
 {

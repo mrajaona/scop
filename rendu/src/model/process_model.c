@@ -102,7 +102,7 @@ int				process_model(const t_model *model, t_data *data)
 {
 	GLint attrib;
 
-	data->nfaces = model->nfaces;
+	data->model.nfaces = model->nfaces;
 
 	if (!vao(&(data->model.arrays.vao)))
 		return (0);

@@ -1,5 +1,5 @@
-#ifndef DEPTH_H
-# define DEPTH_H
+#ifndef SHADOW_H
+# define SHADOW_H
 
 // # include "glfw_inc.h"
 # include "glew_inc.h"
@@ -14,8 +14,8 @@
 # include "lookat.h"
 # include "orthographic.h"
 
-# define DEPTH_WIDTH 1024
-# define DEPTH_HEIGHT 1024
+# define SHADOW_WIDTH 1024
+# define SHADOW_HEIGHT 1024
 
 typedef struct	s_matrices
 {
@@ -23,8 +23,5 @@ typedef struct	s_matrices
 	t_mat4 view;
 	t_mat4 proj;
 }				t_matrices;
-
-void	depth(t_data *data);
-
 
 #endif

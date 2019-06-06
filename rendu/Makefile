@@ -15,8 +15,8 @@ SRC_MAIN	=	data.c \
 				perspective.c \
 				orthographic.c \
 				shader_status.c \
-				depth.c \
-				depth_shader.c
+				shadow.c \
+				shadow_shader.c
 
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 

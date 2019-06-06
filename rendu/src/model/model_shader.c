@@ -17,13 +17,15 @@ static int		vertex_shader(t_shader *shader)
 	const char *vertex_source = R"glsl(
 		#version 330 core
 
-		in vec2 texcoord;
 		in vec3 position;
 		in vec3 normal;
+		in vec2 texcoord;
+		in vec3 color;
 
 		out vec3 ModelPos;
 		out vec3 Normal;
 		out vec2 Texcoord;
+		out vec3 Color;
 
 		uniform mat4 model;
 		uniform mat4 view;
@@ -35,6 +37,7 @@ static int		vertex_shader(t_shader *shader)
 			ModelPos = vec3(model * vec4(position, 1.0));
 			Normal = mat3(transpose(inverse(model))) * normal;
 			Texcoord = texcoord;
+			Color = color;
 		}
 	)glsl";
 
@@ -52,9 +55,10 @@ static int		fragment_shader(t_shader *shader)
 	const char *fragment_source = R"glsl(
 		#version 330 core
 
-		in vec2 Texcoord;
-		in vec3 Normal;
 		in vec3 ModelPos;
+		in vec3 Normal;
+		in vec2 Texcoord;
+		in vec3 Color;
 
 		out vec4 outColor;
 
@@ -85,6 +89,7 @@ static int		fragment_shader(t_shader *shader)
 		{
 			vec4 tex = texture(texScop, Texcoord);
 
+			/*
 			// ambient
 			vec3 ambient = material.ambient * light.ambient * light.color;
 			
@@ -103,8 +108,11 @@ static int		fragment_shader(t_shader *shader)
 			vec3 specular = spec * material.specular * light.specular * light.color;  
 				
 			vec3 result = ambient + diffuse + specular;
+			*/
+
 			// outColor = vec4(result, 1.0);
-			outColor = tex * vec4(result, 1.0);
+			// outColor = tex * vec4(result, 1.0);
+			outColor = vec4(Color, 1.0);
 		}
 
 	)glsl";

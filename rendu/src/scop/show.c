@@ -33,21 +33,11 @@ static void		edit_output(const GLuint program, const t_mat4 src)
 static void		show_model(const t_data *data)
 {
 	glBindTexture(GL_TEXTURE_2D, data->textures[0]);
-	
+
 	use_model(&(data->model));
 	edit_output(data->model.shader.program, data->model.mat_model);
 	glDrawArrays(GL_TRIANGLES, 0, data->model.nfaces * N_VERTICES_PER_FACE);
 	use_no_model();
-}
-
-static void		show_shadow(const t_data *data)
-{
-	bind_fbo_w(data->shadow.fbo);
-
-    glClear(GL_DEPTH_BUFFER_BIT);
-
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
 }
 
 void			show(const t_data *data)
@@ -59,7 +49,6 @@ void			show(const t_data *data)
 		glClearColor(0.5f, 0.5f, 0.5f, 0.5f); // background
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		show_shadow(data);
 		show_model(data);
 
 		usleep(25000);

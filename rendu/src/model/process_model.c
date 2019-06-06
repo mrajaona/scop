@@ -35,12 +35,20 @@ static t_vector_ptr	get_vertex(const t_model *model, GLuint index)
 
 static void			cpy_vertice(float *dest, t_coord coord, t_coord normal)
 {
+	static int	i = 0;
+	static int	j = 0;
+
 	coord_eq(dest, coord);
 	coord_eq(dest + 3, normal);
-	// dest[6] = 0; // u
-	// dest[7] = 0; // v
 	dest[6] = (coord[0] + coord[1] - coord[2]); // u // test
 	dest[7] = (coord[0] - coord[1] + coord[2]); // v // test
+	dest[8] = (j == 0); // r
+	dest[9] = (j == 1); // g
+	dest[10] = (j == 2); // b
+
+	i = (i + 1) % 3;
+	if (!i)
+		j = (j + 1) % 3;
 }
 
 /*
@@ -126,6 +134,13 @@ int				process_model(const t_model *model, t_data *data)
 	attrib = glGetAttribLocation(data->model.shader.program, "texcoord");
 	glVertexAttribPointer(attrib, 2, GL_FLOAT, GL_FALSE,
 		N_DATA_PER_VERTICE * sizeof(float), (void *)(6 * sizeof(float)));
+	glEnableVertexAttribArray(attrib);
+
+	// color
+
+	attrib = glGetAttribLocation(data->model.shader.program, "color");
+	glVertexAttribPointer(attrib, 3, GL_FLOAT, GL_FALSE,
+		N_DATA_PER_VERTICE * sizeof(float), (void *)(8 * sizeof(float)));
 	glEnableVertexAttribArray(attrib);
 
 	// light

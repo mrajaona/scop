@@ -35,20 +35,24 @@ static t_vector_ptr	get_vertex(const t_model *model, GLuint index)
 
 static void			cpy_vertice(float *dest, t_coord coord, t_coord normal)
 {
-	static int	i = 0;
-	static int	j = 0;
+	static int		i = 0;
+	static float	j = 0;
 
 	coord_eq(dest, coord);
 	coord_eq(dest + 3, normal);
 	dest[6] = (coord[0] + coord[1] - coord[2]); // u // test
 	dest[7] = (coord[0] - coord[1] + coord[2]); // v // test
-	dest[8] = (j % 2); // r
-	dest[9] = (j % 2); // g
-	dest[10] = (j % 2); // b
+	dest[8] = j; // r
+	dest[9] = j; // g
+	dest[10] = j; // b
 
 	i = (i + 1) % 3;
 	if (!i)
-		j = (j + 1) % 2;
+	{
+		j += 0.25;
+		if (j > 1)
+			j = 0;
+	}
 }
 
 /*

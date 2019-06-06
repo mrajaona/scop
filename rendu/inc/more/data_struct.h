@@ -43,6 +43,7 @@ typedef struct	s_info
 	t_shader	shader;
 	t_arrays	arrays;
 	size_t		nfaces;
+	t_vector	center;
 }				t_info;
 
 typedef struct	s_shadow

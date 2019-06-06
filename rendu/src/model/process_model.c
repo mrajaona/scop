@@ -114,6 +114,19 @@ int				process_model(const t_model *model, t_data *data)
 {
 	GLint attrib;
 
+	fprintf(stdout, "min %f %f %f\n", model->min[0], model->min[1], model->min[2]);
+	fprintf(stdout, "max %f %f %f\n", model->max[0], model->max[1], model->max[2]);
+	fflush(stdout);
+
+	coord_to_vec(
+		(model->min[0] + model->max[0]) / 2,
+		(model->min[1] + model->max[1]) / 2,
+		(model->min[2] + model->max[2]) / 2,
+		data->model.center);
+
+	fprintf(stdout, "center %f %f %f\n", data->model.center[0], data->model.center[1], data->model.center[2]);
+	fflush(stdout);
+
 	data->model.nfaces = model->nfaces;
 
 	if (!vao(&(data->model.arrays.vao)))

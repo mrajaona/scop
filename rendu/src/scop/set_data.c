@@ -19,8 +19,6 @@ void 			set_model(t_data *data)
 
 	identity(data->model.mat_model);
 
-	mat4_rotatey(deg_to_rad(90.0f), data->model.mat_model);
-
 	// fprintf(stdout, "\nmodel");
 	// mat4_print(data->mat_model);
 

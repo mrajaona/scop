@@ -1,5 +1,29 @@
 #include "read_obj.h"
 
+static void	min_max(t_model *model, float *data)
+{
+	int	i;
+
+	i = 0;
+
+	while (i < 3)
+	{
+		if (!model->min[i] && !model->max[i])
+		{
+			model->min[i] = data[i];
+			model->max[i] = data[i];
+		}
+		else
+		{
+			if (data[i] < model->min[i])
+				model->min[i] = data[i];
+			if (data[i] > model->max[i])
+				model->max[i] = data[i];
+		}
+		i++;
+	}
+}
+
 int	read_v(FILE *fp, t_model *model)
 {
 	t_list				*current;
@@ -15,6 +39,7 @@ int	read_v(FILE *fp, t_model *model)
 			&(tmp[2]))
 		!= 3)
 		return (0);
+	min_max(model, tmp);
 	current->index = index;
 	index++;
 	return (1);
@@ -105,10 +130,7 @@ int	read_usemtl(FILE *fp, t_model *model)
 	int		rd;
 
 	if (!fp)
-	{
-		printf("bbbbbbbbbbbb\n"); fflush(stderr);
 		return (0);
-	}
 	rd = fscanf(fp, "%ms\n", &name);
 	if (!rd || !name)
 		return (0);

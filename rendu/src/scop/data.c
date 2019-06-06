@@ -61,6 +61,8 @@ static void		clr_info(t_info *info)
 	info->arrays.vao = 0;
 	info->arrays.vbo = 0;
 	info->nfaces = 0;
+	clear_vector(info->center);
+
 }
 
 static void		clr_shadow(t_shadow *shadow)

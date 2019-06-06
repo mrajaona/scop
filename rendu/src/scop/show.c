@@ -12,19 +12,32 @@
 
 #include "show.h"
 
-static void		edit_output(const GLuint program, const t_mat4 src)
+static void		edit_output(const GLuint program, const t_info *src)
 {
 	static int	deg = 0;
 	t_mat4		model;
+	t_vector	to_center;
+	t_vector	to_origin;
 	GLint		uni_model;
 
-	if (src)
-		mat4_eq(model, src);
+	if (src->mat_model)
+	{
+		mat4_eq(model, src->mat_model);
+		vector_eq(to_origin, src->center);
+	}
 	else
+	{
 		identity(model);
+		clear_vector(to_origin);
+	}
+
+	vector_scalar(to_origin, -1, to_center);
+	translation(to_center, model);
 
 	deg = (deg - 1) % 360;
 	mat4_rotatey(deg_to_rad((float)deg), model);
+
+	translation(to_origin, model);
 
 	uni_model = glGetUniformLocation(program, "model");
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);
@@ -35,7 +48,7 @@ static void		show_model(const t_data *data)
 	glBindTexture(GL_TEXTURE_2D, data->textures[0]);
 
 	use_model(&(data->model));
-	edit_output(data->model.shader.program, data->model.mat_model);
+	edit_output(data->model.shader.program, &(data->model));
 	glDrawArrays(GL_TRIANGLES, 0, data->model.nfaces * N_VERTICES_PER_FACE);
 	use_no_model();
 }

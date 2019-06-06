@@ -112,6 +112,8 @@ t_model		*read_model(const char *path)
 	model->material.ni = 1.0f;
 	model->material.d = 1.0f;
 	model->material.illum = 0;
+	clear_vector(model->min);
+	clear_vector(model->max);
 
 	read_lines(fp, &model);
 	fclose(fp);

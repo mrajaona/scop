@@ -58,6 +58,8 @@ typedef struct	s_model
 	char		*res_folder;
 	FILE		*mtl_fp;
 	t_material	material;
+	t_vector	min;
+	t_vector	max;
 }				t_model;
 
 /*

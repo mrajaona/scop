@@ -84,6 +84,7 @@ static int		fragment_shader(t_shader *shader)
 		};
 
 		uniform Material material;
+		uniform float blend;
 
 		void main()
 		{
@@ -103,12 +104,12 @@ static int		fragment_shader(t_shader *shader)
 			vec3 viewDir = normalize(viewPos - ModelPos);
 			vec3 reflectDir = reflect(-lightDir, norm);  
 			float spec = pow(max(dot(viewDir, reflectDir), 0.0),
-			 material.shininess);
+				material.shininess);
 			vec3 specular = spec * material.specular * light.specular * light.color;  
 				
 			vec3 result = ambient + diffuse + specular;
 
-			outColor = vec4(Color, 1.0) * tex * vec4(result, 1.0);
+			outColor = mix(vec4(Color, 1.0), tex, blend) * vec4(result, 1.0);
 		}
 
 	)glsl";

@@ -14,7 +14,8 @@
 
 static void		edit_output(const GLuint program, const t_info *src)
 {
-	static int	deg = 0;
+	static int		deg = 0;
+	static float	blend = 0.0f;
 	t_mat4		model;
 	t_vector	to_center;
 	t_vector	to_origin;
@@ -41,6 +42,13 @@ static void		edit_output(const GLuint program, const t_info *src)
 
 	uni_model = glGetUniformLocation(program, "model");
 	glUniformMatrix4fv(uni_model, 1, GL_FALSE, model);
+
+	uni_model = glGetUniformLocation(program, "blend");
+	glUniform1f(uni_model, blend);
+
+	blend += 0.001f;
+	if (blend > 1.0f)
+		blend = 0.0f;
 }
 
 static void		show_model(const t_data *data)

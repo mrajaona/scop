@@ -25,6 +25,8 @@
 # include "read_model.h"
 # include "process_model.h"
 
+# include "coord.h"
+
 # define N_DATA_PER_VERTICE 11
 # define N_VERTICES_PER_FACE 3
 

@@ -106,9 +106,9 @@ t_model		*read_model(const char *path)
 	model->mtl_fp = NULL;
 
 	model->material.ns = 32;
-	clear_vector(model->material.ka);
-	clear_vector(model->material.kd);
-	clear_vector(model->material.ks);
+	coord_to_vec(1.0f, 1.0f, 1.0f, model->material.ka);
+	coord_to_vec(1.0f, 1.0f, 1.0f, model->material.kd);
+	coord_to_vec(1.0f, 1.0f, 1.0f, model->material.ks);
 	model->material.ni = 1.0f;
 	model->material.d = 1.0f;
 	model->material.illum = 0;

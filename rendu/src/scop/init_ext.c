@@ -12,20 +12,6 @@
 
 #include "init_ext.h"
 
-static void		glfw_callback(GLFWwindow *window, int key, int scancode,
-	int action, int mods)
-{
-	(void)window;
-	(void)scancode;
-	(void)mods;
-
-	if (key == GLFW_KEY_E && action == GLFW_PRESS)
-	{
-		printf("PRESSED E\n");
-		fflush(stdout);
-	}
-}
-
 static void		glfw_error(void)
 {
 	const char	*description;
@@ -58,7 +44,6 @@ void			glfw_init(GLFWwindow **window)
 	if (!(*window))
 		glfw_error();
 	glfwMakeContextCurrent(*window);	
-	glfwSetKeyCallback(*window, &glfw_callback);
 }
 
 void			glew_init(void)

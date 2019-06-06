@@ -12,6 +12,18 @@
 
 #include "show.h"
 
+int	g_blend_factor = 1;
+
+static void		glfw_callback(GLFWwindow *window, int key, int scancode,
+	int action, int mods)
+{
+	(void)window;
+	(void)scancode;
+	(void)mods;
+	if (key == GLFW_KEY_E && action == GLFW_PRESS)
+		g_blend_factor *= -1;
+}
+
 static void		edit_output(const GLuint program, const t_info *src)
 {
 	static int		deg = 0;
@@ -46,8 +58,11 @@ static void		edit_output(const GLuint program, const t_info *src)
 	uni_model = glGetUniformLocation(program, "blend");
 	glUniform1f(uni_model, blend);
 
-	blend += 0.001f;
+	blend += 0.01f * g_blend_factor;
+
 	if (blend > 1.0f)
+		blend = 1.0f;
+	else if (blend < 0.0f)
 		blend = 0.0f;
 }
 
@@ -63,6 +78,8 @@ static void		show_model(const t_data *data)
 
 void			show(const t_data *data)
 {
+	glfwSetKeyCallback(data->window, &glfw_callback);
+
 	glEnable(GL_DEPTH_TEST);
 
 	while (!glfwWindowShouldClose(data->window))

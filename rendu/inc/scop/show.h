@@ -32,6 +32,14 @@
 
 # define MV_VALUE 0.1
 
+typedef struct	s_edit
+{
+	t_mat4		model;
+	t_vector	to_center;
+	t_vector	to_origin;
+	GLint		uniform;
+}				t_edit;
+
 void			show(const t_data *data);
 
 #endif

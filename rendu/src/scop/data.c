@@ -19,7 +19,7 @@ static void		del_info(t_info *info)
 	if (info->shader.fragment)
 		glDeleteShader(info->shader.fragment);
 	if (info->shader.vertex)
-		glDeleteShader(info->shader.vertex);	
+		glDeleteShader(info->shader.vertex);
 	if (info->arrays.vao)
 		glDeleteVertexArrays(1, &(info->arrays.vao));
 	if (info->arrays.vbo)
@@ -35,7 +35,7 @@ static void		del_shadow(t_shadow *shadow)
 	if (shadow->shader.fragment)
 		glDeleteShader(shadow->shader.fragment);
 	if (shadow->shader.vertex)
-		glDeleteShader(shadow->shader.vertex);	
+		glDeleteShader(shadow->shader.vertex);
 }
 
 static void		data_del(t_data *data)
@@ -62,7 +62,6 @@ static void		clr_info(t_info *info)
 	info->arrays.vbo = 0;
 	info->nfaces = 0;
 	clear_vector(info->center);
-
 }
 
 static void		clr_shadow(t_shadow *shadow)

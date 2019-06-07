@@ -47,32 +47,21 @@ static void		edit_output(const GLuint program, const t_info *src)
 {
 	static int		deg = 0;
 	static float	blend = 0.0f;
-	t_mat4		model;
-	t_vector	to_center;
-	t_vector	to_origin;
-	GLint		uniform;
+	t_edit			edit;
 
-	mat4_eq(model, src->mat_model);
-	vector_eq(to_origin, src->center);
-
-	vector_scalar(to_origin, -1, to_center);
-	translation(to_center, model);
-
+	mat4_eq(edit.model, src->mat_model);
+	vector_eq(edit.to_origin, src->center);
+	vector_scalar(edit.to_origin, -1, edit.to_center);
+	translation(edit.to_center, edit.model);
 	deg = (deg - 1) % 360;
-	mat4_rotatey(deg_to_rad((float)deg), model);
-
-	translation(to_origin, model);
-
-	translation(g_move, model);
-
-	uniform = glGetUniformLocation(program, "model");
-	glUniformMatrix4fv(uniform, 1, GL_FALSE, model);
-
-	uniform = glGetUniformLocation(program, "blend");
-	glUniform1f(uniform, blend);
-
+	mat4_rotatey(deg_to_rad((float)deg), edit.model);
+	translation(edit.to_origin, edit.model);
+	translation(g_move, edit.model);
+	edit.uniform = glGetUniformLocation(program, "model");
+	glUniformMatrix4fv(edit.uniform, 1, GL_FALSE, edit.model);
+	edit.uniform = glGetUniformLocation(program, "blend");
+	glUniform1f(edit.uniform, blend);
 	blend += 0.01f * g_blend_factor;
-
 	if (blend > 1.0f)
 		blend = 1.0f;
 	else if (blend < 0.0f)
@@ -82,7 +71,6 @@ static void		edit_output(const GLuint program, const t_info *src)
 static void		show_model(const t_data *data)
 {
 	glBindTexture(GL_TEXTURE_2D, data->textures[0]);
-
 	use_model(&(data->model));
 	edit_output(data->model.shader.program, &(data->model));
 	glDrawArrays(GL_TRIANGLES, 0, data->model.nfaces * N_VERTICES_PER_FACE);
@@ -92,21 +80,15 @@ static void		show_model(const t_data *data)
 void			show(const t_data *data)
 {
 	glfwSetKeyCallback(data->window, &glfw_callback);
-
 	glEnable(GL_DEPTH_TEST);
-
 	while (!glfwWindowShouldClose(data->window))
 	{
-		glClearColor(0.5f, 0.5f, 0.5f, 0.5f); // background
+		glClearColor(0.5f, 0.5f, 0.5f, 0.5f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 		show_model(data);
-
 		usleep(25000);
-
 		glfwSwapBuffers(data->window);
 		glfwPollEvents();
 	}
-
 	glDisable(GL_DEPTH_TEST);
 }

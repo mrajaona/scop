@@ -39,9 +39,9 @@ void			glfw_init(GLFWwindow **window)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	*window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "OpenGL", NULL, NULL); // Windowed
-	// window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "OpenGL", glfwGetPrimaryMonitor(), NULL); // Fullscreen
+	*window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "OpenGL",
+		NULL, NULL);
 	if (!(*window))
 		glfw_error();
-	glfwMakeContextCurrent(*window);	
+	glfwMakeContextCurrent(*window);
 }

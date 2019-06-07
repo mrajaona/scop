@@ -15,8 +15,8 @@
 static void		bw_checkerboard(void)
 {
 	const float pixels[] = {
-		0.0f, 0.0f, 0.0f,	1.0f, 1.0f, 1.0f,
-		1.0f, 1.0f, 1.0f,	0.0f, 0.0f, 0.0f
+		0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+		1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f
 	};
 
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_FLOAT, pixels);
@@ -47,11 +47,9 @@ void			texture_init(GLuint textures[N_TEXTURES], const GLuint shader)
 	int	success;
 
 	glGenTextures(N_TEXTURES, textures);
-
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textures[0]);
 	success = load_img("textures/img_test.bmp");
-	// success = load_img("textures/drop.bmp");
 	glUniform1i(glGetUniformLocation(shader, "texScop"), 0);
 	set_texparameter(success);
 }

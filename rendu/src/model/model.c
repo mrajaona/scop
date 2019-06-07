@@ -32,16 +32,18 @@ void		free_model(t_model **model)
 ** #		- comments, which are ignored
 ** mtllib	- the filename of a materials definition file
 ** o		- gives the name of a model.
-** -			All data between this type and the next o type is a single model.
+** -			All data between this type and the next o type
+** -			is a single model.
 ** v		- defines the x, y, and z value of a single vertex
-** usemtl	- use a specific color and material definition for the following polygons.
-** s		- turn smooth shading off or on; flat shading is used when smooth shading is off.
-** f		- defines the vertices that compose a face. Note that faces can have more than 3 vertices.
-** -			In this example the faces have four vertices which define quad polygons.
-** -			These must be divided into triangles before WebGL rendering.
+** usemtl	- use a specific color and material definition for
+** -			the following polygons.
+** s		- turn smooth shading off or on;
+** -			flat shading is used when smooth shading is off.
+** f		- defines the vertices that compose a face.
+** -			Note that faces can have more than 3 vertices.
 */
 
-int				load_model(const char *path, t_data *data)
+int			load_model(const char *path, t_data *data)
 {
 	t_model	*model;
 	int		ret;

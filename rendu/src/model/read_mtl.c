@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_mtl.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/07 11:53:07 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/06/07 11:53:08 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "read_mtl.h"
 
 static int	skip_line(FILE *fp)
@@ -9,40 +21,34 @@ static int	skip_line(FILE *fp)
 		if (strchr(s, '\n'))
 			return (1);
 	}
-
 	return (1);
 }
 
 void	use_mtl(const char *name, FILE *fp, t_material *material)
 {
-	const char	*vector_str[] = {"Ka", "Kd", "Ks"};
-	t_vector	*vector_tab[] = {&(material->ka), &(material->kd), &(material->ks)};
-
-	const char	*float_str[] = {"Ns", "Ni", "d", "Tr"};
-	float 		*float_tab[] = {&(material->ns), &(material->ni),  &(material->d), &(material->d)};
-
-	(void)material;
+	const char *const	vector_str[] = {"Ka", "Kd", "Ks"};
+	t_vector *const		vector_tab[] = {&(material->ka), &(material->kd),
+		&(material->ks)};
+	const char *const	float_str[] = {"Ns", "Ni", "d", "Tr"};
+	float *const		float_tab[] = {&(material->ns), &(material->ni),
+		&(material->d), &(material->d)};
+	char				type[21];
+	int					ret;
+	unsigned int		i;
 
 	// TODO : check open
-
 	fseek(fp, 0, SEEK_SET);
 
 	// TODO : find mtl
 	(void)name;
 
- 	// TODO : stop at newmtl or EOF
-
-	char			type[21];
-	int				ret;
-	unsigned int	i;
+	// TODO : stop at newmtl or EOF
 
 	memset(type, '\0', 11);
-
-	while (fscanf(fp, "%20s", type) != EOF) // read first word
+	while (fscanf(fp, "%20s", type) != EOF)
 	{
 		if (!type[0])
 			return ;
-
 		// if (strcmp(type, "newmtl") == 0)
 			// return ;
 		i = 0;
@@ -79,13 +85,10 @@ void	use_mtl(const char *name, FILE *fp, t_material *material)
 					ret = fscanf(fp, "%i", &(material->illum)) != 1 ? 0 : 1;
 			}
 		}
-
 		ret = skip_line(fp);
-
 		memset(type, '\0', 21);
-
 		if (!ret)
-			return ;	
+			return ;
 	}
 }
 
@@ -101,6 +104,5 @@ void	open_mtl(const char *name, t_model *model)
 	strcat(path, model->res_folder);
 	strcat(path, name);
 	model->mtl_fp = fopen(path, "r");
-
 	free(path);
 }

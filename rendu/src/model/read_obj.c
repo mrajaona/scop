@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_obj.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/07 11:53:15 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/06/07 11:53:16 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "read_obj.h"
 
 static void	min_max(t_model *model, float *data)
@@ -5,7 +17,6 @@ static void	min_max(t_model *model, float *data)
 	int	i;
 
 	i = 0;
-
 	while (i < 3)
 	{
 		if (!model->min[i] && !model->max[i])
@@ -24,7 +35,7 @@ static void	min_max(t_model *model, float *data)
 	}
 }
 
-int	read_v(FILE *fp, t_model *model)
+int			read_v(FILE *fp, t_model *model)
 {
 	t_list				*current;
 	float				*tmp;
@@ -45,7 +56,7 @@ int	read_v(FILE *fp, t_model *model)
 	return (1);
 }
 
-int	read_f(FILE *fp, t_model *model)
+int			read_f(FILE *fp, t_model *model)
 {
 	t_list	*current;
 	GLuint	*tmp;
@@ -57,13 +68,11 @@ int	read_f(FILE *fp, t_model *model)
 		&(face[1]),
 		&(face[2]),
 		&(face[3]));
-
 	if (face[0] == 0
 		|| face[1] == 0
 		|| face[2] == 0
 		|| (rd == 4 && face[3] == 0))
 		return (0);
-
 	if (rd == 4 || rd == 3)
 	{
 		if (!(current = new_elem(&(model->faces), 3 * sizeof(GLuint))))
@@ -73,7 +82,6 @@ int	read_f(FILE *fp, t_model *model)
 		tmp[0] = face[0] - 1;
 		tmp[1] = face[1] - 1;
 		tmp[2] = face[2] - 1;
-
 		if (rd == 4)
 		{
 			if (!(current = new_elem(&(model->faces), 3 * sizeof(GLuint))))
@@ -87,7 +95,6 @@ int	read_f(FILE *fp, t_model *model)
 	}
 	else
 		return (0);
-
 	return (1);
 }
 
@@ -95,15 +102,14 @@ int	read_f(FILE *fp, t_model *model)
 ** off = 0 // TODO
 */
 
-int	read_s(FILE *fp, t_model *model)
+int			read_s(FILE *fp, t_model *model)
 {
 	fscanf(fp, "%*s\n");
 	(void)model;
 	return (1);
 }
 
-// mtl file
-int	read_mtllib(FILE *fp, t_model *model)
+int			read_mtllib(FILE *fp, t_model *model)
 {
 	char	name[21];
 	int		rd;
@@ -123,20 +129,17 @@ int	read_mtllib(FILE *fp, t_model *model)
 	return (1);
 }
 
-// material in mtl file (-> newmtl)
-int	read_usemtl(FILE *fp, t_model *model)
+int			read_usemtl(FILE *fp, t_model *model)
 {
 	char	name[21];
 	int		rd;
 
 	if (!fp)
 		return (0);
-
 	memset(name, '\0', 21);
 	rd = fscanf(fp, "%20s\n", name);
 	if (!rd || !name[0])
 		return (0);
 	use_mtl(name, model->mtl_fp, &(model->material));
-
 	return (1);
 }

@@ -12,6 +12,15 @@
 
 #include "img.h"
 
+static unsigned char	*error(const char *err, const char *info, FILE *fp)
+{
+	if (fp)
+		fclose(fp);
+	fprintf(stderr, "%s %s\n", err, info);
+	fflush(stderr);
+	return (NULL);
+}
+
 static unsigned char	*load(const char *path, int *width, int *height)
 {
 	FILE			*fp;
@@ -21,19 +30,10 @@ static unsigned char	*load(const char *path, int *width, int *height)
 
 	fp = fopen(path, "r");
 	if (!fp)
-	{
-		fprintf(stderr, "Could not open %s\n", path);
-		fflush(stderr);
-		return (NULL);
-	}
+		return (error("Could not open", path, NULL));
 	rd = fread(magic, 1, 8, fp);
 	if (!rd)
-	{
-		fprintf(stderr, "Could not read %s\n", path);
-		fflush(stderr);
-		fclose(fp);
-		return (NULL);
-	}
+		return (error("Could not read", path, fp));
 	errno = 0;
 	rewind(fp);
 	if (errno)
@@ -44,11 +44,7 @@ static unsigned char	*load(const char *path, int *width, int *height)
 	if (rd >= 2 && !strncmp(magic, BMP_MAGIC, 2))
 		image = load_bmp(fp, width, height);
 	else
-	{
-		fprintf(stderr, "File format not supported\n");
-		fflush(stderr);
-		image = NULL;
-	}
+		return (error("File format not supported,", "please use BMP", fp));
 	fclose(fp);
 	return (image);
 }

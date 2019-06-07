@@ -12,17 +12,14 @@
 
 #include "img_bmp.h"
 
-static void				read_header(t_bmp_header *header, FILE *ptr)
+static void				read_infos(t_bmp_header *header, t_bmp_info *info,
+	FILE *ptr)
 {
 	fread(&(header->type), 2, 1, ptr);
 	fread(&(header->size), 4, 1, ptr);
 	fread(&(header->reserved1), 2, 1, ptr);
 	fread(&(header->reserved2), 2, 1, ptr);
 	fread(&(header->offset), 4, 1, ptr);
-}
-
-static void				read_info(t_bmp_info *info, FILE *ptr)
-{
 	fread(&(info->size), 4, 1, ptr);
 	fread(&(info->width), 4, 1, ptr);
 	fread(&(info->height), 4, 1, ptr);
@@ -86,8 +83,6 @@ static unsigned char	*read_data(FILE *ptr,
 	size_t			size;
 	size_t			line_size;
 
-	if (fseek(ptr, header->offset, SEEK_SET) < 0)
-		return (NULL);
 	size = info->height * info->width * (info->bits / 8);
 	if (!(image = (unsigned char *)malloc(size * sizeof(unsigned char))))
 		return (NULL);
@@ -114,9 +109,10 @@ unsigned char			*load_bmp(FILE *ptr, int *width, int *height)
 	t_bmp_header	header;
 	t_bmp_info		info;
 
-	read_header(&header, ptr);
-	read_info(&info, ptr);
+	read_infos(&header, &info, ptr);
 	*width = info.width;
 	*height = info.height;
+	if (fseek(ptr, header.offset, SEEK_SET) < 0)
+		return (NULL);
 	return (read_data(ptr, &header, &info));
 }

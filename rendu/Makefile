@@ -6,14 +6,17 @@ DIR_INC		=	./inc/
 DIR_SRC		=	./src/
 
 DIR_MAIN	=	scop/
-SRC_MAIN	=	arrays.c \
-				data.c \
+SRC_MAIN	=	data.c \
 				init_ext.c \
 				scop.c \
 				set_data.c \
-				shader.c \
 				show.c \
-				texture.c
+				texture.c \
+				use_model.c \
+				lookat.c \
+				perspective.c \
+				orthographic.c \
+				shader_status.c
 
 SRCS_MAIN	=	$(addprefix	$(DIR_MAIN), $(SRC_MAIN))
 
@@ -21,13 +24,11 @@ DIR_MATRIX	=	matrix/
 SRC_MATRIX	=	angle.c \
 				coord.c \
 				coord_op.c \
-				lookat.c \
 				mat4.c \
 				mat4_op.c \
 				mat4_rotate.c \
 				mat4_transform.c \
 				mat4_vect_prod.c \
-				perspective.c \
 				vector.c \
 				vector_op.c
 
@@ -40,30 +41,41 @@ SRC_IMAGE	=	img.c \
 SRCS_IMAGE	=	$(addprefix	$(DIR_IMAGE), $(SRC_IMAGE))
 
 DIR_MODEL	=	model/
-SRC_MODEL	=	model.c
+SRC_MODEL	=	model.c \
+				model_shader.c \
+				read_model.c \
+				read_obj.c \
+				read_mtl.c \
+				process_model.c \
+				list.c
 
 SRCS_MODEL	=	$(addprefix	$(DIR_MODEL), $(SRC_MODEL))
 
-DIR_MORE_INC	=	scop/
+DIR_MORE_INC	=	more/
 MORE_INC		=	data_struct.h \
 					shader_struct.h \
-					glew_inc.h \
+					model_struct.h \
 					glfw_inc.h
 
 MORE_INCS		=	$(addprefix	$(DIR_MORE_INC), $(MORE_INC))
 
-SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX) $(SRCS_IMAGE) $(SRCS_MODEL)
+SRC			=	$(SRCS_MAIN) $(SRCS_MATRIX) $(SRCS_IMAGE) \
+				$(SRCS_MODEL) $(SRCS_LIGHT)
 INC			=	$(SRC:.c=.h) $(MORE_INCS)
 
 INCS		=	$(addprefix $(DIR_INC), $(INC))
 SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
 
-DIRS		=	$(DIR_MAIN) $(DIR_MATRIX) $(DIR_IMAGE) $(DIR_MODEL)
+DIRS		=	$(DIR_MAIN) \
+				$(DIR_MATRIX) \
+				$(DIR_IMAGE) \
+				$(DIR_MODEL) \
+				$(DIR_MORE_INC)
 DIRS_INC	=	$(addprefix -I$(DIR_INC), $(DIRS))
 
 OBJS		=	$(SRCS:.c=.o)
 
-CFLAGS		=	-Wall -Wextra -Werror $(DIRS_INC) -I$(GLWF_INC) -I./lib
+CFLAGS		=	-Wall -Wextra -Werror $(DIRS_INC) -I$(GLWF_INC)
 
 CC			=	/usr/bin/gcc
 RM			=	/bin/rm -f
@@ -75,7 +87,7 @@ $(OBJS)	:		$(INCS)
 
 $(NAME)	:		$(INCS) $(SRCS) $(OBJS)
 				$(CC) `pkg-config --cflags glfw3` \
-				-o $(NAME) $(OBJS) -L./lib/ -lSOIL -framework OpenGL \
+				-o $(NAME) $(OBJS) -L./lib/ -framework OpenGL \
 				`pkg-config --static --libs glfw3`
 				@$(ECHO) "\033[32m> Executable compiled\033[0m\n"
 

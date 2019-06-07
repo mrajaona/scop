@@ -12,25 +12,41 @@
 
 #include "scop.h"
 
-int				main(void)
+static void		model(t_data *data, const char *path)
+{
+	if (!model_shader_init(&(data->model.shader)))
+		data_exit(data, 1);
+	
+	texture_init(data->textures, data->model.shader.program);
+
+	if (!(load_model(path, data)))
+	{
+		fprintf(stderr, "Could not load model %s\n", path);
+		fflush(stderr);
+		exit(1);
+	}
+
+	set_model(data);
+}
+
+int				main(int ac, char **av)
 {
 	t_data	data;
+
+	if (ac == 1)
+	{
+		fprintf(stdout, "No model to load\n");
+		fflush(stdout);		
+		return (0);
+	}
 
 	data_clr(&data);
 
 	glfw_init(&(data.window));
-	// glew_init();
 
-	load_model("resources/cube.obj", &data);
-	vbo(&(data.arrays.vbo));
-	vao(&(data.arrays.vao));
-	ebo(&(data.arrays.ebo));
+	model(&data, av[1]);
+	set_light(&data);
 
-	if (!shader_init(&(data.shader)))
-		data_exit(&data, 1);
-	texture_init(data.textures, data.shader.program);
-
-	set_model(&data);
 	set_view(&data);
 	set_proj(&data);
 

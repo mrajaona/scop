@@ -1,8 +1,6 @@
 #ifndef TEXTURE_H
 # define TEXTURE_H
 
-# include "glew_inc.h"
-
 # include "data_struct.h"
 # include "img.h"
 

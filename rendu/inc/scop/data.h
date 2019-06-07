@@ -13,8 +13,6 @@
 #ifndef DATA_H
 # define DATA_H
 
-# include "glew_inc.h"
-
 # include <stdlib.h>
 
 # include "data_struct.h"

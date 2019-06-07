@@ -50,8 +50,8 @@ void			texture_init(GLuint textures[N_TEXTURES], const GLuint shader)
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textures[0]);
-	// success = load_img("textures/sample.png");
 	success = load_img("textures/img_test.bmp");
+	// success = load_img("textures/drop.bmp");
 	glUniform1i(glGetUniformLocation(shader, "texScop"), 0);
 	set_texparameter(success);
 }

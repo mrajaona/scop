@@ -39,23 +39,9 @@ void			glfw_init(GLFWwindow **window)
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	*window = glfwCreateWindow(800, 600, "OpenGL", NULL, NULL); // Windowed
-	// window = glfwCreateWindow(800, 600, "OpenGL", glfwGetPrimaryMonitor(), NULL); // Fullscreen
+	*window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "OpenGL", NULL, NULL); // Windowed
+	// window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "OpenGL", glfwGetPrimaryMonitor(), NULL); // Fullscreen
 	if (!(*window))
 		glfw_error();
 	glfwMakeContextCurrent(*window);	
 }
-
-/*
-void			glew_init(void)
-{
-	glewExperimental = GL_TRUE;
-	int err;
-	if ((err = glewInit()) != GLEW_OK)
-	{
-		fprintf(stderr, "glew init error\n%s\n", glewGetErrorString(err));
-		fflush(stderr);
-		exit(1);
-	}
-}
-*/

@@ -12,17 +12,6 @@
 
 #include "vector.h"
 
-// debug
-
-void	vector_print(const t_vector vec)
-{
-	if (!vec)
-		return ;
-	fprintf(stdout, "\n% .2f\n% .2f\n% .2f\n% .2f\n",
-		vec[0], vec[1], vec[2], vec[3]);
-	fflush(stdout);
-}
-
 /*
 ** 0
 ** 0

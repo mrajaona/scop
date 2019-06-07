@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_model.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/06/07 10:52:22 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/06/07 10:52:23 by mrajaona         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PROCESS_MODEL_H
 # define PROCESS_MODEL_H
 
@@ -9,10 +21,10 @@
 # include "model.h"
 # include "use_model.h"
 
-#include "vector.h"
-#include "vector_op.h"
-#include "coord.h"
-#include "coord_op.h"
+# include "vector.h"
+# include "vector_op.h"
+# include "coord.h"
+# include "coord_op.h"
 
 typedef struct	s_triangle
 {
@@ -22,6 +34,6 @@ typedef struct	s_triangle
 	t_coord		normal;
 }				t_triangle;
 
-int	process_model(const t_model *model, t_data *data);
+int				process_model(const t_model *model, t_data *data);
 
 #endif

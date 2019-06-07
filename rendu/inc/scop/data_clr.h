@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   scop.h                                             :+:      :+:    :+:   */
+/*   data_clr.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/05/24 11:26:28 by mrajaona          #+#    #+#             */
-/*   Updated: 2019/05/24 11:26:29 by mrajaona         ###   ########.fr       */
+/*   Created: 2019/06/07 11:36:15 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/06/07 11:36:16 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCOP_H
-# define SCOP_H
+#ifndef DATA_CLR_H
+# define DATA_CLR_H
+
+# include <stdlib.h>
 
 # include "data_struct.h"
 
-# include "data_exit.h"
-# include "data_clr.h"
-# include "init_ext.h"
-# include "texture.h"
-# include "model.h"
-# include "model_shader.h"
-# include "set_data.h"
-# include "show.h"
+void	data_clr(t_data *data);
 
 #endif

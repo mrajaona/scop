@@ -6,7 +6,8 @@ DIR_INC		=	./inc/
 DIR_SRC		=	./src/
 
 DIR_MAIN	=	scop/
-SRC_MAIN	=	data.c \
+SRC_MAIN	=	data_exit.c \
+				data_clr.c \
 				init_ext.c \
 				scop.c \
 				set_data.c \

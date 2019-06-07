@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.h                                             :+:      :+:    :+:   */
+/*   data_exit.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,14 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_H
-# define DATA_H
+#ifndef DATA_EXIT_H
+# define DATA_EXIT_H
 
 # include <stdlib.h>
 
 # include "data_struct.h"
 
-void			data_clr(t_data *data);
-void			data_exit(t_data *data, const int status);
+void	data_exit(t_data *data, const int status);
 
 #endif

@@ -12,6 +12,12 @@
 
 #include "model_shader.h"
 
+static char	*load_shader_err(FILE *fp)
+{
+	fclose(fp);
+	return (NULL);
+}
+
 static char	*load_shader(const char *path)
 {
 	char	*content;
@@ -21,34 +27,20 @@ static char	*load_shader(const char *path)
 	fp = fopen(path, "r");
 	if (!fp)
 		return (NULL);
-
 	fseek(fp, 0L, SEEK_END);
 	size = ftell(fp);
 	if (size < 0)
-	{
-		fclose(fp);
-		return (NULL);
-	}
-
+		return (load_shader_err(fp));
 	rewind(fp);
-
 	if (!(content = (char *)malloc(size + 1)))
-	{
-		fclose(fp);
-		return (NULL);
-	}
-
+		return (load_shader_err(fp));
 	if (!fread(content, size, 1, fp))
 	{
-		fclose(fp);
 		free(content);
-		return (NULL);
+		return (load_shader_err(fp));
 	}
-
 	content[size] = '\0';
-
 	fclose(fp);
-	
 	return (content);
 }
 
@@ -85,27 +77,21 @@ static int		fragment_shader(t_shader *shader, const char *source)
 int				model_shader_init(t_shader *shader)
 {
 	char	*shader_source;
+	int		res;
 
 	shader->program = glCreateProgram();
-
 	if (!(shader_source = load_shader("src/model/vertex.shader")))
 		return (0);
-	if (!vertex_shader(shader, shader_source))
-	{
-		free(shader_source);
-		return (0);
-	}
+	res = vertex_shader(shader, shader_source);
 	free(shader_source);
-
+	if (!res)
+		return (0);
 	if (!(shader_source = load_shader("src/model/fragment.shader")))
 		return (0);
-	if (!fragment_shader(shader, shader_source))
-	{
-		free(shader_source);
-		return (0);
-	}
+	res = fragment_shader(shader, shader_source);
 	free(shader_source);
-
+	if (!res)
+		return (0);
 	glBindFragDataLocation(shader->program, 0, "outColor");
 	glLinkProgram(shader->program);
 	glUseProgram(shader->program);

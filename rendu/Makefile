@@ -49,8 +49,11 @@ SRC_MODEL	=	model.c \
 				read_mtl.c \
 				process_model.c \
 				list.c
+SRC_SHADER		=	vertex.shader \
+				fragment.shader
 
-SRCS_MODEL	=	$(addprefix	$(DIR_MODEL), $(SRC_MODEL))
+SRCS_MODEL		=	$(addprefix	$(DIR_MODEL), $(SRC_MODEL))
+SRCS_SHADER		=	$(addprefix	$(DIR_MODEL), $(SRC_SHADER))
 
 DIR_MORE_INC	=	more/
 MORE_INC		=	data_struct.h \
@@ -66,6 +69,7 @@ INC			=	$(SRC:.c=.h) $(MORE_INCS)
 
 INCS		=	$(addprefix $(DIR_INC), $(INC))
 SRCS		=	$(addprefix $(DIR_SRC), $(SRC))
+SHADERS		=	$(addprefix $(DIR_SRC), $(SRCS_SHADER))
 
 DIRS		=	$(DIR_MAIN) \
 				$(DIR_MATRIX) \
@@ -86,7 +90,7 @@ all		:		$(NAME)
 
 $(OBJS)	:		$(INCS)
 
-$(NAME)	:		$(INCS) $(SRCS) $(OBJS)
+$(NAME)	:		$(INCS) $(SRCS) $(OBJS) $(SHADERS)
 				$(CC) `pkg-config --cflags glfw3` \
 				-o $(NAME) $(OBJS) -L./lib/ -framework OpenGL \
 				`pkg-config --static --libs glfw3`

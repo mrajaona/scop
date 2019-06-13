@@ -119,58 +119,6 @@ static int			vbo(GLuint *vbo, const t_model *model)
 	return (1);
 }
 
-static void			attrib_position(const GLuint program)
-{
-	GLint attrib;
-
-	attrib = glGetAttribLocation(program, "position");
-	glVertexAttribPointer(attrib, 3, GL_FLOAT, GL_FALSE,
-		N_DATA_PER_VERTICE * sizeof(float), 0);
-	glEnableVertexAttribArray(attrib);
-}
-
-static void			attrib_texture(const GLuint program)
-{
-	GLint attrib;
-
-	attrib = glGetAttribLocation(program, "normal");
-	glVertexAttribPointer(attrib, 3, GL_FLOAT, GL_FALSE,
-		N_DATA_PER_VERTICE * sizeof(float), (void *)(3 * sizeof(float)));
-	glEnableVertexAttribArray(attrib);
-	attrib = glGetAttribLocation(program, "texcoord");
-	glVertexAttribPointer(attrib, 2, GL_FLOAT, GL_FALSE,
-		N_DATA_PER_VERTICE * sizeof(float), (void *)(6 * sizeof(float)));
-	glEnableVertexAttribArray(attrib);
-}
-
-static void			attrib_color(const GLuint program)
-{
-	GLint attrib;
-
-	attrib = glGetAttribLocation(program, "color");
-	glVertexAttribPointer(attrib, 3, GL_FLOAT, GL_FALSE,
-		N_DATA_PER_VERTICE * sizeof(float), (void *)(8 * sizeof(float)));
-	glEnableVertexAttribArray(attrib);
-}
-
-static void			attrib_light(const GLuint program, const t_model *model)
-{
-	GLint attrib;
-
-	attrib = glGetUniformLocation(program,
-		"material.ambient");
-	glUniform3fv(attrib, 1, model->material.ka);
-	attrib = glGetUniformLocation(program,
-		"material.diffuse");
-	glUniform3fv(attrib, 1, model->material.kd);
-	attrib = glGetUniformLocation(program,
-		"material.specular");
-	glUniform3fv(attrib, 1, model->material.ks);
-	attrib = glGetUniformLocation(program,
-		"material.shininess");
-	glUniform1f(attrib, model->material.ns);
-}
-
 int					process_model(const t_model *model, t_data *data)
 {
 	coord_to_vec(
@@ -183,10 +131,7 @@ int					process_model(const t_model *model, t_data *data)
 		return (0);
 	if (!vbo(&(data->model.arrays.vbo), model))
 		return (0);
-	attrib_position(data->model.shader.program);
-	attrib_texture(data->model.shader.program);
-	attrib_color(data->model.shader.program);
-	attrib_light(data->model.shader.program, model);
+	set_attribs(data->model.shader.program, model);
 	use_no_model();
 	return (1);
 }

@@ -51,6 +51,7 @@ SRC_MODEL	=	model.c \
 				read_mtl.c \
 				read_mtl_check.c \
 				process_model.c \
+				process_model_attribs.c \
 				list.c
 SRC_SHADER		=	vertex.shader \
 				fragment.shader
@@ -95,7 +96,7 @@ $(OBJS)	:		$(INCS)
 
 $(NAME)	:		$(INCS) $(SRCS) $(OBJS) $(SHADERS)
 				$(CC) `pkg-config --cflags glfw3` \
-				-o $(NAME) $(OBJS) -L./lib/ -framework OpenGL \
+				-o $(NAME) $(OBJS) -framework OpenGL \
 				`pkg-config --static --libs glfw3`
 				@$(ECHO) "\033[32m> Executable compiled\033[0m\n"
 

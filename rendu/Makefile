@@ -43,6 +43,7 @@ SRCS_IMAGE	=	$(addprefix	$(DIR_IMAGE), $(SRC_IMAGE))
 
 DIR_MODEL	=	model/
 SRC_MODEL	=	model.c \
+				vbo.c \
 				model_shader.c \
 				read_model.c \
 				read_lines.c \

@@ -12,87 +12,75 @@
 
 #include "read_mtl.h"
 
-static int	skip_line(FILE *fp)
+static void	skip_line(FILE *fp)
 {
 	char	s[1025];
 
+	if (!fp)
+		return ;
 	while (fgets(s, 1025, fp) != NULL)
 	{
 		if (strchr(s, '\n'))
-			return (1);
+			return ;
 	}
-	return (1);
 }
 
-void	use_mtl(const char *name, FILE *fp, t_material *material)
+static int	find_mtl(const char *name, FILE *fp)
 {
-	const char *const	vector_str[] = {"Ka", "Kd", "Ks"};
-	t_vector *const		vector_tab[] = {&(material->ka), &(material->kd),
-		&(material->ks)};
-	const char *const	float_str[] = {"Ns", "Ni", "d", "Tr"};
-	float *const		float_tab[] = {&(material->ns), &(material->ni),
-		&(material->d), &(material->d)};
+	char				type[21];
+	char				material[21];
+
+	if (!fp)
+		return (0);
+	memset(type, '\0', 11);
+	while (fscanf(fp, "%20s", type) != EOF)
+	{
+		if (!type[0])
+			return (0);
+		if (strcmp(type, "newmtl") == 0)
+		{
+			if (!fscanf(fp, "%20s", material))
+				return (0);
+			else if (strcmp(material, name) == 0)
+			{
+				skip_line(fp);
+				return (1);
+			}
+		}
+		skip_line(fp);
+		memset(type, '\0', 21);
+	}
+	return (0);
+}
+
+void		use_mtl(const char *name, FILE *fp, t_material *material)
+{
 	char				type[21];
 	int					ret;
-	unsigned int		i;
 
-	// TODO : check open
+	if (!fp)
+		return ;
 	fseek(fp, 0, SEEK_SET);
-
-	// TODO : find mtl
-	(void)name;
-
-	// TODO : stop at newmtl or EOF
-
+	if (!find_mtl(name, fp))
+		return ;
 	memset(type, '\0', 11);
 	while (fscanf(fp, "%20s", type) != EOF)
 	{
 		if (!type[0])
 			return ;
-		// if (strcmp(type, "newmtl") == 0)
-			// return ;
-		i = 0;
-		while (i < 3)
-		{
-			if (strcmp(type, vector_str[i]) == 0)
-			{
-				ret = fscanf(fp, "%f %f %f",
-						&(((*vector_tab)[i])[0]),
-						&(((*vector_tab)[i])[1]),
-						&(((*vector_tab)[i])[2]))
-					!= 3 ? 0 : 1;
-				break ;
-			}
-			i++;
-		}
-		if (i == 3)
-		{
-			i = 0;
-			while (i < 4)
-			{
-				if (strcmp(type, float_str[i]) == 0)
-				{
-					ret = fscanf(fp, "%f", float_tab[i]) != 1 ? 0 : 1;
-					if (i == 3)
-						material->d = 1 - material->d;
-					break ;
-				}
-				i++;
-			}
-			if (i == 4)
-			{
-				if (strcmp(type, "illum") == 0)
-					ret = fscanf(fp, "%i", &(material->illum)) != 1 ? 0 : 1;
-			}
-		}
-		ret = skip_line(fp);
-		memset(type, '\0', 21);
+		if (strcmp(type, "newmtl") == 0)
+			return ;
+		if (!check_vector(&ret, type, fp, material))
+			if (!check_float(&ret, type, fp, material))
+				check_illum(&ret, type, fp, material);
 		if (!ret)
 			return ;
+		skip_line(fp);
+		memset(type, '\0', 21);
 	}
 }
 
-void	open_mtl(const char *name, t_model *model)
+void		open_mtl(const char *name, t_model *model)
 {
 	char	*path;
 	size_t	len;

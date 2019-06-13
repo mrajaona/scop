@@ -45,8 +45,11 @@ DIR_MODEL	=	model/
 SRC_MODEL	=	model.c \
 				model_shader.c \
 				read_model.c \
+				read_lines.c \
 				read_obj.c \
+				read_obj_mtl.c \
 				read_mtl.c \
+				read_mtl_check.c \
 				process_model.c \
 				list.c
 SRC_SHADER		=	vertex.shader \

@@ -56,10 +56,33 @@ int			read_v(FILE *fp, t_model *model)
 	return (1);
 }
 
-int			read_f(FILE *fp, t_model *model)
+static int	read_f_elem(int rd, GLuint face[4], t_model *model)
 {
 	t_list	*current;
 	GLuint	*tmp;
+
+	if (!(current = new_elem(&(model->faces), 3 * sizeof(GLuint))))
+		return (0);
+	model->nfaces++;
+	tmp = (GLuint *)(current->data);
+	tmp[0] = face[0] - 1;
+	tmp[1] = face[1] - 1;
+	tmp[2] = face[2] - 1;
+	if (rd == 4)
+	{
+		if (!(current = new_elem(&(model->faces), 3 * sizeof(GLuint))))
+			return (0);
+		model->nfaces++;
+		tmp = (GLuint *)(current->data);
+		tmp[0] = face[2] - 1;
+		tmp[1] = face[3] - 1;
+		tmp[2] = face[0] - 1;
+	}
+	return (1);
+}
+
+int			read_f(FILE *fp, t_model *model)
+{
 	int		rd;
 	GLuint	face[4];
 
@@ -74,72 +97,18 @@ int			read_f(FILE *fp, t_model *model)
 		|| (rd == 4 && face[3] == 0))
 		return (0);
 	if (rd == 4 || rd == 3)
-	{
-		if (!(current = new_elem(&(model->faces), 3 * sizeof(GLuint))))
-			return (0);
-		model->nfaces++;
-		tmp = (GLuint *)(current->data);
-		tmp[0] = face[0] - 1;
-		tmp[1] = face[1] - 1;
-		tmp[2] = face[2] - 1;
-		if (rd == 4)
-		{
-			if (!(current = new_elem(&(model->faces), 3 * sizeof(GLuint))))
-				return (0);
-			model->nfaces++;
-			tmp = (GLuint *)(current->data);
-			tmp[0] = face[2] - 1;
-			tmp[1] = face[3] - 1;
-			tmp[2] = face[0] - 1;
-		}
-	}
-	else
-		return (0);
-	return (1);
+		return (read_f_elem(rd, face, model));
+	return (0);
 }
 
 /*
-** off = 0 // TODO
+** off = 0
+** (not supported)
 */
 
 int			read_s(FILE *fp, t_model *model)
 {
 	fscanf(fp, "%*s\n");
 	(void)model;
-	return (1);
-}
-
-int			read_mtllib(FILE *fp, t_model *model)
-{
-	char	name[21];
-	int		rd;
-
-	memset(name, '\0', 21);
-	rd = fscanf(fp, "%s\n", name);
-	if (!rd || !name[0])
-		return (0);
-	if ((model->mtl_fp))
-	{
-		fclose(model->mtl_fp);
-		model->mtl_fp = 0;
-	}
-	open_mtl(name, model);
-	if (!(model->mtl_fp))
-		return (0);
-	return (1);
-}
-
-int			read_usemtl(FILE *fp, t_model *model)
-{
-	char	name[21];
-	int		rd;
-
-	if (!fp)
-		return (0);
-	memset(name, '\0', 21);
-	rd = fscanf(fp, "%20s\n", name);
-	if (!rd || !name[0])
-		return (0);
-	use_mtl(name, model->mtl_fp, &(model->material));
 	return (1);
 }

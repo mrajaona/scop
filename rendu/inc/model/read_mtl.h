@@ -16,6 +16,7 @@
 # include <string.h>
 
 # include "model_struct.h"
+# include "read_mtl_check.h"
 
 void	open_mtl(const char *name, t_model *model);
 void	use_mtl(const char *name, FILE *fp, t_material *material);

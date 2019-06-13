@@ -12,57 +12,7 @@
 
 #include "read_model.h"
 
-static int	skip_line(FILE *fp)
-{
-	char	s[1025];
-
-	while (fgets(s, 1025, fp) != NULL)
-	{
-		if (strchr(s, '\n'))
-			return (1);
-	}
-	return (1);
-}
-
-static void	read_lines(FILE *fp, t_model **model)
-{
-	const char		*str_tab[] = {"v", "f", "s", "mtllib", "usemtl"};
-	int				(*const fn_tab[])(FILE *, t_model *) = {&read_v, &read_f,
-		&read_s, &read_mtllib, &read_usemtl};
-	char			type[21];
-	int				ret;
-	unsigned int	i;
-
-	memset(type, '\0', 21);
-	while (fscanf(fp, "%s", type) != EOF)
-	{
-		if (!type[0])
-		{
-			free_model(model);
-			return ;
-		}
-		i = 0;
-		while (i < 5)
-		{
-			if (strcmp(type, str_tab[i]) == 0)
-			{
-				ret = fn_tab[i](fp, *model);
-				break ;
-			}
-			i++;
-		}
-		if (i == 5)
-			ret = skip_line(fp);
-		memset(type, '\0', 21);
-		if (!ret)
-		{
-			free_model(model);
-			return ;
-		}
-	}
-}
-
-char		*get_res_folder(const char *path)
+char			*get_res_folder(const char *path)
 {
 	char	*tmp;
 	char	*folder;
@@ -84,26 +34,12 @@ char		*get_res_folder(const char *path)
 	return (folder);
 }
 
-t_model		*read_model(const char *path)
+static t_model	*init_model(void)
 {
 	t_model	*model;
-	FILE	*fp;
 
 	if (!(model = (t_model *)malloc(sizeof(t_model))))
 		return (NULL);
-	if (!(model->res_folder = get_res_folder(path)))
-	{
-		free_model(&model);
-		return (NULL);
-	}
-	fp = fopen(path, "r");
-	if (!fp)
-	{
-		free_model(&model);
-		fprintf(stderr, "Could not open %s\n", path);
-		fflush(stderr);
-		return (NULL);
-	}
 	model->vertices = NULL;
 	model->faces = NULL;
 	model->nfaces = 0;
@@ -117,6 +53,31 @@ t_model		*read_model(const char *path)
 	model->material.illum = 0;
 	clear_vector(model->min);
 	clear_vector(model->max);
+	return (model);
+}
+
+static t_model	*read_failure(t_model **model)
+{
+	free_model(model);
+	return (NULL);
+}
+
+t_model			*read_model(const char *path)
+{
+	t_model	*model;
+	FILE	*fp;
+
+	if (!(model = init_model()))
+		return (NULL);
+	if (!(model->res_folder = get_res_folder(path)))
+		return (read_failure(&model));
+	fp = fopen(path, "r");
+	if (!fp)
+	{
+		fprintf(stderr, "Could not open %s\n", path);
+		fflush(stderr);
+		return (read_failure(&model));
+	}
 	read_lines(fp, &model);
 	fclose(fp);
 	if (model && (model->mtl_fp))

@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_obj.h                                         :+:      :+:    :+:   */
+/*   read_lines.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/07 10:52:46 by mrajaona          #+#    #+#             */
-/*   Updated: 2019/06/07 10:52:46 by mrajaona         ###   ########.fr       */
+/*   Created: 2019/06/13 10:35:35 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/06/13 10:35:36 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef READ_OBJ_H
-# define READ_OBJ_H
+#ifndef READ_LINES_H
+# define READ_LINES_H
 
-# include <stdio.h>
+# include <string.h>
 
-# include "glfw_inc.h"
+# include "model.h"
 
-# include "model_struct.h"
+# include "read_obj.h"
+# include "read_obj_mtl.h"
 
-int	read_v(FILE *fp, t_model *model);
-int	read_f(FILE *fp, t_model *model);
-int	read_s(FILE *fp, t_model *model);
+void	read_lines(FILE *fp, t_model **model);
 
 #endif

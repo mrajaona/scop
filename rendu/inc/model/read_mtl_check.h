@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_obj.h                                         :+:      :+:    :+:   */
+/*   read_mtl_check.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrajaona <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/07 10:52:46 by mrajaona          #+#    #+#             */
-/*   Updated: 2019/06/07 10:52:46 by mrajaona         ###   ########.fr       */
+/*   Created: 2019/06/13 10:11:22 by mrajaona          #+#    #+#             */
+/*   Updated: 2019/06/13 10:11:22 by mrajaona         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef READ_OBJ_H
-# define READ_OBJ_H
+#ifndef READ_MTL_CHECK_H
+# define READ_MTL_CHECK_H
 
-# include <stdio.h>
-
-# include "glfw_inc.h"
+# include <string.h>
 
 # include "model_struct.h"
 
-int	read_v(FILE *fp, t_model *model);
-int	read_f(FILE *fp, t_model *model);
-int	read_s(FILE *fp, t_model *model);
+int	check_vector(int *ret, const char *type, FILE *fp, t_material *material);
+int	check_float(int *ret, const char *type, FILE *fp, t_material *material);
+int	check_illum(int *ret, const char *type, FILE *fp, t_material *material);
 
 #endif

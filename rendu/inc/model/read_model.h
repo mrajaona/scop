@@ -17,8 +17,7 @@
 
 # include "model.h"
 
-# include "read_obj.h"
-# include "read_mtl.h"
+# include "read_lines.h"
 
 t_model		*read_model(const char *path);
 

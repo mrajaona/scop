@@ -12,13 +12,13 @@
 
 #include "model_shader.h"
 
-static char	*load_shader_err(FILE *fp)
+static char		*load_shader_err(FILE *fp)
 {
 	fclose(fp);
 	return (NULL);
 }
 
-static char	*load_shader(const char *path)
+static char		*load_shader(const char *path)
 {
 	char	*content;
 	FILE	*fp;

@@ -16,11 +16,10 @@ int			g_blend_factor = -1;
 t_vector	g_move = {0, 0, 0, 1};
 
 static void		glfw_callback(GLFWwindow *window, int key, int scancode,
-	int action, int mods)
+	int action)
 {
 	(void)window;
 	(void)scancode;
-	(void)mods;
 	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
 		g_blend_factor *= -1;
 	if (key == GLFW_KEY_UP
@@ -79,7 +78,11 @@ static void		show_model(const t_data *data)
 
 void			show(const t_data *data)
 {
-	glfwSetKeyCallback(data->window, &glfw_callback);
+	void (*glfw_callback_ptr)(GLFWwindow *, int, int, int, int);
+
+	glfw_callback_ptr = (void (*)(GLFWwindow *,
+		int, int, int, int))&glfw_callback;
+	glfwSetKeyCallback(data->window, glfw_callback_ptr);
 	glEnable(GL_DEPTH_TEST);
 	while (!glfwWindowShouldClose(data->window))
 	{

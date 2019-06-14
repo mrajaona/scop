@@ -13,8 +13,6 @@
 #ifndef VBO_H
 # define VBO_H
 
-# include "glfw_inc.h"
-
 # include "model_struct.h"
 # include "data_struct.h"
 

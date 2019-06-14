@@ -15,6 +15,8 @@
 
 # include <unistd.h>
 
+# include "glfw_inc.h"
+
 # include "data_struct.h"
 
 # include "coord.h"

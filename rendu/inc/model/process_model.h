@@ -13,8 +13,6 @@
 #ifndef PROCESS_MODEL_H
 # define PROCESS_MODEL_H
 
-# include "glfw_inc.h"
-
 # include "model_struct.h"
 # include "data_struct.h"
 

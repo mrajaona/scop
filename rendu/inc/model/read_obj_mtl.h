@@ -15,8 +15,6 @@
 
 # include <stdio.h>
 
-# include "glfw_inc.h"
-
 # include "model_struct.h"
 # include "read_mtl.h"
 

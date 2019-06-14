@@ -15,8 +15,6 @@
 
 # define N_TEXTURES 1
 
-# include "glfw_inc.h"
-
 # include "shader_struct.h"
 
 # include "mat4.h"

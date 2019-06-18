@@ -1,3 +1,3 @@
 #!/bin/sh
 
-clear && make re && clear && ./run.sh "resources/42.obj" ; make clean
+clear && make re && clear && ./scop "resources/abort.obj" ; make clean

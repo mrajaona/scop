@@ -16,10 +16,11 @@ int	read_mtllib(FILE *fp, t_model *model)
 {
 	char	name[21];
 	int		rd;
+	char	c;
 
 	memset(name, '\0', 21);
-	rd = fscanf(fp, "%s\n", name);
-	if (!rd || !name[0])
+	rd = fscanf(fp, "%20s%c", name, &c);
+	if (c != '\n' || !rd || !name[0])
 		return (0);
 	if ((model->mtl_fp))
 	{
@@ -36,12 +37,13 @@ int	read_usemtl(FILE *fp, t_model *model)
 {
 	char	name[21];
 	int		rd;
+	char	c;
 
 	if (!fp)
 		return (0);
 	memset(name, '\0', 21);
-	rd = fscanf(fp, "%20s\n", name);
-	if (!rd || !name[0])
+	rd = fscanf(fp, "%20s%c", name, &c);
+	if (c != '\n' || !rd || !name[0])
 		return (0);
 	use_mtl(name, model->mtl_fp, &(model->material));
 	return (1);

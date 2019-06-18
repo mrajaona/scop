@@ -102,12 +102,8 @@ int			read_f(FILE *fp, t_model *model)
 		&c);
 	if (rd != 4)
 		return (0);
-
 	if (c == ' ')
-		rd += fscanf(fp, "%u%c",
-			&(face[3]),
-			&c);
-
+		rd += fscanf(fp, "%u%c", &(face[3]), &c);
 	if ((rd != 4 && rd != 6)
 		|| c != '\n'
 		|| face[0] == 0

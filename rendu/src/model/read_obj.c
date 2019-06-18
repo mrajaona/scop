@@ -95,13 +95,19 @@ int			read_f(FILE *fp, t_model *model)
 	GLuint	face[4];
 	char	c;
 
-	rd = fscanf(fp, "%u %u %u%c%u%c",
+	rd = fscanf(fp, "%u %u %u%c",
 		&(face[0]),
 		&(face[1]),
 		&(face[2]),
-		&c,
-		&(face[3]),
 		&c);
+	if (rd != 4)
+		return (0);
+
+	if (c == ' ')
+		rd += fscanf(fp, "%u%c",
+			&(face[3]),
+			&c);
+
 	if ((rd != 4 && rd != 6)
 		|| c != '\n'
 		|| face[0] == 0

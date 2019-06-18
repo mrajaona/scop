@@ -35,12 +35,6 @@ static void	min_max(t_model *model, float *data)
 	}
 }
 
-/*
-** leaks sur la liste de vertices
-** TODO : implémenter std::vector
-** ou utiliser un simple tableau avec realloc
-*/
-
 int			read_v(FILE *fp, t_model *model)
 {
 	t_list				*current;

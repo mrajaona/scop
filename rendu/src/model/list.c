@@ -38,8 +38,6 @@ t_list	*new_elem(t_list **list, size_t data_size)
 	return (elem);
 }
 
-# include <stdio.h>
-
 void	free_list(t_list **list)
 {
 	t_list	*next;

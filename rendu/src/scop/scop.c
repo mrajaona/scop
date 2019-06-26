@@ -33,6 +33,7 @@ static void		model(t_data *data, const char *path)
 int				main(int ac, char **av)
 {
 	t_data	data;
+	char	path[1025];
 
 	if (ac == 1)
 	{
@@ -40,7 +41,6 @@ int				main(int ac, char **av)
 		fflush(stdout);
 		return (0);
 	}
-	char path[1025];
 	memset(path, '\0', 1025);
 	getcwd(path, 1024);
 	data_clr(&data);
@@ -53,4 +53,3 @@ int				main(int ac, char **av)
 	show(&data);
 	data_exit(&data, 0);
 }
-

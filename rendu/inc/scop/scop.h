@@ -13,6 +13,8 @@
 #ifndef SCOP_H
 # define SCOP_H
 
+# include <unistd.h>
+
 # include "data_struct.h"
 
 # include "data_exit.h"

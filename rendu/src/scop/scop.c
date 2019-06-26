@@ -40,8 +40,12 @@ int				main(int ac, char **av)
 		fflush(stdout);
 		return (0);
 	}
+	char path[1025];
+	memset(path, '\0', 1025);
+	getcwd(path, 1024);
 	data_clr(&data);
 	glfw_init(&(data.window));
+	chdir(path);
 	model(&data, av[1]);
 	set_light(&data);
 	set_view(&data);
@@ -49,3 +53,4 @@ int				main(int ac, char **av)
 	show(&data);
 	data_exit(&data, 0);
 }
+

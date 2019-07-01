@@ -17,7 +17,7 @@ static void		model(t_data *data, const char *path)
 	if (!model_shader_init(&(data->model.shader)))
 	{
 		fprintf(stderr, "Could not load shaders\n");
-		fflush(stderr);		
+		fflush(stderr);
 		data_exit(data, 1);
 	}
 	texture_init(data->textures, data->model.shader.program);
